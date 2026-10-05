@@ -1,0 +1,402 @@
+---
+// src/pages/aventura.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/booking/BookingBar.astro';
+
+const accommodations = [
+  {
+    title: 'Tenda Glamping Safari Adventure',
+    image: '/images/alojamentos/media_25_Gavi.jpg',
+    capacity: '2 a 4 Aventureiros',
+    size: '40 m² + Deck Panorâmico',
+    features: ['Espaço amplo para equipamento outdoor', 'Deck exterior suspenso em madeira', 'Banheiro privativo completo', 'Ar condicionado quente/frio', 'Vistas desafogadas sobre os montes'],
+    desc: 'O ponto de partida perfeito para quem ama a vida ao ar livre. Toda a emoção do campismo autêntico com colchões ortopédicos de alto conforto e chuveiro de alta pressão para retemperar forças após um dia nos trilhos.'
+  },
+  {
+    title: 'Cork Shelter Explorer',
+    image: '/images/alojamentos/media_10_Gavi_o.jpg',
+    capacity: '2 a 3 Hóspedes',
+    size: '32 m² + Terraço',
+    features: ['Isolamento natural em cortiça', 'Deck privativo para preparação de rotas', 'Casa de banho privativa ampla', 'Wi-Fi rápido para planeamento de GPS', 'Estacionamento privativo próximo'],
+    desc: 'Construído em cortiça 100% natural, garante um descanso térmico e acústico sem falhas depois de uma longa descida de canoa no Tejo ou de uma travessia de BTT.'
+  }
+];
+
+const experiences = [
+  {
+    title: 'E-Bikes & Trilhos da Herdade',
+    time: 'Aluguer Disponível',
+    image: '/images/village/media_35_Gavi.jpg',
+    desc: 'Bicicletas de montanha e elétricas para explorar os 8 hectares da herdade e as vias rurais centenárias de Cadafaz e Belver com facilidade.'
+  },
+  {
+    title: 'Recuperação Muscular no Spa',
+    time: 'Wellness Center',
+    image: '/images/wellness/media_37_Gavi_o.jpg',
+    desc: 'Piscina aquecida a 35°C com jatos de massagem subaquática para descompressão lombar e sauna seca para desintoxicação muscular profunda.'
+  },
+  {
+    title: 'Pequeno-Almoço & Jantar Energético',
+    time: 'Cadafaz Restaurante',
+    image: '/images/restaurante/media_20_Gavi_o.jpg',
+    desc: 'Buffet matinal reforçado com frutas da época, frutos secos, ovos do campo e pão alentejano tradicional para carregar energias antes de partir para a aventura.'
+  }
+];
+
+const surroundingActivities = [
+  {
+    title: 'Passadiços do Alamal & Caniçada do Tejo',
+    distance: '6 km do Resort',
+    image: '/images/arredores/passadicos_alamal.jpg',
+    desc: 'Passadiço de madeira que acompanha as curvas sinuosas do Rio Tejo entre a Praia Fluvial da Quinta do Alamal e a histórica ponte de Belver.'
+  },
+  {
+    title: 'Descidas de Canoa & Stand Up Paddle',
+    distance: 'Na Albufeira de Belver',
+    image: '/images/experiencias/media_105_Gavi_o.jpg',
+    desc: 'Passeios de caiaque e SUP pelas águas tranquilas e límpidas do Tejo, passando na base das escarpadas arribas sob o Castelo de Belver.'
+  },
+  {
+    title: 'Rede Oficial de Percursos Pedestres (PR1 a PR8)',
+    distance: 'Concelho de Gavião',
+    image: '/images/arredores/pr1_encostas_tejo.jpg',
+    desc: 'Mais de 80 km de trilhos pedestres marcados que cruzam pontes romanas, cascatas secretas (Ribeira da Venda), antas pré-históricas e miradouros rochosos.'
+  }
+];
+
+const faqs = [
+  {
+    q: 'Disponibilizam tracks de GPS e mapas dos percursos pedestres?',
+    a: 'Sim, a nossa receção fornece mapas detalhados em papel e ficheiros GPX/KML dos 8 percursos pedestres oficiais do Gavião para instalar diretamente no seu telemóvel ou relógio desportivo.'
+  },
+  {
+    q: 'É possível guardar bicicletas com segurança?',
+    a: 'Sim, dispomos de espaço fechado e seguro para lavagem ligeira e guarda de bicicletas particulares dos nossos hóspedes.'
+  },
+  {
+    q: 'Ajudam a reservar atividades de canoagem ou desportos náuticos?',
+    a: 'Com certeza! Temos parceria direta com operadores náuticos e de animação turística do Tejo, podendo articular transfers e aluguer de kayaks e SUP.'
+  }
+];
+---
+
+<BaseLayout
+  title="Aventura & Ecoturismo | Gavião Nature Village — Desporto & Natureza no Tejo"
+  description="Explore o Alto Alentejo no seu estado mais puro: passadiços do Alamal no Tejo, canoagem, trilhos pedestres PR1 a PR8, BTT e o refúgio sustentável do Gavião Nature Village."
+>
+  <!-- =========================================================================
+       HERO AVENTURA & ECOTURISMO: DESIGN CONSISTENTE COM A VILA
+       ========================================================================= -->
+  <section class="relative min-h-[42vh] sm:min-h-[46vh] flex flex-col justify-center items-center overflow-hidden bg-charcoal">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/hero/hero_aventura.webp" 
+        alt="Aventura e Ecoturismo no Gavião Nature Village" 
+        class="w-full h-full object-cover opacity-50 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/40"></div>
+    </div>
+
+    <!-- Centro do Hero: Apenas o Nome da Página Centrado -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto pb-4 sm:pb-6">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        Aventura & Ecoturismo
+      </h1>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       1º PASSO: APRESENTAR A VILA (CAMPO-BASE SUSTENTÁVEL)
+       ========================================================================= -->
+  <section id="vila-aventura" class="relative bg-sand-warm text-charcoal border-b border-sand-border pt-0 pb-16 md:pb-24">
+    <!-- BARRA FORMULÁRIO (METADE DENTRO DO HERO, METADE DE FORA - APENAS AS 2 CORES: HERO E SECÇÃO) -->
+    <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-1/2">
+      <BookingBar isFloating={true} />
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 sm:mt-4 md:mt-6">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Texto Editorial -->
+        <div class="lg:col-span-6 space-y-6">
+
+          <h2 class="font-catamaran font-extrabold text-3xl sm:text-4xl lg:text-5xl uppercase tracking-wide text-charcoal leading-tight">
+            A Natureza Viva <br />
+            <span class="font-playfair italic font-normal text-natureGold-dark normal-case">Sem Filtros Nem Barreiras</span>
+          </h2>
+
+          <p class="text-charcoal-muted text-base sm:text-lg leading-relaxed font-normal">
+            Localizado estrategicamente em Cadafaz, o Gavião Nature Village é o acampamento de eleição para os entusiastas de ecoturismo ativo e desportos na natureza.
+          </p>
+
+          <p class="text-charcoal-muted text-sm sm:text-base leading-relaxed font-normal">
+            Daqui tem acesso imediato aos percursos pedestres PR do concelho, aos passadiços suspensos sobre o Tejo, a arribas de escalada em Belver e a praias fluviais com condições excecionais para desportos náuticos não motorizados. E ao final do dia, espera-o o conforto de uma massagem revigorante e uma refeição reconfortante.
+          </p>
+
+          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand-border font-montserrat">
+            <div>
+              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">+80 km</div>
+              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Trilhos Pedestres Oficiais</div>
+            </div>
+            <div>
+              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">Rio Tejo & Alamal</div>
+              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Canoagem, SUP & Passadiços</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Galeria Visual Integrada -->
+        <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+          <div class="space-y-4">
+            <div class="h-64 overflow-hidden border border-sand-border shadow-soft">
+              <img src="/images/experiencias/media_105_Gavi_o.jpg" alt="Canoagem no Tejo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="h-44 overflow-hidden border border-sand-border shadow-soft">
+              <img src="/images/village/media_48_Gavi_o.jpg" alt="Trilhos na Natureza" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+          <div class="space-y-4 pt-8">
+            <div class="h-44 overflow-hidden border border-sand-border shadow-soft">
+              <img src="/images/hero/hero_village.webp" alt="Castelo de Belver e Tejo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+            <div class="h-64 overflow-hidden border border-sand-border shadow-soft">
+              <img src="/images/alojamentos/media_25_Gavi.jpg" alt="Tenda Glamping Aventura" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       2º PASSO: OS ALOJAMENTOS EXPLORER
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white text-charcoal border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
+          Conforto Robusto & Descanso Merecido
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Estruturas preparadas para quem vive o dia intensamente lá fora e valoriza uma boa noite de sono reparador com todo o conforto.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {accommodations.map((item) => (
+          <div class="bg-sand-warm/50 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-72 w-full overflow-hidden relative">
+                <img 
+                  src={item.image} 
+                  alt={item.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                />
+              </div>
+
+              <div class="p-8 space-y-4">
+                <div class="flex items-center justify-between text-xs text-natureGold-dark font-montserrat tracking-wider uppercase font-semibold">
+                  <span>Capacidade: {item.capacity}</span>
+                  <span>{item.size}</span>
+                </div>
+
+                <h3 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                  {item.title}
+                </h3>
+
+                <p class="text-charcoal-muted text-sm leading-relaxed">
+                  {item.desc}
+                </p>
+
+                <div class="pt-4 border-t border-sand-border">
+                  <h4 class="text-xs uppercase tracking-wider text-charcoal font-bold mb-3 font-montserrat">
+                    Comodidades em Destaque:
+                  </h4>
+                  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-charcoal-muted">
+                    {item.features.map(f => (
+                      <li class="flex items-center gap-2">
+                        <span class="text-natureGold font-bold">✓</span>
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-8 pt-0">
+              <a 
+                href="/reservar?perfil=aventura" 
+                class="w-full block text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
+              >
+                Verificar Disponibilidade Explorer
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       3º PASSO: AS EXPERIÊNCIAS ATIVAS
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-sand-warm text-charcoal border-t border-b border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
+          Energia, Movimento & Recuperação
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          E-bikes na ponta dos dedos, trilhos na propriedade e o circuito de hidroterapia para relaxar os músculos cansados.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {experiences.map((exp) => (
+          <div class="bg-white overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group flex flex-col justify-between">
+            <div>
+              <div class="h-56 overflow-hidden relative">
+                <img 
+                  src={exp.image} 
+                  alt={exp.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                />
+                <span class="absolute bottom-3 left-3 bg-[#181614]/85 backdrop-blur-md px-3 py-1 rounded text-xs text-natureGold font-montserrat font-bold">
+                  {exp.time}
+                </span>
+              </div>
+              <div class="p-6 space-y-3">
+                <h3 class="font-catamaran font-extrabold text-xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                  {exp.title}
+                </h3>
+                <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
+                  {exp.desc}
+                </p>
+              </div>
+            </div>
+            <div class="p-6 pt-0">
+              <a 
+                href="/experiencias" 
+                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5"
+              >
+                <span>Saber Mais</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       4º PASSO: O QUE FAZER NOS ARREDORES (ROTAS & TEJO)
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white text-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
+          Trilhos, Desfiladeiros & Águas do Tejo
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Passadiços de madeira à beira-rio, cascatas de águas translúcidas e uma rede fantástica de percursos pedestres sinalizados.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {surroundingActivities.map((act) => (
+          <div class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group">
+            <div class="h-60 overflow-hidden relative">
+              <img 
+                src={act.image} 
+                alt={act.title} 
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+              />
+              <span class="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-3 py-1 rounded text-xs text-charcoal font-montserrat font-semibold shadow-sm flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-natureGold shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <span>{act.distance}</span>
+              </span>
+            </div>
+            <div class="p-6 space-y-3">
+              <h3 class="font-catamaran font-extrabold text-xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                {act.title}
+              </h3>
+              <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
+                {act.desc}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href="/arredores" 
+          class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
+        >
+          <span>Ver Mapa de Percursos e Arredores</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       FAQS DE AVENTURA & OUTDOOR
+       ========================================================================= -->
+  <section class="py-16 md:py-20 bg-sand-warm text-charcoal border-t border-sand-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      
+      <div class="text-center mb-12">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Perguntas Frequentes de Ecoturismo & Desporto
+        </h2>
+      </div>
+
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <div class="p-6 rounded-2xl bg-white border border-sand-border shadow-soft">
+            <h3 class="font-catamaran font-bold text-lg text-charcoal mb-2">
+              {faq.q}
+            </h3>
+            <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+              {faq.a}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA (ESTILO A VILA)
+       ========================================================================= -->
+  <section id="reserva" class="py-12 md:py-16 bg-white border-t border-sand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
+      <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-3">
+        Reserve a Sua Estadia de Aventura
+      </h2>
+      <p class="font-catamaran text-charcoal-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
+        Garantam a melhor tarifa disponível diretamente connosco, oferta de tracks GPX e acesso livre ao Wellness Center para recuperação muscular.
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BookingBar />
+    </div>
+  </section>
+</BaseLayout>

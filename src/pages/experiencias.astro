@@ -1,0 +1,498 @@
+---
+// src/pages/experiencias.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const programs = [
+  {
+    id: 'lua-de-mel',
+    title: 'Lua de Mel',
+    subtitle: 'Uma celebração intimista sob o céu estrelado do Alentejo e a mística de Belver',
+    description: 'Para recém-casados ou casais em celebração especial, o Gavião Nature Village desenhou uma estadia intimista e inesquecível. Reza a lenda que do alto do castelo nasceu o encanto deste "belo ver" — o refúgio perfeito para brindar ao amor entre o montado, o silêncio e as estrelas.',
+    inclusions: [
+      'Estadia na exclusiva Tenda Glamping Amor Perfeito (cama redonda panorâmica)',
+      'Espumante de boas-vindas e cesto de frutas selecionadas no quarto',
+      'Sessão privada de relaxamento a dois no Wellness Center',
+      'Jantar romântico no Cadafaz Restaurante & Sky Lounge com vista para o castelo',
+      'Pequeno-almoço com sabores tradicionais alentejanos',
+      'Late check-out (mediante disponibilidade)'
+    ],
+    image: '/images/programas/pdf_lua-de-mel.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/gnv_lua-de-mel.pdf'
+  },
+  {
+    id: 'familia-no-campo',
+    title: 'Família no Campo',
+    subtitle: 'Liberdade, ar puro, descoberta da natureza e contacto genuíno com os animais',
+    description: 'O Gavião Nature Village é o cenário ideal para uma escapadela familiar diferente. Venha e desfrute com os seus entes queridos da paisagem verde e da luz dourada do Alentejo, das colinas ondulantes e dos caminhos rurais, proporcionando momentos mágicos na quinta pedagógica e na natureza.',
+    inclusions: [
+      'Alojamento em Cork Shelter Familiar acolhedor e independente',
+      'Experiência na Quinta Pedagógica e contacto com os animais da herdade',
+      'Visita à Horta Biológica e descoberta de plantas e aromas locais',
+      'Cesto de piquenique familiar para desfrutar nos campos da herdade',
+      'Utilização livre de bicicletas e mapa de percursos pedestres',
+      'Pequeno-almoço buffet com produtos frescos e caseiros'
+    ],
+    image: '/images/programas/pdf_familia-no-campo.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Familia-no-Campo.pdf'
+  },
+  {
+    id: 'reconnect-thrive',
+    title: 'Reconnect & Thrive',
+    subtitle: 'Revitalização holística do corpo e da mente no silêncio inspirador da herdade',
+    description: 'Delicie-se com um programa desenhado para revitalizar mente, corpo e essência. Num ambiente de retiro sereno, desacelere o ritmo quotidiano, respire o ar puro do montado e renove energias com tratamentos especializados e termalismo em comunhão com a natureza.',
+    inclusions: [
+      'Estadia em Cork Shelter Superior com deck panorâmico privativo',
+      'Acesso diário ao circuito de relaxamento (banheira de hidromassagem, sauna e banho turco)',
+      'Massagem de relaxamento e aromaterapia com essências botânicas (50 min)',
+      'Rituais de infusões biológicas e chá de ervas colhidas na herdade',
+      'Tempo de contemplação nos trilhos naturais e jardins ecológicos',
+      'Pequeno-almoço com opções saudáveis e ingredientes locais'
+    ],
+    image: '/images/programas/pdf_reconnect-thrive.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Reconnect-Thrive.pdf'
+  },
+  {
+    id: 'experiencia-gastronomica',
+    title: 'Experiência Gastronómica',
+    subtitle: 'Sabores autênticos da terra e da tradição com um toque de cozinha contemporânea',
+    description: 'O Alentejo, terra de horizontes vastos e ritmo sereno, convida a uma experiência onde o tempo abranda e os sentidos despertam. Combinando a autenticidade das paisagens com a riqueza gastronómica regional, convidamo-lo a momentos únicos feitos de sabor, tranquilidade e produtos genuínos da herdade e da região.',
+    inclusions: [
+      'Estadia de charme em Cork Shelter com vista panorâmica',
+      'Jantar de degustação de autor no Cadafaz Restaurante & Sky Lounge',
+      'Harmonização vínica selecionada com néctares de castas alentejanas',
+      'Degustação comentada de azeites virgem extra e queijos tradicionais',
+      'Pequeno-almoço com pão alentejano fresco, compotas e queijos artesanais',
+      'Acesso ao circuito térmico do Wellness Center'
+    ],
+    image: '/images/programas/pdf_experiencia-gastronomica.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/GNV_%20EXPERIENCIA_GASTRONOMICA.pdf'
+  },
+  {
+    id: 'cultura-e-gastronomia',
+    title: 'Cultura e Gastronomia',
+    subtitle: 'O património medieval de Belver, as margens do Tejo e os sabores típicos alentejanos',
+    description: 'Belver, na margem direita do rio Tejo, é um tesouro de história e paisagens memoráveis. Do alto do imponente castelo às margens fluviais do Alamal, viva a cultura regional em primeira mão e celebre o final do dia à mesa, com os enchidos, azeites e pratos típicos no Restaurante Cadafaz com vista panorâmica.',
+    inclusions: [
+      'Alojamento acolhedor integrado na natureza do Village',
+      'Bilhetes de visita ao Castelo de Belver e Torre de Menagem',
+      'Jantar com menu regional e sabores autênticos no Restaurante Cadafaz',
+      'Roteiro sugerido pelos Passadiços do Alamal e margem do Tejo',
+      'Pequeno-almoço alentejano com produtos da época',
+      'Acesso ao circuito de relaxamento no Wellness Center'
+    ],
+    image: '/images/programas/pdf_cultura-e-gastronomia.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Cultura-Gastronomia.pdf'
+  },
+  {
+    id: 'cultura-e-tradicao',
+    title: 'Cultura e Tradição',
+    subtitle: 'A arte das Rodilhas de Belver, a herança etnográfica e a identidade comunitária',
+    description: 'Tecidos antigos, cores e estampados vibrantes dão vida às rodilhas de lã — antigas almofadas de cabeça das mulheres alentejanas que hoje são verdadeiras obras de arte, história e sustentabilidade. Um programa que convida a mergulhar nas raízes mais genuínas do concelho de Gavião e na sua gente.',
+    inclusions: [
+      'Estadia de charme em Cork Shelter',
+      'Visita guiada ao Museu do Sabão de Belver e Museu das Mantas e Tapeçarias',
+      'Apresentação e workshop da arte tradicional das Rodilhas de Belver',
+      'Lembrança artesanal exclusiva confecionada por artesãos locais',
+      'Pequeno-almoço buffet com produtos típicos da região',
+      'Acesso ao circuito de sauna e banho turco no Wellness Center'
+    ],
+    image: '/images/programas/pdf_cultura-e-tradicao.jpg',
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Cultura-Tradicao.pdf'
+  }
+];
+---
+
+<BaseLayout 
+  title="Experiências & Programas | Gavião Nature Village"
+  description="Conheça os 6 programas e packs de estadia do Gavião Nature Village: Lua de Mel, Família no Campo, Reconnect & Thrive, Gastronomia e Cultura de Belver."
+>
+
+  <!-- =========================================================================
+       HERO DA PÁGINA (PADRÃO IGUAL ÀS RESTANTES PÁGINAS DO WEBSITE)
+       ========================================================================= -->
+  <section class="relative h-[38vh] min-h-[290px] md:h-[40vh] md:min-h-[330px] flex flex-col justify-center items-center bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/experiencias/media_104_Gavi_o.jpg" 
+        alt="Experiências Gavião Nature Village" 
+        class="w-full h-full object-cover opacity-50 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/40"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        Experiências
+      </h1>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       INTRODUÇÃO EDITORIAL (SEM TAGS / COM SUB-TÍTULO COMPLETO)
+       ========================================================================= -->
+  <section class="py-8 md:py-12 bg-white border-b border-sand-border/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        
+        <!-- Coluna Esquerda: Título e Declaração Editorial Envolvente -->
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+            Programas & Packs de Estadia
+          </span>
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl text-charcoal leading-tight">
+            Onde o tempo abranda e a natureza dita o ritmo dos seus dias.
+          </h2>
+        </div>
+
+        <!-- Coluna Direita: Apenas o Texto Superior -->
+        <div class="lg:col-span-7 lg:pl-8 lg:border-l border-sand-border">
+          <p class="font-catamaran text-charcoal text-base sm:text-lg leading-relaxed font-light">
+            No Gavião Nature Village desenhámos experiências de imersão que vão além da estadia convencional. Cada programa reúne o conforto ecológico dos nossos Cork Shelters e Tendas Glamping com momentos que revelam a autenticidade do território: o romance discreto sob o céu estrelado, a liberdade dos mais novos na quinta pedagógica, o silêncio reparador do spa e a herança histórica de Belver e do Rio Tejo.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       OS 6 PROGRAMAS (ESTRUTURA EDITORIAL / SEM TAGS DE CANTO / COM PDF E RESERVA)
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+      
+      {programs.map((prog, idx) => (
+        <article id={prog.id} class={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          
+          <!-- Imagem Ampla Editorial (Sem Tag no Canto Superior) -->
+          <div class={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
+            <div class="relative overflow-hidden shadow-luxury group">
+              <img 
+                src={prog.image} 
+                alt={prog.title} 
+                class="w-full h-80 sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <!-- Conteúdo e Ações -->
+          <div class={`lg:col-span-6 space-y-5 ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div>
+              <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-charcoal">
+                {prog.title}
+              </h2>
+              <p class="font-catamaran text-natureGold-dark text-sm sm:text-base font-semibold mt-1.5">
+                {prog.subtitle}
+              </p>
+            </div>
+
+            <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+              {prog.description}
+            </p>
+
+            <!-- Caixa de Inclusões -->
+            <div class="bg-sand-warm rounded-2xl p-5 sm:p-6 border border-sand-border space-y-3">
+              <h3 class="font-montserrat font-bold text-xs uppercase tracking-wider text-charcoal flex items-center gap-2">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                O Que Está Incluído no Programa:
+              </h3>
+              <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-montserrat text-charcoal-muted">
+                {prog.inclusions.map(inc => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-natureGold font-bold">•</span>
+                    <span>{inc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Botões: "Reservar este programa" e "Detalhes (PDF)" -->
+            <div class="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+              <a 
+                href="#reserva-programa" 
+                data-select-program={prog.id}
+                class="book-program-trigger btn-gold font-montserrat font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-soft hover:shadow-gold transition-all cursor-pointer whitespace-nowrap"
+              >
+                Reservar este programa →
+              </a>
+
+              <a 
+                href={prog.pdfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-white hover:bg-sand-warm text-charcoal border border-sand-border hover:border-natureGold font-montserrat font-semibold text-xs px-5 py-3 rounded-xl transition-all shadow-sm cursor-pointer whitespace-nowrap"
+                title={`Ver detalhes de ${prog.title}`}
+              >
+                <span>Detalhes</span>
+                <svg class="w-3.5 h-3.5 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </article>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       FORMULÁRIO DE RESERVA DEDICADO AOS PROGRAMAS (NO FIM DA PÁGINA)
+       ========================================================================= -->
+  <section id="reserva-programa" class="py-16 md:py-24 bg-sand-warm border-t border-sand-border scroll-mt-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-10 space-y-2">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+          Pedido de Reserva
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-4xl uppercase tracking-wide text-charcoal">
+          Reserve o Seu Programa
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base">
+          Preencha os seus dados e o programa pretendido. A nossa equipa entrará em contacto num prazo de 24 horas para confirmar a disponibilidade e personalizar a sua estadia.
+        </p>
+      </div>
+
+      <!-- Caixa do Formulário -->
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-sand-border shadow-luxury">
+        <form id="program-booking-form" class="space-y-6">
+          
+          <!-- Linha 1: Seleção do Programa e Tipologia -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="form-program-select" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Programa Pretendido *
+              </label>
+              <select 
+                id="form-program-select" 
+                name="program" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              >
+                <option value="">Selecione um programa...</option>
+                {programs.map(p => (
+                  <option value={p.id}>{p.title}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label for="form-accom-select" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Alojamento Preferido
+              </label>
+              <select 
+                id="form-accom-select" 
+                name="accommodation" 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              >
+                <option value="conforme-programa">Recomendado pelo Programa</option>
+                <option value="tenda-amor-perfeito">Tenda Glamping Amor Perfeito (Casal)</option>
+                <option value="cork-shelter-superior">Cork Shelter Superior</option>
+                <option value="cork-shelter-familiar">Cork Shelter Familiar (até 8 pax)</option>
+                <option value="cork-shelter-standard">Cork Shelter Standard</option>
+                <option value="tenda-glamping-amigos">Tenda Glamping Amigos</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Linha 2: Datas de Chegada e Saída -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="form-checkin" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Data Prevista de Chegada (Check-in) *
+              </label>
+              <input 
+                type="date" 
+                id="form-checkin" 
+                name="checkin" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              />
+            </div>
+
+            <div>
+              <label for="form-checkout" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Data Prevista de Saída (Check-out) *
+              </label>
+              <input 
+                type="date" 
+                id="form-checkout" 
+                name="checkout" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <!-- Linha 3: Número de Hóspedes (Adultos e Crianças) -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label for="form-adults" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Adultos *
+              </label>
+              <select 
+                id="form-adults" 
+                name="adults" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              >
+                <option value="2">2 Adultos (Casal)</option>
+                <option value="1">1 Adulto</option>
+                <option value="3">3 Adultos</option>
+                <option value="4">4 Adultos</option>
+                <option value="5+">5 ou mais Adultos</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="form-children" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Crianças (0 a 12 anos)
+              </label>
+              <select 
+                id="form-children" 
+                name="children" 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-semibold text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all cursor-pointer"
+              >
+                <option value="0">Sem crianças</option>
+                <option value="1">1 Criança</option>
+                <option value="2">2 Crianças</option>
+                <option value="3+">3 ou mais Crianças</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Linha 4: Dados Pessoais de Contacto -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <div>
+              <label for="form-name" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Nome Completo *
+              </label>
+              <input 
+                type="text" 
+                id="form-name" 
+                name="name" 
+                placeholder="Ex: Maria Santos" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-medium text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="form-email" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                E-mail de Contacto *
+              </label>
+              <input 
+                type="email" 
+                id="form-email" 
+                name="email" 
+                placeholder="exemplo@email.com" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-medium text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all"
+              />
+            </div>
+
+            <div>
+              <label for="form-phone" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+                Telefone / Telemóvel *
+              </label>
+              <input 
+                type="tel" 
+                id="form-phone" 
+                name="phone" 
+                placeholder="+351 912 345 678" 
+                required 
+                class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-medium text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all"
+              />
+            </div>
+          </div>
+
+          <!-- Linha 5: Pedidos Especiais -->
+          <div>
+            <label for="form-notes" class="block text-xs font-montserrat font-bold uppercase tracking-wider text-charcoal mb-2">
+              Observações ou Pedidos Especiais
+            </label>
+            <textarea 
+              id="form-notes" 
+              name="notes" 
+              rows="3" 
+              placeholder="Indique celebrações especiais, restrições alimentares, necessidade de berço ou dúvidas..."
+              class="w-full bg-[#FAF7F2] border border-sand-border rounded-xl px-4 py-3 text-sm font-medium text-charcoal focus:outline-none focus:border-natureGold focus:ring-2 focus:ring-natureGold/30 transition-all resize-y"
+            ></textarea>
+          </div>
+
+          <!-- Mensagem de Sucesso (Oculta por defeito) -->
+          <div id="booking-success-msg" class="hidden p-4 rounded-xl bg-[#E8F0E6] border border-[#C2D8BF] text-[#2D5A27] text-sm font-montserrat font-medium text-center animate-fadeIn">
+            ✓ <strong>Pedido de reserva registado com sucesso!</strong> A nossa equipa entrará em contacto consigo muito em breve para confirmar todos os detalhes da sua estadia.
+          </div>
+
+          <!-- Botão de Submissão -->
+          <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span class="text-xs text-charcoal-muted font-montserrat">
+              * Campos de preenchimento obrigatório
+            </span>
+            <button 
+              type="submit" 
+              id="submit-booking-btn"
+              class="w-full sm:w-auto btn-gold font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl shadow-soft hover:shadow-gold transition-all cursor-pointer text-center"
+            >
+              Enviar Pedido de Reserva do Programa
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // Lógica de pré-seleção dinâmica do programa no formulário
+  const triggers = document.querySelectorAll<HTMLAnchorElement>('.book-program-trigger');
+  const programSelect = document.getElementById('form-program-select') as HTMLSelectElement | null;
+  const formSection = document.getElementById('reserva-programa');
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const progId = trigger.getAttribute('data-select-program');
+      if (programSelect && progId) {
+        programSelect.value = progId;
+        // Destaque visual temporário no campo de seleção
+        programSelect.classList.add('ring-4', 'ring-natureGold/50', 'border-natureGold');
+        setTimeout(() => {
+          programSelect.classList.remove('ring-4', 'ring-natureGold/50', 'border-natureGold');
+        }, 2000);
+      }
+      // Scroll suave até ao formulário
+      formSection?.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Feedback de submissão do formulário
+  const bookingForm = document.getElementById('program-booking-form') as HTMLFormElement | null;
+  const successMsg = document.getElementById('booking-success-msg');
+  const submitBtn = document.getElementById('submit-booking-btn') as HTMLButtonElement | null;
+
+  bookingForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'A Enviar Pedido...';
+    }
+    setTimeout(() => {
+      if (successMsg) successMsg.classList.remove('hidden');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Pedido Enviado';
+        submitBtn.classList.remove('btn-gold');
+        submitBtn.classList.add('bg-natureGreen', 'text-white');
+      }
+    }, 600);
+  });
+</script>

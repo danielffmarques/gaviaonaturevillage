@@ -1,0 +1,762 @@
+{
+  "1": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "3": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "4": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "5": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters"
+    ]
+  },
+  "6": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "7": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "8": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "9": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "02_alojamento"
+    ]
+  },
+  "10": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "11": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "12": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "13": {
+    "label": "Gavião",
+    "category": "village",
+    "foundOn": [
+      "06_village"
+    ]
+  },
+  "14": {
+    "label": "Gavião",
+    "category": "village",
+    "foundOn": [
+      "06_village"
+    ]
+  },
+  "15": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "16": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "18": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "19": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "20": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "21": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "22": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "23": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "24": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "25": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "26": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "02_alojamento"
+    ]
+  },
+  "27": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "28": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "29": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "30": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "31": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "32": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "33": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "34": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "00_home",
+      "00_home"
+    ]
+  },
+  "35": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "36": {
+    "label": "Gavião",
+    "category": "village",
+    "foundOn": [
+      "06_village"
+    ]
+  },
+  "37": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "38": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "39": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "40": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "41": {
+    "label": "Gavi",
+    "category": "galeria",
+    "foundOn": [
+      "galeria"
+    ]
+  },
+  "42": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "43": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "44": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "07_experiencias"
+    ]
+  },
+  "45": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "47": {
+    "label": "Gavião",
+    "category": "village",
+    "foundOn": [
+      "06_village"
+    ]
+  },
+  "48": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "54": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "55": {
+    "label": "Gavião",
+    "category": "village",
+    "foundOn": [
+      "06_village"
+    ]
+  },
+  "56": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "57": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar"
+    ]
+  },
+  "58": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "01_reservar",
+      "02_alojamento"
+    ]
+  },
+  "59": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "07a_natureza-e-lazer",
+      "07b_praia-fluvial-alamal",
+      "07c_passadicos-alamal",
+      "07d_observatorio-avifauna",
+      "07e_praia-ribeira-venda"
+    ]
+  },
+  "60": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "08_patrimonio-cultura",
+      "08a_castelo-belver",
+      "08b_museu-sabao",
+      "08c_mantas-belver",
+      "08d_casa-das-artes"
+    ]
+  },
+  "61": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "08_patrimonio-cultura",
+      "08a_castelo-belver",
+      "08b_museu-sabao",
+      "08c_mantas-belver",
+      "08d_casa-das-artes"
+    ]
+  },
+  "62": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "08_patrimonio-cultura",
+      "08a_castelo-belver",
+      "08b_museu-sabao",
+      "08c_mantas-belver",
+      "08d_casa-das-artes"
+    ]
+  },
+  "63": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "08_patrimonio-cultura",
+      "08a_castelo-belver",
+      "08b_museu-sabao",
+      "08c_mantas-belver",
+      "08d_casa-das-artes"
+    ]
+  },
+  "64": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "07a_natureza-e-lazer",
+      "07b_praia-fluvial-alamal",
+      "07c_passadicos-alamal",
+      "07d_observatorio-avifauna",
+      "07e_praia-ribeira-venda"
+    ]
+  },
+  "66": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters"
+    ]
+  },
+  "68": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "07a_natureza-e-lazer",
+      "07b_praia-fluvial-alamal",
+      "07c_passadicos-alamal",
+      "07d_observatorio-avifauna",
+      "07e_praia-ribeira-venda"
+    ]
+  },
+  "69": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters"
+    ]
+  },
+  "70": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "09_percursos-pedestres",
+      "09a_pr1",
+      "09b_pr2",
+      "09c_pr3",
+      "09d_pr4"
+    ]
+  },
+  "72": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "09_percursos-pedestres",
+      "09a_pr1",
+      "09b_pr2",
+      "09c_pr3",
+      "09d_pr4"
+    ]
+  },
+  "73": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "09_percursos-pedestres",
+      "09a_pr1",
+      "09b_pr2",
+      "09c_pr3",
+      "09d_pr4"
+    ]
+  },
+  "74": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "09_percursos-pedestres",
+      "09a_pr1",
+      "09b_pr2",
+      "09c_pr3",
+      "09d_pr4"
+    ]
+  },
+  "75": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "09_percursos-pedestres",
+      "09a_pr1",
+      "09b_pr2",
+      "09c_pr3",
+      "09d_pr4"
+    ]
+  },
+  "76": {
+    "label": "",
+    "category": "experiencias",
+    "foundOn": [
+      "09a_pr1"
+    ]
+  },
+  "77": {
+    "label": "",
+    "category": "experiencias",
+    "foundOn": [
+      "09b_pr2"
+    ]
+  },
+  "78": {
+    "label": "",
+    "category": "experiencias",
+    "foundOn": [
+      "09c_pr3"
+    ]
+  },
+  "79": {
+    "label": "",
+    "category": "experiencias",
+    "foundOn": [
+      "09d_pr4"
+    ]
+  },
+  "80": {
+    "label": "",
+    "category": "experiencias",
+    "foundOn": [
+      "09e_pr8"
+    ]
+  },
+  "84": {
+    "label": "Gavião",
+    "category": "contacto",
+    "foundOn": [
+      "12_contacto"
+    ]
+  },
+  "85": {
+    "label": "Gavião",
+    "category": "contacto",
+    "foundOn": [
+      "12_contacto"
+    ]
+  },
+  "86": {
+    "label": "Gavião",
+    "category": "contacto",
+    "foundOn": [
+      "12_contacto"
+    ]
+  },
+  "87": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters"
+    ]
+  },
+  "102": {
+    "label": "Gavião",
+    "category": "experiencias",
+    "foundOn": [
+      "07a_natureza-e-lazer",
+      "07b_praia-fluvial-alamal",
+      "07c_passadicos-alamal",
+      "07d_observatorio-avifauna",
+      "07e_praia-ribeira-venda"
+    ]
+  },
+  "104": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "105": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "106": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "107": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "108": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "111": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "00_home",
+      "00_home",
+      "00_home",
+      "00_home"
+    ]
+  },
+  "119": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  },
+  "128": {
+    "label": "Gavião",
+    "category": "geral",
+    "foundOn": [
+      "00_home",
+      "01_reservar",
+      "02_alojamento",
+      "02a_cork-shelters",
+      "02b_tendas-glamping"
+    ]
+  }
+}

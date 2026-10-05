@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Gavião Nature Village - Brand Guidelines, Proposta de Valor & Sitemap Oficial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 14mm 16mm 14mm;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Catamaran', sans-serif;
+      color: #383434;
+      background-color: #ffffff;
+      line-height: 1.5;
+      font-size: 12.5px;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      box-sizing: border-box;
+      padding-bottom: 22px;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* Header & Footer in Pages */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid #E6D8BF;
+      padding-bottom: 6px;
+      margin-bottom: 15px;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #8C827A;
+    }
+
+    .doc-header .logo-text {
+      font-weight: 700;
+      color: #C2A472;
+    }
+
+    .doc-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 8.5px;
+      color: #A09890;
+      border-top: 1px solid #ECE7DE;
+      padding-top: 4px;
+      letter-spacing: 0.05em;
+    }
+
+    /* Cover Page */
+    .cover-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 245mm;
+      text-align: center;
+      padding: 24px 20px;
+      background: radial-gradient(circle at center, #FCFAF7 0%, #F5EFE6 100%);
+      border: 1px solid #E8DFD1;
+      border-radius: 4px;
+    }
+
+    .cover-top {
+      margin-top: 15px;
+    }
+
+    .badge-luxury {
+      display: inline-block;
+      padding: 5px 16px;
+      border: 1px solid #C2A472;
+      border-radius: 30px;
+      color: #9E7D47;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      background-color: rgba(194, 164, 114, 0.08);
+    }
+
+    .cover-title {
+      font-size: 34px;
+      font-weight: 800;
+      color: #474242;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .cover-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: 19px;
+      font-style: italic;
+      color: #C2A472;
+      margin-bottom: 20px;
+    }
+
+    .cover-divider {
+      width: 60px;
+      height: 3px;
+      background-color: #C2A472;
+      margin: 0 auto 20px;
+    }
+
+    .cover-description {
+      max-width: 580px;
+      margin: 0 auto;
+      font-size: 13.5px;
+      color: #615A5A;
+      line-height: 1.55;
+    }
+
+    .cover-middle-box {
+      margin: 20px auto;
+      padding: 18px 26px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #E6D8BF;
+      box-shadow: 0 4px 14px rgba(194, 164, 114, 0.12);
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .cover-middle-box h4 {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #C2A472;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .cover-middle-box ul {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      font-size: 10.5px;
+      color: #474242;
+    }
+
+    .cover-middle-box ul li:before {
+      content: "✦ ";
+      color: #C2A472;
+    }
+
+    .cover-bottom {
+      margin-bottom: 10px;
+      font-size: 10.5px;
+      color: #8C827A;
+      line-height: 1.5;
+    }
+
+    /* Headings & Texts */
+    h2.section-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #474242;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    h2.section-title span.number {
+      color: #C2A472;
+      font-size: 24px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .section-intro {
+      font-size: 12px;
+      color: #6E6666;
+      margin-bottom: 16px;
+      max-width: 98%;
+      line-height: 1.5;
+    }
+
+    h3.block-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #474242;
+      margin: 14px 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-left: 3px solid #C2A472;
+      padding-left: 8px;
+    }
+
+    p {
+      margin-bottom: 8px;
+      color: #4A4444;
+      text-align: justify;
+    }
+
+    /* Cards & Grids */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .card {
+      background: #FAFAFA;
+      border: 1px solid #ECE7DE;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .card.highlight {
+      background: #FDFBF7;
+      border-color: #E2D3B8;
+    }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 12.5px;
+      color: #474242;
+      margin-bottom: 4px;
+    }
+
+    .card-text {
+      font-size: 11px;
+      color: #665F5F;
+      line-height: 1.45;
+    }
+
+    /* Color Swatches */
+    .swatch-box {
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #E4DDD2;
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .swatch-color {
+      height: 48px;
+      width: 100%;
+    }
+
+    .swatch-details {
+      padding: 8px 9px;
+      font-size: 10px;
+    }
+
+    .swatch-name {
+      font-weight: 700;
+      color: #474242;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    .swatch-hex {
+      font-family: monospace;
+      color: #C2A472;
+      font-weight: 600;
+      font-size: 10.5px;
+    }
+
+    .swatch-desc {
+      font-size: 9px;
+      color: #7A7272;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+
+    /* Custom Tables */
+    table.custom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0 10px 0;
+      font-size: 10px;
+    }
+
+    table.custom-table th {
+      background-color: #F5EFE6;
+      color: #474242;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 6px;
+      text-align: left;
+      border-bottom: 2px solid #C2A472;
+      font-size: 9px;
+    }
+
+    table.custom-table td {
+      padding: 3.5px 6px;
+      border-bottom: 1px solid #ECE7DE;
+      color: #4A4444;
+      vertical-align: middle;
+      font-size: 9.5px;
+      line-height: 1.35;
+    }
+
+    table.custom-table tr:nth-child(even) td {
+      background-color: #FAF8F5;
+    }
+
+    /* Lists */
+    ul.clean-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 10px;
+    }
+
+    ul.clean-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 5px;
+      font-size: 11px;
+      color: #4A4444;
+      line-height: 1.45;
+    }
+
+    ul.clean-list li:before {
+      content: "▪";
+      position: absolute;
+      left: 0;
+      color: #C2A472;
+      font-size: 13px;
+      line-height: 1;
+    }
+
+    /* Flows */
+    .flow-diagram {
+      background: #FDFCF9;
+      border: 1px solid #E6D8BF;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin: 10px 0;
+    }
+
+    .flow-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .flow-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .flow-node {
+      background: #ffffff;
+      border: 1.5px solid #C2A472;
+      border-radius: 4px;
+      padding: 6px 10px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 10px;
+      color: #474242;
+      box-shadow: 0 1px 3px rgba(194, 164, 114, 0.12);
+      flex: 1;
+      margin: 0 4px;
+    }
+
+    .flow-node.hub {
+      background: #474242;
+      color: #ffffff;
+      border-color: #474242;
+    }
+
+    .flow-node.conversion {
+      background: #C2A472;
+      color: #ffffff;
+      border-color: #C2A472;
+    }
+
+    .flow-arrow {
+      color: #C2A472;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .notice-box {
+      background: #F4F1EA;
+      border-left: 3px solid #C2A472;
+      padding: 8px 12px;
+      font-size: 10.5px;
+      color: #554E4E;
+      margin: 8px 0 12px 0;
+      border-radius: 0 4px 4px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== PÁGINA 1: CAPA ==================== -->
+  <div class="page">
+    <div class="cover-page">
+      <div class="cover-top">
+        <div class="badge-luxury">Gavião Nature Village ★ Ecoturismo de Charme</div>
+        <h1 class="cover-title">Diretrizes de Marca, Proposta de Valor & Sitemap</h1>
+        <div class="cover-subtitle">Manual Estratégico & Arquitetura Web Oficial para Astro, Tailwind & TypeScript</div>
+        <div class="cover-divider"></div>
+        <p class="cover-description">
+          Documento técnico e criativo de referência para a reformulação da presença digital do 
+          <strong>Gavião Nature Village</strong> (Cadafaz, Gavião, Alto Alentejo), baseado numa auditoria rigorosa 
+          ao website oficial live e aos seus ativos reais.
+        </p>
+      </div>
+
+      <div class="cover-middle-box">
+        <h4>Conteúdo Auditado & Estruturado</h4>
+        <ul>
+          <li>Proposta de Valor Real</li>
+          <li>Identidade Visual & Cores Oficiais</li>
+          <li>Escala Tipográfica (Catamaran)</li>
+          <li>Tokens para Tailwind CSS</li>
+          <li>Sitemap Auditado (20 Páginas Live)</li>
+          <li>Subpáginas de Detalhe Ativas</li>
+          <li>Análise Real da Homepage</li>
+          <li>Fluxos de Navegação & Setup Astro</li>
+        </ul>
+      </div>
+
+      <div class="cover-bottom">
+        <p><strong>Projeto:</strong> Website Gavião Nature Village | <strong>Versão:</strong> 1.1 Auditada e Corrigida</p>
+        <p><strong>Stack Tecnológica:</strong> Astro + Tailwind CSS + TypeScript + Assistente Bionic</p>
+        <p><strong>Data de Emissão:</strong> Outubro de 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 2: PROPOSTA DE VALOR ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Brand Guidelines</span>
+      <span class="logo-text">01. Proposta de Valor</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">01</span> Proposta de Valor & Conceito de Marca</h2>
+    <p class="section-intro">
+      O Gavião Nature Village é um empreendimento de ecoturismo no Alto Alentejo (Cadafaz, Gavião), junto à praia fluvial do Alamal e ao Rio Tejo. O seu conceito nuclear alia o luxo do conforto hoteleiro contemporâneo à sustentabilidade e à tranquilidade da paisagem alentejana.
+    </p>
+
+    <div class="grid-3">
+      <div class="card highlight">
+        <div class="card-title">🌿 Construção Sustentável & Cortiça</div>
+        <div class="card-text">
+          10 Cork Shelters construídos com recursos endógenos (revestimento a cortiça natural alentejana, garantindo isolamento térmico e acústico de topo) e 13 tendas Glamping decoradas com a comodidade de um quarto de hotel com casa de banho privada.
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">🧘 Bem-Estar Holístico (Wellness)</div>
+        <div class="card-text">
+          Circuito de bem-estar com hidromassagem/jacuzzi, sauna e banho turco integrados no ambiente natural, acompanhados por massagens corporais e rituais terapêuticos.
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">🍷 Gastronomia com Vista para o Castelo</div>
+        <div class="card-text">
+          Restaurante Cadafaz e Sky Lounge Bar: cozinha regional com toque moderno, valorizando produtos locais (enchidos, azeite, queijos e vinhos alentejanos) com vista panorâmica para o Castelo de Belver.
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Os 4 Pilares da Proposta de Valor</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">1. Conexão Genuína com a Natureza</div>
+        <div class="card-text">
+          Proximidade aos trilhos pedestres de Gavião, aos Passadiços do Alamal e ao Rio Tejo, permitindo desfrutar de ar puro, silêncio e céu estrelado sem abdicar de Wi-Fi, ar condicionado e comodidades modernas.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">2. Experiências no Village</div>
+        <div class="card-text">
+          Herdade viva com piscina exterior, cantinho dos animais (quinta pedagógica com cabras, póneis e aves), vinhas velhas em cultivo, horta biológica e espaços de lazer para famílias.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">3. Vantagens Diretas do Canal Oficial</div>
+        <div class="card-text">
+          Proposta comercial clara: quem reserva no site oficial obtém o melhor preço garantido, acesso gratuito ao circuito wellness, descontos no spa (15% em massagens) e flexibilidade de check-in.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">4. Retiros e Pacotes Temáticos</div>
+        <div class="card-text">
+          Oferta de programas completos: Lua de Mel romântica (Tenda Amor Perfeito com cama redonda), Família no Campo, Reconnect & Thrive e experiências gastronómicas e culturais.
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 2</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 3: CORES OFICIAIS ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Brand Guidelines</span>
+      <span class="logo-text">02. Paleta de Cores Oficial</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">02</span> Paleta de Cores Oficial</h2>
+    <p class="section-intro">
+      Cromática inspirada na terra, nas vinhas, no montado e na cortiça alentejana, extraída diretamente dos estilos de produção do website oficial.
+    </p>
+
+    <div class="grid-4">
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #C2A472;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Dourado Nature</div>
+          <div class="swatch-hex">#C2A472</div>
+          <div class="swatch-desc">Cor primária de destaque: botões principais, links ativos, ícones e linhas decorativas.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #B58C30;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Ouro Alentejano</div>
+          <div class="swatch-hex">#B58C30</div>
+          <div class="swatch-desc">Cor oficial do motor do CMS: estados hover, badges e acentos cromáticos.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #474242;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Grafite Carvão</div>
+          <div class="swatch-hex">#474242</div>
+          <div class="swatch-desc">Cor principal de tipografia: títulos, textos de leitura, botões secundários e rodapé.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #F3F3F3;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Areia Suave</div>
+          <div class="swatch-hex">#F3F3F3</div>
+          <div class="swatch-desc">Cor de fundo do body e blocos neutros, transmitindo luminosidade e amplitude.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-top: -2px;">
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #132223;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Noite do Tejo</div>
+          <div class="swatch-hex">#132223</div>
+          <div class="swatch-desc">Tom escuro profundo: modais, aviso de cookies e botões de destaque noturno.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #3A4D39;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Verde Natureza</div>
+          <div class="swatch-hex">#3A4D39</div>
+          <div class="swatch-desc">Acento vegetal para indicar sustentabilidade, trilhos pedestres e natureza.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #E6D8BF;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Cortiça Clara</div>
+          <div class="swatch-hex">#E6D8BF</div>
+          <div class="swatch-desc">Bordas, separadores subtis de secção e fundos de destaque secundário.</div>
+        </div>
+      </div>
+      <div class="swatch-box">
+        <div class="swatch-color" style="background-color: #FFFFFF; border-bottom: 1px solid #ddd;"></div>
+        <div class="swatch-details">
+          <div class="swatch-name">Branco Puro</div>
+          <div class="swatch-hex">#FFFFFF</div>
+          <div class="swatch-desc">Cartões de alojamento, caixas de formulário, modais e barra de navegação ativa.</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Tokens Tailwind CSS para o Projeto</h3>
+    <div class="card" style="font-family: monospace; font-size: 10px; background: #262424; color: #ECEAE7; padding: 10px 14px; margin-bottom: 10px;">
+      // tailwind.config.mjs<br>
+      export default {<br>
+      &nbsp;&nbsp;theme: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;extend: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors: {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;natureGold: { DEFAULT: '#C2A472', dark: '#B58C30', light: '#E6D8BF' },<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;charcoal: { DEFAULT: '#474242', dark: '#132223', muted: '#6E6666' },<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sandBg: '#F3F3F3',<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forestGreen: '#3A4D39'<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 3</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 4: TIPOGRAFIA ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Brand Guidelines</span>
+      <span class="logo-text">03. Tipografia Oficial</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">03</span> Sistema Tipográfico Oficial</h2>
+    <p class="section-intro">
+      Identificação das tipografias utilizadas no site original com regras estritas de aplicação, pesos e hierarquia visual.
+    </p>
+
+    <div class="grid-2">
+      <div class="card highlight">
+        <div class="card-title" style="font-size: 14px;">1. Catamaran (Fonte Primária)</div>
+        <div class="card-text">
+          Fonte oficial do website: utilizada em todos os títulos (H1 a H4), botões, corpo de texto e rodapé.
+          <br><strong>Características:</strong> Sem serifa, geométrica, traços limpos e modernos com excelente legibilidade.
+          <br><strong>Pesos utilizados:</strong> Regular (400) e Bold (700).
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="card-title" style="font-size: 14px;">2. Montserrat (Fonte de Apoio)</div>
+        <div class="card-text">
+          Configurada no motor CMS do hotel: utilizada para metadados, badges, números e textos de navegação técnica.
+          <br><strong>Características:</strong> Moderna, proporcional, excelente legibilidade em tamanhos pequenos (9px a 11px).
+          <br><strong>Pesos utilizados:</strong> Medium (500) e SemiBold (600).
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Tabela de Hierarquia Tipográfica</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Elemento</th>
+          <th>Família</th>
+          <th>Peso & Tamanho</th>
+          <th>Espaçamento (Tracking)</th>
+          <th>Exemplo no Site</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>H1 Página</strong></td>
+          <td>Catamaran</td>
+          <td>Bold (700) • 28px - 40px</td>
+          <td>Normal / 0.02em</td>
+          <td>"Alojamento de Gavião Nature Village"</td>
+        </tr>
+        <tr>
+          <td><strong>H2 Secção</strong></td>
+          <td>Catamaran</td>
+          <td>Bold (700) • 20px - 26px</td>
+          <td>0.05em • UPPERCASE</td>
+          <td>"CORK SHELTERS & TENDAS GLAMPING"</td>
+        </tr>
+        <tr>
+          <td><strong>H3 Bloco</strong></td>
+          <td>Catamaran</td>
+          <td>Bold (700) • 16px - 20px</td>
+          <td>Normal</td>
+          <td>"Cork Shelter Standard", "Sky Lounge Bar"</td>
+        </tr>
+        <tr>
+          <td><strong>Corpo (Body)</strong></td>
+          <td>Catamaran</td>
+          <td>Regular (400) • 14px</td>
+          <td>Line-height: 1.6</td>
+          <td>Descrições de quartos, ementas e história regional</td>
+        </tr>
+        <tr>
+          <td><strong>Botão Primário</strong></td>
+          <td>Catamaran</td>
+          <td>Bold (700) • 15px - 16px</td>
+          <td>0.10em • UPPERCASE</td>
+          <td>"RESERVAR", "MAIS INFORMAÇÃO"</td>
+        </tr>
+        <tr>
+          <td><strong>Metadados / Badges</strong></td>
+          <td>Montserrat</td>
+          <td>SemiBold (600) • 10px - 11px</td>
+          <td>0.12em • UPPERCASE</td>
+          <td>"26 M²", "WIFI INCLUÍDO", "WC PRIVADO"</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="notice-box">
+      <strong>Regra de Implementação:</strong> No novo website Astro, o body utilizará <code>font-['Catamaran'] text-[#474242]</code> com renderização antialiased. Os botões manterão sempre a convenção de letras maiúsculas (<code>uppercase tracking-wider font-bold</code>) tal como no design oficial.
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 4</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 5: SITEMAP GERAL ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Arquitetura de Informação</span>
+      <span class="logo-text">04. Sitemap & Arquitetura Web</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">04</span> Sitemap Auditado & Arquitetura Web</h2>
+    <p class="section-intro" style="margin-bottom: 10px;">
+      Auditoria rigorosa da estrutura real do website. O mapa divide-se entre as <strong>20 páginas oficiais indexadas</strong> no <code>sitemap.xml</code> e as <strong>páginas específicas de detalhe e conteúdo</strong> ligadas internamente.
+    </p>
+
+    <div class="grid-3" style="margin-bottom: 8px;">
+      <div class="card highlight" style="text-align: center; padding: 6px 8px;">
+        <div style="font-size: 20px; font-weight: 800; color: #C2A472;">20</div>
+        <div style="font-size: 9.5px; text-transform: uppercase; font-weight: 700;">Páginas Sitemap.xml</div>
+      </div>
+      <div class="card" style="text-align: center; padding: 6px 8px;">
+        <div style="font-size: 20px; font-weight: 800; color: #474242;">14</div>
+        <div style="font-size: 9.5px; text-transform: uppercase; font-weight: 700;">Subpáginas de Detalhe</div>
+      </div>
+      <div class="card" style="text-align: center; padding: 6px 8px;">
+        <div style="font-size: 20px; font-weight: 800; color: #3A4D39;">3</div>
+        <div style="font-size: 9.5px; text-transform: uppercase; font-weight: 700;">Páginas Legais</div>
+      </div>
+    </div>
+
+    <h3 class="block-title" style="margin: 8px 0 6px 0;">Tabela das 20 Páginas Principais (Sitemap Oficial)</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>URL / Slug</th>
+          <th>Nome / Secção</th>
+          <th>Conteúdo Principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>/</code></td>
+          <td>Homepage</td>
+          <td>Hero banner, motor de reservas, apresentação, vantagens diretas, destaques.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>/reservar.html</code></td>
+          <td>Reservar</td>
+          <td>Interface de reserva online e consulta de disponibilidade de estadias.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>/alojamento.html</code></td>
+          <td>Alojamento</td>
+          <td>Apresentação conjunta dos Cork Shelters e Tendas Glamping.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td><code>/wellness-center.html</code></td>
+          <td>Wellness Center</td>
+          <td>Apresentação do spa: sauna, banho turco, hidromassagem e massagens.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td><code>/cadafaz-restaurante-&-sky-lounge.html</code></td>
+          <td>Restaurante & Sky Lounge</td>
+          <td>Restaurante com vista Castelo de Belver, horários, ementa e lounge bar.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td><code>/programas.html</code></td>
+          <td>Programas</td>
+          <td>Catálogo dos 6 pacotes temáticos para estadias especiais.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td><code>/lua-de-mel.html</code></td>
+          <td>Lua de Mel</td>
+          <td>Pacote romântico para recém-casados com referência à lenda de Belver.</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td><code>/familia-no-campo.html</code></td>
+          <td>Família no Campo</td>
+          <td>Pacote de lazer rural familiar entre colinas e vinhedos alentejanos.</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td><code>/reconnect-&-thrive.html</code></td>
+          <td>Reconnect & Thrive</td>
+          <td>Programa focado em revitalização da mente e corpo com tratamentos wellness.</td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td><code>/cultura-e-tradicao.html</code></td>
+          <td>Cultura e Tradição</td>
+          <td>Foco nas rodilhas tradicionais de Belver e património etnográfico local.</td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td><code>/cultura-e-gastronomia.html</code></td>
+          <td>Cultura e Gastronomia</td>
+          <td>Experiência combinada da história de Belver com degustação alentejana.</td>
+        </tr>
+        <tr>
+          <td>12</td>
+          <td><code>/experiencia-gastronomica.html</code></td>
+          <td>Experiência Gastronómica</td>
+          <td>Programa intimista dedicado aos sabores e tradições culinárias da terra.</td>
+        </tr>
+        <tr>
+          <td>13</td>
+          <td><code>/village.html</code></td>
+          <td>The Village</td>
+          <td>Piscina exterior, cantinho dos animais, vinhas velhas e parque infantil.</td>
+        </tr>
+        <tr>
+          <td>14</td>
+          <td><code>/experiencias.html</code></td>
+          <td>Experiências</td>
+          <td>Destaque de atividades de aventura, incluindo balonismo sobre o Alentejo.</td>
+        </tr>
+        <tr>
+          <td>15</td>
+          <td><code>/natureza-e-lazer.html</code></td>
+          <td>Natureza e Lazer</td>
+          <td>Praia fluvial do Alamal, passadiços, observatório de aves e ribeira da venda.</td>
+        </tr>
+        <tr>
+          <td>16</td>
+          <td><code>/patrimonio-e-cultura.html</code></td>
+          <td>Património e Cultura</td>
+          <td>Castelo de Belver, Museu do Sabão, Núcleo de Mantas e Casa das Artes.</td>
+        </tr>
+        <tr>
+          <td>17</td>
+          <td><code>/percursos-pedrestres.html</code></td>
+          <td>Percursos Pedestres</td>
+          <td>Rede de percursos PR1, PR2, PR3, PR4 e PR8 do concelho de Gavião.</td>
+        </tr>
+        <tr>
+          <td>18</td>
+          <td><code>/eventos.html</code></td>
+          <td>Eventos</td>
+          <td>Página introdutória a celebrações e eventos na herdade.</td>
+        </tr>
+        <tr>
+          <td>19</td>
+          <td><code>/galeria.html</code></td>
+          <td>Galeria</td>
+          <td>Fotografias organizadas em 4 secções (Alojamento, Village, Restaurante, Spa).</td>
+        </tr>
+        <tr>
+          <td>20</td>
+          <td><code>/contacto.html</code></td>
+          <td>Contacto</td>
+          <td>Morada, telefones, email e guia de como chegar de transportes sustentáveis.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 5</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 6: ANÁLISE REAL DA HOMEPAGE & ALOJAMENTOS ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Arquitetura de Informação</span>
+      <span class="logo-text">05. Análise Real da Homepage & Alojamentos</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">05</span> Conteúdo Real da Homepage & Alojamentos</h2>
+    <p class="section-intro">
+      Auditoria exata aos blocos de informação presentes na Homepage e nas páginas detalhadas de dormida.
+    </p>
+
+    <div class="card highlight" style="margin-bottom: 12px;">
+      <div class="card-title">Análise Rigorosa da Homepage (<code>/</code>) — O que existe e o que NÃO existe</div>
+      <div class="card-text">
+        <div class="grid-2" style="margin-top: 6px; gap: 8px;">
+          <div style="background: #fff; padding: 8px 10px; border-radius: 4px; border: 1px solid #E2D3B8;">
+            <strong style="color: #3A4D39;">✓ Elementos Reais Presentes:</strong>
+            <ul style="margin-left: 14px; margin-top: 4px; font-size: 10.5px;">
+              <li><strong>Hero com Motor de Reservas:</strong> Datas, hóspedes e código promocional.</li>
+              <li><strong>Texto Editorial:</strong> Menção aos 10 Cork Shelters e 13 tendas Glamping com WC privado, além da zona de campismo tradicional com Bell Tents.</li>
+              <li><strong>Destaques de Alojamento:</strong> Teasers com links diretos para Cork Shelters e Glamping.</li>
+              <li><strong>4 Vantagens da Reserva Direta:</strong> Melhor preço garantido, acesso ao circuito de spa, descontos nas massagens (15%) e early check-in.</li>
+              <li><strong>Bloco Gastronómico:</strong> Restaurante com vista panorâmica para o Castelo de Belver.</li>
+              <li><strong>Secção do Alto Alentejo:</strong> 3 links para Património, Natureza e Trilhos.</li>
+              <li><strong>Rodapé Institucional:</strong> Morada, telefones e email oficial da receção.</li>
+            </ul>
+          </div>
+          <div style="background: #fff; padding: 8px 10px; border-radius: 4px; border: 1px solid #D5C2C2;">
+            <strong style="color: #9C3333;">✗ O Que NÃO Existe na Homepage:</strong>
+            <ul style="margin-left: 14px; margin-top: 4px; font-size: 10.5px;">
+              <li><strong>Sem Provas Sociais:</strong> Não há testemunhos de hóspedes, nem avaliações de clientes.</li>
+              <li><strong>Sem Widgets de Reputação:</strong> Sem notas do TripAdvisor, Google Reviews ou Booking.</li>
+              <li><strong>Sem Crachás de Selos Externos:</strong> Não existem logótipos de certificações verdes inseridos na página.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Páginas de Detalhe dos Alojamentos (Conteúdo Real Extraído)</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Cork Shelters (<code>/CORK-SHELTERS.html</code>)</div>
+        <div class="card-text">
+          Revestidos a cortiça natural alentejana com isolamento ecológico:
+          <ul style="margin-left: 14px; margin-top: 4px; font-size: 10.5px;">
+            <li><strong>Standard (26 m²):</strong> 2 pessoas, cama de casal, WC privado (1 adaptado a mobilidade reduzida).</li>
+            <li><strong>Superior:</strong> Até 4 pessoas, cama de casal + beliche, pequena sala de estar e WC completo.</li>
+            <li><strong>Familiar:</strong> Até 8 pessoas, 2 quartos privados (cama casal + beliche cada um), 2 WCs completos e sala partilhada.</li>
+            <li><strong>Comodidades:</strong> Wi-Fi, ar condicionado individual, mini-frigorífico, smart TV, secador, telefone, closet, chaleira elétrica, mesa e cadeiras.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Tendas Glamping (<code>/TENDAS-GLAMPING.html</code>)</div>
+        <div class="card-text">
+          Tendas mobiladas e decoradas com atmosfera de hotel boutique:
+          <ul style="margin-left: 14px; margin-top: 4px; font-size: 10.5px;">
+            <li><strong>Glamping Amigos (30 m²):</strong> 4 camas individuais e casa de banho completa privada.</li>
+            <li><strong>Glamping Familiar:</strong> 1 cama de casal e 1 beliche para famílias.</li>
+            <li><strong>Tenda Amor Perfeito:</strong> Tenda romântica com cama redonda, vista privilegiada para a vinha, casa de banho completa e welcome gift.</li>
+            <li><strong>Comodidades:</strong> Ar condicionado individual, minibar, cofre, secador, Wi-Fi, telefone e chaleira.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 6</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 7: WELLNESS, RESTAURANTE & PROGRAMAS ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Arquitetura de Informação</span>
+      <span class="logo-text">06. Wellness, Restauração & Programas</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">06</span> Wellness, Restauração & Programas</h2>
+    <p class="section-intro">
+      Detalhe dos serviços de spa, restaurante, sky lounge bar e pacotes temáticos disponíveis no website.
+    </p>
+
+    <div class="card highlight" style="margin-bottom: 10px;">
+      <div class="card-title">Wellness Center (<code>/wellness-center.html</code>)</div>
+      <div class="card-text">
+        Espaço de relaxamento e tonificação corporal. Conteúdo extraído da página:
+        <ul style="margin-left: 15px; margin-top: 4px;">
+          <li><strong>Circuito Wellness:</strong> Hidromassagem / jacuzzi, sauna envidraçada e banho turco.</li>
+          <li><strong>Massagens & Rituais:</strong> Seleção de massagens corporais e rituais de bem-estar (com desconto de 15% nas massagens e 5% nos rituais para reservas diretas no site).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 10px;">
+      <div class="card-title">Cadafaz Restaurante & Sky Lounge (<code>/cadafaz-restaurante-&-sky-lounge.html</code>)</div>
+      <div class="card-text">
+        Subpáginas de detalhe: <code>/Sky-Lounge-Bar.html</code> e <code>/Os-nossos-menus.html</code>
+        <ul style="margin-left: 15px; margin-top: 4px;">
+          <li><strong>Conceito Culinário:</strong> Cozinha regional alentejana com toque moderno. Vistas panorâmicas para o Castelo de Belver. Produtos de qualidade: enchidos, azeite e vinhos alentejanos.</li>
+          <li><strong>Restrições Alimentares:</strong> Disponibiliza opções vegetarianas, veganas e sem glúten.</li>
+          <li><strong>Horário de Funcionamento Oficial:</strong> Almoço das 12h30 às 15h00 | Jantar das 19h00 às 22h00.</li>
+          <li><strong>Tipos de Menus:</strong> Menú à la carte, Sugestão da Semana e menus sazonais (ex: Menú de Natal).</li>
+          <li><strong>Sky Lounge Bar:</strong> No piso superior, com esplanada ao ar livre com vista para o Castelo de Belver para bebidas frescas nas tardes de verão e bebidas quentes no inverno.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="block-title">Os 6 Programas Temáticos Oficiais</h3>
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>Programa</th>
+          <th>URL Oficial</th>
+          <th>Proposta & Conteúdo Real</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Lua de Mel</strong></td>
+          <td><code>/lua-de-mel.html</code></td>
+          <td>Programa especial para recém-casados evocando a lenda medieval do Castelo de Belver ("...que belo ver!").</td>
+        </tr>
+        <tr>
+          <td><strong>Família no Campo</strong></td>
+          <td><code>/familia-no-campo.html</code></td>
+          <td>Escapadela rural familiar entre colinas, campos e vinhedos alentejanos, com trilhos e passeios no campo.</td>
+        </tr>
+        <tr>
+          <td><strong>Reconnect & Thrive</strong></td>
+          <td><code>/reconnect-&-thrive.html</code></td>
+          <td>Programa para revitalizar mente, corpo e essência com tratamentos de bem-estar num ambiente sereno.</td>
+        </tr>
+        <tr>
+          <td><strong>Cultura e Tradição</strong></td>
+          <td><code>/cultura-e-tradicao.html</code></td>
+          <td>Homenagem às rodilhas de Belver (novelos de lã tradicionais coloridos transformados em arte sustentável).</td>
+        </tr>
+        <tr>
+          <td><strong>Cultura e Gastronomia</strong></td>
+          <td><code>/cultura-e-gastronomia.html</code></td>
+          <td>Visita à vila histórica de Belver e Castelo combinada com degustação dos produtos regionais.</td>
+        </tr>
+        <tr>
+          <td><strong>Experiência Gastronómica</strong></td>
+          <td><code>/experiencia-gastronomica.html</code></td>
+          <td>Imersão nos sabores e no tempo desacelerado do Alentejo, unindo estadia e gastronomia da terra.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 7</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 8: VILLAGE, EXPERIÊNCIAS & CONTACTO ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Arquitetura de Informação</span>
+      <span class="logo-text">07. Village, Experiências & Contactos</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">07</span> The Village, Experiências & Contactos</h2>
+    <p class="section-intro">
+      Especificação das infraestruturas da herdade, atividades locais no concelho de Gavião e informação prática.
+    </p>
+
+    <div class="card" style="margin-bottom: 10px;">
+      <div class="card-title">The Village Facilities (<code>/village.html</code>)</div>
+      <div class="card-text">
+        Espaços de lazer internos na propriedade de Cadafaz:
+        <ul style="margin-left: 15px; margin-top: 4px;">
+          <li><strong>Piscina Exterior:</strong> Área de banhos de sol e relaxamento na natureza.</li>
+          <li><strong>Cantinho dos Animais & Horta Biológica:</strong> Contacto com animais da herdade e cultivo sustentável.</li>
+          <li><strong>Vinhas Velhas:</strong> Parcelas de vinhedo tradicional em preservação na herdade.</li>
+          <li><strong>Parque Infantil & Área Recreativa:</strong> Espaço lúdico dedicado às crianças e jogos ao ar livre.</li>
+        </ul>
+        <div style="font-size: 9.5px; color: #888; margin-top: 4px;">
+          <em>Nota técnica:</em> As URLs <code>servicio_piscina.html</code>, <code>servicio_animales.html</code>, etc., são âncoras internas do CMS cujos dados residem nesta página mãe.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 10px;">
+      <div class="card-title">Experiências Locais & Trilhos (<code>/experiencias.html</code>)</div>
+      <div class="card-text">
+        <ul style="margin-left: 15px; margin-top: 4px;">
+          <li><strong>Balonismo:</strong> Voo de balão de ar quente ("Sentirá o céu mais perto do que nunca").</li>
+          <li><strong>Natureza e Lazer (<code>/natureza-e-lazer.html</code>):</strong> Praia Fluvial do Alamal (no Tejo), Passadiços do Alamal, Observatório de Avifauna e Praia Fluvial da Ribeira da Venda.</li>
+          <li><strong>Património e Cultura (<code>/patrimonio-e-cultura.html</code>):</strong> Castelo de Belver (século XII), Museu do Sabão, Núcleo de Mantas e Tapeçarias de Belver e Casa das Artes de Gavião.</li>
+          <li><strong>Percursos Pedestres (<code>/percursos-pedrestres.html</code>):</strong> Rede oficial de pequenas rotas (PR1 a PR8).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card highlight" style="margin-bottom: 10px;">
+      <div class="card-title">Contactos Oficiais & Acessibilidade Sustentável (<code>/contacto.html</code>)</div>
+      <div class="card-text">
+        <div class="grid-2" style="margin-top: 4px;">
+          <div>
+            <strong>Contactos Diretos:</strong><br>
+            • Telefone fixo: +351 241 247 360<br>
+            • Telefone móvel: +351 924 289 410<br>
+            • E-mail: rececao@gaviaonaturevillage.com<br>
+            • Morada: Lugar de São Domingos, Cadafaz, 6040-052 Gavião
+          </div>
+          <div>
+            <strong>Como Chegar de Forma Sustentável:</strong><br>
+            • <strong>De comboio:</strong> Linha da Beira Baixa (ligação a Lisboa e Entroncamento, saindo na paragem de Belver a 3 km).<br>
+            • <strong>De autocarro:</strong> Ligação direta ao centro de Gavião (a 3 km da herdade).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 8</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 9: INTERLIGAÇÃO & JORNADAS DE UX ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Arquitetura de Informação</span>
+      <span class="logo-text">08. Interligação de Páginas & UX</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">08</span> Interligação de Páginas & Navegação</h2>
+    <p class="section-intro">
+      Como as páginas se interligam no ecossistema web para assegurar uma navegação intuitiva e maximizar a taxa de reserva direta.
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <div class="flow-node hub" style="flex: 2;">🏠 HOME (Hub Principal)</div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-node conversion" style="flex: 1.5;">🛎️ RESERVA ONLINE (Booking)</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node">Cork Shelters & Glamping</div>
+        <div class="flow-node">Wellness Center & Spa</div>
+        <div class="flow-node">Cadafaz & Sky Lounge</div>
+      </div>
+      <div class="flow-row">
+        <div class="flow-node">6 Programas Temáticos</div>
+        <div class="flow-node">The Village (Piscina & Animais)</div>
+        <div class="flow-node">Trilhos, Tejo & Castelo</div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Mecanismos Reais de Navegação e Interligação</h3>
+    <ul class="clean-list">
+      <li><strong>Menu Global Persistente:</strong> Navegação no topo com logótipo à esquerda, links para Alojamento, Wellness, Restaurante, Programas, Village, Experiências e botão "RESERVAR" dourado no topo direito.</li>
+      <li><strong>Botão Flutuante de Reserva Rápida:</strong> Aba lateral fixa à direita que acompanha a leitura de qualquer página em desktop e barra inferior em telemóveis.</li>
+      <li><strong>Ligações Cruzadas nos Programas:</strong> No rodapé de cada página de programa (ex: Lua de Mel), o website apresenta carrosséis com os restantes programas (Família no Campo, Reconnect, etc.) para navegação contínua.</li>
+      <li><strong>Teasers na Home Page:</strong> A homepage direciona para as páginas detalhadas com botões "Mais informação" sobre os Cork Shelters, Tendas Glamping, Restaurante e Atrações do Alentejo.</li>
+    </ul>
+
+    <h3 class="block-title">As 3 Jornadas de Navegação Principais</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Jornada 1: Reserva Direta</div>
+        <div class="card-text">
+          Visitante entra na Home ➔ Vê os 10 Cork Shelters e as vantagens do site oficial (preço e spa) ➔ Abre a barra de datas ➔ Seleciona quarto e conclui.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Jornada 2: Escapadela a Dois</div>
+        <div class="card-text">
+          Pesquisa por glamping ➔ Visita a Tenda Amor Perfeito (cama redonda) ➔ Lê o programa Lua de Mel ➔ Explora o Sky Lounge Bar ➔ Solicita estadia.
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Jornada 3: Ecoturismo & Trilhos</div>
+        <div class="card-text">
+          Pesquisa por trilhos no Tejo ➔ Consulta Passadiços do Alamal e PR1 a PR8 ➔ Descobre o Village e piscina biológica ➔ Marca fim de semana.
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 9</span>
+    </div>
+  </div>
+
+  <!-- ==================== PÁGINA 10: ARQUITETURA TÉCNICA ASTRO ==================== -->
+  <div class="page">
+    <div class="doc-header">
+      <span>Gavião Nature Village — Engenharia Web</span>
+      <span class="logo-text">09. Implementação Técnica</span>
+    </div>
+
+    <h2 class="section-title"><span class="number">09</span> Arquitetura em Astro, Tailwind & TypeScript</h2>
+    <p class="section-intro">
+      Plano técnico de execução do novo website moderno, sem HTML puro nem CSS solto, garantindo máxima performance e integração com o assistente Bionic.
+    </p>
+
+    <div class="grid-3">
+      <div class="card highlight">
+        <div class="card-title">🚀 Astro Framework</div>
+        <div class="card-text">
+          Componentes <code>.astro</code> modulares. Zero JavaScript por padrão para renderização estática ultra-veloz e SEO imbatível no Alto Alentejo.
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">🎨 Tailwind CSS</div>
+        <div class="card-text">
+          Classes utilitárias configuradas com os tokens oficiais (<code>natureGold</code>, <code>charcoal</code>, <code>sandBg</code>). Design 100% responsivo.
+        </div>
+      </div>
+      <div class="card highlight">
+        <div class="card-title">🛡️ TypeScript</div>
+        <div class="card-text">
+          Tipos estritos para dados de alojamentos (<code>Accommodation</code>), menus (<code>MenuItem</code>) e percursos pedestres (<code>Trail</code>).
+        </div>
+      </div>
+    </div>
+
+    <h3 class="block-title">Estrutura de Diretórios Criada no Projeto</h3>
+    <div class="card" style="font-family: monospace; font-size: 10px; line-height: 1.45; background: #FAF9F6; border: 1px solid #E6D8BF;">
+      📁 Gavião Nature Village/<br>
+      ├── 📁 content/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Recursos e Textos Reais Extraídos */<br>
+      │&nbsp;&nbsp;&nbsp;├── 📁 texts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 45 ficheiros Markdown das páginas reais */<br>
+      │&nbsp;&nbsp;&nbsp;└── 📁 images/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* 84 fotografias categorizadas + SVGs */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 alojamentos/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Cork Shelters e Glamping */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 wellness/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Spa, sauna e circuito */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 restaurante/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Cadafaz e Sky Lounge Bar */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 village/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Piscina, animais da quinta e vinha */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 experiencias/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Alamal, passadiços e castelo */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── 📁 programas/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Lua de Mel, Família, Reconnect */<br>
+      │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── 📁 branding/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Logótipo oficial SVG e favicon */<br>
+      ├── 📁 src/<br>
+      │&nbsp;&nbsp;&nbsp;├── 📁 components/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Componentes modulares .astro */<br>
+      │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── 📁 common/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Header, Footer, BookingDrawer */<br>
+      │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── 📁 accommodation/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Cards de Cork Shelters e Glamping */<br>
+      │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├── 📁 wellness/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Tratamentos e circuito */<br>
+      │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└── 📁 restaurant/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Menus e horários */<br>
+      │&nbsp;&nbsp;&nbsp;├── 📁 layouts/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* BaseLayout.astro com SEO e OpenGraph */<br>
+      │&nbsp;&nbsp;&nbsp;├── 📁 pages/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Roteamento dinâmico e páginas .astro */<br>
+      │&nbsp;&nbsp;&nbsp;├── 📁 types/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Interfaces e tipos TypeScript */<br>
+      │&nbsp;&nbsp;&nbsp;└── 📁 styles/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Classes base e diretivas Tailwind */<br>
+      ├── 📁 docs/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Guidelines e Sitemap em PDF */<br>
+      └── 📁 tools/ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* Conector com o Bionic AI Assistant */
+    </div>
+
+    <h3 class="block-title">Operação com o Bionic AI Assistant</h3>
+    <p>
+      O assistente local Bionic está conectado via porta <code>1234</code> com a ponte <code>tools/bionic_ask.ps1</code>. 
+      Nas fases seguintes, o Bionic será invocado para gerar os ficheiros de componentes Astro, regras de estilo Tailwind e tipos TypeScript, respeitando todas as regras deste projeto.
+    </p>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village — Documentação de Marca</span>
+      <span>Página 10</span>
+    </div>
+  </div>
+
+</body>
+</html>

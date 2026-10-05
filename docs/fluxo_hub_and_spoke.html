@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Arquitetura Hub & Spoke — Gavião Nature Village</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400;1,600&display=swap');
+
+    @page {
+      size: A4 portrait;
+      margin: 14mm 16mm 14mm 16mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 8pt;
+        color: #888;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Catamaran', sans-serif;
+      color: #242220;
+      background-color: #FFFFFF;
+      font-size: 10pt;
+      line-height: 1.5;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      page-break-after: always;
+      position: relative;
+      height: 268mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+
+    .page:last-child {
+      page-break-after: avoid;
+    }
+
+    /* Cores Oficiais da Marca */
+    :root {
+      --gold: #C2A472;
+      --gold-dark: #9C7814;
+      --gold-light: #E8D3A2;
+      --charcoal: #161412;
+      --charcoal-soft: #282522;
+      --sand: #FAF8F5;
+      --sand-border: #E8E2D8;
+      --text-muted: #66605A;
+      --emerald: #2D6A4F;
+    }
+
+    /* Header e Footer de Documento */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5pt solid var(--sand-border);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+    }
+
+    .doc-header-logo {
+      height: 28px;
+    }
+
+    .doc-header-meta {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5pt;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    .doc-footer {
+      border-top: 1pt solid var(--sand-border);
+      padding-top: 8px;
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7.5pt;
+      color: var(--text-muted);
+    }
+
+    /* Tipografia de Cabeçalhos */
+    h1, h2, h3, h4 {
+      font-family: 'Catamaran', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--charcoal);
+    }
+
+    h1 { font-size: 26pt; font-weight: 900; line-height: 1.1; }
+    h2 { font-size: 15pt; font-weight: 800; color: var(--gold-dark); margin-bottom: 8px; }
+    h3 { font-size: 11pt; font-weight: 800; color: var(--charcoal); margin-bottom: 4px; }
+
+    .tag-badge {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 7pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(194, 164, 114, 0.15);
+      color: var(--gold-dark);
+      border: 0.5pt solid var(--gold);
+      margin-bottom: 8px;
+    }
+
+    /* Grid e Caixas */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .card {
+      background: var(--sand);
+      border: 1pt solid var(--sand-border);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .card-dark {
+      background: var(--charcoal);
+      color: #FFFFFF;
+      border: 1pt solid var(--gold-dark);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .card-dark h3 {
+      color: var(--gold-light);
+    }
+
+    p {
+      margin-bottom: 8px;
+      font-size: 9.5pt;
+      color: #3A3632;
+    }
+
+    .highlight-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gold-dark);
+      font-size: 12pt;
+      border-left: 2pt solid var(--gold);
+      padding-left: 12px;
+      margin: 12px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10px 0;
+      font-size: 8.5pt;
+    }
+
+    th {
+      background: var(--charcoal);
+      color: #FFF;
+      font-family: 'Montserrat', sans-serif;
+      text-align: left;
+      padding: 6px 8px;
+      font-size: 7.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 7px 8px;
+      border-bottom: 1pt solid var(--sand-border);
+    }
+
+    tr:nth-child(even) td {
+      background: #FAF9F7;
+    }
+
+    /* Diagrama SVG */
+    .diagram-container {
+      background: #181614;
+      border: 1.5pt solid var(--gold-dark);
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================================
+       PÁGINA 1: CAPA EXECUTIVA
+       ========================================================================= -->
+  <div class="page" style="justify-content: center; background: radial-gradient(circle at center, #24211D 0%, #141210 100%); color: #FFF; padding: 30mm 20mm; text-align: center;">
+    
+    <div style="margin-bottom: 25px;">
+      <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 662 800" style="width: 110px; height: 110px; margin: 0 auto; display: block;">
+        <path fill="#E8D3A2" d="m474.3 0.2c18.7-0.2 21.7 0 21.7 1.3 0 1.1-1.7 1.6-6.8 2.1-3.7 0.3-10.8 0.9-15.7 1.5-5 0.5-14.2 2.1-20.5 3.5-6.3 1.4-19.4 5.2-29 8.4-9.6 3.2-22.7 8.2-29 11.2-6.3 3-16 8-21.5 11.3-5.5 3.2-14.5 8.9-20 12.6-5.5 3.7-13.2 9.1-17.2 12-3.9 3-12.4 10.4-18.9 16.4-6.5 6-16.9 16.6-23.2 23.5-6.2 6.9-15.3 17.7-20.1 24-4.9 6.3-12.4 16.9-16.7 23.5-4.4 6.6-11.2 17.8-15.2 25-3.9 7.2-10.2 19.8-14 28-3.8 8.3-9.4 21.5-12.5 29.5-3 8-7.8 22.6-10.6 32.5-2.8 9.9-6.3 23.3-7.6 29.8-1.4 6.4-3.4 17.2-4.5 23.9-1.3 7.8-2.4 21.1-3 36.3-0.5 13.2-1 34.4-1 70l-4 14c-2.3 7.7-5.1 19.7-6.3 26.6-1.2 7-2.5 13.1-2.9 13.5-0.4 0.5-1.5 0.2-2.4-0.6-0.8-0.8-3.7-8.2-6.4-16.5-2.6-8.2-5.7-19.3-6.8-24.5-1.2-5.2-2.6-14.4-3.2-20.5-0.5-6.1-1-18.9-1-28.5 0-9.6 0.5-22.9 1-29.5 0.6-6.6 2.2-19.4 3.6-28.5 1.4-9.1 4.1-24.1 5.9-33.5 1.9-9.4 6.4-27.4 10-40 3.6-12.7 9.3-30 12.7-38.5 3.3-8.5 10.2-24.1 15.3-34.5 5.1-10.4 13-25.1 17.5-32.5 4.5-7.4 10.9-17.3 14.3-22 3.3-4.7 9.2-12.3 13.1-17 3.9-4.7 14.3-15.9 23.1-24.9 8.8-9 20-19.8 25-24 4.9-4.3 13.3-10.7 18.5-14.3 5.2-3.6 14.4-9.4 20.5-12.9 6-3.4 15.9-8.6 22-11.4 6-2.9 16.4-7.3 23-9.8 6.6-2.5 16.9-5.9 23-7.6 6-1.7 17.7-4.2 26-5.6 8.2-1.3 16.6-2.6 18.5-2.8 1.9-0.2 13.3-0.5 25.2-0.5z" />
+      </svg>
+      <span style="font-family: 'Montserrat', sans-serif; font-size: 11pt; letter-spacing: 0.35em; color: #E8D3A2; font-weight: 700; display: block; margin-top: 10px;">
+        GAVIÃO NATURE VILLAGE
+      </span>
+      <span style="font-size: 8.5pt; color: #AAA; letter-spacing: 0.2em; text-transform: uppercase;">
+        Alto Alentejo · Cadafaz
+      </span>
+    </div>
+
+    <div style="border-top: 1pt solid #444; border-bottom: 1pt solid #444; padding: 25px 0; margin: 25px 0;">
+      <span class="tag-badge" style="background: rgba(232, 211, 162, 0.15); color: #E8D3A2; border-color: #E8D3A2;">
+        Documento Estratégico de Arquitetura de Informação
+      </span>
+      <h1 style="color: #FFF; font-size: 28pt; margin: 15px 0 10px 0; text-transform: uppercase; letter-spacing: 0.04em;">
+        O Modelo Hub & Spoke
+      </h1>
+      <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 14pt; color: #E8D3A2; max-width: 500px; margin: 0 auto; font-weight: 400;">
+        "A jornada fluida do visitante: da visão panorâmica da herdade à reserva direta orientada ao público-alvo."
+      </p>
+    </div>
+
+    <div style="font-family: 'Montserrat', sans-serif; font-size: 8.5pt; color: #888; text-transform: uppercase; letter-spacing: 0.15em; line-height: 1.8;">
+      Versão 2.0 · Outubro 2026<br />
+      Estrutura Digital & Otimização de Conversão Direta (IBE)
+    </div>
+
+  </div>
+
+  <!-- =========================================================================
+       PÁGINA 2: O CONCEITO HUB & SPOKE
+       ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.15em;">GAVIÃO NATURE VILLAGE</span>
+        <span class="doc-header-meta">Arquitetura de Navegação · Pág. 2</span>
+      </div>
+
+      <span class="tag-badge">Fundamentos do Modelo</span>
+      <h2>1. Porquê o Modelo Hub & Spoke?</h2>
+      
+      <p>
+        Em websites de hotelaria convencional, o utilizador é forçado a percorrer uma árvore hierárquica rígida e desarticulada (ex.: <em>Menu &gt; Quartos &gt; Cork Shelters</em> ou <em>Menu &gt; Serviços &gt; Spa</em>). Esta abordagem ignora o motivo primordial pelo qual o cliente viaja e gera taxas elevadas de abandono.
+      </p>
+
+      <p>
+        O modelo <strong>Hub & Spoke</strong> inverte a lógica: coloca a <strong>Homepage como o Hub Central (o Epicentro Magnético)</strong> e ramifica a navegação em <strong>4 Spokes Primários</strong> que representam os verdadeiros motores de decisão de reserva do resort: os <strong>4 Públicos-Alvo Estratégicos</strong>.
+      </p>
+
+      <div class="highlight-quote">
+        "O hóspede não procura apenas um quarto; procura uma experiência à medida do momento da sua vida."
+      </div>
+
+      <div class="grid-2" style="margin-top: 15px;">
+        <div class="card">
+          <h3>O "Hub" (O Epicentro)</h3>
+          <p style="font-size: 8.5pt; color: var(--text-muted); margin-bottom: 6px;">
+            A Homepage atua como uma <strong>montra imersiva de impacto imediato (100vh)</strong>:
+          </p>
+          <ul style="font-size: 8.5pt; padding-left: 15px; color: #444; line-height: 1.6;">
+            <li><strong>Introdução de 2 segundos:</strong> pulsação pura do logótipo que estabelece autoridade de luxo sereno.</li>
+            <li><strong>Desobstrução visual:</strong> centro do ecrã 100% luminoso para contemplar a herdade e o Castelo de Belver.</li>
+            <li><strong>Filtro mental instantâneo:</strong> o utilizador identifica imediatamente quem é através dos 4 títulos laterais.</li>
+            <li><strong>Motor de reservas omnipresente:</strong> reserva direta sem atritos em 1 só toque.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Os "Spokes" (Os Raios de Conversão)</h3>
+          <p style="font-size: 8.5pt; color: var(--text-muted); margin-bottom: 6px;">
+            Páginas de aterragem hiper-focadas na dor, desejo e aspiração de cada segmento:
+          </p>
+          <ul style="font-size: 8.5pt; padding-left: 15px; color: #444; line-height: 1.6;">
+            <li><strong>Copywriting personalizado:</strong> o tom de voz para um casal em lua-de-mel é radicalmente diferente de uma família com crianças.</li>
+            <li><strong>Curadoria de produtos:</strong> recomendação apenas dos alojamentos e serviços relevantes para esse grupo.</li>
+            <li><strong>Navegação sem becos sem saída:</strong> cada Spoke permite transitar para outros pontos ou reservar diretamente.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village · Modelo Hub & Spoke</span>
+      <span>Confidencial · Arquitetura Web Oficial</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PÁGINA 3: OS 4 SPOKES PRIMÁRIOS (PÚBLICOS-ALVO)
+       ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.15em;">GAVIÃO NATURE VILLAGE</span>
+        <span class="doc-header-meta">Segmentação & Narrativa · Pág. 3</span>
+      </div>
+
+      <span class="tag-badge">Matriz de Segmentação</span>
+      <h2>2. Os 4 Spokes Primários de Conversão</h2>
+
+      <p style="margin-bottom: 12px;">
+        Cada Spoke responde com precisão milimétrica às motivações do hóspede, eliminando distrações e aumentando a probabilidade de conversão direta:
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 22%;">Spoke (Público-Alvo)</th>
+            <th style="width: 25%;">Gatilho Emocional</th>
+            <th style="width: 28%;">Produtos & Ativos Chave</th>
+            <th style="width: 25%;">Call-to-Action Ideal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong style="color: var(--gold-dark);">1. Casais & Romance</strong><br />
+              <span style="font-size: 7.5pt; color: #777;">Rota: /casais</span>
+            </td>
+            <td>Intimidade, desconexão da rotina, comemoração de datas especiais, calma e privacidade total.</td>
+            <td>Cork Shelters privativos com isolamento de cortiça, pacote lua de mel, circuito termal a dois, jantar nas vinhas.</td>
+            <td><em>"Garantir Escapadinha Romântica com Spa"</em></td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color: var(--gold-dark);">2. Famílias & Natureza</strong><br />
+              <span style="font-size: 7.5pt; color: #777;">Rota: /familias</span>
+            </td>
+            <td>Segurança para as crianças, contacto puro com animais e terra, ar livre e memórias familiares.</td>
+            <td>Tendas Glamping familiares, piscina panorâmica, quinta pedagógica, horta biológica, espaço amplo de 30.000m².</td>
+            <td><em>"Consultar Tarifas para Famílias"</em></td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color: var(--gold-dark);">3. Bem-Estar & Retiro</strong><br />
+              <span style="font-size: 7.5pt; color: #777;">Rota: /bem-estar</span>
+            </td>
+            <td>Regeneração mental e física, alívio do burnout, silêncio regenerador e rituais holísticos de spa.</td>
+            <td>Piscina aquecida a 35°C com jatos de hidroterapia, sauna envidraçada panorâmica, banho turco e massagens botânicas.</td>
+            <td><em>"Reservar Retiro com Circuito Termal"</em></td>
+          </tr>
+          <tr>
+            <td>
+              <strong style="color: var(--gold-dark);">4. Aventura & Ecoturismo</strong><br />
+              <span style="font-size: 7.5pt; color: #777;">Rota: /aventura</span>
+            </td>
+            <td>Descoberta do território, turismo ativo, desportos de rio, fotografia de paisagem e história medieval.</td>
+            <td>Passadiços do Alamal (a 5 min), canoagem e paddle no Rio Tejo, trilhos BTT, Castelo de Belver, voos de balão.</td>
+            <td><em>"Reservar Estadia de Aventura & Trilhos"</em></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="card" style="margin-top: 15px; border-left: 3pt solid var(--gold-dark);">
+        <h3 style="margin-bottom: 5px;">Mecanismo de Hover Dinâmico na Homepage</h3>
+        <p style="font-size: 8.5pt; color: var(--text-muted);">
+          Ao pousar o cursor em qualquer um dos 4 títulos no Hub, <strong>a fotografia de fundo altera-se instantaneamente em tempo real</strong>, transportando o visitante visualmente para o universo desejado antes mesmo de clicar. Esta micro-interação cria um efeito de imersão que valida a escolha do visitante em milissegundos.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village · Modelo Hub & Spoke</span>
+      <span>Confidencial · Arquitetura Web Oficial</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PÁGINA 4: DIAGRAMA VISUAL DE ARQUITETURA HUB & SPOKE
+       ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.15em;">GAVIÃO NATURE VILLAGE</span>
+        <span class="doc-header-meta">Topologia da Rede · Pág. 4</span>
+      </div>
+
+      <span class="tag-badge">Diagrama de Fluxo</span>
+      <h2>3. Topologia da Rede Digital (Hub, Spokes & Sub-Spokes)</h2>
+
+      <p style="margin-bottom: 8px;">
+        Representação esquemática do ecossistema: o Hub como nó central que irradia para os públicos-alvo e sustenta a interligação com os módulos operacionais do resort:
+      </p>
+
+      <!-- Diagrama SVG Vetorial Nativo -->
+      <div class="diagram-container">
+        <svg viewBox="0 0 760 380" style="width: 100%; height: 350px; font-family: 'Montserrat', sans-serif;">
+          <!-- Linhas de Conexão Hub -> Spokes Primários -->
+          <line x1="380" y1="190" x2="160" y2="80" stroke="#C2A472" stroke-width="2.5" stroke-dasharray="4,4" />
+          <line x1="380" y1="190" x2="600" y2="80" stroke="#C2A472" stroke-width="2.5" stroke-dasharray="4,4" />
+          <line x1="380" y1="190" x2="160" y2="300" stroke="#C2A472" stroke-width="2.5" stroke-dasharray="4,4" />
+          <line x1="380" y1="190" x2="600" y2="300" stroke="#C2A472" stroke-width="2.5" stroke-dasharray="4,4" />
+
+          <!-- Linhas Sub-Spokes -> Motor de Reservas -->
+          <circle cx="380" cy="190" r="160" fill="none" stroke="rgba(194, 164, 114, 0.2)" stroke-width="1.5" />
+
+          <!-- Órbita de Sub-Spokes -->
+          <line x1="380" y1="190" x2="380" y2="35" stroke="#777" stroke-width="1" />
+          <line x1="380" y1="190" x2="380" y2="345" stroke="#777" stroke-width="1" />
+          <line x1="380" y1="190" x2="70" y2="190" stroke="#777" stroke-width="1" />
+          <line x1="380" y1="190" x2="690" y2="190" stroke="#777" stroke-width="1" />
+
+          <!-- NÓ CENTRAL: HUB (HOMEPAGE) -->
+          <g>
+            <circle cx="380" cy="190" r="54" fill="#24211D" stroke="#E8D3A2" stroke-width="3" />
+            <text x="380" y="178" fill="#E8D3A2" font-size="11" font-weight="bold" text-anchor="middle">HUB CENTRAL</text>
+            <text x="380" y="193" fill="#FFFFFF" font-size="9" text-anchor="middle">HOMEPAGE 100VH</text>
+            <text x="380" y="206" fill="#AAA" font-size="7.5" text-anchor="middle">Motor Reserva IBE</text>
+          </g>
+
+          <!-- SPOKE 1: CASAIS & ROMANCE -->
+          <g>
+            <rect x="75" y="45" width="170" height="62" rx="8" fill="#1C1A18" stroke="#C2A472" stroke-width="2" />
+            <text x="160" y="68" fill="#E8D3A2" font-size="10" font-weight="bold" text-anchor="middle">CASAIS & ROMANCE</text>
+            <text x="160" y="83" fill="#BBB" font-size="8" text-anchor="middle">/casais · Cork Shelters</text>
+            <text x="160" y="96" fill="#2D6A4F" font-size="7.5" font-weight="bold" text-anchor="middle">Conversão: Foco a Dois</text>
+          </g>
+
+          <!-- SPOKE 2: FAMÍLIAS & NATUREZA -->
+          <g>
+            <rect x="515" y="45" width="170" height="62" rx="8" fill="#1C1A18" stroke="#C2A472" stroke-width="2" />
+            <text x="600" y="68" fill="#E8D3A2" font-size="10" font-weight="bold" text-anchor="middle">FAMÍLIAS & NATUREZA</text>
+            <text x="600" y="83" fill="#BBB" font-size="8" text-anchor="middle">/familias · Glamping & Quinta</text>
+            <text x="600" y="96" fill="#2D6A4F" font-size="7.5" font-weight="bold" text-anchor="middle">Conversão: Foco Segurança</text>
+          </g>
+
+          <!-- SPOKE 3: BEM-ESTAR & RETIRO -->
+          <g>
+            <rect x="75" y="270" width="170" height="62" rx="8" fill="#1C1A18" stroke="#C2A472" stroke-width="2" />
+            <text x="160" y="293" fill="#E8D3A2" font-size="10" font-weight="bold" text-anchor="middle">BEM-ESTAR & RETIRO</text>
+            <text x="160" y="308" fill="#BBB" font-size="8" text-anchor="middle">/bem-estar · Circuito Spa</text>
+            <text x="160" y="321" fill="#2D6A4F" font-size="7.5" font-weight="bold" text-anchor="middle">Conversão: Foco Saúde</text>
+          </g>
+
+          <!-- SPOKE 4: AVENTURA & ECOTURISMO -->
+          <g>
+            <rect x="515" y="270" width="170" height="62" rx="8" fill="#1C1A18" stroke="#C2A472" stroke-width="2" />
+            <text x="600" y="293" fill="#E8D3A2" font-size="10" font-weight="bold" text-anchor="middle">AVENTURA & ECOTURISMO</text>
+            <text x="600" y="308" fill="#BBB" font-size="8" text-anchor="middle">/aventura · Alamal & Tejo</text>
+            <text x="600" y="321" fill="#2D6A4F" font-size="7.5" font-weight="bold" text-anchor="middle">Conversão: Foco Trilhos</text>
+          </g>
+
+          <!-- SUB-SPOKES DE SUPORTE (PONTOS ORBITAIS) -->
+          <g>
+            <rect x="310" y="10" width="140" height="30" rx="6" fill="#2A2724" stroke="#555" />
+            <text x="380" y="29" fill="#FFF" font-size="8" text-anchor="middle">ALOJAMENTOS (/alojamento)</text>
+          </g>
+
+          <g>
+            <rect x="310" y="340" width="140" height="30" rx="6" fill="#2A2724" stroke="#555" />
+            <text x="380" y="359" fill="#FFF" font-size="8" text-anchor="middle">RESTAURANTE (/cadafaz...)</text>
+          </g>
+
+          <g>
+            <rect x="5" y="175" width="130" height="30" rx="6" fill="#2A2724" stroke="#555" />
+            <text x="70" y="194" fill="#FFF" font-size="8" text-anchor="middle">WELLNESS (/wellness...)</text>
+          </g>
+
+          <g>
+            <rect x="625" y="175" width="130" height="30" rx="6" fill="#2A2724" stroke="#555" />
+            <text x="690" y="194" fill="#FFF" font-size="8" text-anchor="middle">THE VILLAGE (/village)</text>
+          </g>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village · Modelo Hub & Spoke</span>
+      <span>Confidencial · Arquitetura Web Oficial</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PÁGINA 5: SUB-SPOKES & CROSS-LINKING ESTRATÉGICO
+       ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.15em;">GAVIÃO NATURE VILLAGE</span>
+        <span class="doc-header-meta">Interconexão & Upselling · Pág. 5</span>
+      </div>
+
+      <span class="tag-badge">Engenharia de Conversão</span>
+      <h2>4. Sub-Spokes & O Efeito de Cross-Linking</h2>
+
+      <p>
+        Para além dos 4 Spokes de Públicos-Alvo, o ecossistema é suportado por <strong>Sub-Spokes Estruturais</strong> que funcionam como âncoras tangíveis de instalações. A chave do sucesso deste modelo é o <strong>Cross-Linking Bidirecional Inteligente</strong>:
+      </p>
+
+      <div class="grid-2" style="margin-top: 10px;">
+        <div class="card">
+          <h3>Sub-Spokes Estruturais (Instalações)</h3>
+          <ul style="font-size: 8.5pt; color: #444; line-height: 1.6; padding-left: 15px;">
+            <li><strong>Alojamentos (/alojamento):</strong> Ficha técnica detalhada de Cork Shelters e Glamping com fotos em alta definição.</li>
+            <li><strong>Wellness Center (/wellness-center):</strong> Menu de tratamentos, circuito termal, jacuzzi a 35°C e sauna panorâmica.</li>
+            <li><strong>Restaurante Cadafaz (/cadafaz-restaurante):</strong> Cartas gastronómicas alentejanas, vinhos locais e Sky Lounge.</li>
+            <li><strong>The Village (/village):</strong> Piscina exterior, horta biológica, animais da herdade e vinhedos.</li>
+            <li><strong>Experiências (/experiencias):</strong> Trilhos do Alamal, Rio Tejo, canoagem e Castelo de Belver.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Como Funciona o Cross-Linking?</h3>
+          <p style="font-size: 8.5pt; color: #444; line-height: 1.6;">
+            Quando um utilizador lê sobre o público <strong>Casais & Romance</strong>, o sistema sugere automaticamente a adição de uma massagem a dois (link para o Sub-Spoke de Wellness) e um jantar degustação (link para o Restaurante).
+          </p>
+          <p style="font-size: 8.5pt; color: #444; line-height: 1.6;">
+            Isto gera um ciclo virtuoso de <strong>Upselling Natural</strong> sem forçar o utilizador a regressar ao menu inicial nem sobrecarregar o formulário de reserva.
+          </p>
+        </div>
+      </div>
+
+      <div class="card-dark" style="margin-top: 15px;">
+        <h3 style="font-size: 11pt; margin-bottom: 4px;">Regra de Ouro: "Zero Becos Sem Saída" (No Dead-Ends)</h3>
+        <p style="font-size: 8.5pt; color: #DDD; margin: 0;">
+          Em qualquer Spoke ou Sub-Spoke, o utilizador tem permanentemente à sua disposição:
+          <strong>(1) A barra de reserva rápida IBE</strong>,
+          <strong>(2) Links para os outros 3 públicos</strong> e
+          <strong>(3) O logótipo central que o devolve imediatamente ao Hub imersivo</strong>.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village · Modelo Hub & Spoke</span>
+      <span>Confidencial · Arquitetura Web Oficial</span>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       PÁGINA 6: SEO, MÉTRICAS & PLANO DE AÇÃO
+       ========================================================================= -->
+  <div class="page">
+    <div>
+      <div class="doc-header">
+        <span style="font-family: 'Montserrat', sans-serif; font-size: 9pt; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.15em;">GAVIÃO NATURE VILLAGE</span>
+        <span class="doc-header-meta">Estratégia SEO & KPIs · Pág. 6</span>
+      </div>
+
+      <span class="tag-badge">Vantagens Estratégicas</span>
+      <h2>5. Impacto no SEO & Métricas de Sucesso</h2>
+
+      <p>
+        O modelo Hub & Spoke não é apenas elegante visualmente; é a <strong>estrutura número 1 recomendada pela Google para autoridade tópica (Topical Authority)</strong>:
+      </p>
+
+      <div class="grid-2" style="margin-top: 10px;">
+        <div class="card">
+          <h3>Clusters Temáticos de SEO</h3>
+          <p style="font-size: 8.5pt; color: #444; line-height: 1.6;">
+            Em vez de uma única página tentar ranquear para todas as pesquisas, cada Spoke domina a sua própria intenção de busca orgânica:
+          </p>
+          <ul style="font-size: 8pt; color: var(--text-muted); padding-left: 15px; line-height: 1.5;">
+            <li><code>/casais</code> ranqueia para: <em>"escapadinha romântica alentejo"</em>, <em>"lua de mel glamping portugal"</em>.</li>
+            <li><code>/familias</code> ranqueia para: <em>"hotel com quinta pedagógica crianças"</em>, <em>"férias campo família alentejo"</em>.</li>
+            <li><code>/bem-estar</code> ranqueia para: <em>"spa termal gavião"</em>, <em>"retiro fim de semana alentejo"</em>.</li>
+            <li><code>/aventura</code> ranqueia para: <em>"passadiços do alamal alojamento"</em>, <em>"canoagem tejo belver"</em>.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Métricas Chave de Desempenho (KPIs)</h3>
+          <ul style="font-size: 8.5pt; color: #444; line-height: 1.7; padding-left: 15px;">
+            <li><strong>Bounce Rate (Taxa de Rejeição):</strong> Redução prevista para &lt; 25% devido ao impacto sensorial inicial e segmentação imediata.</li>
+            <li><strong>Tempo no Site:</strong> Aumento do tempo de sessão graças à exploração fluida entre Spokes.</li>
+            <li><strong>Taxa de Conversão Direta:</strong> Aumento das reservas diretas no IBE ao evitar comissões de OTAs (Booking, Expedia).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="background: var(--sand); border: 1pt solid var(--gold); border-radius: 8px; padding: 14px; margin-top: 16px;">
+        <h3 style="color: var(--gold-dark); margin-bottom: 4px;">Conclusão & Próxima Fase de Produção</h3>
+        <p style="font-size: 8.5pt; color: #444; margin-bottom: 0;">
+          Com a Homepage 100vh validada e as rotas dos 4 públicos-alvo operacionais, a arquitetura está pronta para receber os conteúdos finos, fotografias de alta resolução e parametrização do motor de reservas da Synergy.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="doc-footer">
+      <span>Gavião Nature Village · Modelo Hub & Spoke</span>
+      <span>Documento Gerado com Sucesso · Outubro 2026</span>
+    </div>
+  </div>
+
+</body>
+</html>

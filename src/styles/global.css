@@ -1,0 +1,138 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Catamaran', sans-serif;
+    color: #474242;
+    background-color: #F3F3F3;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #C2A472;
+    color: #ffffff;
+  }
+}
+
+/* Transições e Estilos de Luxo */
+.bg-glass {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.bg-glass-dark {
+  background: rgba(28, 26, 26, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Hover suave de luxo */
+.hover-gold {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hover-gold:hover {
+  color: #C2A472;
+}
+
+/* Botão de Destaque Oficial */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C2A472;
+  color: #ffffff;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  border-radius: 4px;
+  transition: all 0.35s ease;
+  box-shadow: 0 4px 15px rgba(194, 164, 114, 0.25);
+}
+.btn-primary:hover {
+  background-color: #B58C30;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(181, 140, 48, 0.35);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #474242;
+  border: 1.5px solid #474242;
+  font-family: 'Catamaran', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.75rem;
+  border-radius: 4px;
+  transition: all 0.35s ease;
+}
+.btn-secondary:hover {
+  background-color: #474242;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #C2A472;
+  color: #141210;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(194, 164, 114, 0.25);
+}
+.btn-gold:hover {
+  background-color: #E6D8BF;
+  color: #141210;
+  box-shadow: 0 0 20px rgba(184, 142, 74, 0.4);
+  transform: translateY(-1px);
+}
+
+/* =========================================================================
+   ESTILO ARQUITETURAL: CANTOS NÃO ARREDONDADOS EM TODAS AS IMAGENS DO WEBSITE
+   ========================================================================= */
+/* 1. Força cantos retos (sem arredondamento) em todas as tags de imagem e vídeo */
+img,
+picture,
+figure,
+video {
+  border-radius: 0 !important;
+}
+
+/* 2. Remove o arredondamento de qualquer contentor que envolva ou recorte imagens (overflow-hidden) */
+[class*="rounded"]:has(img),
+[class*="rounded"]:has(picture),
+[class*="rounded"]:has(figure),
+[class*="rounded"]:has(video),
+[class*="overflow-hidden"]:has(img),
+.overflow-hidden:has(img),
+div:has(> img),
+a:has(> img),
+button:has(> img) {
+  border-radius: 0 !important;
+}
+

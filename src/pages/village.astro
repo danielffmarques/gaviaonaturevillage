@@ -1,0 +1,798 @@
+---
+// src/pages/village.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/booking/BookingBar.astro';
+
+// Espaços importantes da Vila para a Visão Superior Interativa
+const VILLAGE_SPACES = [
+  {
+    id: 'piscina',
+    name: 'Piscina Exterior Panorâmica',
+    tagline: 'Refúgio de Água & Sol',
+    coords: { x: 91, y: 51 },
+    image: '/images/village/media_18_Gavi.jpg',
+    description: 'Piscina exterior de água salgada com vista desafogada sobre os montados alentejanos, espreguiçadeiras e serviço de bar de apoio durante a época estival.',
+    highlights: ['Água salgada tratada ecologicamente', 'Solário panorâmico com vista montado', 'Apoio de bar no verão']
+  },
+  {
+    id: 'restaurante',
+    name: 'Cadafaz Restaurante & Sky Lounge',
+    tagline: 'Gastronomia Regional de Autor',
+    coords: { x: 80, y: 32 },
+    image: '/images/restaurante/media_20_Gavi_o.jpg',
+    description: 'Cozinha alentejana autêntica com produtos biológicos da nossa horta e produtores locais. Terraço panorâmico Sky Lounge com vistas inesquecíveis para o Castelo de Belver e o pôr do sol.',
+    highlights: ['Produtos colhidos no dia na horta', 'Vinhos selecionados de Cadafaz', 'Vista panorâmica para o Castelo']
+  },
+  {
+    id: 'cork-shelters',
+    name: 'Cork Shelters (Bungalows em Cortiça)',
+    tagline: 'Arquitetura Sustentável',
+    coords: { x: 52, y: 28 },
+    image: '/images/alojamentos/media_10_Gavi_o.jpg',
+    description: 'Alojamentos térmicos e acústicos inovadores, construídos e revestidos com cortiça 100% natural portuguesa. Conforto contemporâneo perfeitamente integrado na paisagem rural.',
+    highlights: ['Isolamento 100% em cortiça nacional', 'Terraço privativo com vista', 'Ar condicionado e kitchenette']
+  },
+  {
+    id: 'glamping',
+    name: 'Tendas Glamping de Luxo',
+    tagline: 'Dormir sob as Estrelas',
+    coords: { x: 71, y: 73 },
+    image: '/images/alojamentos/media_26_Gavi_o.jpg',
+    description: 'A experiência mágica de acampar em plena harmonia com a natureza sem abdicar do luxo de uma cama king-size, casa de banho privativa completa e deck panorâmico.',
+    highlights: ['Total privacidade sob céu limpo', 'Casa de banho privativa completa', 'Deck exterior suspenso em madeira']
+  },
+  {
+    id: 'vinhas',
+    name: 'Vinhas Velhas de Cadafaz',
+    tagline: 'A Alma Enológica',
+    coords: { x: 42, y: 48 },
+    image: '/images/village/media_36_Gavi_o.jpg',
+    description: 'Parcelas de vinhas históricas preservadas na herdade, testemunhas da tradição vitivinícola secular de Cadafaz que abastece a carta do nosso restaurante.',
+    highlights: ['Vinhas históricas preservadas', 'Provas de vinhos comentadas', 'Passeios pedestres entre cepas']
+  },
+  {
+    id: 'animais',
+    name: 'Cantinho dos Animais & Horta Biológica',
+    tagline: 'Quinta Pedagógica',
+    coords: { x: 24, y: 79 },
+    image: '/images/village/media_1_Gavi.jpg',
+    description: 'Um espaço de carinho e aprendizagem onde as crianças e adultos podem interagir com póneis, cabrinhas anãs e aves em ambiente natural, colhendo produtos frescos.',
+    highlights: ['Póneis, cabrinhas anãs e aves', 'Horta biológica pedagógica', 'Atividades diárias para crianças']
+  },
+  {
+    id: 'wellness',
+    name: 'Wellness Center & Spa Térmico',
+    tagline: 'Revitalização & Quietude',
+    coords: { x: 85, y: 36 },
+    image: '/images/wellness/media_38_Gavi_o.jpg',
+    description: 'Circuito termal completo com sauna panorâmica, banho turco, jacuzzi interior aquecido e rituais de massagem inspirados nas ervas aromáticas do Alto Alentejo.',
+    highlights: ['Sauna com vista exterior', 'Banho turco e Jacuzzi aquecido', 'Massagens de assinatura com óleos locais']
+  },
+  {
+    id: 'retiros',
+    name: 'Tenda Geodésica & Retiros',
+    tagline: 'Harmonia & Bem-Estar',
+    coords: { x: 45, y: 69 },
+    image: '/images/village/media_33_Gavi.jpg',
+    description: 'Espaço multifuncional circular integrado na vegetação, ideal para práticas de yoga matinal, sessões de meditação ao som da natureza, palestras e celebrações intimistas.',
+    highlights: ['Estrutura geodésica em madeira', 'Luz natural de 360 graus', 'Acústica serena e relaxante']
+  },
+  {
+    id: 'parque',
+    name: 'Parque de Jogos & Lazer',
+    tagline: 'Diversão & Aventura',
+    coords: { x: 15, y: 56 },
+    image: '/images/village/media_6_Gavi_o.jpg',
+    description: 'Parque ecológico com bicicletas todo-o-terreno, jogos tradicionais e trilhos de descoberta da natureza para toda a família com total liberdade e segurança.',
+    highlights: ['Bicicletas e trilhos na herdade', 'Área de jogos ao ar livre', 'Total segurança para os mais novos']
+  }
+];
+
+// Destaques / Highlights (Máximo 4 cartões: sustentabilidade, materiais, etc.)
+const HIGHLIGHTS = [
+  {
+    title: 'Sustentabilidade em Cortiça Pura',
+    badge: '100% Ecológico',
+    icon: 'cork',
+    desc: 'Os nossos Cork Shelters utilizam aglomerado de cortiça 100% natural portuguesa, o mais nobre isolante térmico e acústico, garantindo um balanço de carbono negativo e máxima eficiência energética.'
+  },
+  {
+    title: 'Materiais Nobres & Locais',
+    badge: 'Arquitetura Integrada',
+    icon: 'materials',
+    desc: 'Toda a infraestrutura foi erguida com madeiras de florestas geridas de forma sustentável, pedra de granito da região e técnicas artesanais que se fundem perfeitamente com os montados alentejanos.'
+  },
+  {
+    title: 'Eficiência Hídrica & Solar',
+    badge: 'Energia Limpa & Água',
+    icon: 'solar',
+    desc: 'Painéis solares fotovoltaicos para autoconsumo, lagos biológicos para retenção pluvial e rega gota-a-gota inteligente alimentada pela nascente da herdade para vinhedos e hortas.'
+  },
+  {
+    title: 'Biodiversidade & Horta Biológica',
+    badge: 'Ecoturismo Genuíno',
+    icon: 'nature',
+    desc: 'Oito hectares protegidos sem circulação automóvel, onde convivem sobreiros centenários, aves de rapina protegidas, vinhas históricas e uma quinta pedagógica biológica que abastece a nossa cozinha.'
+  }
+];
+
+// Momentos na Herdade & Opiniões Reais de Hóspedes
+const guestMoments = [
+  {
+    image: '/images/hero/hero_familias.webp',
+    activity: 'Dias em Família & Liberdade',
+    author: 'Família Duarte',
+    origin: 'Lisboa',
+    stay: 'Estadia em Cork Shelter Familiar',
+    rating: 5,
+    platform: 'Booking.com',
+    score: '10/10',
+    quote: 'Um fim de semana incrível em família! As crianças adoraram a quinta pedagógica e poder alimentar os animais todos os dias pela manhã. A piscina é maravilhosa e o silêncio da herdade transmite uma paz indescritível. Os funcionários são de uma simpatia fora de série.'
+  },
+  {
+    image: '/images/village/media_1_Gavi.jpg',
+    activity: 'Quinta Pedagógica & Animais',
+    author: 'Mariana & Gonçalo',
+    origin: 'Porto',
+    stay: 'Fim de semana com 2 crianças',
+    rating: 5,
+    platform: 'Google Reviews',
+    score: '5.0 ★',
+    quote: 'O contacto com os animais foi o ponto alto para os nossos filhos. Poder passear livremente pela herdade sem carros a circular dá uma tranquilidade enorme aos pais. Pequeno-almoço divinal com produtos locais frescos!'
+  },
+  {
+    image: '/images/village/media_18_Gavi.jpg',
+    activity: 'Tardes de Piscina Panorâmica',
+    author: 'Rui Fernandes',
+    origin: 'Coimbra',
+    stay: 'Estadia em Tenda Glamping',
+    rating: 5,
+    platform: 'Booking.com',
+    score: '9.6/10',
+    quote: 'A piscina de água salgada com vista desafogada para os montados é simplesmente espetacular. O pôr do sol no terraço do Sky Lounge com um copo de vinho local é imperdível. Uma experiência que superou as nossas expectativas.'
+  },
+  {
+    image: '/images/village/media_6_Gavi_o.jpg',
+    activity: 'Passeios de Bicicleta & Trilhos',
+    author: 'Clara & João',
+    origin: 'Faro',
+    stay: 'Escapadinha na Natureza',
+    rating: 5,
+    platform: 'Google Reviews',
+    score: '5.0 ★',
+    quote: 'Adorámos explorar os trilhos da herdade com as bicicletas disponibilizadas. A calma envolvente, o ar puro e o respeito pela natureza em cada detalhe da arquitetura em cortiça são admiráveis.'
+  },
+  {
+    image: '/images/restaurante/media_20_Gavi_o.jpg',
+    activity: 'Gastronomia Regional no Cadafaz',
+    author: 'Teresa & Manuel',
+    origin: 'Santarém',
+    stay: 'Jantar & Fim de Semana',
+    rating: 5,
+    platform: 'Tripadvisor',
+    score: '5.0 ★',
+    quote: 'Comida extraordinária, autêntica e reconfortante. Ingredientes frescos colhidos na horta biológica da vila. O espaço do restaurante com vista para o Castelo de Belver à noite é mágico.'
+  },
+  {
+    image: '/images/wellness/media_38_Gavi_o.jpg',
+    activity: 'Circuito Spa & Quietude',
+    author: 'Pedro & Sofia',
+    origin: 'Setúbal',
+    stay: 'Retiro de Bem-Estar',
+    rating: 5,
+    platform: 'Booking.com',
+    score: '10/10',
+    quote: 'A sauna panorâmica com vista para o montado e o jacuzzi aquecido depois de um dia de caminhada foram a cereja no topo do bolo. Voltámos completamente revigorados. Aconselhamos vivamente.'
+  }
+];
+---
+
+<BaseLayout 
+  title="A Vila | Gavião Nature Village"
+  description="Descubra a herdade do Gavião Nature Village: visão aérea completa, piscina biológica, animais de quinta para crianças, vinhas velhas históricas e práticas ecológicas de sustentabilidade."
+>
+
+  <!-- =========================================================================
+       HERO DA VILA (CENTRO LIMPO COM NOME DA PÁGINA & ICON DE SCROLL)
+       ========================================================================= -->
+  <section class="relative h-[38vh] min-h-[290px] md:h-[40vh] md:min-h-[330px] flex flex-col justify-center items-center bg-charcoal overflow-hidden text-white">
+    <!-- Imagem de Fundo com Overlay Suave -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/village/media_87_Gavi_o.jpg" 
+        alt="Piscina exterior e herdade Gavião Nature Village" 
+        class="w-full h-full object-cover opacity-50 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/40"></div>
+    </div>
+
+    <!-- Centro do Hero: Apenas o Nome da Página Centrado -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        A Vila
+      </h1>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       1. VISÃO SUPERIOR DE TODA A VILA (MAPA FULL-SCREEN COM POPOVER AO HOVER)
+       ========================================================================= -->
+  <section id="visao-geral" class="py-8 md:py-12 bg-sand-warm text-charcoal scroll-mt-20 overflow-hidden">
+    <div class="max-w-[1520px] mx-auto px-3 sm:px-6 lg:px-8">
+      
+      <!-- Cabeçalho Elegante e Intuitivo -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 md:mb-8">
+        <div>
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+            Tudo o que a vila oferece
+          </h2>
+          <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed mt-2 max-w-2xl font-normal">
+            O Alentejo é conhecido pela sua tranquilidade. Apresentamos cada recanto desenhado para elevar a sua estadia a uma experiência inesquecível.
+          </p>
+        </div>
+
+        <!-- Instrução de Hover para o Utilizador -->
+        <div class="flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white border border-sand-border text-charcoal/70 text-xs font-montserrat shadow-soft self-start md:self-end">
+          <svg class="w-4 h-4 text-natureGold animate-bounce shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+          </svg>
+          <span>Passe o cursor sobre os números para descobrir cada espaço</span>
+        </div>
+      </div>
+
+      <!-- MAPA FULL-SCREEN COM PINS E POPOVER DINÂMICO INTELIGENTE -->
+      <div id="village-map-container" class="relative w-full aspect-[1200/896] max-h-[82vh] rounded-2xl sm:overflow-hidden border border-sand-border shadow-luxury bg-[#141210] select-none">
+        
+        <!-- Fotografia Aérea Masterplan Full Screen (1200x896) -->
+        <img 
+          src="/images/village/mapa_aereo_village.jpg" 
+          alt="Visão Superior e Masterplan de toda a herdade do Gavião Nature Village" 
+          class="w-full h-full object-cover select-none pointer-events-none"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/25 pointer-events-none"></div>
+
+        <!-- PONTOS INTERATIVOS NO MAPA (HOTSPOTS COM HOVER) -->
+        {VILLAGE_SPACES.map((space, i) => (
+          <button 
+            type="button"
+            class="space-pin absolute -translate-x-1/2 -translate-y-1/2 z-20 group/pin focus:outline-none cursor-pointer"
+            data-space-id={space.id}
+            data-index={i}
+            data-coords-x={space.coords.x}
+            data-coords-y={space.coords.y}
+            style={`top: ${space.coords.y}%; left: ${space.coords.x}%;`}
+            aria-label={`Ver detalhes de ${space.name}`}
+          >
+            <!-- Anel de Pulso Animado no Hover e Repouso -->
+            <span class="pin-pulse absolute -inset-2 rounded-full bg-natureGold/40 animate-ping opacity-0 group-hover/pin:opacity-90 transition-opacity"></span>
+            
+            <!-- Marcador Circular com Número -->
+            <span class="pin-badge relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-full border-2 border-natureGold font-montserrat font-bold text-xs sm:text-sm bg-[#181614]/90 text-natureGold shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-md group-hover/pin:bg-natureGold group-hover/pin:text-charcoal-dark group-hover/pin:scale-125 group-hover/pin:border-white group-hover/pin:shadow-[0_0_25px_rgba(212,175,55,0.9)] transition-all duration-300">
+              {i + 1}
+            </span>
+          </button>
+        ))}
+
+        <!-- QUADRO / POPOVER FLUTUANTE DINÂMICO (COM DISTÂNCIA AUMENTADA E ALTA LEGIBILIDADE) -->
+        <div 
+          id="space-popover"
+          class="absolute z-40 w-[320px] sm:w-[360px] md:w-[380px] bg-[#141210]/98 backdrop-blur-2xl border border-natureGold/60 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.95)] opacity-0 scale-95 pointer-events-none transition-all duration-300 overflow-hidden flex flex-col"
+          style="top: 20px; left: 20px;"
+        >
+          <!-- Miniatura da Imagem Limpa Sem Cartões/Badges no Topo -->
+          <div class="relative h-48 sm:h-52 w-full overflow-hidden bg-black shrink-0">
+            <img 
+              id="popover-img"
+              src={VILLAGE_SPACES[0].image} 
+              alt={VILLAGE_SPACES[0].name} 
+              class="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#141210] via-transparent to-black/30"></div>
+
+            <!-- Botão Fechar Discreto (útil em mobile/touch) -->
+            <button 
+              id="popover-close" 
+              type="button" 
+              class="absolute top-3 right-3 w-7 h-7 rounded-full bg-black/60 hover:bg-natureGold hover:text-black text-white/80 flex items-center justify-center text-xs transition-colors cursor-pointer"
+              aria-label="Fechar"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- Conteúdo do Espaço com Tipografia de Alta Legibilidade -->
+          <div class="p-5 sm:p-6 flex flex-col gap-3">
+            <div>
+              <span id="popover-tagline" class="text-[11px] font-montserrat font-bold text-natureGold tracking-wider uppercase block mb-1">
+                {VILLAGE_SPACES[0].tagline}
+              </span>
+              <h3 id="popover-title" class="font-catamaran font-extrabold text-xl sm:text-2xl text-white leading-snug">
+                {VILLAGE_SPACES[0].name}
+              </h3>
+            </div>
+
+            <p id="popover-desc" class="font-catamaran text-[#F5F2EB] text-sm leading-relaxed font-normal">
+              {VILLAGE_SPACES[0].description}
+            </p>
+
+            <!-- Lista de Destaques com Alto Contraste -->
+            <div id="popover-highlights" class="flex flex-wrap gap-2 pt-1">
+              {VILLAGE_SPACES[0].highlights.map(h => (
+                <span class="inline-flex items-center gap-1.5 text-xs font-montserrat font-medium px-2.5 py-1 rounded-lg bg-white/10 border border-natureGold/40 text-white shadow-sm">
+                  <span class="text-natureGold-light font-bold">✓</span> {h}
+                </span>
+              ))}
+            </div>
+
+            <!-- Ação de Reserva -->
+            <div class="pt-3 mt-1 border-t border-white/15 flex items-center justify-between">
+              <span class="text-xs font-montserrat text-white/70">Gavião Nature Village</span>
+              <a 
+                href="#reserva" 
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-natureGold hover:bg-natureGold-light text-charcoal-dark font-montserrat font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-natureGold/30"
+              >
+                <span>Reservar</span>
+                <span>→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. DESTAQUES EM 4 CARTÕES (SUSTENTABILIDADE, MATERIAIS, ETC.)
+       ========================================================================= -->
+  <section class="py-8 md:py-12 bg-white border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-6 md:mb-8">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Compromisso com o Futuro
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm mt-2">
+          Conheça os pilares que tornam o Gavião Nature Village numa referência em ecoturismo regenerativo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {HIGHLIGHTS.map(hl => (
+          <div class="bg-sand-warm rounded-2xl p-6 sm:p-7 border border-sand-border shadow-soft flex flex-col hover:shadow-luxury transition-all duration-300 hover:-translate-y-1">
+            <h3 class="font-catamaran font-extrabold text-xl text-charcoal leading-snug">
+              {hl.title}
+            </h3>
+            <p class="font-catamaran text-charcoal-muted text-xs sm:text-sm leading-relaxed mt-3">
+              {hl.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. SECÇÃO "MOMENTOS NA HERDADE" (FAMÍLIA, ATIVIDADES & OPINIÕES REAIS)
+       ========================================================================= -->
+  <section class="py-8 md:py-14 bg-sand-warm border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-4 sm:mb-5">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Momentos na Herdade
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed mt-2 font-normal">
+          Família, atividades ao ar livre e memórias autênticas contadas por quem já viveu a experiência no Gavião Nature Village.
+        </p>
+
+        <!-- Indicador de Avaliação Geral Agregada -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-3 px-4 py-2 rounded-full bg-white border border-sand-border text-xs font-montserrat shadow-soft">
+          <span class="flex items-center text-amber-500 font-bold tracking-widest text-sm">★★★★★</span>
+          <span class="font-bold text-charcoal">8.7 / 10 Fabuloso</span>
+          <span class="text-charcoal-muted hidden sm:inline">•</span>
+          <span class="text-charcoal-muted">Mais de 1.000 opiniões reais no Booking.com e Google</span>
+        </div>
+      </div>
+
+      <!-- Estrutura do Carrossel de Opiniões -->
+      <div class="relative">
+        
+        <!-- Controlos Superiores do Carrossel: Indicadores (Dots) e Botões de Navegação -->
+        <div class="relative flex items-center justify-between gap-4 mb-3 sm:mb-4">
+          <!-- Indicadores / Dots de Navegação (Centralizados no topo) -->
+          <div id="moments-dots" class="flex items-center gap-2 sm:absolute sm:left-1/2 sm:-translate-x-1/2">
+            {guestMoments.map((_, i) => (
+              <button
+                type="button"
+                class={`carousel-dot h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                  i === 0 ? 'w-6 bg-natureGold' : 'w-2 bg-sand-border hover:bg-natureGold/50'
+                }`}
+                data-dot-index={i}
+                aria-label={`Ir para opinião ${i + 1}`}
+              ></button>
+            ))}
+          </div>
+
+          <!-- Botões de Navegação do Carrossel (À direita) -->
+          <div class="flex items-center gap-2 ml-auto">
+            <button
+              id="moments-prev"
+              type="button"
+              class="w-10 h-10 rounded-full bg-white border border-sand-border shadow-soft flex items-center justify-center text-charcoal hover:bg-natureGold hover:text-charcoal-dark hover:border-natureGold transition-all duration-200 cursor-pointer text-lg font-bold"
+              aria-label="Opinião anterior"
+            >
+              ‹
+            </button>
+            <button
+              id="moments-next"
+              type="button"
+              class="w-10 h-10 rounded-full bg-white border border-sand-border shadow-soft flex items-center justify-center text-charcoal hover:bg-natureGold hover:text-charcoal-dark hover:border-natureGold transition-all duration-200 cursor-pointer text-lg font-bold"
+              aria-label="Próxima opinião"
+            >
+              ›
+            </button>
+          </div>
+        </div>
+
+        <!-- Pista de Cartões do Carrossel -->
+        <div 
+          id="moments-carousel"
+          class="flex overflow-x-auto scroll-smooth snap-x snap-mandatory gap-6 pb-2 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {guestMoments.map((item, idx) => (
+            <div 
+              class="w-[85%] sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] shrink-0 snap-start group bg-white overflow-hidden border border-sand-border shadow-soft flex flex-col justify-between hover:shadow-luxury transition-all duration-300 hover:-translate-y-1"
+              data-slide-index={idx}
+            >
+              
+              <!-- Fotografia do Momento / Atividade com Badge -->
+              <div class="relative h-56 sm:h-60 overflow-hidden bg-charcoal">
+                <img 
+                  src={item.image} 
+                  alt={item.activity} 
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                  loading="lazy" 
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              </div>
+
+              <!-- Corpo com Opinião Real do Hóspede -->
+              <div class="p-5 sm:p-6 flex flex-col justify-between flex-1 gap-4">
+                
+                <div class="space-y-3">
+                  <!-- Avaliação & Plataforma -->
+                  <div class="flex items-center justify-between gap-2">
+                    <div class="flex text-amber-500 text-xs sm:text-sm">
+                      {"★".repeat(item.rating)}
+                    </div>
+                    <span class="text-[11px] font-montserrat font-semibold px-2 py-0.5 rounded bg-sand-warm text-charcoal-muted border border-sand-border/70">
+                      {item.platform} • <strong class="text-natureGold-dark">{item.score}</strong>
+                    </span>
+                  </div>
+
+                  <!-- Citação do Hóspede -->
+                  <p class="font-catamaran italic text-charcoal/85 text-xs sm:text-sm leading-relaxed">
+                    "{item.quote}"
+                  </p>
+                </div>
+
+                <!-- Autor e Detalhe da Estadia -->
+                <div class="pt-3 border-t border-sand-border flex items-center justify-between gap-2 text-xs font-montserrat">
+                  <div>
+                    <h4 class="font-bold text-charcoal leading-snug">
+                      {item.author}
+                    </h4>
+                    <span class="text-charcoal-muted text-[11px]">
+                      {item.origin}
+                    </span>
+                  </div>
+                  <span class="text-[10px] sm:text-[11px] text-natureGold-dark font-medium text-right max-w-[130px] leading-tight">
+                    {item.stay}
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+          ))}
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       4. SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
+       ========================================================================= -->
+  <section id="reserva" class="py-8 md:py-12 bg-white border-t border-sand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-5">
+      <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+        Reserve a Sua Estadia
+      </h2>
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BookingBar />
+    </div>
+  </section>
+
+  <!-- Dados dos Espaços para o Script Interativo -->
+  <script is:inline define:vars={{ VILLAGE_SPACES }}>
+    window.__VILLAGE_SPACES = VILLAGE_SPACES;
+  </script>
+
+  <!-- Script para Interatividade do Mapa: Hover, Posição Inteligente e Popovers -->
+  <script>
+    interface VillageSpace {
+      id: string;
+      name: string;
+      tagline: string;
+      coords: { x: number; y: number };
+      image: string;
+      description: string;
+      highlights: string[];
+    }
+
+    declare global {
+      interface Window {
+        __VILLAGE_SPACES?: VillageSpace[];
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const spacesData = window.__VILLAGE_SPACES || [];
+      const mapContainer = document.getElementById('village-map-container');
+      const popover = document.getElementById('space-popover');
+      const popoverImg = document.getElementById('popover-img') as HTMLImageElement | null;
+      const popoverNum = document.getElementById('popover-num');
+      const popoverTagline = document.getElementById('popover-tagline');
+      const popoverTitle = document.getElementById('popover-title');
+      const popoverDesc = document.getElementById('popover-desc');
+      const popoverHighlights = document.getElementById('popover-highlights');
+      const popoverClose = document.getElementById('popover-close');
+
+      const pins = document.querySelectorAll<HTMLElement>(`#village-map-container .space-pin`);
+
+      if (!mapContainer || !popover) return;
+
+      let hideTimeout: ReturnType<typeof setTimeout> | null = null;
+      let activeSpaceId: string | null = null;
+
+      function updatePopoverContent(space: VillageSpace, index: number) {
+        if (popoverImg) {
+          popoverImg.src = space.image;
+          popoverImg.alt = space.name;
+        }
+        if (popoverNum) popoverNum.textContent = String(index + 1);
+        if (popoverTagline) popoverTagline.textContent = space.tagline;
+        if (popoverTitle) popoverTitle.textContent = space.name;
+        if (popoverDesc) popoverDesc.textContent = space.description;
+        
+        if (popoverHighlights) {
+          popoverHighlights.innerHTML = space.highlights.map(h => `
+            <span class="inline-flex items-center gap-1.5 text-xs font-montserrat font-medium px-2.5 py-1 rounded-lg bg-white/10 border border-natureGold/40 text-white shadow-sm">
+              <span class="text-natureGold-light font-bold">✓</span> ${h}
+            </span>
+          `).join('');
+        }
+      }
+
+      function positionPopover(space: VillageSpace, pinEl?: HTMLElement | null) {
+        if (!mapContainer || !popover) return;
+
+        const containerRect = mapContainer.getBoundingClientRect();
+        const isMobile = containerRect.width < 640;
+
+        if (isMobile) {
+          // Mobile: Dock ao fundo do mapa com estilo card moderno
+          popover.style.left = '10px';
+          popover.style.right = '10px';
+          popover.style.width = 'calc(100% - 20px)';
+          popover.style.bottom = '10px';
+          popover.style.top = 'auto';
+          return;
+        }
+
+        // Desktop: Posicionamento Inteligente com maior afastamento dos Pins
+        const cardWidth = 360;
+        const cardHeight = popover.offsetHeight || 380;
+
+        // Posição do Pin em pixels dentro do container
+        let pinPixelX = (space.coords.x / 100) * containerRect.width;
+        let pinPixelY = (space.coords.y / 100) * containerRect.height;
+
+        if (pinEl) {
+          const pinRect = pinEl.getBoundingClientRect();
+          pinPixelX = pinRect.left - containerRect.left + pinRect.width / 2;
+          pinPixelY = pinRect.top - containerRect.top + pinRect.height / 2;
+        }
+
+        // Afastar os quadros dos botões (gap de 55px para folga generosa)
+        const pinGap = 55;
+        let left: number;
+        if (space.coords.x > 50) {
+          // Abrir à ESQUERDA
+          left = pinPixelX - cardWidth - pinGap;
+          if (left < 16) left = 16;
+        } else {
+          // Abrir à DIREITA
+          left = pinPixelX + pinGap;
+          if (left + cardWidth > containerRect.width - 16) {
+            left = containerRect.width - cardWidth - 16;
+          }
+        }
+
+        // Clamping vertical para garantir visibilidade perfeita
+        let top = pinPixelY - 110;
+        if (top < 16) top = 16;
+        if (top + cardHeight > containerRect.height - 16) {
+          top = containerRect.height - cardHeight - 16;
+        }
+
+        popover.style.left = `${left}px`;
+        popover.style.top = `${top}px`;
+        popover.style.right = 'auto';
+        popover.style.bottom = 'auto';
+        popover.style.width = `${cardWidth}px`;
+      }
+
+      function showSpace(spaceId: string, pinEl?: HTMLElement | null) {
+        if (hideTimeout) clearTimeout(hideTimeout);
+        activeSpaceId = spaceId;
+
+        const index = spacesData.findIndex(s => s.id === spaceId);
+        if (index === -1) return;
+        const space = spacesData[index];
+
+        updatePopoverContent(space, index);
+        positionPopover(space, pinEl);
+
+        // Ativar Popover
+        popover?.classList.remove('opacity-0', 'scale-95', 'pointer-events-none');
+        popover?.classList.add('opacity-100', 'scale-100', 'pointer-events-auto');
+
+        // Atualizar estilos dos Pins
+        pins.forEach(pin => {
+          const id = pin.getAttribute('data-space-id');
+          const badge = pin.querySelector('.pin-badge');
+          const pulse = pin.querySelector('.pin-pulse');
+          if (id === spaceId) {
+            badge?.classList.add('bg-natureGold', 'text-charcoal-dark', 'border-white', 'scale-125', 'shadow-[0_0_25px_rgba(212,175,55,0.9)]');
+            badge?.classList.remove('bg-[#181614]/90', 'border-natureGold', 'text-natureGold');
+            pulse?.classList.add('opacity-90');
+            pulse?.classList.remove('opacity-0');
+          } else {
+            badge?.classList.remove('bg-natureGold', 'text-charcoal-dark', 'border-white', 'scale-125', 'shadow-[0_0_25px_rgba(212,175,55,0.9)]');
+            badge?.classList.add('bg-[#181614]/90', 'border-natureGold', 'text-natureGold');
+            pulse?.classList.remove('opacity-90');
+            pulse?.classList.add('opacity-0');
+          }
+        });
+      }
+
+      function hidePopover() {
+        popover?.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        popover?.classList.remove('opacity-100', 'scale-100', 'pointer-events-auto');
+        activeSpaceId = null;
+
+        pins.forEach(pin => {
+          const badge = pin.querySelector('.pin-badge');
+          const pulse = pin.querySelector('.pin-pulse');
+          badge?.classList.remove('bg-natureGold', 'text-charcoal-dark', 'border-white', 'scale-125', 'shadow-[0_0_25px_rgba(212,175,55,0.9)]');
+          badge?.classList.add('bg-[#181614]/90', 'border-natureGold', 'text-natureGold');
+          pulse?.classList.remove('opacity-90');
+          pulse?.classList.add('opacity-0');
+        });
+      }
+
+      function scheduleHide() {
+        hideTimeout = setTimeout(() => {
+          hidePopover();
+        }, 220);
+      }
+
+      // Eventos nos Pins: MouseEnter, MouseLeave, Click
+      pins.forEach(pin => {
+        const id = pin.getAttribute('data-space-id');
+        if (!id) return;
+
+        pin.addEventListener('mouseenter', () => {
+          showSpace(id, pin);
+        });
+
+        pin.addEventListener('mouseleave', () => {
+          scheduleHide();
+        });
+
+        pin.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showSpace(id, pin);
+        });
+      });
+
+      // Manter popover aberto se o utilizador passar o rato por cima dele
+      popover.addEventListener('mouseenter', () => {
+        if (hideTimeout) clearTimeout(hideTimeout);
+      });
+
+      popover.addEventListener('mouseleave', () => {
+        scheduleHide();
+      });
+
+      // Botão fechar
+      popoverClose?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hidePopover();
+      });
+
+      // Fechar ao clicar fora do mapa
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!mapContainer.contains(target)) {
+          hidePopover();
+        }
+      });
+
+      // Recalcular posição em caso de resize da janela
+      window.addEventListener('resize', () => {
+        if (activeSpaceId) {
+          const space = spacesData.find(s => s.id === activeSpaceId);
+          const pin = document.querySelector<HTMLElement>(`#village-map-container .space-pin[data-space-id="${activeSpaceId}"]`);
+          if (space) positionPopover(space, pin);
+        }
+      });
+
+      // =========================================================================
+      // CARROSSEL: MOMENTOS NA HERDADE
+      // =========================================================================
+      const carousel = document.getElementById('moments-carousel');
+      const prevBtn = document.getElementById('moments-prev') as HTMLButtonElement | null;
+      const nextBtn = document.getElementById('moments-next') as HTMLButtonElement | null;
+      const dots = document.querySelectorAll<HTMLElement>('.carousel-dot');
+
+      if (carousel) {
+        function getScrollStep() {
+          const firstSlide = carousel?.querySelector<HTMLElement>('[data-slide-index="0"]');
+          return firstSlide ? firstSlide.offsetWidth + 24 : 360;
+        }
+
+        prevBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        });
+
+        nextBtn?.addEventListener('click', () => {
+          carousel.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        });
+
+        dots.forEach(dot => {
+          dot.addEventListener('click', () => {
+            const idx = parseInt(dot.getAttribute('data-dot-index') || '0', 10);
+            const target = carousel.querySelector<HTMLElement>(`[data-slide-index="${idx}"]`);
+            target?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          });
+        });
+
+        carousel.addEventListener('scroll', () => {
+          const step = getScrollStep();
+          const activeIndex = Math.min(dots.length - 1, Math.max(0, Math.round(carousel.scrollLeft / step)));
+          dots.forEach((d, idx) => {
+            if (idx === activeIndex) {
+              d.classList.add('w-6', 'bg-natureGold');
+              d.classList.remove('w-2', 'bg-sand-border');
+            } else {
+              d.classList.remove('w-6', 'bg-natureGold');
+              d.classList.add('w-2', 'bg-sand-border');
+            }
+          });
+        });
+      }
+    });
+  </script>
+
+</BaseLayout>

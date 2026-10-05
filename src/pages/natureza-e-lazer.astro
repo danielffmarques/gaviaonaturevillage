@@ -1,0 +1,249 @@
+---
+// src/pages/natureza-e-lazer.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const items = [
+  {
+    id: 'praia-fluvial-do-alamal',
+    title: 'Praia Fluvial do Alamal',
+    subtitle: 'Águas calmas e límpidas com vista panorâmica para o Castelo de Belver',
+    badge: 'Bandeira Azul · Rio Tejo',
+    distance: '8 min de carro da herdade (Belver)',
+    image: '/images/arredores/praia_alamal.jpg',
+    description: 'Situada na margem esquerda do rio Tejo, a calma e pureza das suas águas — propiciadas pela sua localização estratégica entre a barragem de Fratel a montante e a de Belver a jusante — convidam a relaxar ao sol, a banhos refrescantes e a passeios náuticos de kayak ou gaivota, com o histórico castelo a coroar o horizonte.',
+    highlights: [
+      'Praia fluvial com Bandeira Azul e vigilância na época balnear',
+      'Extenso relvado com sombras, restaurante e esplanada',
+      'Ponto de partida dos famosos Passadiços do Alamal'
+    ],
+    infoLink: 'https://www.cm-gaviao.pt/locais/praia-fluvial-do-alamal/?mp=6049&mc=11048'
+  },
+  {
+    id: 'passadicos-do-alamal',
+    title: 'Passadiços do Alamal',
+    subtitle: 'Um dos mais belos passeios ribeirinhos de madeira em Portugal',
+    badge: 'Percurso Pedestre Ribeirinho · 3 km',
+    distance: 'Partida na Praia do Alamal ou na Ponte de Belver',
+    image: '/images/arredores/passadicos_alamal.jpg',
+    description: 'Com uma extensão de 3 km ligando a Praia Fluvial do Alamal à secular ponte de Belver, o passeio sobre os passadiços em madeira é acessível, tranquilo e deslumbrante. Ao longo do percurso, respira-se a vegetação ripícola, os aromas a rosmaninho e giesta, com miradouros naturais voltados para as escarpas do Tejo e a muralha medieval.',
+    highlights: [
+      'Percurso linear e plano de 3 km, ideal para todas as idades',
+      'Passadiço em madeira suspenso sobre as encostas rochosas do rio',
+      'Panorâmicas contínuas sobre o Tejo e o Castelo de Belver'
+    ],
+    infoLink: 'https://www.cm-gaviao.pt/visitar/conhecer/passadicos-do-alamal/'
+  },
+  {
+    id: 'observatorio-de-avifauna',
+    title: 'Observatório de Avifauna do Outeiro',
+    subtitle: 'Santuário de aves rupícolas e a maior colónia de abutres-pretos do país',
+    badge: 'Birdwatching & Biodiversidade Protegida',
+    distance: '12 min de carro da herdade',
+    image: '/images/arredores/observatorio_avifauna.jpg',
+    description: 'As impressionantes formações rochosas e penhascos peculiares do Observatório de Avifauna do Outeiro são o habitat predileto de majestosas aves de rapina. Este local privilegiado abriga a maior colónia de abutres-pretos de Portugal, além de outras espécies rupícolas em perigo de extinção, como a cegonha-preta, o grifo e a águia-perdigueira.',
+    highlights: [
+      'Ponto de observação privilegiado no topo das escarpas do Tejo',
+      'Maior colónia nacional de abutres-pretos (espécie protegida)',
+      'Paisagem selvagem de grande tranquilidade e silêncio'
+    ],
+    infoLink: 'https://www.cm-gaviao.pt/locais/observatorio-de-avifauna-do-outeiro/?mp=6049&mc=6316'
+  },
+  {
+    id: 'praia-fluvial-da-ribeira-da-venda',
+    title: 'Praia Fluvial da Ribeira da Venda',
+    subtitle: 'Oásis verde com águas de nascente, frondosas sombras e ponte romana',
+    badge: 'Complexo de Lazer & Parque Natural',
+    distance: '7 min de carro da herdade (junto a Comenda)',
+    image: '/images/arredores/ribeira_venda.jpg',
+    description: 'O Parque de Merendas da Ribeira da Venda, localizado a 1 km da aldeia de Comenda e integrado num aprazível complexo de lazer do Município de Gavião, oferece águas de nascente límpidas, extensos espaços relvados com árvores frondosas e pontes de encanto histórico, incluindo uma antiga ponte romana. Dispõe de praia fluvial, piscina infantil com entrada gratuita, churrasqueiras, balneários e snack-bar com esplanada.',
+    highlights: [
+      'Piscina infantil e zona balnear fluvial com relvado arborizado',
+      'Ponte romana preservada sobre a límpida Ribeira da Venda',
+      'Infraestruturas completas de lazer, piquenique e parque infantil'
+    ],
+    infoLink: 'https://www.cm-gaviao.pt/locais/parque-de-merendas-da-ribeira-da-venda/'
+  }
+];
+---
+
+<BaseLayout 
+  title="Natureza e Lazer | Gavião Nature Village — Alto Alentejo"
+  description="Explore as praias fluviais e o lazer ao ar livre junto ao Gavião Nature Village: Praia Fluvial do Alamal, Passadiços do Tejo, Observatório de Avifauna e Ribeira da Venda."
+>
+
+  <!-- =========================================================================
+       HERO DA PÁGINA (PADRÃO UNIFICADO DO WEBSITE)
+       ========================================================================= -->
+  <section class="relative h-[38vh] min-h-[290px] md:h-[40vh] md:min-h-[330px] flex flex-col justify-center items-center bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/arredores/hero_natureza.jpg" 
+        alt="Natureza e Lazer em Gavião e Belver" 
+        class="w-full h-full object-cover opacity-50 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/40"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        Natureza e Lazer
+      </h1>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       INTRODUÇÃO EDITORIAL
+       ========================================================================= -->
+  <section class="py-8 md:py-12 bg-white border-b border-sand-border/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+        
+        <!-- Coluna Esquerda: Título Editorial -->
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+            Natureza Viva & Águas do Tejo
+          </span>
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl text-charcoal leading-tight">
+            Espelhos de água cristalina, praias fluviais premiadas e refúgios de fauna selvagem.
+          </h2>
+        </div>
+
+        <!-- Coluna Direita: Narrativa de Contexto -->
+        <div class="lg:col-span-7 lg:pl-8 lg:border-l border-sand-border">
+          <p class="font-catamaran text-charcoal text-base sm:text-lg leading-relaxed font-light">
+            O Alto Alentejo oferece um contacto com a água e a natureza absolutamente invulgar. A presença do Rio Tejo, contido e espelhado entre barragens, cria praias fluviais de águas tranquilas e límpidas onde o calor do verão dá lugar a banhos revigorantes. Pelas margens, os passadiços em madeira serpenteiam a encosta e conduzem o olhar até às escarpas onde nidificam espécies raras de aves de rapina. Uma envolvente natural intocada, a breves minutos do conforto do Gavião Nature Village.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SHOWCASE DOS LOCAIS DE NATUREZA & LAZER
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20 md:space-y-24">
+      
+      {items.map((item, idx) => (
+        <article id={item.id} class={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+          
+          <!-- Imagem Fotográfica -->
+          <div class={`lg:col-span-6 ${idx % 2 === 1 ? 'lg:order-2' : ''}`}>
+            <div class="relative overflow-hidden shadow-luxury group">
+              <img 
+                src={item.image} 
+                alt={item.title} 
+                class="w-full h-80 sm:h-[420px] object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <!-- Tag de Distância / Localização -->
+              <div class="absolute bottom-4 left-4">
+                <span class="bg-black/75 backdrop-blur-md text-white font-montserrat text-xs font-medium px-3.5 py-1.5 rounded-full flex items-center gap-1.5">
+                  <svg class="w-3.5 h-3.5 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
+                  {item.distance}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo Editorial -->
+          <div class={`lg:col-span-6 space-y-5 ${idx % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div>
+              <span class="text-xs font-montserrat font-bold text-natureGold-dark uppercase tracking-widest block mb-1">
+                {item.badge}
+              </span>
+              <h3 class="font-catamaran font-extrabold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-charcoal">
+                {item.title}
+              </h3>
+              <p class="font-catamaran text-charcoal-muted text-sm sm:text-base font-semibold mt-1">
+                {item.subtitle}
+              </p>
+            </div>
+
+            <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+              {item.description}
+            </p>
+
+            <!-- Destaques -->
+            <div class="bg-sand-warm rounded-2xl p-5 sm:p-6 border border-sand-border space-y-2.5">
+              <h4 class="font-montserrat font-bold text-xs uppercase tracking-wider text-charcoal flex items-center gap-2">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                O Que Encontrar:
+              </h4>
+              <ul class="space-y-1.5 text-xs font-montserrat text-charcoal-muted">
+                {item.highlights.map(h => (
+                  <li class="flex items-start gap-2">
+                    <span class="text-natureGold font-bold">•</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Botões / Links -->
+            <div class="pt-2 flex flex-wrap items-center gap-3 sm:gap-4">
+              {item.infoLink && (
+                <a 
+                  href={item.infoLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 btn-gold font-montserrat font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl shadow-soft hover:shadow-gold transition-all whitespace-nowrap cursor-pointer"
+                >
+                  <span>Mais Informações (C.M. Gavião)</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+              )}
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.title + ' Gaviao Portugal')}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 bg-white hover:bg-sand-warm text-charcoal border border-sand-border hover:border-natureGold font-montserrat font-semibold text-xs px-5 py-3 rounded-xl transition-all shadow-sm whitespace-nowrap cursor-pointer"
+              >
+                <span>Ver no Mapa</span>
+                <svg class="w-3.5 h-3.5 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+              </a>
+            </div>
+
+          </div>
+
+        </article>
+      ))}
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       RODAPÉ EDITORIAL / CONTINUAR A EXPLORAR OS ARREDORES
+       ========================================================================= -->
+  <section class="py-16 md:py-20 bg-sand-warm border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <span class="text-xs uppercase tracking-widest text-natureGold-dark font-bold font-montserrat block">
+        Continue a Descobrir o Alto Alentejo
+      </span>
+      <h3 class="font-catamaran font-extrabold text-2xl sm:text-4xl text-charcoal">
+        Conheça o Património Histórico e os Trilhos de Gavião
+      </h3>
+      <p class="font-catamaran text-charcoal-muted text-sm sm:text-base max-w-2xl mx-auto">
+        Das muralhas do Castelo de Belver aos percursos pedestres PR marcados nas encostas do rio.
+      </p>
+      <div class="pt-4 flex flex-wrap items-center justify-center gap-4">
+        <a 
+          href="/patrimonio-e-cultura" 
+          class="btn-gold font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl shadow-soft hover:shadow-gold transition-all"
+        >
+          Ver Património e Cultura →
+        </a>
+        <a 
+          href="/percursos-pedestres" 
+          class="bg-white hover:bg-sand-warm text-charcoal border border-sand-border font-montserrat font-bold text-xs uppercase tracking-wider px-8 py-3.5 rounded-xl shadow-sm transition-all"
+        >
+          Ver Percursos Pedestres →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

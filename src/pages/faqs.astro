@@ -1,0 +1,425 @@
+---
+// src/pages/faqs.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/booking/BookingBar.astro';
+
+const faqCategories = [
+  {
+    id: 'reservas',
+    category: 'Reservas, Check-in & Check-out',
+    description: 'Horários, condições de cancelamento e inclusões da sua estadia.',
+    items: [
+      {
+        q: 'Quais são os horários de check-in e check-out?',
+        a: 'O check-in realiza-se a partir das 16:00 e o check-out até às 12:00. Caso chegue mais cedo ou deseje prolongar a sua estadia (late check-out), contacte previamente a receção para confirmar disponibilidade.'
+      },
+      {
+        q: 'O que inclui o valor da estadia?',
+        a: 'A tarifa de alojamento inclui dormida na tipologia selecionada, pequeno-almoço buffet com produtos regionais no Restaurante Cadafaz, acesso ao circuito de hidroterapia do Wellness Center, estacionamento privativo e acesso Wi-Fi de alta velocidade em toda a herdade.'
+      },
+      {
+        q: 'Qual é a política de cancelamento?',
+        a: 'Dispomos de tarifas flexíveis que permitem cancelamento ou alteração gratuita até 48 horas antes da data de chegada, bem como tarifas não reembolsáveis com desconto vantajoso. As condições específicas são detalhadas no momento da reserva.'
+      }
+    ]
+  },
+  {
+    id: 'alojamentos',
+    category: 'Alojamentos & Conceito Ecológico',
+    description: 'Diferenças entre Cork Shelters e Glamping, comodidades e sustentabilidade.',
+    items: [
+      {
+        q: 'Qual é a diferença entre os Cork Shelters e as Tendas Glamping?',
+        a: 'Os Cork Shelters são estruturas sólidas construídas e revestidas a aglomerado de cortiça 100% natural, proporcionando isolamento acústico e térmico excecional todo o ano. As Tendas Glamping oferecem uma vivência de safari de luxo sob lona de alta resistência com deck elevado de madeira, mantendo casa de banho privativa completa e ar condicionado.'
+      },
+      {
+        q: 'Os alojamentos têm ar condicionado e aquecimento?',
+        a: 'Sim, todas as unidades (Cork Shelters e Glampings) dispõem de sistemas de climatização modernos e silenciosos (quente e frio), assegurando conforto em qualquer época do ano.'
+      },
+      {
+        q: 'Os alojamentos têm casa de banho privativa?',
+        a: 'Sim, 100% dos nossos alojamentos possuem casa de banho privativa completa com duche walk-in de alta pressão, secador de cabelo e produtos de higiene ecológicos.'
+      }
+    ]
+  },
+  {
+    id: 'wellness',
+    category: 'Wellness Center, Spa & Piscinas',
+    description: 'Circuito térmico, piscina aquecida, sauna, banho turco e massagens.',
+    items: [
+      {
+        q: 'A piscina interior é aquecida durante todo o ano?',
+        a: 'Sim, a nossa piscina interior de hidroterapia com jatos de massagem está permanentemente aquecida a cerca de 35°C, funcionando durante os 12 meses do ano.'
+      },
+      {
+        q: 'É obrigatório o uso de touca e chinelos no Spa?',
+        a: 'Sim, para garantir as normas de higiene e segurança balnear, é obrigatório o uso de fato de banho e touca na piscina interior. Disponibilizamos toucas na receção do spa.'
+      },
+      {
+        q: 'Como posso agendar massagens ou tratamentos corporais?',
+        a: 'As massagens e rituais podem ser pré-agendados online no ato da reserva, por email (rececao@gaviaonaturevillage.com) ou diretamente na receção do Wellness Center à sua chegada.'
+      }
+    ]
+  },
+  {
+    id: 'restaurante',
+    category: 'Restaurante & Gastronomia',
+    description: 'Restaurante Cadafaz, Sky Lounge Bar, pequenos-almoços e dietas especiais.',
+    items: [
+      {
+        q: 'O Restaurante Cadafaz está aberto a clientes externos ao hotel?',
+        a: 'Sim, o Restaurante Cadafaz e o Sky Lounge Bar estão abertos tanto para hóspedes como para o público em geral, sendo recomendada a reserva antecipada de mesa.'
+      },
+      {
+        q: 'Existem opções vegetarianas, veganas ou para pessoas com alergias alimentares?',
+        a: 'Com certeza. A nossa ementa contempla pratos vegetarianos e opções veganas inspiradas nos produtos frescos da nossa horta biológica. Informando a equipa previamente, adaptamos os pratos a celíacos ou intolerantes à lactose.'
+      },
+      {
+        q: 'Qual é o horário do pequeno-almoço?',
+        a: 'O pequeno-almoço buffet é servido diariamente entre as 08:30 e as 10:30 no Restaurante Cadafaz, com pães de forno a lenha, queijos do Alentejo, fruta da época e bolos caseiros.'
+      }
+    ]
+  },
+  {
+    id: 'familias',
+    category: 'Famílias & Animais de Estimação',
+    description: 'Acolhimento de crianças, berços e política pet-friendly.',
+    items: [
+      {
+        q: 'O Gavião Nature Village é Pet-Friendly (aceita animais)?',
+        a: 'Sim! Os animais de estimação bem-educados são muito bem-vindos nas nossas tendas Glamping e Cork Shelters específicos. Aplicam-se algumas regras de convivência e uma taxa diária de limpeza. Solicite a admissão no ato da reserva.'
+      },
+      {
+        q: 'Disponibilizam berços para bebés?',
+        a: 'Sim, facultamos berços gratuitos para crianças até aos 2 anos, mediante solicitação prévia e confirmação de disponibilidade da tipologia.'
+      }
+    ]
+  },
+  {
+    id: 'localizacao',
+    category: 'Localização, Acessos & Mobilidade',
+    description: 'Como chegar de carro ou comboio, estacionamento e postos de carregamento EV.',
+    items: [
+      {
+        q: 'É possível chegar de comboio sem carro?',
+        a: 'Sim! A Linha da Beira Baixa tem paragem na histórica estação de Belver, situada a apenas 3 km do hotel. Mediante aviso prévio, poderemos providenciar serviço de transfer entre a estação e a herdade.'
+      },
+      {
+        q: 'O parque de estacionamento tem carregador para carros elétricos?',
+        a: 'Sim, dispomos de lugares de estacionamento privativo equipados com postos de carregamento para veículos elétricos (EV) e híbridos plug-in.'
+      }
+    ]
+  }
+];
+---
+
+<BaseLayout
+  title="FAQs & Perguntas Frequentes | Gavião Nature Village — Dúvidas e Informações"
+  description="Consulte as respostas às perguntas mais frequentes sobre estadias, check-in, Cork Shelters, Glamping, Wellness Center, Restaurante Cadafaz, animais e comboio no Gavião Nature Village."
+>
+  <!-- =========================================================================
+       HERO DE FAQs (COM O 's' EM MINÚSCULA)
+       ========================================================================= -->
+  <section class="relative h-[38vh] min-h-[290px] md:h-[40vh] md:min-h-[330px] flex flex-col justify-center items-center bg-charcoal overflow-hidden text-white">
+    <!-- Imagem de Fundo com Overlay Suave -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/village/media_35_Gavi.jpg" 
+        alt="Gavião Nature Village Herdade" 
+        class="w-full h-full object-cover opacity-50 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/25 to-black/40"></div>
+    </div>
+
+    <!-- Centro do Hero: Nome FAQs com 's' em minúscula -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-5xl md:text-6xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        FAQs
+      </h1>
+      <p class="mt-2 text-white/75 font-montserrat text-xs sm:text-sm uppercase tracking-widest font-light">
+        Perguntas Frequentes & Apoio ao Hóspede
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECÇÃO PRINCIPAL: PERGUNTAS ENCOLHÍVEIS (ESQ) + FORMULÁRIO STICKY (DIR)
+       ========================================================================= -->
+  <section class="py-10 md:py-16 bg-sand-warm text-charcoal border-b border-sand-border relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+        
+        <!-- =====================================================================
+             COLUNA ESQUERDA (7 a 8 Colunas): CATEGORIAS ENCOLHÍVEIS (CLEAN & COMPACTO)
+             ===================================================================== -->
+        <div class="lg:col-span-7 xl:col-span-8 space-y-4">
+          
+          <!-- Cabeçalho da Secção (Sem os botões de expandir/encolher) -->
+          <div class="pb-3 border-b border-sand-border">
+            <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl text-charcoal uppercase tracking-wide">
+              Dúvidas Frequentes
+            </h2>
+            <p class="text-xs sm:text-sm text-charcoal-muted font-montserrat mt-0.5">
+              Selecione o tema pretendido para consultar as respostas detalhadas.
+            </p>
+          </div>
+
+          <!-- Lista de Categorias Encolhíveis (Começam Todas Fechadas) -->
+          <div class="space-y-3" id="faq-categories-container">
+            {faqCategories.map((cat, catIdx) => (
+              <details 
+                class="faq-category-group bg-white rounded-xl border border-sand-border shadow-xs hover:border-natureGold/40 transition-all duration-200 overflow-hidden group/cat"
+              >
+                <!-- CABEÇALHO DA CATEGORIA (ENCOLHÍVEL AO CLICAR) -->
+                <summary class="p-4 sm:py-3.5 sm:px-5 cursor-pointer list-none select-none bg-white hover:bg-sand-warm/30 transition-colors flex items-center justify-between gap-4 border-b border-transparent group-open/cat:border-sand-border">
+                  <div class="flex items-center gap-3">
+                    <span class="w-6 h-6 rounded-md bg-natureGold/15 text-natureGold-dark flex items-center justify-center font-bold font-montserrat text-xs shrink-0">
+                      0{catIdx + 1}
+                    </span>
+                    <div>
+                      <h3 class="font-catamaran font-bold text-base sm:text-lg text-charcoal group-hover/cat:text-natureGold-dark transition-colors uppercase tracking-wide">
+                        {cat.category}
+                      </h3>
+                      <p class="text-xs text-charcoal-muted font-montserrat hidden sm:block">
+                        {cat.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center gap-2.5 shrink-0">
+                    <span class="text-[11px] font-semibold font-montserrat text-charcoal-muted/70 bg-sand-warm px-2 py-0.5 rounded-full border border-sand-border">
+                      {cat.items.length} perguntas
+                    </span>
+                    
+                    <!-- Ícone Indicador de Encolher/Expandir da Categoria -->
+                    <div class="w-7 h-7 rounded-full bg-sand-warm flex items-center justify-center text-natureGold-dark transition-transform duration-200 group-open/cat:rotate-180">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </summary>
+
+                <!-- CONTEÚDO DA CATEGORIA: PERGUNTAS INDIVIDUAIS LIMPAS -->
+                <div class="px-5 py-2 divide-y divide-sand-border/60 bg-white">
+                  {cat.items.map((item) => (
+                    <details class="faq-item-group py-3 group/item">
+                      <summary class="font-catamaran font-bold text-sm sm:text-base text-charcoal group-hover/item:text-natureGold-dark cursor-pointer list-none flex items-center justify-between gap-3">
+                        <span class="leading-snug">{item.q}</span>
+                        <span class="text-natureGold font-light text-lg transition-transform duration-200 group-open/item:rotate-45 shrink-0 ml-2">＋</span>
+                      </summary>
+                      <div class="mt-2 text-charcoal-muted text-xs sm:text-sm leading-relaxed font-normal pt-1">
+                        <p>{item.a}</p>
+                      </div>
+                    </details>
+                  ))}
+                </div>
+              </details>
+            ))}
+          </div>
+
+        </div>
+
+        <!-- =====================================================================
+             COLUNA DIREITA (4 a 5 Colunas): FORMULÁRIO DE DÚVIDAS STICKY (SEMPRE NO ECRÃ)
+             ===================================================================== -->
+        <div class="lg:col-span-5 xl:col-span-4 relative self-stretch">
+          <div class="sticky top-28 z-20">
+            
+            <!-- Cartão do Formulário de Dúvidas -->
+            <div class="bg-white rounded-3xl p-6 sm:p-7 border border-sand-border shadow-card relative overflow-hidden">
+              
+              <!-- Detalhe Dourado no Topo -->
+              <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-natureGold via-natureGold-light to-natureGold"></div>
+              
+              <!-- Cabeçalho do Formulário -->
+              <div class="space-y-2 mb-5">
+                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-natureGold/15 text-natureGold-dark text-[11px] font-bold font-montserrat uppercase tracking-wider">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                  </svg>
+                  <span>Apoio Direto</span>
+                </div>
+                
+                <h3 class="font-catamaran font-extrabold text-xl sm:text-2xl text-charcoal uppercase tracking-wide">
+                  Envie a sua Dúvida
+                </h3>
+                <p class="text-xs text-charcoal-muted font-montserrat leading-relaxed">
+                  Não encontrou a resposta pretendida? Preencha os campos abaixo e respondemos com brevidade.
+                </p>
+              </div>
+
+              <!-- Formulário -->
+              <form id="faq-contact-form" class="space-y-4">
+                
+                <!-- Campo Nome -->
+                <div>
+                  <label for="faq-form-name" class="block text-xs font-bold font-montserrat uppercase tracking-wider text-charcoal mb-1.5">
+                    Nome Completo <span class="text-natureGold">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="faq-form-name" 
+                    name="name" 
+                    required 
+                    placeholder="Ex: Maria Santos"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-sand-border focus:border-natureGold focus:ring-1 focus:ring-natureGold text-xs sm:text-sm text-charcoal placeholder-charcoal-muted/50 bg-sand-warm/30 focus:bg-white transition-all outline-none"
+                  />
+                </div>
+
+                <!-- Campo Email -->
+                <div>
+                  <label for="faq-form-email" class="block text-xs font-bold font-montserrat uppercase tracking-wider text-charcoal mb-1.5">
+                    Email de Contacto <span class="text-natureGold">*</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    id="faq-form-email" 
+                    name="email" 
+                    required 
+                    placeholder="maria.santos@email.com"
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-sand-border focus:border-natureGold focus:ring-1 focus:ring-natureGold text-xs sm:text-sm text-charcoal placeholder-charcoal-muted/50 bg-sand-warm/30 focus:bg-white transition-all outline-none"
+                  />
+                </div>
+
+                <!-- Campo Tema (Se Houver) -->
+                <div>
+                  <label for="faq-form-theme" class="block text-xs font-bold font-montserrat uppercase tracking-wider text-charcoal mb-1.5">
+                    Tema <span class="text-charcoal-muted/70 font-normal text-[11px]">(se houver)</span>
+                  </label>
+                  <div class="relative">
+                    <select 
+                      id="faq-form-theme" 
+                      name="theme"
+                      class="w-full px-3.5 py-2.5 rounded-xl border border-sand-border focus:border-natureGold focus:ring-1 focus:ring-natureGold text-xs sm:text-sm text-charcoal bg-sand-warm/30 focus:bg-white transition-all outline-none appearance-none cursor-pointer"
+                    >
+                      <option value="">Selecione o tema (opcional)</option>
+                      <option value="Reservas & Disponibilidade">Reservas & Disponibilidade</option>
+                      <option value="Alojamentos (Cork Shelters / Glamping)">Alojamentos (Cork Shelters / Glamping)</option>
+                      <option value="Wellness Center, Spa & Massagens">Wellness Center, Spa & Massagens</option>
+                      <option value="Restaurante Cadafaz & Ementas">Restaurante Cadafaz & Ementas</option>
+                      <option value="Animais de Estimação (Pet-Friendly)">Animais de Estimação (Pet-Friendly)</option>
+                      <option value="Comboio & Transfers">Comboio & Transfers</option>
+                      <option value="Eventos, Grupos ou Celebrações">Eventos, Grupos ou Celebrações</option>
+                      <option value="Outro Assunto">Outro Assunto</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-charcoal-muted">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Campo Mensagem -->
+                <div>
+                  <label for="faq-form-message" class="block text-xs font-bold font-montserrat uppercase tracking-wider text-charcoal mb-1.5">
+                    Mensagem / Dúvida <span class="text-natureGold">*</span>
+                  </label>
+                  <textarea 
+                    id="faq-form-message" 
+                    name="message" 
+                    rows="3" 
+                    required 
+                    placeholder="Descreva a sua dúvida ou pedido em detalhe..."
+                    class="w-full px-3.5 py-2.5 rounded-xl border border-sand-border focus:border-natureGold focus:ring-1 focus:ring-natureGold text-xs sm:text-sm text-charcoal placeholder-charcoal-muted/50 bg-sand-warm/30 focus:bg-white transition-all outline-none resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Botão Enviar -->
+                <button 
+                  type="submit" 
+                  id="faq-form-submit-btn"
+                  class="w-full py-3 px-4 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark font-montserrat font-bold text-xs uppercase tracking-widest shadow-md hover:shadow-lg transition-all hover:scale-[1.01] flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <span>Enviar Questão</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                  </svg>
+                </button>
+
+                <!-- Feedback de Mensagem Enviada -->
+                <div id="faq-form-feedback" class="hidden p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs text-center font-montserrat">
+                  <div class="font-bold flex items-center justify-center gap-1.5 text-emerald-700 mb-0.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    <span>Dúvida enviada com sucesso!</span>
+                  </div>
+                  <span>A nossa equipa responderá em breve.</span>
+                </div>
+
+              </form>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
+       ========================================================================= -->
+  <section id="reserva" class="py-10 md:py-14 bg-white border-t border-sand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
+      <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+        Reserve a Sua Estadia
+      </h2>
+      <p class="text-charcoal-muted text-xs sm:text-sm font-montserrat mt-1">
+        Garantia de melhor tarifa disponível e cancelamento flexível.
+      </p>
+    </div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BookingBar />
+    </div>
+  </section>
+
+</BaseLayout>
+
+<!-- Script Interativo para Envio do Formulário -->
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Submissão do Formulário de Dúvidas
+    const form = document.getElementById('faq-contact-form');
+    const submitBtn = document.getElementById('faq-form-submit-btn');
+    const feedback = document.getElementById('faq-form-feedback');
+
+    if (form && submitBtn && feedback) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Simulação de envio com feedback interativo imediato
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-charcoal-dark inline" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          A enviar...
+        `;
+
+        setTimeout(() => {
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `
+            <span>Enviar Questão</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          `;
+          feedback.classList.remove('hidden');
+
+          setTimeout(() => {
+            feedback.classList.add('hidden');
+          }, 6000);
+        }, 700);
+      });
+    }
+  });
+</script>

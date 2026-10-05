@@ -1,0 +1,715 @@
+---
+// src/pages/index.astro
+const targetAudiences = [
+  {
+    id: 'casais',
+    title: 'Casais & Romance',
+    href: '/casais',
+    bg: '/images/hero/hero_casais.webp'
+  },
+  {
+    id: 'familias',
+    title: 'Famílias & Natureza',
+    href: '/familias',
+    bg: '/images/hero/hero_familias.webp'
+  },
+  {
+    id: 'bem-estar',
+    title: 'Bem-Estar & Retiro',
+    href: '/bem-estar',
+    bg: '/images/hero/hero_wellness.webp'
+  },
+  {
+    id: 'aventura',
+    title: 'Aventura & Ecoturismo',
+    href: '/aventura',
+    bg: '/images/hero/hero_aventura.webp'
+  }
+];
+import '../styles/global.css';
+---
+
+<!DOCTYPE html>
+<html lang="pt" class="h-full overflow-hidden bg-[#141210]">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gavião Nature Village — Ecoturismo de Charme no Alentejo | Site Oficial</title>
+  <meta name="description" content="Plena conexão com a natureza em Cadafaz, Gavião. Cork Shelters em cortiça natural, Tendas Glamping, Wellness Center e vistas sobre o Castelo de Belver." />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Transições de crossfade entre as fotografias de alta resolução */
+    .bg-crossfade {
+      transition: opacity 800ms cubic-bezier(0.4, 0, 0.2, 1), transform 1200ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+
+<body class="h-screen w-screen overflow-hidden text-white font-catamaran select-none relative bg-[#141210]">
+
+  <!-- =========================================================================
+       1. CORTINA DE INTRODUÇÃO DE 2 SEGUNDOS (FUNDO PRETO + LOGO DOURADO OFICIAL)
+       ========================================================================= -->
+  <div 
+    id="intro-curtain" 
+    class="fixed inset-0 z-50 bg-[#141210] flex items-center justify-center transition-all duration-1000 ease-in-out pointer-events-auto"
+  >
+    <div id="intro-logo-box" class="flex flex-col items-center justify-center transition-all duration-1000 ease-in-out">
+      <img 
+        id="intro-logo"
+        src="/images/branding/logo_gold.svg" 
+        alt="Gavião Nature Village" 
+        class="h-28 sm:h-36 w-auto transition-opacity duration-700 drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)]"
+        style="image-rendering: -webkit-optimize-contrast; shape-rendering: geometricPrecision;"
+      />
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. CAMADAS DE IMAGENS DE ALTA RESOLUÇÃO (DESLOCADAS PARA A ESQUERDA & CENTRADAS)
+       ========================================================================= -->
+  <div class="absolute inset-y-0 left-0 w-full lg:w-[calc(100%-540px)] xl:w-[calc(100%-600px)] 2xl:w-[calc(100%-640px)] z-0 overflow-hidden">
+    <!-- Imagem Padrão (Vista Global da Herdade e Castelo) -->
+    <img 
+      id="bg-default"
+      src="/images/hero/hero_village.webp" 
+      alt="Gavião Nature Village Vista Panorâmica" 
+      class="bg-crossfade absolute inset-0 w-full h-full object-cover object-center opacity-100 scale-100"
+      loading="eager"
+    />
+
+    <!-- Imagens dos 4 Públicos-Alvo sincronizadas ao passar o cursor -->
+    {targetAudiences.map(target => (
+      <img 
+        id={`bg-${target.id}`}
+        src={target.bg} 
+        alt={target.title} 
+        class="bg-crossfade absolute inset-0 w-full h-full object-cover object-center opacity-0 scale-105 pointer-events-none"
+        loading="eager"
+      />
+    ))}
+
+    <!-- Overlays & Gradientes de Fusão: Suavização nas Bordas e Transição para o Fundo Preto -->
+    <div class="hidden lg:block absolute inset-y-0 right-0 w-48 bg-gradient-to-r from-transparent via-[#141210]/60 to-[#141210] pointer-events-none"></div>
+    <div class="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#141210]/75 via-[#141210]/25 to-transparent pointer-events-none"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#141210]/85 via-[#141210]/35 to-transparent pointer-events-none"></div>
+    <div class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#141210]/40 to-transparent pointer-events-none"></div>
+    <!-- Overlay suave em ecrãs menores -->
+    <div class="lg:hidden absolute inset-0 bg-[#141210]/60 pointer-events-none"></div>
+  </div>
+
+  <!-- =========================================================================
+       3. ESTRUTURA DA PÁGINA (ECRÃ ÚNICO 100VH - TEMA PRETO / CHARCOAL LUXURY)
+       ========================================================================= -->
+  <div id="main-content" class="relative z-10 h-full flex flex-col justify-between p-6 sm:p-10 lg:p-12 opacity-0 transition-opacity duration-1000">
+    
+    <!-- Topo: Header com Logo Central Proeminente Dourado -->
+    <header class="w-full flex justify-center items-center pt-1 pb-2">
+      <a href="/" class="focus:outline-none group block py-1">
+        <img 
+          src="/images/branding/logo_gold.svg" 
+          alt="Gavião Nature Village" 
+          class="h-16 sm:h-20 lg:h-24 w-auto transition-transform duration-300 group-hover:scale-105 drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]"
+          style="image-rendering: -webkit-optimize-contrast; shape-rendering: geometricPrecision;"
+        />
+      </a>
+    </header>
+
+    <!-- Centro: Imagens centradas à esquerda; 4 Páginas e Formulário de Reserva à Direita -->
+    <main class="w-full my-auto flex flex-col lg:flex-row justify-end items-center">
+      
+      <!-- Bloco Direito: 4 Públicos-Alvo em Linha Única + Barra Formulário Sem Molde -->
+      <div class="w-full lg:w-auto flex flex-col items-start lg:items-end space-y-6 sm:space-y-8">
+        
+        <!-- 4 Públicos-Alvo em Tipografia Pura (Ao Comprido, Sem Quebras) -->
+        <nav class="flex flex-col items-start lg:items-end space-y-3 sm:space-y-5">
+          {targetAudiences.map((target) => (
+            <a 
+              href={target.href}
+              data-bg-id={`bg-${target.id}`}
+              class="target-hover-trigger group text-left lg:text-right transition-all duration-300 py-1"
+            >
+              <span class="block font-catamaran font-black text-2xl sm:text-3xl lg:text-4xl xl:text-5xl uppercase tracking-wider text-white/40 group-hover:text-white transition-all duration-300 lg:group-hover:-translate-x-3 whitespace-nowrap">
+                {target.title}
+              </span>
+            </a>
+          ))}
+        </nav>
+
+        <!-- Barra Formulário: Sem molde/caixa em volta, posicionada por baixo das 4 páginas -->
+        <form 
+          action="https://synergy.booking-channel.com/ibe/index.html" 
+          method="GET" 
+          target="_blank"
+          class="relative flex flex-wrap sm:flex-nowrap items-end gap-2.5 pt-2"
+          id="hp-booking-form"
+        >
+          <input type="hidden" name="hotel" value="3142" />
+          <input type="hidden" name="lang" value="pt" />
+          
+          <!-- Hidden inputs enviados para o motor de reservas (formato YYYY-MM-DD) -->
+          <input type="hidden" id="hp-checkin" name="checkin" value="" />
+          <input type="hidden" id="hp-checkout" name="checkout" value="" />
+
+          <!-- Check-in Trigger -->
+          <div class="flex-1 min-w-[125px]">
+            <label for="hp-checkin-btn" class="block text-[10px] font-bold uppercase tracking-wider text-white/70 font-montserrat mb-1">
+              Check-in
+            </label>
+            <button 
+              type="button" 
+              id="hp-checkin-btn" 
+              class="w-full bg-black/45 backdrop-blur-md border border-white/20 hover:border-natureGold focus:border-natureGold rounded-lg px-3 py-2 text-xs font-semibold text-white focus:outline-none shadow-soft transition-all flex items-center justify-between gap-2 text-left cursor-pointer group"
+              aria-label="Abrir calendário para escolher data de check-in"
+            >
+              <span id="hp-checkin-display" class="tabular-nums">--/--/----</span>
+              <svg class="w-3.5 h-3.5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Check-out Trigger -->
+          <div class="flex-1 min-w-[125px]">
+            <label for="hp-checkout-btn" class="block text-[10px] font-bold uppercase tracking-wider text-white/70 font-montserrat mb-1">
+              Check-out
+            </label>
+            <button 
+              type="button" 
+              id="hp-checkout-btn" 
+              class="w-full bg-black/45 backdrop-blur-md border border-white/20 hover:border-natureGold focus:border-natureGold rounded-lg px-3 py-2 text-xs font-semibold text-white focus:outline-none shadow-soft transition-all flex items-center justify-between gap-2 text-left cursor-pointer group"
+              aria-label="Abrir calendário para escolher data de check-out"
+            >
+              <span id="hp-checkout-display" class="tabular-nums">--/--/----</span>
+              <svg class="w-3.5 h-3.5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Nº de Hóspedes -->
+          <div class="flex-1 min-w-[130px]">
+            <label for="hp-guests" class="block text-[10px] font-bold uppercase tracking-wider text-white/70 font-montserrat mb-1">
+              Hóspedes
+            </label>
+            <select 
+              id="hp-guests" 
+              name="guests" 
+              class="w-full bg-black/45 backdrop-blur-md border border-white/20 hover:border-natureGold focus:border-natureGold rounded-lg px-3 py-2 text-xs font-semibold text-white focus:outline-none shadow-soft cursor-pointer transition-colors" 
+            >
+              <option value="2" class="bg-[#181614] text-white">2 Adultos (Casal)</option>
+              <option value="1" class="bg-[#181614] text-white">1 Adulto</option>
+              <option value="fam" class="bg-[#181614] text-white">Família (2 Ad + Crianças)</option>
+              <option value="group" class="bg-[#181614] text-white">Grupo (+4 Pessoas)</option>
+            </select>
+          </div>
+
+          <!-- Botão CTA Disponibilidade -->
+          <div>
+            <button 
+              type="submit" 
+              class="bg-natureGold hover:bg-natureGold-light text-charcoal-dark font-montserrat font-bold text-xs uppercase tracking-wider shadow-soft hover:shadow-luxury hover:-translate-y-0.5 transition-all whitespace-nowrap min-h-[38px] px-6 py-2.5 rounded-lg"
+            >
+              Disponibilidade
+            </button>
+          </div>
+
+          <!-- =========================================================================
+               POPOVER DO CALENDÁRIO INTERATIVO (ABRE ACIMA DA BARRA DE RESERVA)
+               ========================================================================= -->
+          <div 
+            id="hp-calendar-popover" 
+            class="hidden absolute bottom-full mb-3 right-0 sm:right-auto sm:left-0 z-50 w-[310px] sm:w-[340px] max-w-[calc(100vw-32px)] bg-[#161412] border border-natureGold/40 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.95)] p-4 text-white animate-fadeIn"
+          >
+            <!-- Cabeçalho de Navegação de Mês (1 Mês Único em Todos os Dispositivos) -->
+            <div class="flex items-center justify-between pb-2.5 border-b border-[#2d2925] mb-2.5">
+              <button 
+                type="button" 
+                id="cal-prev" 
+                class="w-7 h-7 flex items-center justify-center rounded-lg bg-[#221f1c] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+                aria-label="Mês anterior"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              
+              <div class="text-center">
+                <span id="cal-month-year" class="font-catamaran font-bold text-sm sm:text-base text-white tracking-wide uppercase">
+                  Outubro 2026
+                </span>
+              </div>
+
+              <button 
+                type="button" 
+                id="cal-next" 
+                class="w-7 h-7 flex items-center justify-center rounded-lg bg-[#221f1c] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+                aria-label="Mês seguinte"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+
+            <!-- Instrução Dinâmica & Noites -->
+            <div class="flex items-center justify-between mb-2.5 bg-[#221f1c] py-1 px-2.5 rounded-lg border border-[#2d2925] text-[10px] sm:text-[11px] font-montserrat">
+              <span id="cal-instruction" class="text-natureGold font-semibold">
+                Selecione a data de Check-in
+              </span>
+              <span id="cal-nights-count" class="text-white/60">
+                2 noites
+              </span>
+            </div>
+
+            <!-- Dias da Semana -->
+            <div class="grid grid-cols-7 gap-1 text-center text-[9px] sm:text-[10px] font-montserrat font-bold text-white/50 mb-1.5 uppercase">
+              <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+            </div>
+
+            <!-- Grelha de Dias -->
+            <div id="cal-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs font-montserrat min-h-[190px]">
+              <!-- Gerado dinamicamente -->
+            </div>
+
+            <!-- Rodapé com Ações Rápidas -->
+            <div class="mt-2.5 pt-2.5 border-t border-[#2d2925] flex items-center justify-between text-[11px] font-montserrat">
+              <button 
+                type="button" 
+                id="cal-today-btn" 
+                class="text-white/60 hover:text-natureGold transition-colors text-[10px]"
+              >
+                Voltar a Hoje
+              </button>
+              <button 
+                type="button" 
+                id="cal-close-btn" 
+                class="text-[10px] font-bold text-charcoal bg-natureGold hover:bg-natureGold-light px-3 py-1 rounded-md transition-all shadow-sm"
+              >
+                Concluir
+              </button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+
+    </main>
+
+    <!-- Rodapé Minimalista: Apenas links essenciais (Sem Scroll) -->
+    <footer class="w-full flex flex-col sm:flex-row justify-between items-center text-[11px] font-montserrat text-white/50 border-t border-white/10 pt-3">
+      <div class="flex items-center gap-5">
+        <a href="/alojamento" class="hover:text-natureGold transition-colors">Alojamentos</a>
+        <a href="/wellness-center" class="hover:text-natureGold transition-colors">Wellness Center</a>
+        <a href="/cadafaz-restaurante" class="hover:text-natureGold transition-colors">Restaurante Cadafaz</a>
+        <a href="/experiencias" class="hover:text-natureGold transition-colors">Experiências</a>
+        <a href="/contacto" class="hover:text-natureGold transition-colors">Contactos</a>
+      </div>
+
+      <div class="text-[10px] text-white/40 mt-2 sm:mt-0">
+        © Gavião Nature Village · Cadafaz, Alto Alentejo
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- =========================================================================
+       4. SCRIPTS DE ANIMAÇÃO DE ENTRADA & HOVER SINCRONIZADO
+       ========================================================================= -->
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const curtain = document.getElementById('intro-curtain');
+      const mainContent = document.getElementById('main-content');
+
+      // ==========================================
+      // LÓGICA DO CALENDÁRIO INTERATIVO DA HOMEPAGE
+      // ==========================================
+      const popover = document.getElementById('hp-calendar-popover') as HTMLDivElement | null;
+      const checkinBtn = document.getElementById('hp-checkin-btn') as HTMLButtonElement | null;
+      const checkoutBtn = document.getElementById('hp-checkout-btn') as HTMLButtonElement | null;
+      const checkinDisplay = document.getElementById('hp-checkin-display') as HTMLSpanElement | null;
+      const checkoutDisplay = document.getElementById('hp-checkout-display') as HTMLSpanElement | null;
+      const hiddenCheckin = document.getElementById('hp-checkin') as HTMLInputElement | null;
+      const hiddenCheckout = document.getElementById('hp-checkout') as HTMLInputElement | null;
+
+      const calMonthYear = document.getElementById('cal-month-year') as HTMLSpanElement | null;
+      const calInstruction = document.getElementById('cal-instruction') as HTMLSpanElement | null;
+      const calNightsCount = document.getElementById('cal-nights-count') as HTMLSpanElement | null;
+      const calDaysGrid = document.getElementById('cal-days-grid') as HTMLDivElement | null;
+      const calPrev = document.getElementById('cal-prev') as HTMLButtonElement | null;
+      const calNext = document.getElementById('cal-next') as HTMLButtonElement | null;
+      const calTodayBtn = document.getElementById('cal-today-btn') as HTMLButtonElement | null;
+      const calCloseBtn = document.getElementById('cal-close-btn') as HTMLButtonElement | null;
+
+      const monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
+
+      const toYMD = (d: Date) => {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+
+      const toDisplay = (d: Date) => {
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
+
+      const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+      const today = normalize(new Date());
+      let checkinDate = new Date(today);
+      checkinDate.setDate(today.getDate() + 1);
+
+      let checkoutDate = new Date(today);
+      checkoutDate.setDate(today.getDate() + 3);
+
+      let viewYear = checkinDate.getFullYear();
+      let viewMonth = checkinDate.getMonth();
+      let mode: 'checkin' | 'checkout' = 'checkin';
+
+      const updateInputsAndDisplays = () => {
+        if (hiddenCheckin) hiddenCheckin.value = toYMD(checkinDate);
+        if (hiddenCheckout) hiddenCheckout.value = toYMD(checkoutDate);
+        if (checkinDisplay) checkinDisplay.textContent = toDisplay(checkinDate);
+        if (checkoutDisplay) checkoutDisplay.textContent = toDisplay(checkoutDate);
+
+        const diffTime = checkoutDate.getTime() - checkinDate.getTime();
+        const nights = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)));
+        if (calNightsCount) {
+          calNightsCount.textContent = nights === 1 ? '1 noite' : `${nights} noites`;
+        }
+      };
+
+      const updateTriggerHighlights = () => {
+        if (mode === 'checkin') {
+          checkinBtn?.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+          checkoutBtn?.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+        } else {
+          checkoutBtn?.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+          checkinBtn?.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+        }
+      };
+
+      const clearTriggerHighlights = () => {
+        checkinBtn?.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+        checkoutBtn?.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/50', 'bg-black/60');
+      };
+
+      const refreshDayStyles = () => {
+        const checkinTime = normalize(checkinDate).getTime();
+        const checkoutTime = normalize(checkoutDate).getTime();
+        const todayTime = today.getTime();
+
+        const allBtns = popover?.querySelectorAll<HTMLButtonElement>('.hp-day-btn');
+        allBtns?.forEach(btn => {
+          const time = Number(btn.getAttribute('data-time'));
+          btn.classList.remove(
+            'bg-natureGold', 'text-charcoal', 'font-bold', 'ring-2', 'ring-natureGold/60', 'shadow-sm',
+            'scale-105', 'bg-natureGold/25', 'text-natureGold-light', 'cal-day-hover-range', 'rounded-sm'
+          );
+
+          if (time < todayTime) {
+            btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center transition-all text-white/20 cursor-not-allowed';
+            btn.disabled = true;
+            return;
+          }
+
+          btn.disabled = false;
+
+          if (time === checkinTime) {
+            btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold text-charcoal font-bold rounded-lg shadow-sm scale-105 ring-2 ring-natureGold/60 cursor-pointer';
+          } else if (time === checkoutTime) {
+            btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold text-charcoal font-bold rounded-lg shadow-sm scale-105 ring-2 ring-natureGold/60 cursor-pointer';
+          } else if (time > checkinTime && time < checkoutTime) {
+            btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold/25 text-natureGold-light rounded-sm cursor-pointer';
+          } else {
+            btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center text-white/90 hover:bg-white/10 hover:text-natureGold rounded-lg cursor-pointer transition-colors';
+          }
+        });
+      };
+
+      const renderCalendar = () => {
+        if (!calDaysGrid || !calMonthYear) return;
+        calMonthYear.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+
+        if (calInstruction) {
+          calInstruction.textContent = mode === 'checkin' 
+            ? '1. Selecione a data de Check-in' 
+            : '2. Selecione a data de Check-out';
+        }
+
+        calDaysGrid.innerHTML = '';
+
+        const firstDayOfMonth = new Date(viewYear, viewMonth, 1);
+        const startingDay = (firstDayOfMonth.getDay() + 6) % 7; // Seg = 0, Dom = 6
+        const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+        // Células em branco antes do 1º dia
+        for (let i = 0; i < startingDay; i++) {
+          const emptyCell = document.createElement('div');
+          emptyCell.className = 'w-full h-7 sm:h-8';
+          calDaysGrid.appendChild(emptyCell);
+        }
+
+        for (let day = 1; day <= daysInMonth; day++) {
+          const curDate = new Date(viewYear, viewMonth, day);
+          const curNorm = normalize(curDate).getTime();
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(day);
+          btn.setAttribute('data-time', String(curNorm));
+          btn.setAttribute('data-date', toYMD(curDate));
+          btn.className = 'hp-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center transition-all';
+
+          // Hover sem recriar DOM!
+          btn.addEventListener('mouseenter', () => {
+            if (mode === 'checkout') {
+              const checkinTime = normalize(checkinDate).getTime();
+              const hoverTime = curNorm;
+              const allBtns = popover?.querySelectorAll<HTMLButtonElement>('.hp-day-btn');
+              allBtns?.forEach(b => {
+                const t = Number(b.getAttribute('data-time'));
+                if (t > checkinTime && t <= hoverTime) {
+                  b.classList.add('bg-natureGold/20', 'text-white');
+                } else if (!(t > checkinTime && t < normalize(checkoutDate).getTime())) {
+                  b.classList.remove('bg-natureGold/20', 'text-white');
+                }
+              });
+            }
+          });
+
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (mode === 'checkin') {
+              checkinDate = curDate;
+              if (normalize(checkoutDate).getTime() <= curNorm) {
+                checkoutDate = new Date(checkinDate);
+                checkoutDate.setDate(checkoutDate.getDate() + 1);
+              }
+              mode = 'checkout';
+              updateInputsAndDisplays();
+              updateTriggerHighlights();
+              if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+              refreshDayStyles();
+            } else {
+              const checkinTime = normalize(checkinDate).getTime();
+              if (curNorm <= checkinTime) {
+                checkinDate = curDate;
+                updateInputsAndDisplays();
+                updateTriggerHighlights();
+                refreshDayStyles();
+              } else {
+                checkoutDate = curDate;
+                updateInputsAndDisplays();
+                clearTriggerHighlights();
+                refreshDayStyles();
+                if (calInstruction) calInstruction.textContent = 'Estadia confirmada!';
+                setTimeout(() => {
+                  closeCalendar();
+                }, 250);
+              }
+            }
+          });
+
+          calDaysGrid.appendChild(btn);
+        }
+
+        refreshDayStyles();
+      };
+
+      const openCalendar = (forMode: 'checkin' | 'checkout') => {
+        mode = forMode;
+        if (forMode === 'checkin') {
+          viewYear = checkinDate.getFullYear();
+          viewMonth = checkinDate.getMonth();
+          if (calInstruction) calInstruction.textContent = '1. Selecione a data de Check-in';
+        } else {
+          viewYear = checkoutDate.getFullYear();
+          viewMonth = checkoutDate.getMonth();
+          if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+        }
+        updateTriggerHighlights();
+        popover?.classList.remove('hidden');
+        renderCalendar();
+      };
+
+      const closeCalendar = () => {
+        popover?.classList.add('hidden');
+        clearTriggerHighlights();
+      };
+
+      // Listeners de abertura dos triggers
+      checkinBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (popover && !popover.classList.contains('hidden') && mode === 'checkin') {
+          closeCalendar();
+        } else {
+          openCalendar('checkin');
+        }
+      });
+
+      checkoutBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (popover && !popover.classList.contains('hidden') && mode === 'checkout') {
+          closeCalendar();
+        } else {
+          openCalendar('checkout');
+        }
+      });
+
+      // Fechar com ESC ou clique fora
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && popover && !popover.classList.contains('hidden')) {
+          closeCalendar();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        const target = e.target as Node;
+        if (popover && !popover.classList.contains('hidden')) {
+          const form = document.getElementById('hp-booking-form');
+          if (form && !form.contains(target)) {
+            closeCalendar();
+          }
+        }
+      });
+
+      // Navegação mês anterior / seguinte
+      calPrev?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewMonth--;
+        if (viewMonth < 0) {
+          viewMonth = 11;
+          viewYear--;
+        }
+        renderCalendar();
+      });
+
+      calNext?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewMonth++;
+        if (viewMonth > 11) {
+          viewMonth = 0;
+          viewYear++;
+        }
+        renderCalendar();
+      });
+
+      calTodayBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewYear = today.getFullYear();
+        viewMonth = today.getMonth();
+        renderCalendar();
+      });
+
+      calCloseBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeCalendar();
+      });
+
+      // Evitar que cliques dentro do popover fechem o calendário
+      popover?.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+
+      // Fechar ao clicar fora ou ao carregar em Escape
+      document.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (popover && !popover.contains(target) && !checkinBtn?.contains(target) && !checkoutBtn?.contains(target)) {
+          closeCalendar();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeCalendar();
+      });
+
+      // Inicialização imediata de valores
+      updateInputsAndDisplays();
+
+      // Ao fim de 2 segundos (ou instantâneo se ?nointro=true): transição suave para a imagem panorâmica
+      const isInstant = new URLSearchParams(window.location.search).get('nointro') === 'true';
+
+      if (isInstant) {
+        if (curtain) curtain.style.display = 'none';
+        if (mainContent) {
+          mainContent.style.opacity = '1';
+          mainContent.style.transition = 'none';
+        }
+      } else {
+        setTimeout(() => {
+          if (curtain) {
+            curtain.style.opacity = '0';
+            curtain.style.pointerEvents = 'none';
+          }
+          if (mainContent) {
+            mainContent.style.opacity = '1';
+          }
+        }, 2000);
+      }
+
+      // Interação de Hover Sincronizado com os 4 Públicos-Alvo
+      const triggers = document.querySelectorAll('.target-hover-trigger');
+      const defaultBg = document.getElementById('bg-default');
+      const allDynamicBgs = document.querySelectorAll<HTMLImageElement>('[id^="bg-"]:not(#bg-default)');
+
+      triggers.forEach(trigger => {
+        const targetBgId = trigger.getAttribute('data-bg-id');
+        const targetImg = targetBgId ? document.getElementById(targetBgId) : null;
+
+        trigger.addEventListener('click', () => {
+          const href = trigger.getAttribute('href');
+          const title = trigger.querySelector('span')?.textContent?.trim();
+          if (href && title) {
+            try {
+              localStorage.setItem('gnv_chosen_audience_path', href);
+              localStorage.setItem('gnv_chosen_audience_label', title);
+            } catch (e) {}
+          }
+        });
+
+        trigger.addEventListener('mouseenter', () => {
+          if (targetImg) {
+            allDynamicBgs.forEach(img => {
+              if (img !== targetImg) {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(1.05)';
+              }
+            });
+            targetImg.style.opacity = '1';
+            targetImg.style.transform = 'scale(1.0)';
+            if (defaultBg) defaultBg.style.opacity = '0';
+          }
+        });
+
+        trigger.addEventListener('mouseleave', () => {
+          setTimeout(() => {
+            const anyHovered = Array.from(triggers).some(t => t.matches(':hover'));
+            if (!anyHovered && defaultBg) {
+              allDynamicBgs.forEach(img => {
+                img.style.opacity = '0';
+                img.style.transform = 'scale(1.05)';
+              });
+              defaultBg.style.opacity = '1';
+            }
+          }, 60);
+        });
+      });
+    });
+  </script>
+</body>
+</html>

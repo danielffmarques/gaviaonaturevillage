@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/booking/BookingBar.astro';
+
+const menuHighlights = [
+  {
+    course: 'Entradas de Partilha',
+    dishes: [
+      { name: 'Tábua de Queijos Regionais de Nisa e Enchidos Alentejanos', price: '16 €', desc: 'Com tostas artesanais, nozes da herdade e doce caseiro de abóbora.' },
+      { name: 'Ovos Rotos com Espargo Bravo & Farinheira de Portalegre', price: '12 €', desc: 'Ovos biológicos, batata crocante e aroma de poejo fresco.' },
+      { name: 'Pétalas de Polvo Grelhado em Azeite Virgem Extra e Coentros', price: '15 €', desc: 'Salteado com alho confitado e pimentos assados da horta.' }
+    ]
+  },
+  {
+    course: 'Pratos Principais de Tradição & Vanguarda',
+    dishes: [
+      { name: 'Bochecha de Porco Alentejano Confitada a Baixa Temperatura', price: '22 €', desc: 'Com puré aveludado de castanha e redução de vinho tinto de Cadafaz.' },
+      { name: 'Migas Alentejanas Tradicionais com Entrecosto e Enchidos', price: '19 €', desc: 'A autêntica receita ribeirinha do Tejo com pão alentejano e aromas do campo.' },
+      { name: 'Lombo de Bacalhau Confitado em Crosta de Broa de Milho', price: '23 €', desc: 'Servido sobre cama de grelos salteados e batata a murro perfumada com alecrim.' },
+      { name: 'Risotto Cremoso de Cogumelos Selvagens e Espargos (Vegetariano)', price: '18 €', desc: 'Enriquecido com queijo curado local e azeite trufado.' }
+    ]
+  },
+  {
+    course: 'Sobremesas da Herdade',
+    dishes: [
+      { name: 'Sericaia Tradicional Alentejana com Ameixa de Elvas DOP', price: '7.5 €', desc: 'Receita conventual cozida no forno de barro com canela abundante.' },
+      { name: 'Texturas de Chocolate com Flor de Sal e Gelado de Poêjo', price: '8 €', desc: 'Combinação surpreendente do cacau intenso com a frescura botânica da herdade.' }
+    ]
+  }
+];
+
+const galleryRestaurante = [
+  '/images/restaurante/media_20_Gavi_o.jpg',
+  '/images/restaurante/media_21_Gavi_o.jpg',
+  '/images/restaurante/media_22_Gavi.jpg',
+  '/images/restaurante/media_23_Gavi.jpg',
+  '/images/restaurante/media_24_Gavi.jpg',
+  '/images/restaurante/media_4_Gavi_o.jpg'
+];
+---
+
+<BaseLayout 
+  title="Restaurante Cadafaz & Sky Lounge Bar | Gastronomia Alentejana Autêntica"
+  description="Sabores do Alto Alentejo no Restaurante Cadafaz do Gavião Nature Village. Ingredientes biológicos da herdade, vinhos locais e o exclusivo Sky Lounge Bar."
+>
+
+  <!-- =========================================================================
+       HERO DO RESTAURANTE CADAFAZ
+       ========================================================================= -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/restaurante/media_20_Gavi_o.jpg" 
+        alt="Restaurante Cadafaz e Vinhas do Gavião Nature Village" 
+        class="w-full h-full object-cover opacity-35 scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/40"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-tight max-w-4xl mx-auto">
+        Restaurante Cadafaz & Sky Lounge
+      </h1>
+      <p class="mt-4 font-catamaran text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light">
+        A celebração dos produtos autênticos do Alto Alentejo e das margens do Rio Tejo, harmonizados com a colheita das nossas vinhas velhas.
+      </p>
+
+      <div class="mt-8 flex flex-wrap justify-center items-center gap-4 text-xs font-montserrat text-sand-warm font-medium">
+        <span class="flex items-center gap-1.5 bg-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-sm">
+          Aberto a Hóspedes & Visitantes
+        </span>
+        <span class="flex items-center gap-1.5 bg-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-sm">
+          Ingredientes da Horta Biológica
+        </span>
+        <span class="flex items-center gap-1.5 bg-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-sm">
+          Terraço Panorâmico sobre as Vinhas
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Barra de Reserva -->
+  <section class="relative z-20 max-w-6xl mx-auto px-4 -mt-10 sm:-mt-12">
+    <BookingBar />
+  </section>
+
+  <!-- =========================================================================
+       1. CONCEITO GASTRONÓMICO & SKY LOUNGE
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+        <div class="lg:col-span-6 space-y-6">
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+            Sabores Genuínos do Campo Alentejano
+          </h2>
+          <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+            No Restaurante Cadafaz, a simplicidade dos produtos da terra transforma-se em refeições memoráveis. Selecionamos carnes autóctones, queijos curados, azeites de prensa a frio e pão cozido em forno de lenha, honrando os costumes ancestrais da região de Belver e Gavião.
+          </p>
+          <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+            No piso superior, o <strong>Sky Lounge Bar</strong> convida a desacelerar ao entardecer: saboreie um cocktail de assinatura elaborado com botânicos colhidos na propriedade enquanto o sol doura os sobreiros e as vinhas.
+          </p>
+
+          <!-- Horários de Funcionamento -->
+          <div class="bg-sand-warm rounded-2xl p-6 border border-sand-border space-y-3 font-montserrat text-xs text-charcoal">
+            <h4 class="font-bold uppercase tracking-wider text-natureGold-dark text-sm">Horários de Serviço</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-1">
+              <div>
+                <span class="text-charcoal-muted block text-[11px]">Pequeno-Almoço</span>
+                <strong class="text-sm font-catamaran block">08:00 - 10:30</strong>
+              </div>
+              <div>
+                <span class="text-charcoal-muted block text-[11px]">Almoço</span>
+                <strong class="text-sm font-catamaran block">12:30 - 15:00</strong>
+              </div>
+              <div>
+                <span class="text-charcoal-muted block text-[11px]">Sky Lounge Bar</span>
+                <strong class="text-sm font-catamaran block">15:00 - 23:00</strong>
+              </div>
+              <div>
+                <span class="text-charcoal-muted block text-[11px]">Jantar</span>
+                <strong class="text-sm font-catamaran block">19:00 - 22:00</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+          <div class="h-64 sm:h-80 overflow-hidden shadow-soft">
+            <img src="/images/restaurante/media_21_Gavi_o.jpg" alt="Sala de Jantar Restaurante Cadafaz" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="h-64 sm:h-80 overflow-hidden shadow-soft pt-6">
+            <img src="/images/restaurante/media_22_Gavi.jpg" alt="Prato tradicional alentejano" class="w-full h-full object-cover " loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. DESTAQUES DA CARTA (MENU)
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-sand-warm border-t border-sand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Destaques da Nossa Carta
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm mt-2">
+          Sugestões sazonais sujeitas a disponibilidade dos melhores ingredientes do mercado local.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {menuHighlights.map(group => (
+          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-sand-border shadow-soft">
+            <h3 class="font-catamaran font-extrabold text-xl uppercase tracking-wide text-charcoal pb-4 border-b border-sand-border flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-natureGold"></span>
+              {group.course}
+            </h3>
+
+            <div class="divide-y divide-sand-border mt-6">
+              {group.dishes.map(dish => (
+                <div class="py-5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-6">
+                  <div>
+                    <h4 class="font-catamaran font-bold text-base sm:text-lg text-charcoal">{dish.name}</h4>
+                    <p class="font-catamaran text-charcoal-muted text-xs sm:text-sm mt-0.5">{dish.desc}</p>
+                  </div>
+                  <span class="font-catamaran font-extrabold text-base sm:text-lg text-natureGold shrink-0">{dish.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Reserva de Mesa -->
+      <div class="mt-12 bg-charcoal text-white rounded-2xl p-8 border border-charcoal-muted text-center max-w-2xl mx-auto shadow-soft">
+        <h4 class="font-catamaran font-extrabold text-2xl uppercase tracking-wide mb-2">Reserve a Sua Mesa</h4>
+        <p class="font-catamaran text-gray-300 text-sm mb-6">
+          Garantimos mesa tanto para os hóspedes do Village como para visitantes externos que queiram desfrutar do restaurante ou do pôr do sol no Sky Lounge.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 font-montserrat text-xs font-bold uppercase tracking-wider">
+          <a href="tel:+351241123456" class="btn-gold py-3 px-6 rounded-lg w-full sm:w-auto text-center">
+            Ligar +351 241 123 456
+          </a>
+          <a href="mailto:reservas@gaviaonaturevillage.com" class="bg-white/10 hover:bg-white/20 text-white py-3 px-6 rounded-lg transition-colors border border-white/20 w-full sm:w-auto text-center">
+            reservas@gaviaonaturevillage.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. GALERIA VISUAL
+       ========================================================================= -->
+  <section class="py-16 bg-white border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 md:grid-cols-6 gap-3">
+        {galleryRestaurante.map((img, i) => (
+          <div class="h-40 sm:h-48 overflow-hidden group shadow-soft">
+            <img src={img} alt={`Restaurante foto ${i + 1}`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

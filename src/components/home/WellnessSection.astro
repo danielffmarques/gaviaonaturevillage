@@ -1,0 +1,110 @@
+---
+// src/components/home/WellnessSection.astro
+---
+
+<section id="wellness" class="py-16 md:py-24 bg-white border-b border-sand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+      
+      <!-- Lado Esquerdo: Imagem Principal com Destaque -->
+      <div class="lg:col-span-6 relative order-2 lg:order-1">
+        <div class="relative h-72 sm:h-96 lg:h-[460px] overflow-hidden shadow-luxury group">
+          <img 
+            src="/images/wellness/media_37_Gavi_o.jpg" 
+            alt="Wellness Center Circuito de Spa" 
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/70 via-transparent to-transparent"></div>
+          
+          <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-xl border border-sand-border shadow-soft flex items-center justify-between">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-natureGold font-montserrat block">
+                ✦ Circuito Incluído na Estadia
+              </span>
+              <span class="text-sm font-bold text-charcoal font-catamaran">
+                Jacuzzi, Sauna e Banho Turco
+              </span>
+            </div>
+            <a href="#reserva" class="text-xs font-bold text-natureGold-dark hover:underline font-montserrat">
+              Reservar →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado Direito: Conteúdo Editorial -->
+      <div class="lg:col-span-6 order-1 lg:order-2">
+        <span class="inline-block px-3.5 py-1 rounded-full border border-natureGold/40 text-natureGold-dark text-[11px] font-bold tracking-widest uppercase mb-3 bg-natureGold/5 font-montserrat">
+          Corpo, Mente & Natureza
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-charcoal mb-4">
+          Wellness Center
+        </h2>
+        <p class="font-playfair italic text-base sm:text-lg text-natureGold-dark mb-4">
+          Um bem-estar completo, saudável e único em comunhão com o silêncio do campo.
+        </p>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed mb-6">
+          Viva uma experiência relaxante e tonificante no nosso circuito de hidroterapia com banho turco, sauna panorâmica e hidromassagem. Desfrute ainda de uma cuidada seleção de massagens corporais e rituais sensoriais para revitalizar o corpo e a mente.
+        </p>
+
+        <!-- Três Pilares do Spa -->
+        <div class="space-y-3 mb-8">
+          <div class="flex items-start gap-3 p-3 bg-sand-warm/60 rounded-lg border border-sand-border">
+            <span class="w-8 h-8 rounded-full bg-natureGold/20 text-natureGold-dark flex items-center justify-center font-bold text-sm shrink-0">
+              01
+            </span>
+            <div>
+              <h4 class="font-catamaran font-bold text-sm text-charcoal">Circuito de Água & Calor</h4>
+              <p class="text-xs text-charcoal-muted leading-relaxed font-catamaran">
+                Sauna com vista exterior, banho turco com vapor de eucalipto e jacuzzi para descompressão muscular após caminhadas.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3 bg-sand-warm/60 rounded-lg border border-sand-border">
+            <span class="w-8 h-8 rounded-full bg-natureGold/20 text-natureGold-dark flex items-center justify-center font-bold text-sm shrink-0">
+              02
+            </span>
+            <div>
+              <h4 class="font-catamaran font-bold text-sm text-charcoal">Massagens Terapêuticas & Rituais</h4>
+              <p class="text-xs text-charcoal-muted leading-relaxed font-catamaran">
+                Tratamentos corporais com óleos essenciais, massagens desportivas e rituais especiais para casais.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3 bg-sand-warm/60 rounded-lg border border-sand-border">
+            <span class="w-8 h-8 rounded-full bg-natureGold/20 text-natureGold-dark flex items-center justify-center font-bold text-sm shrink-0">
+              03
+            </span>
+            <div>
+              <h4 class="font-catamaran font-bold text-sm text-charcoal">Desconto Especial Reservas Diretas</h4>
+              <p class="text-xs text-charcoal-muted leading-relaxed font-catamaran">
+                Beneficie de 15% de desconto em massagens corporais e 5% nos rituais ao reservar pelo nosso site oficial.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <a 
+            href="#reserva" 
+            class="btn-primary text-xs sm:text-sm py-2.5 px-6"
+          >
+            Marcar Estadia com Spa
+          </a>
+          <a 
+            href="#contactos" 
+            class="text-xs sm:text-sm font-bold uppercase tracking-wider text-charcoal hover:text-natureGold transition-colors font-catamaran"
+          >
+            Dúvidas sobre o Spa? Fale connosco →
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

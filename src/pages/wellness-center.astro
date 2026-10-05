@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookingBar from '../components/booking/BookingBar.astro';
+
+const treatments = [
+  {
+    category: 'Massagens de Assinatura',
+    items: [
+      {
+        name: 'Massagem Relaxamento Gavião Nature',
+        duration: '50 min',
+        price: '65 €',
+        description: 'Movimentos suaves e fluidos com óleos essenciais botânicos locais para libertação profunda de tensões musculares e fadiga acumulada.'
+      },
+      {
+        name: 'Massagem Terapêutica & Desportiva',
+        duration: '50 min',
+        price: '75 €',
+        description: 'Técnica de pressão profunda especialmente concebida para quem regressa dos trilhos pedestres de Gavião e passadiços do Tejo.'
+      },
+      {
+        name: 'Massagem Aromática a Dois (Casal)',
+        duration: '50 min',
+        price: '120 €',
+        description: 'Sessão simultânea para o casal na sala duo, com iluminação suave, aromas relaxantes e chá quente biológico no final.'
+      }
+    ]
+  },
+  {
+    category: 'Rituais & Hidratação Botânica',
+    items: [
+      {
+        name: 'Ritual Renovador da Floresta de Sobreiros',
+        duration: '75 min',
+        price: '85 €',
+        description: 'Esfoliação corporal purificante com grainha de uva e azeite alentejano, seguida de hidratação profunda e máscara nutritiva.'
+      },
+      {
+        name: 'Ritual Sensações de Belver',
+        duration: '60 min',
+        price: '70 €',
+        description: 'Circuito térmico orientado com aromaterapia em banho turco, choque térmico revigorante e massagem localizada nas costas e ombros.'
+      }
+    ]
+  }
+];
+
+const galleryImages = [
+  '/images/wellness/media_37_Gavi_o.jpg',
+  '/images/wellness/media_38_Gavi_o.jpg',
+  '/images/wellness/media_39_Gavi.jpg',
+  '/images/wellness/media_40_Gavi.jpg',
+  '/images/wellness/media_41_Gavi.jpg'
+];
+---
+
+<BaseLayout 
+  title="Wellness Center & Spa | Circuito Hidroterapia, Sauna e Massagens"
+  description="Revitalize o corpo no Wellness Center do Gavião Nature Village: jacuzzi, sauna, banho turco e massagens relaxantes com óleos botânicos. Acesso gratuito para reservas diretas."
+>
+
+  <!-- =========================================================================
+       HERO DO WELLNESS CENTER
+       ========================================================================= -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/wellness/media_37_Gavi_o.jpg" 
+        alt="Circuito de Spa e Jacuzzi no Gavião Nature Village" 
+        class="w-full h-full object-cover opacity-35 scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/40"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-tight max-w-4xl mx-auto">
+        Wellness Center & Spa
+      </h1>
+      <p class="mt-4 font-catamaran text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light">
+        Um santuário de serenidade onde a água, o calor e a aromaterapia devolvem a vitalidade perdida no ritmo da cidade.
+      </p>
+
+      <!-- Vantagem Reserva Oficial -->
+      <div class="mt-8 inline-flex items-center gap-2.5 bg-natureGold/20 border border-natureGold/50 px-5 py-2.5 rounded-full text-xs sm:text-sm font-montserrat font-bold text-white shadow-soft">
+        <svg class="w-5 h-5 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>Exclusivo Reserva Direta: <strong>Acesso Gratuito ao Spa</strong> + 15% OFF em Massagens</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Barra de Reserva -->
+  <section class="relative z-20 max-w-6xl mx-auto px-4 -mt-10 sm:-mt-12">
+    <BookingBar />
+  </section>
+
+  <!-- =========================================================================
+       1. CIRCUITO TÉRMICO E INSTALAÇÕES
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-16">
+        <div class="lg:col-span-6 space-y-6">
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+            O Silêncio como o Mais Raro dos Luxos
+          </h2>
+          <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+            Concebido para harmonizar a sua respiração com a quietude de Cadafaz, o nosso Wellness Center dispõe de uma piscina de hidromassagem aquecida (jacuzzi), sauna finlandesa envidraçada e banho turco húmido para desintoxicação celular.
+          </p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+            <div class="p-4 rounded-xl bg-sand-warm border border-sand-border text-center">
+              <span class="text-2xl font-extrabold text-natureGold font-catamaran block">34°C - 36°C</span>
+              <span class="text-xs font-montserrat font-bold text-charcoal uppercase tracking-wider">Jacuzzi Térmico</span>
+            </div>
+            <div class="p-4 rounded-xl bg-sand-warm border border-sand-border text-center">
+              <span class="text-2xl font-extrabold text-natureGold font-catamaran block">80°C - 90°C</span>
+              <span class="text-xs font-montserrat font-bold text-charcoal uppercase tracking-wider">Sauna Panorâmica</span>
+            </div>
+            <div class="p-4 rounded-xl bg-sand-warm border border-sand-border text-center">
+              <span class="text-2xl font-extrabold text-natureGold font-catamaran block">45°C / 100%</span>
+              <span class="text-xs font-montserrat font-bold text-charcoal uppercase tracking-wider">Banho Turco</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 grid grid-cols-2 gap-4">
+          <div class="h-64 overflow-hidden shadow-soft">
+            <img src="/images/wellness/media_37_Gavi_o.jpg" alt="Jacuzzi de hidromassagem" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="h-64 overflow-hidden shadow-soft">
+            <img src="/images/wellness/media_38_Gavi_o.jpg" alt="Sauna com luz natural" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="h-64 overflow-hidden shadow-soft col-span-2">
+            <img src="/images/wellness/media_39_Gavi.jpg" alt="Área de descanso do Spa" class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. MENU DE TRATAMENTOS & MASSAGENS
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-sand-warm border-t border-sand-border">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Menu de Massagens & Bem-Estar
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm mt-2">
+          Realizadas por terapeutas certificadas utilizando extratos naturais de lavanda, alecrim e azeite alentejano.
+        </p>
+      </div>
+
+      <div class="space-y-12">
+        {treatments.map(group => (
+          <div class="bg-white rounded-2xl p-6 sm:p-8 border border-sand-border shadow-soft">
+            <h3 class="font-catamaran font-extrabold text-xl uppercase tracking-wide text-charcoal pb-4 border-b border-sand-border flex items-center gap-3">
+              <span class="w-2.5 h-2.5 rounded-full bg-natureGold"></span>
+              {group.category}
+            </h3>
+
+            <div class="divide-y divide-sand-border mt-6">
+              {group.items.map(item => (
+                <div class="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-4">
+                  <div class="space-y-1 sm:max-w-xl">
+                    <div class="flex items-center gap-3">
+                      <h4 class="font-catamaran font-bold text-lg text-charcoal">{item.name}</h4>
+                      <span class="text-xs font-montserrat font-medium text-charcoal-muted bg-sand-warm px-2.5 py-0.5 rounded-full">
+                        {item.duration}
+                      </span>
+                    </div>
+                    <p class="font-catamaran text-charcoal-muted text-xs sm:text-sm leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                  <div class="text-right sm:shrink-0">
+                    <span class="font-catamaran font-extrabold text-xl text-natureGold block">{item.price}</span>
+                    <span class="text-[11px] font-montserrat text-emerald-700 font-semibold block">-15% ao reservar hotel</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Informações Práticas -->
+      <div class="mt-12 bg-white rounded-xl p-6 border border-sand-border text-xs font-montserrat text-charcoal-muted space-y-2">
+        <strong class="text-charcoal block mb-1">Informações & Marcações Prévias:</strong>
+        <p>• Recomendamos a marcação com antecedência mínima de 24 horas no momento da reserva ou através da nossa receção.</p>
+        <p>• O circuito de spa tem lotação controlada para garantir a privacidade e serenidade de cada hóspede.</p>
+        <p>• Roupão e toalhas de spa fornecidos diretamente no seu quarto ou na entrada das instalações.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. GALERIA VISUAL DO SPA
+       ========================================================================= -->
+  <section class="py-16 bg-white border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-10">
+        <h3 class="font-catamaran font-bold text-xl uppercase tracking-wide text-charcoal">
+          Ambiente do Wellness Center
+        </h3>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+        {galleryImages.map((img, i) => (
+          <div class="h-44 sm:h-52 overflow-hidden group shadow-soft">
+            <img src={img} alt={`Wellness Center foto ${i + 1}`} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

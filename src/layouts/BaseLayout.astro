@@ -1,0 +1,75 @@
+---
+// src/layouts/BaseLayout.astro
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Gavião Nature Village — Ecoturismo & Glamping no Alto Alentejo',
+  description = 'Desfrute de plena conexão com a natureza em Cadafaz, Gavião. Cork Shelters sustentáveis, tendas Glamping de luxo, Wellness Center e Restaurante Cadafaz com vista para o Castelo de Belver.'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="pt" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  
+  <!-- Favicon Oficial -->
+  <link rel="icon" type="image/x-icon" href="/images/branding/favicon.ico" />
+
+  <!-- OpenGraph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="hotel" />
+  <meta property="og:url" content="https://www.gaviaonaturevillage.com" />
+  <meta property="og:image" content="/images/geral/media_5_Gavi_o.jpg" />
+
+  <!-- Fontes Oficiais de Luxo: Catamaran, Montserrat, Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Catamaran:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-sand-bg text-charcoal font-catamaran antialiased selection:bg-natureGold selection:text-white">
+  
+  <!-- Cabeçalho -->
+  <Header />
+
+  <!-- Conteúdo Principal -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- Rodapé -->
+  <Footer />
+
+
+
+  <!-- Barra Fixa Inferior de Reserva Rápida (Mobile) -->
+  <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-sand-border p-3 shadow-dropdown flex items-center justify-between gap-3">
+    <a 
+      href="tel:+351241247360" 
+      class="flex-1 btn-secondary text-xs py-2.5 flex items-center justify-center gap-1.5"
+    >
+      <svg class="w-4 h-4 text-natureGold shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <span>Ligar</span>
+    </a>
+    <a 
+      href="#reserva" 
+      class="flex-[2] btn-primary text-xs py-2.5 flex items-center justify-center gap-1.5"
+    >
+      <span>Verificar Disponibilidade</span>
+      <span>→</span>
+    </a>
+  </div>
+
+</body>
+</html>

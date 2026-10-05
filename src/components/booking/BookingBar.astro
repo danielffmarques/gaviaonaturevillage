@@ -1,0 +1,487 @@
+---
+// src/components/booking/BookingBar.astro
+interface Props {
+  isFloating?: boolean;
+}
+
+const { isFloating = false } = Astro.props;
+---
+
+<div class={`w-full max-w-5xl mx-auto ${isFloating ? 'relative z-30' : ''}`}>
+  <div class="bg-white rounded-2xl shadow-luxury border border-sand-border p-3.5 sm:p-5 transition-all duration-300">
+    <form 
+      action="https://synergy.booking-channel.com/ibe/index.html?hotel=3142&lang=pt" 
+      method="GET" 
+      target="_blank"
+      class="booking-bar-form grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.05fr_1.05fr_1.2fr_1.5fr] gap-2.5 sm:gap-3.5 items-end relative"
+    >
+      <input type="hidden" name="hotel" value="3142" />
+      <input type="hidden" name="lang" value="pt" />
+      <input type="hidden" name="check_in" class="bb-hidden-checkin" value="" />
+      <input type="hidden" name="check_out" class="bb-hidden-checkout" value="" />
+      <input type="hidden" name="checkin" class="bb-hidden-checkin-alias" value="" />
+      <input type="hidden" name="checkout" class="bb-hidden-checkout-alias" value="" />
+
+      <!-- 1. Check-in -->
+      <div class="flex flex-col relative">
+        <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal-muted mb-1 flex items-center gap-1 font-montserrat">
+          <svg class="w-3 h-3 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Check-in
+        </label>
+        <button 
+          type="button" 
+          class="bb-checkin-btn w-full bg-sand-warm/70 border border-sand-border rounded-lg px-3 py-2 text-charcoal text-xs sm:text-sm font-semibold hover:border-natureGold focus:outline-none transition-all flex items-center justify-between cursor-pointer group text-left min-h-[42px]"
+          aria-label="Abrir calendário para escolher data de check-in"
+        >
+          <span class="bb-checkin-display tabular-nums font-montserrat">--/--/----</span>
+          <svg class="w-3.5 h-3.5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 2. Check-out -->
+      <div class="flex flex-col relative">
+        <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal-muted mb-1 flex items-center gap-1 font-montserrat">
+          <svg class="w-3 h-3 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+          Check-out
+        </label>
+        <button 
+          type="button" 
+          class="bb-checkout-btn w-full bg-sand-warm/70 border border-sand-border rounded-lg px-3 py-2 text-charcoal text-xs sm:text-sm font-semibold hover:border-natureGold focus:outline-none transition-all flex items-center justify-between cursor-pointer group text-left min-h-[42px]"
+          aria-label="Abrir calendário para escolher data de check-out"
+        >
+          <span class="bb-checkout-display tabular-nums font-montserrat">--/--/----</span>
+          <svg class="w-3.5 h-3.5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 3. Hóspedes -->
+      <div class="flex flex-col">
+        <label class="text-[10px] font-bold uppercase tracking-wider text-charcoal-muted mb-1 flex items-center gap-1 font-montserrat">
+          <svg class="w-3 h-3 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+          Hóspedes
+        </label>
+        <select 
+          name="adults" 
+          class="w-full bg-sand-warm/70 border border-sand-border rounded-lg px-3 py-2 text-charcoal text-xs sm:text-sm font-semibold focus:outline-none focus:border-natureGold focus:ring-1 focus:ring-natureGold transition-colors cursor-pointer min-h-[42px]"
+        >
+          <option value="2">2 Adultos (Casal)</option>
+          <option value="1">1 Adulto</option>
+          <option value="3">3 Pessoas</option>
+          <option value="4">Família (4 Pessoas)</option>
+          <option value="6">Grupo (6 Pessoas)</option>
+          <option value="8">Grupo Familiar (8 Pessoas)</option>
+        </select>
+      </div>
+
+      <!-- 4. Botão de Submissão -->
+      <div>
+        <button 
+          type="submit" 
+          class="btn-gold w-full flex items-center justify-center gap-2 font-montserrat font-bold text-xs uppercase tracking-wider py-2.5 sm:py-3 px-4 rounded-xl shadow-soft hover:shadow-gold transition-all duration-300 whitespace-nowrap min-h-[42px]"
+        >
+          <span class="whitespace-nowrap">Ver Disponibilidade</span>
+          <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+        </button>
+      </div>
+
+      <!-- =========================================================================
+           POPOVER 100% OPACO (FUNDO CLARO SÓLIDO, 1 MÊS EM TODOS OS DISPOSITIVOS)
+           ========================================================================= -->
+      <div 
+        class="bb-calendar-popover hidden absolute z-50 left-0 w-[310px] sm:w-[340px] max-w-[calc(100vw-32px)] bg-white border border-[#DDD5C7] rounded-2xl shadow-[0_20px_50px_rgba(43,39,37,0.22)] p-4 text-charcoal animate-fadeIn"
+      >
+        <!-- Barra de Cabeçalho do Mês -->
+        <div class="flex items-center justify-between pb-2.5 border-b border-[#E5DFD5] mb-2.5">
+          <button 
+            type="button" 
+            class="bb-cal-prev w-7 h-7 flex items-center justify-center rounded-lg bg-[#F5F2EB] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+            aria-label="Mês anterior"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+
+          <span class="bb-month-title font-catamaran font-bold text-sm sm:text-base text-charcoal uppercase tracking-wider">
+            Outubro 2026
+          </span>
+
+          <button 
+            type="button" 
+            class="bb-cal-next w-7 h-7 flex items-center justify-center rounded-lg bg-[#F5F2EB] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+            aria-label="Mês seguinte"
+          >
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+
+        <!-- Instrução Dinâmica & Noites -->
+        <div class="flex items-center justify-between mb-2.5 bg-[#F5F2EB] py-1 px-2.5 rounded-lg border border-[#E5DFD5] text-[10px] sm:text-[11px] font-montserrat">
+          <span class="bb-cal-instruction text-natureGold-dark font-bold">
+            1. Selecione a data de Check-in
+          </span>
+          <span class="bb-cal-nights-badge hidden bg-[#EAE2D5] text-charcoal font-bold px-2 py-0.5 rounded-full text-[10px]">
+            -- noites
+          </span>
+        </div>
+
+        <!-- Dias da Semana -->
+        <div class="grid grid-cols-7 gap-1 text-center text-[9px] sm:text-[10px] font-montserrat font-bold text-charcoal-muted mb-1.5 uppercase">
+          <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+        </div>
+
+        <!-- Grelha de Dias (1 Mês Único) -->
+        <div class="bb-days-grid grid grid-cols-7 gap-1 text-center text-xs font-montserrat min-h-[190px]"></div>
+
+        <!-- Rodapé com Ações Rápidas -->
+        <div class="mt-2.5 pt-2.5 border-t border-sand-border flex items-center justify-between text-[11px] font-montserrat">
+          <button 
+            type="button" 
+            class="bb-cal-today-btn text-charcoal-muted hover:text-natureGold-dark transition-colors text-[10px] cursor-pointer"
+          >
+            Hoje
+          </button>
+          <div class="flex items-center gap-2">
+            <button 
+              type="button" 
+              class="bb-cal-reset-btn text-charcoal-muted hover:text-charcoal text-[10px] cursor-pointer"
+            >
+              Repor
+            </button>
+            <button 
+              type="button" 
+              class="bb-cal-done-btn text-charcoal font-bold bg-natureGold hover:bg-natureGold-light px-3 py-1 rounded-md text-[10px] transition-all shadow-sm cursor-pointer"
+            >
+              Concluir
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('.booking-bar-form').forEach(form => {
+    const checkinBtn = form.querySelector<HTMLButtonElement>('.bb-checkin-btn');
+    const checkoutBtn = form.querySelector<HTMLButtonElement>('.bb-checkout-btn');
+    const checkinDisplay = form.querySelector<HTMLSpanElement>('.bb-checkin-display');
+    const checkoutDisplay = form.querySelector<HTMLSpanElement>('.bb-checkout-display');
+    const hiddenCheckin = form.querySelector<HTMLInputElement>('.bb-hidden-checkin');
+    const hiddenCheckout = form.querySelector<HTMLInputElement>('.bb-hidden-checkout');
+    const hiddenCheckinAlias = form.querySelector<HTMLInputElement>('.bb-hidden-checkin-alias');
+    const hiddenCheckoutAlias = form.querySelector<HTMLInputElement>('.bb-hidden-checkout-alias');
+
+    const popover = form.querySelector<HTMLDivElement>('.bb-calendar-popover');
+    const calInstruction = form.querySelector<HTMLSpanElement>('.bb-cal-instruction');
+    const calNightsBadge = form.querySelector<HTMLSpanElement>('.bb-cal-nights-badge');
+    const monthTitle = form.querySelector<HTMLSpanElement>('.bb-month-title');
+    const daysGrid = form.querySelector<HTMLDivElement>('.bb-days-grid');
+
+    const prevBtn = form.querySelector<HTMLButtonElement>('.bb-cal-prev');
+    const nextBtn = form.querySelector<HTMLButtonElement>('.bb-cal-next');
+    const todayBtn = form.querySelector<HTMLButtonElement>('.bb-cal-today-btn');
+    const resetBtn = form.querySelector<HTMLButtonElement>('.bb-cal-reset-btn');
+    const doneBtn = form.querySelector<HTMLButtonElement>('.bb-cal-done-btn');
+
+    if (!checkinBtn || !checkoutBtn || !popover || !daysGrid || !monthTitle) return;
+
+    const monthNames = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    const toYMD = (d: Date) => {
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+
+    const toDisplay = (d: Date) => {
+      const day = String(d.getDate()).padStart(2, '0');
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const year = d.getFullYear();
+      return `${day}/${month}/${year}`;
+    };
+
+    const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+    const today = normalize(new Date());
+    let checkinDate: Date = new Date(today);
+    checkinDate.setDate(today.getDate() + 1);
+
+    let checkoutDate: Date = new Date(today);
+    checkoutDate.setDate(today.getDate() + 3);
+
+    let viewYear = checkinDate.getFullYear();
+    let viewMonth = checkinDate.getMonth();
+    let mode: 'checkin' | 'checkout' = 'checkin';
+
+    const updateInputsAndDisplays = () => {
+      const ymdCheckin = toYMD(checkinDate);
+      const ymdCheckout = toYMD(checkoutDate);
+
+      if (hiddenCheckin) hiddenCheckin.value = ymdCheckin;
+      if (hiddenCheckinAlias) hiddenCheckinAlias.value = ymdCheckin;
+
+      if (hiddenCheckout) hiddenCheckout.value = ymdCheckout;
+      if (hiddenCheckoutAlias) hiddenCheckoutAlias.value = ymdCheckout;
+
+      if (checkinDisplay) checkinDisplay.textContent = toDisplay(checkinDate);
+      if (checkoutDisplay) checkoutDisplay.textContent = toDisplay(checkoutDate);
+
+      const diffTime = checkoutDate.getTime() - checkinDate.getTime();
+      const nights = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)));
+      if (calNightsBadge) {
+        calNightsBadge.textContent = nights === 1 ? '1 noite' : `${nights} noites`;
+        calNightsBadge.classList.remove('hidden');
+      }
+    };
+
+    const updateTriggerHighlights = () => {
+      if (mode === 'checkin') {
+        checkinBtn.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+        checkoutBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+      } else {
+        checkoutBtn.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+        checkinBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+      }
+    };
+
+    const clearTriggerHighlights = () => {
+      checkinBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+      checkoutBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+    };
+
+    const refreshDayStyles = () => {
+      const checkinTime = normalize(checkinDate).getTime();
+      const checkoutTime = normalize(checkoutDate).getTime();
+      const todayTime = today.getTime();
+
+      const allBtns = form.querySelectorAll<HTMLButtonElement>('.bb-day-btn');
+      allBtns.forEach(btn => {
+        const time = Number(btn.getAttribute('data-time'));
+
+        if (time < todayTime) {
+          btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center text-charcoal/25 cursor-not-allowed';
+          btn.disabled = true;
+          return;
+        }
+
+        btn.disabled = false;
+
+        if (time === checkinTime) {
+          btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold text-charcoal font-bold rounded-lg shadow-sm scale-105 ring-2 ring-natureGold cursor-pointer';
+        } else if (time === checkoutTime) {
+          btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold text-charcoal font-bold rounded-lg shadow-sm scale-105 ring-2 ring-natureGold cursor-pointer';
+        } else if (time > checkinTime && time < checkoutTime) {
+          btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-[#F3EDE2] text-charcoal font-semibold rounded-none cursor-pointer';
+        } else {
+          btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center text-charcoal hover:bg-[#F5F2EB] hover:text-natureGold-dark rounded-lg cursor-pointer transition-colors';
+        }
+      });
+    };
+
+    const renderCalendar = () => {
+      monthTitle.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+      daysGrid.innerHTML = '';
+
+      const firstDay = new Date(viewYear, viewMonth, 1);
+      const startingDay = (firstDay.getDay() + 6) % 7; // Seg = 0
+      const daysCount = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      for (let i = 0; i < startingDay; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'w-full h-7 sm:h-8';
+        daysGrid.appendChild(empty);
+      }
+
+      for (let day = 1; day <= daysCount; day++) {
+        const d = new Date(viewYear, viewMonth, day);
+        const normTime = normalize(d).getTime();
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = String(day);
+        btn.setAttribute('data-time', String(normTime));
+        btn.setAttribute('data-date', toYMD(d));
+        btn.className = 'bb-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center rounded-lg transition-colors';
+
+        // Hover range sem recriar DOM!
+        btn.addEventListener('mouseenter', () => {
+          if (mode === 'checkout') {
+            const checkinTime = normalize(checkinDate).getTime();
+            const hoverTime = normTime;
+            const allBtns = form.querySelectorAll<HTMLButtonElement>('.bb-day-btn');
+            allBtns.forEach(b => {
+              const t = Number(b.getAttribute('data-time'));
+              if (t > checkinTime && t <= hoverTime) {
+                b.classList.add('bg-[#F3EDE2]', 'text-charcoal');
+              } else if (!(t > checkinTime && t < normalize(checkoutDate).getTime())) {
+                b.classList.remove('bg-[#F3EDE2]', 'text-charcoal');
+              }
+            });
+          }
+        });
+
+        // Clique garantido em Check-in e Check-out
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const clickedDate = new Date(viewYear, viewMonth, day);
+          const clickedTime = normTime;
+
+          if (mode === 'checkin') {
+            checkinDate = clickedDate;
+            if (normalize(checkoutDate).getTime() <= clickedTime) {
+              checkoutDate = new Date(clickedDate);
+              checkoutDate.setDate(checkoutDate.getDate() + 1);
+            }
+            mode = 'checkout';
+            if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+            updateInputsAndDisplays();
+            updateTriggerHighlights();
+            refreshDayStyles();
+          } else {
+            const curCheckinTime = normalize(checkinDate).getTime();
+            if (clickedTime <= curCheckinTime) {
+              checkinDate = clickedDate;
+              updateInputsAndDisplays();
+              updateTriggerHighlights();
+              refreshDayStyles();
+            } else {
+              checkoutDate = clickedDate;
+              updateInputsAndDisplays();
+              clearTriggerHighlights();
+              refreshDayStyles();
+              if (calInstruction) calInstruction.textContent = 'Estadia confirmada!';
+              setTimeout(() => {
+                closeCalendar();
+              }, 250);
+            }
+          }
+        });
+
+        daysGrid.appendChild(btn);
+      }
+
+      refreshDayStyles();
+    };
+
+    const positionPopover = () => {
+      const formRect = form.getBoundingClientRect();
+      const spaceBelow = window.innerHeight - formRect.bottom;
+      
+      if (spaceBelow < 380 && formRect.top > 380) {
+        popover.classList.remove('top-full', 'mt-2.5');
+        popover.classList.add('bottom-full', 'mb-2.5');
+      } else {
+        popover.classList.remove('bottom-full', 'mb-2.5');
+        popover.classList.add('top-full', 'mt-2.5');
+      }
+    };
+
+    const openCalendar = (forMode: 'checkin' | 'checkout') => {
+      mode = forMode;
+      if (forMode === 'checkin') {
+        viewYear = checkinDate.getFullYear();
+        viewMonth = checkinDate.getMonth();
+        if (calInstruction) calInstruction.textContent = '1. Selecione a data de Check-in';
+      } else {
+        viewYear = checkoutDate.getFullYear();
+        viewMonth = checkoutDate.getMonth();
+        if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+      }
+      positionPopover();
+      updateTriggerHighlights();
+      popover.classList.remove('hidden');
+      renderCalendar();
+    };
+
+    const closeCalendar = () => {
+      popover.classList.add('hidden');
+      clearTriggerHighlights();
+    };
+
+    checkinBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!popover.classList.contains('hidden') && mode === 'checkin') {
+        closeCalendar();
+      } else {
+        openCalendar('checkin');
+      }
+    });
+
+    checkoutBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!popover.classList.contains('hidden') && mode === 'checkout') {
+        closeCalendar();
+      } else {
+        openCalendar('checkout');
+      }
+    });
+
+    prevBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      viewMonth--;
+      if (viewMonth < 0) {
+        viewMonth = 11;
+        viewYear--;
+      }
+      renderCalendar();
+    });
+
+    nextBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      viewMonth++;
+      if (viewMonth > 11) {
+        viewMonth = 0;
+        viewYear++;
+      }
+      renderCalendar();
+    });
+
+    todayBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      viewYear = today.getFullYear();
+      viewMonth = today.getMonth();
+      renderCalendar();
+    });
+
+    resetBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      checkinDate = new Date(today);
+      checkinDate.setDate(today.getDate() + 1);
+      checkoutDate = new Date(today);
+      checkoutDate.setDate(today.getDate() + 3);
+      mode = 'checkin';
+      if (calInstruction) calInstruction.textContent = '1. Selecione a data de Check-in';
+      updateInputsAndDisplays();
+      updateTriggerHighlights();
+      renderCalendar();
+    });
+
+    doneBtn?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeCalendar();
+    });
+
+    // Fechar ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (!popover.classList.contains('hidden') && !form.contains(e.target as Node)) {
+        closeCalendar();
+      }
+    });
+
+    // Fechar com ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !popover.classList.contains('hidden')) {
+        closeCalendar();
+      }
+    });
+
+    updateInputsAndDisplays();
+  });
+</script>

@@ -1,0 +1,211 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Contactos & Como Chegar | Gavião Nature Village no Alentejo"
+  description="Contactos oficiais do Gavião Nature Village: localização em Cadafaz, coordenadas GPS, acessos de comboio pela estação de Belver, postos EV e formulário de reservas."
+>
+
+  <!-- =========================================================================
+       HERO DE CONTACTOS
+       ========================================================================= -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/geral/media_5_Gavi_o.jpg" 
+        alt="Gavião Nature Village localização" 
+        class="w-full h-full object-cover opacity-25 scale-105"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/40"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-wide leading-tight max-w-4xl mx-auto">
+        Contactos & Localização
+      </h1>
+      <p class="mt-4 font-catamaran text-gray-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto font-light">
+        Em Cadafaz, no concelho de Gavião, a menos de 2 horas de Lisboa e a 3 km da estação ferroviária de Belver.
+      </p>
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       1. CARTÕES DE CONTACTO DIRETO
+       ========================================================================= -->
+  <section class="py-16 bg-white border-b border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Telefone & Receção -->
+        <div class="p-8 rounded-2xl bg-sand-warm border border-sand-border shadow-soft text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-natureGold/15 text-natureGold flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+          </div>
+          <h3 class="font-catamaran font-bold text-xl uppercase tracking-wide text-charcoal">Receção & Reservas</h3>
+          <p class="font-catamaran text-charcoal-muted text-xs">Atendimento telefónico todos os dias das 08h00 às 22h00.</p>
+          <a href="tel:+351241123456" class="inline-block font-catamaran font-extrabold text-lg text-natureGold hover:underline pt-2">
+            +351 241 123 456
+          </a>
+        </div>
+
+        <!-- E-mail Oficial -->
+        <div class="p-8 rounded-2xl bg-sand-warm border border-sand-border shadow-soft text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-natureGold/15 text-natureGold flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          </div>
+          <h3 class="font-catamaran font-bold text-xl uppercase tracking-wide text-charcoal">E-mail</h3>
+          <p class="font-catamaran text-charcoal-muted text-xs">Respostas em menos de 24 horas úteis.</p>
+          <a href="mailto:reservas@gaviaonaturevillage.com" class="inline-block font-catamaran font-bold text-sm text-natureGold hover:underline pt-2">
+            reservas@gaviaonaturevillage.com
+          </a>
+        </div>
+
+        <!-- Morada & GPS -->
+        <div class="p-8 rounded-2xl bg-sand-warm border border-sand-border shadow-soft text-center space-y-3">
+          <div class="w-12 h-12 rounded-full bg-natureGold/15 text-natureGold flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3 class="font-catamaran font-bold text-xl uppercase tracking-wide text-charcoal">Morada & Coordenadas</h3>
+          <p class="font-catamaran text-charcoal-muted text-xs">Cadafaz, 6040-052 Cadafaz, Gavião</p>
+          <div class="font-montserrat text-xs text-natureGold-dark font-semibold pt-1">
+            GPS: 39°28'24.8"N 7°55'48.4"W
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       2. GUIA DE TRANSPORTES & FORMULÁRIO DE CONTACTO
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        
+        <!-- Como Chegar: Carro, Comboio e Mobilidade Verde -->
+        <div class="lg:col-span-6 space-y-6">
+          <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl uppercase tracking-wide text-charcoal">
+            Como Chegar ao Nature Village
+          </h2>
+
+          <div class="space-y-6 pt-2">
+            <!-- Carro -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-sand-warm border border-sand-border">
+              <div class="w-10 h-10 rounded-lg bg-natureGold text-white flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
+              </div>
+              <div>
+                <h4 class="font-catamaran font-bold text-base text-charcoal">De Automóvel Particular</h4>
+                <p class="font-catamaran text-charcoal-muted text-xs leading-relaxed mt-1">
+                  Via autoestrada <strong>A23</strong>, tome a <strong>Saída 13 (Mação / Belver / Gavião)</strong> e siga pela EN244 até Cadafaz. A viagem demora aproximadamente 1h45 a partir de Lisboa e 2h30 a partir do Porto.
+                </p>
+              </div>
+            </div>
+
+            <!-- Comboio -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-sand-warm border border-sand-border">
+              <div class="w-10 h-10 rounded-lg bg-natureGold text-white flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+              </div>
+              <div>
+                <h4 class="font-catamaran font-bold text-base text-charcoal">De Comboio (Linha da Beira Baixa)</h4>
+                <p class="font-catamaran text-charcoal-muted text-xs leading-relaxed mt-1">
+                  A estação ferroviária de <strong>Belver</strong> dista apenas 3 km do hotel, com ligações diretas a Lisboa (Santa Apolónia / Oriente) e Entroncamento. Mediante aviso prévio, disponibilizamos transfer da estação.
+                </p>
+              </div>
+            </div>
+
+            <!-- Carregadores Elétricos -->
+            <div class="flex items-start gap-4 p-4 rounded-xl bg-sand-warm border border-sand-border">
+              <div class="w-10 h-10 rounded-lg bg-natureGold text-white flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+              </div>
+              <div>
+                <h4 class="font-catamaran font-bold text-base text-charcoal">Postos de Carregamento EV</h4>
+                <p class="font-catamaran text-charcoal-muted text-xs leading-relaxed mt-1">
+                  Estacionamento amplo e gratuito com pontos de carregamento rápido para veículos elétricos (EV) para total tranquilidade na sua viagem.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário de Mensagem Direta -->
+        <div class="lg:col-span-6 bg-sand-warm rounded-2xl p-8 border border-sand-border shadow-soft">
+          <h3 class="font-catamaran font-extrabold text-2xl uppercase tracking-wide text-charcoal mb-4">
+            Envie o Seu Pedido
+          </h3>
+
+          <form id="contact-page-form" class="space-y-4">
+            <div>
+              <label for="contact-name" class="block font-montserrat text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Nome Completo *</label>
+              <input type="text" id="contact-name" required placeholder="O seu nome" class="w-full px-4 py-3 rounded-lg border border-sand-border bg-white text-xs font-montserrat focus:ring-2 focus:ring-natureGold outline-none" />
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="contact-email" class="block font-montserrat text-xs font-bold uppercase tracking-wider text-charcoal mb-1">E-mail *</label>
+                <input type="email" id="contact-email" required placeholder="exemplo@email.com" class="w-full px-4 py-3 rounded-lg border border-sand-border bg-white text-xs font-montserrat focus:ring-2 focus:ring-natureGold outline-none" />
+              </div>
+              <div>
+                <label for="contact-phone" class="block font-montserrat text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Telefone / Telemóvel</label>
+                <input type="tel" id="contact-phone" placeholder="+351 900 000 000" class="w-full px-4 py-3 rounded-lg border border-sand-border bg-white text-xs font-montserrat focus:ring-2 focus:ring-natureGold outline-none" />
+              </div>
+            </div>
+
+            <div>
+              <label for="contact-subject" class="block font-montserrat text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Motivo do Contacto</label>
+              <select id="contact-subject" class="w-full px-4 py-3 rounded-lg border border-sand-border bg-white text-xs font-montserrat focus:ring-2 focus:ring-natureGold outline-none text-charcoal">
+                <option value="reserva">Pedido de Reserva / Disponibilidade</option>
+                <option value="restaurante">Reserva de Mesa no Restaurante Cadafaz</option>
+                <option value="spa">Marcação de Spa / Massagens</option>
+                <option value="eventos">Eventos Privados, Grupos ou Retiros</option>
+                <option value="outro">Outro Assunto</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="contact-msg" class="block font-montserrat text-xs font-bold uppercase tracking-wider text-charcoal mb-1">Mensagem *</label>
+              <textarea id="contact-msg" required rows="4" placeholder="Como o podemos ajudar?" class="w-full px-4 py-3 rounded-lg border border-sand-border bg-white text-xs font-montserrat focus:ring-2 focus:ring-natureGold outline-none resize-none"></textarea>
+            </div>
+
+            <button type="submit" class="btn-gold w-full py-4 rounded-lg font-montserrat text-xs font-bold uppercase tracking-widest text-center shadow-soft hover:shadow-gold transition-all">
+              Enviar Mensagem
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =========================================================================
+       3. MAPA GOOGLE EMBEDDED
+       ========================================================================= -->
+  <section class="h-96 w-full border-t border-sand-border">
+    <iframe 
+      title="Mapa de Localização Gavião Nature Village"
+      class="w-full h-full border-0 grayscale hover:grayscale-0 transition-all duration-700"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12224.23868846399!2d-7.9351!3d39.4735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1869e0b82f0ad1%3A0x6b772c6cfb2f42a5!2zQ2FkYWZheiwgR2F2acOjbw!5e0!3m2!1spt-PT!2spt!4v1700000000000!5m2!1spt-PT!2spt" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-page-form');
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Obrigado! A sua mensagem foi enviada com sucesso para a receção do Gavião Nature Village. Responderemos em breve.');
+      (form as HTMLFormElement).reset();
+    });
+  </script>
+
+</BaseLayout>

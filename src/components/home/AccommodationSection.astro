@@ -1,0 +1,160 @@
+---
+// src/components/home/AccommodationSection.astro
+import { ACCOMMODATIONS } from '../../utils/data';
+---
+
+<section id="alojamentos" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Cabeçalho -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div class="max-w-2xl">
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-charcoal mb-3">
+          Cork Shelters & Tendas Glamping
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          10 abrigos térmicos revestidos a cortiça natural alentejana e 13 tendas glamping de alto conforto. Todas as tipologias contam com casa de banho privada completa e ar condicionado.
+        </p>
+      </div>
+
+      <!-- Filtro Alternador de Tipologia -->
+      <div class="mt-6 md:mt-0 flex items-center bg-sand-warm border border-sand-border p-1 rounded-lg">
+        <button
+          type="button"
+          id="btn-filter-all"
+          class="accom-filter-btn active px-4 py-2 text-xs font-bold font-catamaran uppercase tracking-wider rounded transition-all bg-charcoal text-white"
+          data-category="all"
+        >
+          Todas (6)
+        </button>
+        <button
+          type="button"
+          id="btn-filter-cork"
+          class="accom-filter-btn px-4 py-2 text-xs font-bold font-catamaran uppercase tracking-wider rounded transition-all text-charcoal hover:text-natureGold"
+          data-category="cork-shelter"
+        >
+          Cork Shelters
+        </button>
+        <button
+          type="button"
+          id="btn-filter-glamping"
+          class="accom-filter-btn px-4 py-2 text-xs font-bold font-catamaran uppercase tracking-wider rounded transition-all text-charcoal hover:text-natureGold"
+          data-category="glamping-tent"
+        >
+          Tendas Glamping
+        </button>
+      </div>
+    </div>
+
+    <!-- Grelha de Alojamentos -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {ACCOMMODATIONS.map(acc => (
+        <article 
+          class="accom-card bg-sand-warm/40 border border-sand-border overflow-hidden shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group"
+          data-category={acc.category}
+        >
+          <!-- Topo: Imagem & Badges -->
+          <div>
+            <div class="relative h-60 sm:h-64 overflow-hidden bg-sand-warm">
+              <img 
+                src={acc.image} 
+                alt={acc.name} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute bottom-3 right-3 bg-charcoal-dark/90 text-white px-2.5 py-1 rounded text-[11px] font-semibold font-montserrat">
+                {acc.capacityLabel}
+              </div>
+            </div>
+
+            <!-- Corpo -->
+            <div class="p-6">
+              <h3 class="font-catamaran font-bold text-xl text-charcoal mb-1 group-hover:text-natureGold transition-colors">
+                {acc.name}
+              </h3>
+              <p class="text-xs text-natureGold-dark font-montserrat font-medium mb-3">
+                {acc.subtitle}
+              </p>
+              <p class="font-catamaran text-charcoal-muted text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                {acc.description}
+              </p>
+
+              <!-- Especificações -->
+              <div class="border-t border-b border-sand-border/70 py-3 mb-4 space-y-1 text-xs text-charcoal font-montserrat">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-natureGold shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+                  <span>{acc.features.beds}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-natureGold shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11v1h1V11c0-4.41 3.59-8 8-8s8 3.59 8 8v1h1v-1c0-4.97-4.03-9-9-9zm-4 13c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm-6 4c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1zm4 0c-.55 0-1 .45-1 1s.45 1 1 1 1-.45 1-1-.45-1-1-1z"/></svg>
+                  <span>{acc.features.wc}</span>
+                </div>
+              </div>
+
+              </div>
+          </div>
+
+          <!-- Rodapé do Cartão com CTA -->
+          <div class="p-6 pt-0">
+            <a 
+              href={`/reservar?tipologia=${acc.id}`} 
+              class="w-full text-center font-montserrat text-xs font-bold uppercase tracking-widest py-3 px-4 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark shadow-md hover:shadow-[0_0_20px_rgba(184,142,74,0.4)] transition-all flex items-center justify-center gap-2 hover:scale-[1.01]"
+            >
+              <span>Reservar {acc.name}</span>
+              <span>→</span>
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Nota de Vantagem Oficial Integrada -->
+    <div class="mt-12 p-4 sm:p-6 bg-natureGold/10 border border-natureGold/30 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-full bg-natureGold text-white flex items-center justify-center text-xl shrink-0">
+          ✓
+        </div>
+        <div>
+          <h4 class="font-catamaran font-bold text-base text-charcoal">
+            Incluído em Todas as Estadias Reservadas no Site Oficial
+          </h4>
+          <p class="font-catamaran text-xs text-charcoal-muted">
+            Acesso livre ao Circuito Wellness (jacuzzi, sauna e banho turco) + 15% de desconto nas massagens corporais.
+          </p>
+        </div>
+      </div>
+      <a href="#reserva" class="btn-primary text-xs shrink-0 py-2.5 px-6">
+        Reservar Direto
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  // Lógica do filtro de tipologias
+  const filterBtns = document.querySelectorAll('.accom-filter-btn');
+  const cards = document.querySelectorAll('.accom-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.getAttribute('data-category');
+
+      filterBtns.forEach(b => {
+        b.classList.remove('bg-charcoal', 'text-white');
+        b.classList.add('text-charcoal');
+      });
+      btn.classList.add('bg-charcoal', 'text-white');
+      btn.classList.remove('text-charcoal');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (cat === 'all' || cardCat === cat) {
+          (card as HTMLElement).style.display = 'flex';
+        } else {
+          (card as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

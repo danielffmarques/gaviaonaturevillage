@@ -1,0 +1,1224 @@
+---
+// src/pages/reservar.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ACCOMMODATIONS } from '../utils/data';
+
+// Preços base de referência por noite para simulação completa
+const ACCOM_PRICING: Record<string, number> = {
+  'cork-shelter-standard': 120,
+  'cork-shelter-superior': 155,
+  'cork-shelter-familiar': 220,
+  'tenda-amor-perfeito': 145,
+  'tenda-glamping-familiar': 160,
+  'tenda-glamping-amigos': 150,
+};
+---
+
+<BaseLayout
+  title="Reservar Estadia Oficial | Gavião Nature Village"
+  description="Processo de reserva oficial do Gavião Nature Village em passos simples: datas, tipologia, dados do hóspede, pagamento seguro e confirmação imediata."
+>
+  <!-- Hero Compacto -->
+  <section class="relative h-[28vh] min-h-[220px] md:h-[32vh] flex flex-col justify-center items-center bg-charcoal overflow-hidden text-white">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="/images/hero/hero_village.webp" 
+        alt="Gavião Nature Village Reserva" 
+        class="w-full h-full object-cover opacity-45 scale-105"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/50"></div>
+    </div>
+
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center my-auto">
+      <h1 class="font-catamaran font-extrabold text-3xl sm:text-4xl md:text-5xl uppercase tracking-wider text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
+        Reservar Estadia
+      </h1>
+      <p class="font-catamaran text-white/80 text-sm sm:text-base mt-2 max-w-xl mx-auto font-light">
+        Reserve o seu refúgio na natureza em passos simples com confirmação imediata.
+      </p>
+    </div>
+  </section>
+
+  <!-- Processo de Reserva Multi-Passos -->
+  <section class="py-10 md:py-16 bg-sand-warm min-h-[80vh]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <!-- Indicador Visual de Passos (Stepper) -->
+      <div class="mb-10 max-w-3xl mx-auto" id="booking-stepper">
+        <div class="grid grid-cols-4 relative">
+          <!-- Linha de conexão de fundo -->
+          <div class="absolute top-1/2 left-0 right-0 h-1 bg-sand-border -translate-y-1/2 z-0"></div>
+          <div id="stepper-progress-bar" class="absolute top-1/2 left-0 h-1 bg-natureGold -translate-y-1/2 z-0 transition-all duration-500 w-[12.5%]"></div>
+
+          <!-- Passo 1: Dados da Reserva -->
+          <div class="step-indicator relative z-10 flex flex-col items-center text-center cursor-pointer" data-step="1">
+            <div class="step-circle w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-catamaran font-bold text-sm sm:text-base transition-all duration-300 shadow-sm bg-natureGold text-charcoal-dark ring-4 ring-natureGold/20">
+              1
+            </div>
+            <span class="step-label font-montserrat font-bold text-[10px] sm:text-xs uppercase tracking-wider mt-2 text-charcoal">
+              Reserva
+            </span>
+          </div>
+
+          <!-- Passo 2: Dados do Hóspede -->
+          <div class="step-indicator relative z-10 flex flex-col items-center text-center cursor-pointer" data-step="2">
+            <div class="step-circle w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-catamaran font-bold text-sm sm:text-base transition-all duration-300 shadow-sm bg-white text-charcoal-muted border-2 border-sand-border">
+              2
+            </div>
+            <span class="step-label font-montserrat font-medium text-[10px] sm:text-xs uppercase tracking-wider mt-2 text-charcoal-muted">
+              Hóspede
+            </span>
+          </div>
+
+          <!-- Passo 3: Pagamento -->
+          <div class="step-indicator relative z-10 flex flex-col items-center text-center cursor-pointer" data-step="3">
+            <div class="step-circle w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-catamaran font-bold text-sm sm:text-base transition-all duration-300 shadow-sm bg-white text-charcoal-muted border-2 border-sand-border">
+              3
+            </div>
+            <span class="step-label font-montserrat font-medium text-[10px] sm:text-xs uppercase tracking-wider mt-2 text-charcoal-muted">
+              Pagamento
+            </span>
+          </div>
+
+          <!-- Passo 4: Confirmação -->
+          <div class="step-indicator relative z-10 flex flex-col items-center text-center" data-step="4">
+            <div class="step-circle w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-catamaran font-bold text-sm sm:text-base transition-all duration-300 shadow-sm bg-white text-charcoal-muted border-2 border-sand-border">
+              ✓
+            </div>
+            <span class="step-label font-montserrat font-medium text-[10px] sm:text-xs uppercase tracking-wider mt-2 text-charcoal-muted">
+              Confirmação
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Atalho de Teste / Demonstração (123456789) -->
+      <div class="mb-8 p-4 rounded-2xl bg-white border border-natureGold/50 shadow-soft flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-natureGold/20 border border-natureGold/40 flex items-center justify-center text-natureGold-dark text-lg shrink-0">
+            <svg class="w-5 h-5 text-natureGold-dark" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>
+          </div>
+          <div>
+            <span class="font-catamaran font-bold text-sm text-charcoal block">
+              Modo de Demonstração Disponível
+            </span>
+            <span class="text-xs text-charcoal-muted font-catamaran">
+              Pode preencher qualquer campo com o número <strong class="text-charcoal font-mono bg-sand-warm px-1.5 py-0.5 rounded border border-sand-border">123456789</strong> ou usar o botão para teste instantâneo.
+            </span>
+          </div>
+        </div>
+        <button 
+          type="button" 
+          id="btn-quick-fill"
+          class="shrink-0 font-montserrat font-bold text-xs uppercase tracking-wider px-5 py-2.5 rounded-xl bg-natureGold text-charcoal-dark hover:bg-natureGold-light transition-all shadow-sm hover:scale-[1.02] flex items-center gap-2"
+        >
+          <svg class="w-4 h-4 text-charcoal-dark shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8H7z"/></svg>
+          <span>Preenchimento Rápido (123456789)</span>
+        </button>
+      </div>
+
+      <!-- Layout Principal: Formulário dos Passos + Resumo Lateral -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Coluna Esquerda: Conteúdo dos Passos (8 colunas) -->
+        <div class="lg:col-span-8 bg-white border border-sand-border rounded-3xl p-6 sm:p-10 shadow-luxury">
+
+          <!-- ===================================================================
+               PASSO 1: DADOS DA RESERVA
+               =================================================================== -->
+          <div id="step-panel-1" class="step-panel space-y-8">
+            <div class="border-b border-sand-border pb-4">
+              <h2 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase tracking-tight">
+                1. Dados da Reserva
+              </h2>
+              <p class="text-charcoal-muted text-xs font-montserrat mt-1">
+                Escolha o período da sua estadia, a tipologia de alojamento e o número de hóspedes.
+              </p>
+            </div>
+
+            <!-- Seleção de Datas -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label for="step-checkin" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Data de Chegada (Check-in)
+                </label>
+                <input 
+                  type="date" 
+                  id="step-checkin" 
+                  name="checkin"
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm font-medium focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                  required
+                />
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="step-checkout" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Data de Saída (Check-out)
+                </label>
+                <input 
+                  type="date" 
+                  id="step-checkout" 
+                  name="checkout"
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm font-medium focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Tipologia de Alojamento com Previsão Visual -->
+            <div class="space-y-2">
+              <label for="step-accommodation" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                Tipologia de Alojamento
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="accom-grid-selection">
+                {ACCOMMODATIONS.map(acc => {
+                  const price = ACCOM_PRICING[acc.id] || 130;
+                  return (
+                    <label 
+                      data-accom-radio={acc.id}
+                      class="accom-radio-card p-3.5 rounded-2xl border border-sand-border hover:border-natureGold bg-sand-warm/40 hover:bg-white cursor-pointer transition-all duration-200 flex items-center gap-3.5"
+                    >
+                      <input 
+                        type="radio" 
+                        name="accommodation_radio" 
+                        value={acc.id} 
+                        data-name={acc.name}
+                        data-price={price}
+                        data-image={acc.image}
+                        data-capacity={acc.capacityLabel}
+                        class="accent-natureGold sr-only"
+                      />
+                      <img 
+                        src={acc.image} 
+                        alt={acc.name} 
+                        class="w-16 h-16 object-cover shrink-0 border border-sand-border"
+                      />
+                      <div class="min-w-0 flex-1">
+                        <div class="font-catamaran font-bold text-sm text-charcoal truncate">
+                          {acc.name}
+                        </div>
+                        <div class="text-[11px] text-charcoal-muted font-montserrat">
+                          {acc.capacityLabel}
+                        </div>
+                        <div class="text-xs font-montserrat font-bold text-natureGold-dark mt-0.5">
+                          {price}€ <span class="text-[10px] text-charcoal-muted font-normal">/ noite</span>
+                        </div>
+                      </div>
+                      <div class="radio-check w-5 h-5 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
+                        <div class="w-2.5 h-2.5 rounded-full bg-natureGold hidden radio-dot"></div>
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+
+            <!-- Hóspedes -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="space-y-1.5">
+                <label for="step-adults" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Adultos
+                </label>
+                <select 
+                  id="step-adults" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                >
+                  <option value="1">1 Adulto</option>
+                  <option value="2" selected>2 Adultos</option>
+                  <option value="3">3 Adultos</option>
+                  <option value="4">4 Adultos</option>
+                  <option value="6">6 Adultos</option>
+                  <option value="8">8 Adultos</option>
+                </select>
+              </div>
+
+              <div class="space-y-1.5">
+                <label for="step-children" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Crianças (0 aos 12 anos)
+                </label>
+                <select 
+                  id="step-children" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                >
+                  <option value="0" selected>0 Crianças</option>
+                  <option value="1">1 Criança</option>
+                  <option value="2">2 Crianças</option>
+                  <option value="3">3 Crianças</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Serviços Extras Opcionais -->
+            <div class="space-y-3 pt-2 border-t border-sand-border">
+              <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                Experiências & Serviços Opcionais
+              </label>
+              
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer">
+                  <input type="checkbox" id="extra-breakfast" data-price="15" class="w-4 h-4 accent-natureGold rounded" />
+                  <div class="text-xs font-montserrat">
+                    <strong class="text-charcoal block">Pequeno-Almoço Regional</strong>
+                    <span class="text-charcoal-muted">+15€ / pessoa / dia</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer">
+                  <input type="checkbox" id="extra-spa" data-price="80" class="w-4 h-4 accent-natureGold rounded" />
+                  <div class="text-xs font-montserrat">
+                    <strong class="text-charcoal block">Massagem Relaxante Duo</strong>
+                    <span class="text-charcoal-muted">+80€ (sessão casal)</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer">
+                  <input type="checkbox" id="extra-bike" data-price="25" class="w-4 h-4 accent-natureGold rounded" />
+                  <div class="text-xs font-montserrat">
+                    <strong class="text-charcoal block">Aluguer de E-Bikes</strong>
+                    <span class="text-charcoal-muted">+25€ / dia</span>
+                  </div>
+                </label>
+
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer">
+                  <input type="checkbox" id="extra-wine" data-price="30" class="w-4 h-4 accent-natureGold rounded" />
+                  <div class="text-xs font-montserrat">
+                    <strong class="text-charcoal block">Welcome Kit Alentejano</strong>
+                    <span class="text-charcoal-muted">+30€ (vinho & queijo no quarto)</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Botão de Avanço do Passo 1 -->
+            <div class="pt-6 border-t border-sand-border flex justify-end">
+              <button 
+                type="button" 
+                id="btn-goto-step-2"
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark shadow-md transition-all hover:scale-[1.02]"
+              >
+                Avançar para Dados do Hóspede →
+              </button>
+            </div>
+          </div>
+
+          <!-- ===================================================================
+               PASSO 2: DADOS DO HÓSPEDE
+               =================================================================== -->
+          <div id="step-panel-2" class="step-panel space-y-6 hidden">
+            <div class="border-b border-sand-border pb-4">
+              <h2 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase tracking-tight">
+                2. Dados do Hóspede Principal
+              </h2>
+              <p class="text-charcoal-muted text-xs font-montserrat mt-1">
+                Introduza os seus dados para emissão da confirmação de reserva.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- Nome Completo -->
+              <div class="space-y-1.5 sm:col-span-2">
+                <label for="guest-name" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Nome Completo *
+                </label>
+                <input 
+                  type="text" 
+                  id="guest-name" 
+                  placeholder="ex: Maria Santos ou 123456789" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors"
+                  required
+                />
+              </div>
+
+              <!-- Email -->
+              <div class="space-y-1.5">
+                <label for="guest-email" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Correio Eletrónico (Email) *
+                </label>
+                <input 
+                  type="text" 
+                  id="guest-email" 
+                  placeholder="ex: maria@exemplo.pt ou 123456789" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors"
+                  required
+                />
+              </div>
+
+              <!-- Telefone -->
+              <div class="space-y-1.5">
+                <label for="guest-phone" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Telemóvel / Telefone *
+                </label>
+                <input 
+                  type="text" 
+                  id="guest-phone" 
+                  placeholder="ex: +351 912 345 678 ou 123456789" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors"
+                  required
+                />
+              </div>
+
+              <!-- NIF / Documento -->
+              <div class="space-y-1.5">
+                <label for="guest-nif" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  NIF / N.º de Identificação *
+                </label>
+                <input 
+                  type="text" 
+                  id="guest-nif" 
+                  placeholder="ex: 123456789" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors"
+                  required
+                />
+              </div>
+
+              <!-- País -->
+              <div class="space-y-1.5">
+                <label for="guest-country" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  País de Residência
+                </label>
+                <select 
+                  id="guest-country" 
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                >
+                  <option value="PT" selected>Portugal</option>
+                  <option value="ES">Espanha</option>
+                  <option value="FR">França</option>
+                  <option value="UK">Reino Unido</option>
+                  <option value="DE">Alemanha</option>
+                  <option value="BR">Brasil</option>
+                  <option value="OTHER">Outro País</option>
+                </select>
+              </div>
+
+              <!-- Observações -->
+              <div class="space-y-1.5 sm:col-span-2">
+                <label for="guest-notes" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Pedidos Especiais ou Observações (Opcional)
+                </label>
+                <textarea 
+                  id="guest-notes" 
+                  rows="3" 
+                  placeholder="ex: Hora prevista de chegada, restrições alimentares ou berço para bebé..."
+                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors resize-none"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- Botões de Ação do Passo 2 -->
+            <div class="pt-6 border-t border-sand-border flex flex-col sm:flex-row items-center justify-between gap-4">
+              <button 
+                type="button" 
+                id="btn-backto-step-1"
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl border border-sand-border hover:bg-sand-warm text-charcoal transition-all"
+              >
+                ← Voltar à Reserva
+              </button>
+
+              <button 
+                type="button" 
+                id="btn-goto-step-3"
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-4 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark shadow-md transition-all hover:scale-[1.02]"
+              >
+                Avançar para Pagamento →
+              </button>
+            </div>
+          </div>
+
+          <!-- ===================================================================
+               PASSO 3: PAGAMENTO
+               =================================================================== -->
+          <div id="step-panel-3" class="step-panel space-y-6 hidden">
+            <div class="border-b border-sand-border pb-4">
+              <h2 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase tracking-tight">
+                3. Modo de Pagamento
+              </h2>
+              <p class="text-charcoal-muted text-xs font-montserrat mt-1">
+                Ambiente encriptado seguro com confirmação instantânea da estadia.
+              </p>
+            </div>
+
+            <!-- Seleção do Método de Pagamento -->
+            <div class="space-y-3">
+              <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                Selecione o Método de Pagamento
+              </label>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <!-- Cartão de Crédito -->
+                <label class="payment-method-card p-4 rounded-2xl border border-natureGold bg-natureGold/10 cursor-pointer flex flex-col items-center text-center gap-2 transition-all">
+                  <input type="radio" name="payment_method" value="credit_card" checked class="sr-only" />
+                  <svg class="w-7 h-7 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 14h2"/><path d="M10 14h4"/></svg>
+                  <strong class="font-catamaran font-bold text-sm text-charcoal block">Cartão de Crédito</strong>
+                  <span class="text-[10px] text-charcoal-muted font-montserrat">Visa, Mastercard</span>
+                </label>
+
+                <!-- MB WAY -->
+                <label class="payment-method-card p-4 rounded-2xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer flex flex-col items-center text-center gap-2 transition-all">
+                  <input type="radio" name="payment_method" value="mbway" class="sr-only" />
+                  <svg class="w-7 h-7 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="3"/><circle cx="12" cy="18" r="1"/></svg>
+                  <strong class="font-catamaran font-bold text-sm text-charcoal block">MB WAY</strong>
+                  <span class="text-[10px] text-charcoal-muted font-montserrat">Notificação na app</span>
+                </label>
+
+                <!-- Multibanco -->
+                <label class="payment-method-card p-4 rounded-2xl border border-sand-border hover:border-natureGold bg-sand-warm/20 cursor-pointer flex flex-col items-center text-center gap-2 transition-all">
+                  <input type="radio" name="payment_method" value="multibanco" class="sr-only" />
+                  <svg class="w-7 h-7 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M4 18h16M5 18V9m4 9V9m6 9V9m4 9V9M2 9l10-6 10 6"/></svg>
+                  <strong class="font-catamaran font-bold text-sm text-charcoal block">Multibanco</strong>
+                  <span class="text-[10px] text-charcoal-muted font-montserrat">Entidade e Referência</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Campos: Cartão de Crédito -->
+            <div id="payment-fields-credit_card" class="space-y-4 p-5 rounded-2xl bg-sand-warm/40 border border-sand-border">
+              <div class="space-y-1.5">
+                <label for="card-number" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Número do Cartão *
+                </label>
+                <input 
+                  type="text" 
+                  id="card-number" 
+                  placeholder="4532 •••• •••• 1234 ou 123456789" 
+                  class="w-full bg-white border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm font-mono focus:outline-none focus:border-natureGold transition-colors"
+                />
+              </div>
+
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="space-y-1.5 sm:col-span-2">
+                  <label for="card-holder" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Nome Impresso no Cartão *
+                  </label>
+                  <input 
+                    type="text" 
+                    id="card-holder" 
+                    placeholder="ex: MARIA SANTOS ou 123456789" 
+                    class="w-full bg-white border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors"
+                  />
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="card-expiry" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Validade *
+                  </label>
+                  <input 
+                    type="text" 
+                    id="card-expiry" 
+                    placeholder="MM/AA" 
+                    class="w-full bg-white border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm font-mono focus:outline-none focus:border-natureGold transition-colors"
+                  />
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="card-cvv" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    CVV / CVC *
+                  </label>
+                  <input 
+                    type="text" 
+                    id="card-cvv" 
+                    placeholder="123" 
+                    class="w-full bg-white border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm font-mono focus:outline-none focus:border-natureGold transition-colors"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Campos: MB WAY -->
+            <div id="payment-fields-mbway" class="hidden space-y-3 p-5 rounded-2xl bg-sand-warm/40 border border-sand-border">
+              <label for="mbway-phone" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                Número de Telemóvel MB WAY
+              </label>
+              <input 
+                type="text" 
+                id="mbway-phone" 
+                placeholder="ex: 912345678 ou 123456789" 
+                class="w-full bg-white border border-sand-border rounded-xl px-4 py-3 text-charcoal text-sm font-mono focus:outline-none focus:border-natureGold transition-colors"
+              />
+              <p class="text-xs text-charcoal-muted font-catamaran">
+                Irá receber um pedido de confirmação de pagamento na app MB WAY do seu telemóvel com validade de 5 minutos.
+              </p>
+            </div>
+
+            <!-- Campos: Multibanco -->
+            <div id="payment-fields-multibanco" class="hidden space-y-3 p-5 rounded-2xl bg-sand-warm/40 border border-sand-border">
+              <p class="text-xs text-charcoal font-catamaran leading-relaxed">
+                Após a confirmação da reserva, serão gerados os dados oficiais de pagamento:
+              </p>
+              <div class="p-3 bg-white rounded-xl border border-sand-border font-mono text-xs space-y-1">
+                <div><span class="text-charcoal-muted">Entidade:</span> <strong>21423</strong></div>
+                <div><span class="text-charcoal-muted">Referência:</span> <strong>123 456 789</strong></div>
+                <div><span class="text-charcoal-muted">Validade:</span> 48 horas após a reserva</div>
+              </div>
+            </div>
+
+            <!-- Termos e Condições -->
+            <div class="pt-2">
+              <label class="flex items-start gap-3 cursor-pointer">
+                <input type="checkbox" id="terms-accepted" checked class="mt-1 w-4 h-4 accent-natureGold rounded" />
+                <span class="text-xs text-charcoal-muted font-montserrat leading-relaxed">
+                  Li e aceito as Condições Gerais de Reserva, a Política de Cancelamento Gratuito (até 48h antes da data de check-in) e a Política de Privacidade do Gavião Nature Village.
+                </span>
+              </label>
+            </div>
+
+            <!-- Botões de Ação do Passo 3 -->
+            <div class="pt-6 border-t border-sand-border flex flex-col sm:flex-row items-center justify-between gap-4">
+              <button 
+                type="button" 
+                id="btn-backto-step-2"
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl border border-sand-border hover:bg-sand-warm text-charcoal transition-all"
+              >
+                ← Voltar aos Dados do Hóspede
+              </button>
+
+              <button 
+                type="button" 
+                id="btn-confirm-payment"
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-10 py-4 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark shadow-md hover:shadow-[0_0_25px_rgba(194,164,114,0.4)] transition-all hover:scale-[1.02] flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4 text-charcoal-dark shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                <span>Confirmar e Pagar Reserva →</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- ===================================================================
+               PASSO 4: MENSAGEM DE AGRADECIMENTO PELA RESERVA (CONFIRMAÇÃO)
+               =================================================================== -->
+          <div id="step-panel-4" class="step-panel space-y-8 hidden animate-fadeIn">
+            
+            <!-- Cabeçalho de Sucesso e Agradecimento -->
+            <div class="text-center space-y-4 py-4">
+              <div class="w-20 h-20 mx-auto rounded-full bg-natureGold/20 border-2 border-natureGold flex items-center justify-center text-3xl text-natureGold-dark shadow-luxury">
+                ✓
+              </div>
+              <h2 class="font-catamaran font-black text-3xl sm:text-4xl text-charcoal uppercase tracking-tight">
+                Muito Obrigado Pela Sua Reserva!
+              </h2>
+              <p class="text-charcoal-muted text-sm sm:text-base font-light max-w-xl mx-auto font-catamaran">
+                A sua estadia no <strong class="text-charcoal font-semibold">Gavião Nature Village</strong> está oficialmente confirmada. Enviámos um email com todos os pormenores e instruções de chegada.
+              </p>
+            </div>
+
+            <!-- Cartão com Número Oficial e Resumo -->
+            <div class="p-6 sm:p-8 rounded-2xl bg-sand-warm/60 border border-natureGold/40 space-y-6">
+              
+              <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-sand-border">
+                <div>
+                  <span class="text-[10px] uppercase tracking-widest text-natureGold-dark font-montserrat font-bold block">
+                    Número Oficial de Confirmação
+                  </span>
+                  <div class="font-mono text-2xl font-bold text-charcoal mt-0.5" id="confirmation-code">
+                    GNV-123456789
+                  </div>
+                </div>
+                <div class="text-right">
+                  <span class="text-[10px] uppercase tracking-widest text-charcoal-muted font-montserrat block">
+                    Estado do Pagamento
+                  </span>
+                  <span class="inline-flex items-center gap-1.5 text-xs font-montserrat font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200 mt-1">
+                    ✓ Confirmado / Liquidado
+                  </span>
+                </div>
+              </div>
+
+              <!-- Detalhes Finais da Reserva -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-montserrat">
+                <div class="space-y-1">
+                  <span class="text-charcoal-muted block">Alojamento:</span>
+                  <strong class="text-charcoal text-sm font-catamaran font-bold block" id="conf-accom-name">
+                    Cork Shelter Standard
+                  </strong>
+                </div>
+
+                <div class="space-y-1">
+                  <span class="text-charcoal-muted block">Período de Estadia:</span>
+                  <strong class="text-charcoal text-sm font-catamaran font-bold block" id="conf-dates">
+                    Check-in a Check-out
+                  </strong>
+                </div>
+
+                <div class="space-y-1">
+                  <span class="text-charcoal-muted block">Titular da Reserva:</span>
+                  <strong class="text-charcoal text-sm font-catamaran font-bold block" id="conf-guest-name">
+                    Utilizador Teste (123456789)
+                  </strong>
+                </div>
+
+                <div class="space-y-1">
+                  <span class="text-charcoal-muted block">Total Pago:</span>
+                  <strong class="text-natureGold-dark text-lg font-catamaran font-black block" id="conf-total-price">
+                    0,00 €
+                  </strong>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Informações Úteis de Check-in e Chegada -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-catamaran">
+              <div class="p-4 rounded-xl bg-white border border-sand-border space-y-1 shadow-soft">
+                <svg class="w-5 h-5 text-natureGold mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12 6 12 12 16 14"/></svg>
+                <strong class="text-charcoal block font-bold">Horários</strong>
+                <p class="text-charcoal-muted leading-relaxed">Check-in: 16h00 – 20h00<br>Check-out: até às 11h00</p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white border border-sand-border space-y-1 shadow-soft">
+                <svg class="w-5 h-5 text-natureGold mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                <strong class="text-charcoal block font-bold">Localização</strong>
+                <p class="text-charcoal-muted leading-relaxed">Cadafaz, Gavião<br>Alto Alentejo, Portugal</p>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white border border-sand-border space-y-1 shadow-soft">
+                <svg class="w-5 h-5 text-natureGold mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <strong class="text-charcoal block font-bold">Apoio à Receção</strong>
+                <p class="text-charcoal-muted leading-relaxed">+351 241 247 360<br>rececao@gaviaonaturevillage.com</p>
+              </div>
+            </div>
+
+            <!-- Botões de Ação da Confirmação -->
+            <div class="pt-6 border-t border-sand-border flex flex-col sm:flex-row items-center justify-center gap-4">
+              <button 
+                type="button" 
+                onclick="window.print()" 
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-6 py-3.5 rounded-xl border border-sand-border hover:bg-sand-warm text-charcoal transition-all flex items-center justify-center gap-2"
+              >
+                <svg class="w-4 h-4 text-charcoal shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                <span>Imprimir Comprovativo</span>
+              </button>
+
+              <a 
+                href="/" 
+                class="w-full sm:w-auto font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark shadow-md transition-all text-center"
+              >
+                ← Voltar à Homepage Principal
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Coluna Direita: Resumo Dinâmico da Reserva (4 colunas) -->
+        <div class="lg:col-span-4 sticky top-28 space-y-4">
+          <div class="bg-white border border-sand-border rounded-3xl p-6 shadow-luxury space-y-5">
+            <h3 class="font-catamaran font-bold text-lg text-charcoal uppercase tracking-wider border-b border-sand-border pb-3 flex items-center justify-between">
+              <span>Resumo da Reserva</span>
+              <span class="text-[10px] font-montserrat text-natureGold-dark font-bold uppercase" id="summary-nights-badge">2 Noites</span>
+            </h3>
+
+            <!-- Imagem e Nome do Alojamento Escolhido -->
+            <div class="space-y-3">
+              <div class="h-36 overflow-hidden border border-sand-border relative">
+                <img 
+                  id="summary-accom-img" 
+                  src="/images/alojamentos/media_10_Gavi_o.jpg" 
+                  alt="Alojamento Selecionado" 
+                  class="w-full h-full object-cover"
+                />
+                <span 
+                  id="summary-accom-capacity" 
+                  class="absolute bottom-2 left-2 bg-charcoal/80 text-natureGold px-2 py-0.5 rounded text-[10px] font-montserrat font-bold"
+                >
+                  Até 2 Pessoas
+                </span>
+              </div>
+              <div>
+                <h4 id="summary-accom-title" class="font-catamaran font-bold text-base text-charcoal">
+                  Cork Shelter Standard
+                </h4>
+                <p class="text-xs text-charcoal-muted font-montserrat mt-0.5">
+                  Isolamento natural em cortiça & vista Alentejo
+                </p>
+              </div>
+            </div>
+
+            <!-- Datas e Hóspedes -->
+            <div class="p-3.5 rounded-xl bg-sand-warm/60 border border-sand-border space-y-2 text-xs font-montserrat">
+              <div class="flex items-center justify-between">
+                <span class="text-charcoal-muted">Check-in:</span>
+                <strong id="summary-checkin" class="text-charcoal">--</strong>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-charcoal-muted">Check-out:</span>
+                <strong id="summary-checkout" class="text-charcoal">--</strong>
+              </div>
+              <div class="flex items-center justify-between pt-1 border-t border-sand-border">
+                <span class="text-charcoal-muted">Hóspedes:</span>
+                <strong id="summary-guests" class="text-charcoal">2 Adultos</strong>
+              </div>
+            </div>
+
+            <!-- Discriminação de Preços -->
+            <div class="space-y-2 text-xs font-montserrat pt-1">
+              <div class="flex items-center justify-between">
+                <span class="text-charcoal-muted" id="summary-calc-line">2 Noites × 120€</span>
+                <span class="text-charcoal font-semibold" id="summary-stay-total">240,00 €</span>
+              </div>
+              <div class="flex items-center justify-between" id="summary-extras-row">
+                <span class="text-charcoal-muted">Extras selecionados:</span>
+                <span class="text-charcoal font-semibold" id="summary-extras-total">0,00 €</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] text-charcoal-muted">
+                <span>Taxa Turística Municipal:</span>
+                <span>Incluída</span>
+              </div>
+            </div>
+
+            <!-- Total Final -->
+            <div class="pt-4 border-t border-sand-border flex items-baseline justify-between">
+              <div>
+                <span class="font-catamaran font-bold text-xs uppercase text-charcoal block">Total da Estadia</span>
+                <span class="text-[10px] text-charcoal-muted font-montserrat">IVA e taxas incluídas</span>
+              </div>
+              <div class="text-right">
+                <span class="font-catamaran font-black text-2xl text-natureGold-dark" id="summary-grand-total">
+                  240,00 €
+                </span>
+              </div>
+            </div>
+
+            <!-- Garantias Oficiais -->
+            <div class="pt-3 border-t border-sand-border space-y-1.5 text-[11px] text-charcoal-muted font-catamaran">
+              <div class="flex items-center gap-2">
+                <span class="text-natureGold">✓</span>
+                <span>Melhor tarifa direta garantida</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-natureGold">✓</span>
+                <span>Acesso ao Circuito Termal & Spa incluído</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <span class="text-natureGold">✓</span>
+                <span>Cancelamento flexível até 48h antes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Lógica Javascript Completa do Wizard de Reserva -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Estado da Reserva
+      const state = {
+        step: 1,
+        checkin: '',
+        checkout: '',
+        nights: 2,
+        accommodationId: 'cork-shelter-standard',
+        accommodationName: 'Cork Shelter Standard',
+        accommodationPrice: 120,
+        accommodationImage: '/images/alojamentos/media_10_Gavi_o.jpg',
+        accommodationCapacity: 'Até 2 Pessoas',
+        adults: 2,
+        children: 0,
+        extrasTotal: 0,
+        grandTotal: 240,
+        guest: {
+          name: '',
+          email: '',
+          phone: '',
+          nif: '',
+          country: 'PT',
+          notes: ''
+        },
+        payment: {
+          method: 'credit_card',
+          cardNumber: '',
+          cardHolder: '',
+          cardExpiry: '',
+          cardCvv: '',
+          mbwayPhone: ''
+        },
+        confirmationCode: ''
+      };
+
+      // 2. Inicialização de Datas
+      const checkinInput = document.getElementById('step-checkin') as HTMLInputElement | null;
+      const checkoutInput = document.getElementById('step-checkout') as HTMLInputElement | null;
+
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      const afterTomorrow = new Date(today);
+      afterTomorrow.setDate(today.getDate() + 3);
+
+      const fmtDate = (d: Date) => d.toISOString().split('T')[0];
+
+      if (checkinInput && checkoutInput) {
+        // Verificar se vieram datas nos parâmetros da URL (ex: ?checkin=...&checkout=...)
+        const urlParams = new URLSearchParams(window.location.search);
+        const qCheckin = urlParams.get('checkin');
+        const qCheckout = urlParams.get('checkout');
+
+        checkinInput.value = qCheckin || fmtDate(tomorrow);
+        checkoutInput.value = qCheckout || fmtDate(afterTomorrow);
+        checkinInput.min = fmtDate(today);
+        checkoutInput.min = fmtDate(tomorrow);
+
+        state.checkin = checkinInput.value;
+        state.checkout = checkoutInput.value;
+
+        checkinInput.addEventListener('change', () => {
+          const nextDay = new Date(checkinInput.value);
+          nextDay.setDate(nextDay.getDate() + 1);
+          checkoutInput.min = fmtDate(nextDay);
+          if (new Date(checkoutInput.value) <= new Date(checkinInput.value)) {
+            checkoutInput.value = fmtDate(nextDay);
+          }
+          state.checkin = checkinInput.value;
+          state.checkout = checkoutInput.value;
+          recalculateNightsAndPricing();
+        });
+
+        checkoutInput.addEventListener('change', () => {
+          state.checkout = checkoutInput.value;
+          recalculateNightsAndPricing();
+        });
+      }
+
+      // 3. Inicialização e Seleção de Tipologia
+      const accomRadios = document.querySelectorAll<HTMLInputElement>('input[name="accommodation_radio"]');
+      const urlParams = new URLSearchParams(window.location.search);
+      const qTipologia = urlParams.get('tipologia');
+
+      let initialSelected = false;
+      accomRadios.forEach(radio => {
+        if (qTipologia && radio.value === qTipologia) {
+          radio.checked = true;
+          initialSelected = true;
+        }
+      });
+      if (!initialSelected && accomRadios.length > 0) {
+        accomRadios[0].checked = true;
+      }
+
+      const updateAccomCardsUI = () => {
+        accomRadios.forEach(radio => {
+          const card = radio.closest('.accom-radio-card');
+          const dot = card?.querySelector('.radio-dot');
+          if (radio.checked) {
+            card?.classList.add('border-natureGold', 'bg-white', 'shadow-soft', 'ring-2', 'ring-natureGold/40');
+            card?.classList.remove('border-sand-border', 'bg-sand-warm/40');
+            dot?.classList.remove('hidden');
+
+            state.accommodationId = radio.value;
+            state.accommodationName = radio.getAttribute('data-name') || radio.value;
+            state.accommodationPrice = parseFloat(radio.getAttribute('data-price') || '120');
+            state.accommodationImage = radio.getAttribute('data-image') || '';
+            state.accommodationCapacity = radio.getAttribute('data-capacity') || '';
+          } else {
+            card?.classList.remove('border-natureGold', 'bg-white', 'shadow-soft', 'ring-2', 'ring-natureGold/40');
+            card?.classList.add('border-sand-border', 'bg-sand-warm/40');
+            dot?.classList.add('hidden');
+          }
+        });
+        recalculateNightsAndPricing();
+      };
+
+      accomRadios.forEach(radio => {
+        radio.addEventListener('change', updateAccomCardsUI);
+      });
+      updateAccomCardsUI();
+
+      // 4. Hóspedes e Extras
+      const adultsSelect = document.getElementById('step-adults') as HTMLSelectElement | null;
+      const childrenSelect = document.getElementById('step-children') as HTMLSelectElement | null;
+      const extraCheckboxes = document.querySelectorAll<HTMLInputElement>('#extra-breakfast, #extra-spa, #extra-bike, #extra-wine');
+
+      adultsSelect?.addEventListener('change', () => {
+        state.adults = parseInt(adultsSelect.value) || 2;
+        recalculateNightsAndPricing();
+      });
+
+      childrenSelect?.addEventListener('change', () => {
+        state.children = parseInt(childrenSelect.value) || 0;
+        recalculateNightsAndPricing();
+      });
+
+      extraCheckboxes.forEach(cb => {
+        cb.addEventListener('change', () => {
+          recalculateNightsAndPricing();
+        });
+      });
+
+      // 5. Cálculo Dinâmico de Noites e Preço
+      function recalculateNightsAndPricing() {
+        if (!state.checkin || !state.checkout) return;
+        const d1 = new Date(state.checkin);
+        const d2 = new Date(state.checkout);
+        const diffTime = Math.abs(d2.getTime() - d1.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        state.nights = diffDays > 0 ? diffDays : 1;
+
+        // Extras
+        let extras = 0;
+        extraCheckboxes.forEach(cb => {
+          if (cb.checked) {
+            const price = parseFloat(cb.getAttribute('data-price') || '0');
+            if (cb.id === 'extra-breakfast') {
+              extras += price * state.adults * state.nights;
+            } else {
+              extras += price;
+            }
+          }
+        });
+        state.extrasTotal = extras;
+
+        const stayTotal = state.nights * state.accommodationPrice;
+        state.grandTotal = stayTotal + state.extrasTotal;
+
+        // Atualizar painel lateral
+        const summaryNightsBadge = document.getElementById('summary-nights-badge');
+        const summaryAccomImg = document.getElementById('summary-accom-img') as HTMLImageElement | null;
+        const summaryAccomTitle = document.getElementById('summary-accom-title');
+        const summaryAccomCap = document.getElementById('summary-accom-capacity');
+        const summaryCheckin = document.getElementById('summary-checkin');
+        const summaryCheckout = document.getElementById('summary-checkout');
+        const summaryGuests = document.getElementById('summary-guests');
+        const summaryCalcLine = document.getElementById('summary-calc-line');
+        const summaryStayTotal = document.getElementById('summary-stay-total');
+        const summaryExtrasTotal = document.getElementById('summary-extras-total');
+        const summaryGrandTotal = document.getElementById('summary-grand-total');
+
+        if (summaryNightsBadge) summaryNightsBadge.textContent = `${state.nights} ${state.nights === 1 ? 'Noite' : 'Noites'}`;
+        if (summaryAccomImg && state.accommodationImage) summaryAccomImg.src = state.accommodationImage;
+        if (summaryAccomTitle) summaryAccomTitle.textContent = state.accommodationName;
+        if (summaryAccomCap) summaryAccomCap.textContent = state.accommodationCapacity;
+        if (summaryCheckin) summaryCheckin.textContent = state.checkin;
+        if (summaryCheckout) summaryCheckout.textContent = state.checkout;
+        if (summaryGuests) summaryGuests.textContent = `${state.adults} Adultos${state.children > 0 ? `, ${state.children} Crianças` : ''}`;
+        if (summaryCalcLine) summaryCalcLine.textContent = `${state.nights} ${state.nights === 1 ? 'Noite' : 'Noites'} × ${state.accommodationPrice}€`;
+        if (summaryStayTotal) summaryStayTotal.textContent = `${stayTotal.toFixed(2)} €`;
+        if (summaryExtrasTotal) summaryExtrasTotal.textContent = `${state.extrasTotal.toFixed(2)} €`;
+        if (summaryGrandTotal) summaryGrandTotal.textContent = `${state.grandTotal.toFixed(2)} €`;
+      }
+
+      recalculateNightsAndPricing();
+
+      // 6. Navegação entre os Passos
+      const panels = [
+        document.getElementById('step-panel-1'),
+        document.getElementById('step-panel-2'),
+        document.getElementById('step-panel-3'),
+        document.getElementById('step-panel-4')
+      ];
+
+      const indicators = document.querySelectorAll<HTMLElement>('.step-indicator');
+      const progressBar = document.getElementById('stepper-progress-bar');
+
+      const goToStep = (stepNumber: number) => {
+        state.step = stepNumber;
+
+        // Mostrar o painel correto
+        panels.forEach((p, idx) => {
+          if (idx + 1 === stepNumber) {
+            p?.classList.remove('hidden');
+          } else {
+            p?.classList.add('hidden');
+          }
+        });
+
+        // Atualizar Stepper Indicator
+        indicators.forEach((ind) => {
+          const s = parseInt(ind.getAttribute('data-step') || '1');
+          const circle = ind.querySelector('.step-circle');
+          const label = ind.querySelector('.step-label');
+
+          if (s < stepNumber) {
+            // Concluído
+            circle?.classList.remove('bg-white', 'border-2', 'border-sand-border', 'text-charcoal-muted', 'ring-4');
+            circle?.classList.add('bg-natureGold', 'text-charcoal-dark');
+            if (circle) circle.innerHTML = '✓';
+            label?.classList.remove('text-charcoal-muted');
+            label?.classList.add('text-charcoal', 'font-bold');
+          } else if (s === stepNumber) {
+            // Ativo
+            circle?.classList.remove('bg-white', 'border-2', 'border-sand-border', 'text-charcoal-muted');
+            circle?.classList.add('bg-natureGold', 'text-charcoal-dark', 'ring-4', 'ring-natureGold/20');
+            if (circle) circle.innerHTML = s === 4 ? '✓' : `${s}`;
+            label?.classList.remove('text-charcoal-muted');
+            label?.classList.add('text-charcoal', 'font-bold');
+          } else {
+            // Pendente
+            circle?.classList.remove('bg-natureGold', 'text-charcoal-dark', 'ring-4', 'ring-natureGold/20');
+            circle?.classList.add('bg-white', 'border-2', 'border-sand-border', 'text-charcoal-muted');
+            if (circle) circle.innerHTML = s === 4 ? '✓' : `${s}`;
+            label?.classList.remove('text-charcoal', 'font-bold');
+            label?.classList.add('text-charcoal-muted');
+          }
+        });
+
+        // Barra de progresso percentual
+        if (progressBar) {
+          const widths = ['12.5%', '37.5%', '62.5%', '100%'];
+          progressBar.style.width = widths[stepNumber - 1];
+        }
+
+        // Scroll suave para o topo do formulário
+        document.getElementById('booking-stepper')?.scrollIntoView({ behavior: 'smooth' });
+      };
+
+      // 7. Botão de Preenchimento Rápido / Demonstração (123456789)
+      const quickFillBtn = document.getElementById('btn-quick-fill');
+      const guestNameInput = document.getElementById('guest-name') as HTMLInputElement | null;
+      const guestEmailInput = document.getElementById('guest-email') as HTMLInputElement | null;
+      const guestPhoneInput = document.getElementById('guest-phone') as HTMLInputElement | null;
+      const guestNifInput = document.getElementById('guest-nif') as HTMLInputElement | null;
+      const cardNumberInput = document.getElementById('card-number') as HTMLInputElement | null;
+      const cardHolderInput = document.getElementById('card-holder') as HTMLInputElement | null;
+      const cardExpiryInput = document.getElementById('card-expiry') as HTMLInputElement | null;
+      const cardCvvInput = document.getElementById('card-cvv') as HTMLInputElement | null;
+      const mbwayPhoneInput = document.getElementById('mbway-phone') as HTMLInputElement | null;
+
+      const fillDemoData = () => {
+        if (guestNameInput) guestNameInput.value = 'Utilizador Teste (123456789)';
+        if (guestEmailInput) guestEmailInput.value = 'teste123456789@gaviaonaturevillage.com';
+        if (guestPhoneInput) guestPhoneInput.value = '123456789';
+        if (guestNifInput) guestNifInput.value = '123456789';
+        if (cardNumberInput) cardNumberInput.value = '1234 5678 9123 4567';
+        if (cardHolderInput) cardHolderInput.value = 'UTILIZADOR TESTE 123456789';
+        if (cardExpiryInput) cardExpiryInput.value = '12/28';
+        if (cardCvvInput) cardCvvInput.value = '123';
+        if (mbwayPhoneInput) mbwayPhoneInput.value = '123456789';
+
+        // Feedback visual
+        if (quickFillBtn) {
+          const original = quickFillBtn.innerHTML;
+          quickFillBtn.innerHTML = '✓ Dados 123456789 Preenchidos!';
+          quickFillBtn.classList.add('bg-green-600', 'text-white');
+          setTimeout(() => {
+            quickFillBtn.innerHTML = original;
+            quickFillBtn.classList.remove('bg-green-600', 'text-white');
+          }, 2500);
+        }
+      };
+
+      quickFillBtn?.addEventListener('click', fillDemoData);
+
+      // 8. Botões de Avanço / Recuo
+      // Passo 1 -> Passo 2
+      document.getElementById('btn-goto-step-2')?.addEventListener('click', () => {
+        goToStep(2);
+      });
+
+      // Passo 2 -> Passo 1
+      document.getElementById('btn-backto-step-1')?.addEventListener('click', () => {
+        goToStep(1);
+      });
+
+      // Passo 2 -> Passo 3 (Validação relaxada para aceitar '123456789' em qualquer campo)
+      document.getElementById('btn-goto-step-3')?.addEventListener('click', () => {
+        const name = guestNameInput?.value.trim() || '';
+        const email = guestEmailInput?.value.trim() || '';
+        const phone = guestPhoneInput?.value.trim() || '';
+        const nif = guestNifInput?.value.trim() || '';
+
+        // Se estiver vazio, se o utilizador não preencheu, preenchemos automaticamente com 123456789
+        if (!name) guestNameInput!.value = '123456789';
+        if (!email) guestEmailInput!.value = '123456789@gaviaonaturevillage.com';
+        if (!phone) guestPhoneInput!.value = '123456789';
+        if (!nif) guestNifInput!.value = '123456789';
+
+        state.guest.name = guestNameInput?.value || '123456789';
+        state.guest.email = guestEmailInput?.value || '123456789@gaviaonaturevillage.com';
+        state.guest.phone = guestPhoneInput?.value || '123456789';
+        state.guest.nif = guestNifInput?.value || '123456789';
+
+        goToStep(3);
+      });
+
+      // Passo 3 -> Passo 2
+      document.getElementById('btn-backto-step-2')?.addEventListener('click', () => {
+        goToStep(2);
+      });
+
+      // Seleção do método de pagamento
+      const paymentRadios = document.querySelectorAll<HTMLInputElement>('input[name="payment_method"]');
+      const paymentBoxes = {
+        credit_card: document.getElementById('payment-fields-credit_card'),
+        mbway: document.getElementById('payment-fields-mbway'),
+        multibanco: document.getElementById('payment-fields-multibanco')
+      };
+
+      paymentRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          document.querySelectorAll('.payment-method-card').forEach(c => {
+            c.classList.remove('border-natureGold', 'bg-natureGold/10');
+            c.classList.add('border-sand-border', 'bg-sand-warm/20');
+          });
+          const parent = radio.closest('.payment-method-card');
+          parent?.classList.add('border-natureGold', 'bg-natureGold/10');
+          parent?.classList.remove('border-sand-border', 'bg-sand-warm/20');
+
+          Object.keys(paymentBoxes).forEach(key => {
+            const box = paymentBoxes[key as keyof typeof paymentBoxes];
+            if (key === radio.value) {
+              box?.classList.remove('hidden');
+            } else {
+              box?.classList.add('hidden');
+            }
+          });
+          state.payment.method = radio.value;
+        });
+      });
+
+      // Passo 3: Confirmação e Pagamento -> Passo 4
+      document.getElementById('btn-confirm-payment')?.addEventListener('click', () => {
+        const confirmBtn = document.getElementById('btn-confirm-payment') as HTMLButtonElement | null;
+        if (confirmBtn) {
+          confirmBtn.disabled = true;
+          confirmBtn.innerHTML = '⏳ A processar pagamento seguro...';
+        }
+
+        // Se campos estiverem vazios no pagamento, preencher com padrão 123456789
+        if (cardNumberInput && !cardNumberInput.value) cardNumberInput.value = '1234 5678 9123 4567';
+        if (cardHolderInput && !cardHolderInput.value) cardHolderInput.value = 'UTILIZADOR TESTE 123456789';
+        if (cardExpiryInput && !cardExpiryInput.value) cardExpiryInput.value = '12/28';
+        if (cardCvvInput && !cardCvvInput.value) cardCvvInput.value = '123';
+
+        setTimeout(() => {
+          // Gerar código de confirmação
+          const randomSuffix = Math.floor(100000 + Math.random() * 900000);
+          state.confirmationCode = `GNV-${randomSuffix}`;
+
+          // Preencher dados na tela de confirmação
+          const codeEl = document.getElementById('confirmation-code');
+          const confAccom = document.getElementById('conf-accom-name');
+          const confDates = document.getElementById('conf-dates');
+          const confGuest = document.getElementById('conf-guest-name');
+          const confTotal = document.getElementById('conf-total-price');
+
+          if (codeEl) codeEl.textContent = state.confirmationCode;
+          if (confAccom) confAccom.textContent = state.accommodationName;
+          if (confDates) confDates.textContent = `${state.checkin} até ${state.checkout} (${state.nights} noites)`;
+          if (confGuest) confGuest.textContent = `${state.guest.name || 'Utilizador Teste'} · ${state.guest.email || '123456789'}`;
+          if (confTotal) confTotal.textContent = `${state.grandTotal.toFixed(2)} €`;
+
+          if (confirmBtn) {
+            confirmBtn.disabled = false;
+            confirmBtn.innerHTML = '<svg class="w-4 h-4 text-charcoal-dark shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg><span>Confirmar e Pagar Reserva →</span>';
+          }
+
+          goToStep(4);
+        }, 600);
+      });
+
+      // Permitir clicar nos indicadores dos passos já visitados
+      indicators.forEach(ind => {
+        ind.addEventListener('click', () => {
+          const target = parseInt(ind.getAttribute('data-step') || '1');
+          if (target <= state.step && state.step !== 4) {
+            goToStep(target);
+          }
+        });
+      });
+    });
+  </script>
+</BaseLayout>

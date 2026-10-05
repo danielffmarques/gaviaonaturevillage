@@ -1,0 +1,47 @@
+---
+// src/components/home/VillageFacilities.astro
+import { FACILITIES } from '../../utils/data';
+---
+
+<section id="village" class="py-16 md:py-24 bg-sand-warm/50 border-b border-sand-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wide text-charcoal mb-4">
+        The Village — Vida no Campo
+      </h2>
+      <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+        O Alentejo é conhecido pela sua calma, mas esta fantástica região tem muito a oferecer. Desenhámos instalações completas para elevar a sua estadia a um novo patamar de lazer e tranquilidade.
+      </p>
+    </div>
+
+    <!-- 4 Instalações em Grelha Elegante -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {FACILITIES.map(fac => (
+        <div class="bg-white overflow-hidden border border-sand-border shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="h-48 overflow-hidden relative">
+              <img 
+                src={fac.image} 
+                alt={fac.title} 
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-charcoal-dark/60 via-transparent to-transparent"></div>
+            </div>
+
+            <div class="p-5">
+              <h3 class="font-catamaran font-bold text-lg text-charcoal mb-2 group-hover:text-natureGold transition-colors">
+                {fac.title}
+              </h3>
+              <p class="font-catamaran text-xs sm:text-sm text-charcoal-muted leading-relaxed">
+                {fac.description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
