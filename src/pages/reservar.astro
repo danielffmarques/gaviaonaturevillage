@@ -396,53 +396,41 @@ import { ACCOMMODATIONS } from '../utils/data';
                     Escolha a opção de refeições pretendida:
                   </p>
                 </div>
-                <span class="text-[10px] font-montserrat font-bold text-natureGold-dark bg-natureGold/15 px-2.5 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">
-                  Restaurante Cadafaz
-                </span>
               </div>
 
-              <!-- 3 Opções Compactas de Pensão (sem emojis, tamanho discreto e elegante) -->
+              <!-- 3 Opções Compactas de Pensão (sem emojis, sem tags) -->
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="meal-plans-compact-selection">
-                <!-- 1. APA -->
+                <!-- 1. Pequeno-Almoço -->
                 <label class="meal-plan-card p-3.5 rounded-xl border border-natureGold bg-natureGold/10 cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="apa">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">APA</span>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Pequeno-Almoço</div>
                     <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
                       <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold"></div>
                     </div>
                   </div>
-                  <div>
-                    <div class="font-catamaran font-bold text-sm text-charcoal">Pequeno-Almoço</div>
-                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Buffet continental regional</p>
-                  </div>
+                  <p class="text-[11px] text-charcoal-muted font-montserrat leading-snug">Buffet continental regional</p>
                 </label>
 
-                <!-- 2. MP -->
+                <!-- 2. Meia Pensão -->
                 <label class="meal-plan-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="mp">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] bg-natureGold text-charcoal-dark font-montserrat font-extrabold px-2 py-0.5 rounded">MP</span>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Meia Pensão</div>
                     <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
                       <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold hidden"></div>
                     </div>
                   </div>
-                  <div>
-                    <div class="font-catamaran font-bold text-sm text-charcoal">Meia Pensão</div>
-                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Pequeno-almoço + Jantar (3 pratos)</p>
-                  </div>
+                  <p class="text-[11px] text-charcoal-muted font-montserrat leading-snug">Pequeno-almoço + Jantar (3 pratos)</p>
                 </label>
 
-                <!-- 3. PC -->
+                <!-- 3. Pensão Completa -->
                 <label class="meal-plan-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="pc">
                   <div class="flex items-center justify-between">
-                    <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">PC</span>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Pensão Completa</div>
                     <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
                       <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold hidden"></div>
                     </div>
                   </div>
-                  <div>
-                    <div class="font-catamaran font-bold text-sm text-charcoal">Pensão Completa</div>
-                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Peq.-almoço + Almoço + Jantar</p>
-                  </div>
+                  <p class="text-[11px] text-charcoal-muted font-montserrat leading-snug">Peq.-almoço + Almoço + Jantar</p>
                 </label>
               </div>
             </div>
@@ -451,7 +439,7 @@ import { ACCOMMODATIONS } from '../utils/data';
             <div class="space-y-3 pt-3" id="section-tarifa-modalidade">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
                 <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                  Tarifas para <span id="active-meal-title" class="text-natureGold-dark font-bold">Alojamento com Pequeno-Almoço (APA)</span>
+                  Tarifas para <span id="active-meal-title" class="text-natureGold-dark font-bold">Alojamento com Pequeno-Almoço</span>
                 </label>
                 <span class="text-[11px] text-charcoal-muted font-montserrat">
                   Escolha as condições de cancelamento pretendidas:
@@ -889,7 +877,7 @@ import { ACCOMMODATIONS } from '../utils/data';
                 <div class="space-y-1">
                   <span class="text-charcoal-muted block">Regime & Tarifa:</span>
                   <strong class="text-charcoal text-sm font-catamaran font-bold block" id="conf-regime-policy">
-                    Pequeno-Almoço (APA) · Reembolsável
+                    Pequeno-Almoço · Reembolsável
                   </strong>
                 </div>
 
@@ -1019,7 +1007,7 @@ import { ACCOMMODATIONS } from '../utils/data';
                 <span class="text-charcoal font-semibold" id="summary-stay-total">240,00 €</span>
               </div>
               <div class="flex items-center justify-between" id="summary-meal-row">
-                <span class="text-charcoal-muted" id="summary-meal-label">Regime: Pequeno-Almoço (APA)</span>
+                <span class="text-charcoal-muted" id="summary-meal-label">Regime: Pequeno-Almoço</span>
                 <span class="text-charcoal font-semibold" id="summary-meal-total">Incluído</span>
               </div>
               <div class="flex items-center justify-between" id="summary-policy-row">
@@ -1131,15 +1119,15 @@ import { ACCOMMODATIONS } from '../utils/data';
             id: 'apa',
             code: 'APA',
             name: 'Pequeno-Almoço',
-            fullName: 'Alojamento com Pequeno-Almoço (APA)',
-            adultDailySupplement: 0,   // Base já inclui APA
+            fullName: 'Alojamento com Pequeno-Almoço',
+            adultDailySupplement: 0,   // Base já inclui Pequeno-Almoço
             childDailySupplement: 0,
           },
           mp: {
             id: 'mp',
             code: 'MP',
             name: 'Meia Pensão',
-            fullName: 'Meia Pensão (MP)',
+            fullName: 'Meia Pensão',
             adultDailySupplement: 35,  // 35€ / adulto / noite
             childDailySupplement: 18,  // 18€ / criança / noite
           },
@@ -1147,7 +1135,7 @@ import { ACCOMMODATIONS } from '../utils/data';
             id: 'pc',
             code: 'PC',
             name: 'Pensão Completa',
-            fullName: 'Pensão Completa (PC)',
+            fullName: 'Pensão Completa',
             adultDailySupplement: 65,  // 65€ / adulto / noite
             childDailySupplement: 32,  // 32€ / criança / noite
           }
