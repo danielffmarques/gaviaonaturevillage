@@ -26,7 +26,7 @@ const targetImages = [
   },
   {
     key: 'hero_aventura',
-    src: 'public/images/experiencias/media_119_Gavi_o.jpg',
+    src: 'public/images/arredores/passadicos_alamal.jpg',
     label: 'Rio Tejo, Passadiços & Arribas (Aventura & Ecoturismo)'
   }
 ];
