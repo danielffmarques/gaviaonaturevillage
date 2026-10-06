@@ -165,32 +165,120 @@ const ACCOM_PRICING: Record<string, number> = {
               </p>
             </div>
 
-            <!-- Seleção de Datas -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="space-y-1.5">
-                <label for="step-checkin" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                  Data de Chegada (Check-in)
-                </label>
-                <input 
-                  type="date" 
-                  id="step-checkin" 
-                  name="checkin"
-                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm font-medium focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
-                  required
-                />
+            <!-- Seleção de Datas com Calendário Personalizado (Idêntico ao BookingBar / Website) -->
+            <div class="relative">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label for="step-checkin-btn" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Data de Entrada (Check-in)
+                  </label>
+                  <button 
+                    type="button" 
+                    id="step-checkin-btn"
+                    class="w-full bg-sand-warm/50 hover:bg-white border border-sand-border focus:border-natureGold rounded-xl px-4 py-3 text-charcoal text-sm font-medium transition-all cursor-pointer flex items-center justify-between group shadow-xs text-left"
+                  >
+                    <div>
+                      <span class="block text-[10px] uppercase font-montserrat font-bold text-natureGold-dark tracking-wider">Entrada</span>
+                      <span id="step-checkin-display" class="font-montserrat font-semibold text-charcoal text-sm">--/--/----</span>
+                    </div>
+                    <svg class="w-5 h-5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  </button>
+                  <input type="hidden" id="step-checkin" name="checkin" required />
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="step-checkout-btn" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Data de Saída (Check-out)
+                  </label>
+                  <button 
+                    type="button" 
+                    id="step-checkout-btn"
+                    class="w-full bg-sand-warm/50 hover:bg-white border border-sand-border focus:border-natureGold rounded-xl px-4 py-3 text-charcoal text-sm font-medium transition-all cursor-pointer flex items-center justify-between group shadow-xs text-left"
+                  >
+                    <div>
+                      <span class="block text-[10px] uppercase font-montserrat font-bold text-natureGold-dark tracking-wider">Saída</span>
+                      <span id="step-checkout-display" class="font-montserrat font-semibold text-charcoal text-sm">--/--/----</span>
+                    </div>
+                    <svg class="w-5 h-5 text-natureGold group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                  </button>
+                  <input type="hidden" id="step-checkout" name="checkout" required />
+                </div>
               </div>
 
-              <div class="space-y-1.5">
-                <label for="step-checkout" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                  Data de Saída (Check-out)
-                </label>
-                <input 
-                  type="date" 
-                  id="step-checkout" 
-                  name="checkout"
-                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm font-medium focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
-                  required
-                />
+              <!-- Calendário Popover Idêntico ao BookingBar (Fundo Branco Sólido, Design GNV) -->
+              <div 
+                id="reservar-calendar-popover"
+                class="hidden absolute z-50 left-0 top-full mt-2 w-[310px] sm:w-[340px] max-w-[calc(100vw-32px)] bg-white border border-[#DDD5C7] rounded-2xl shadow-[0_20px_50px_rgba(43,39,37,0.22)] p-4 text-charcoal animate-fadeIn"
+              >
+                <!-- Barra de Cabeçalho do Mês -->
+                <div class="flex items-center justify-between pb-2.5 border-b border-[#E5DFD5] mb-2.5">
+                  <button 
+                    type="button" 
+                    id="res-cal-prev"
+                    class="w-7 h-7 flex items-center justify-center rounded-lg bg-[#F5F2EB] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+                    aria-label="Mês anterior"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                  </button>
+
+                  <span id="res-month-title" class="font-catamaran font-bold text-sm sm:text-base text-charcoal uppercase tracking-wider">
+                    Outubro 2026
+                  </span>
+
+                  <button 
+                    type="button" 
+                    id="res-cal-next"
+                    class="w-7 h-7 flex items-center justify-center rounded-lg bg-[#F5F2EB] hover:bg-natureGold hover:text-charcoal transition-colors focus:outline-none cursor-pointer"
+                    aria-label="Mês seguinte"
+                  >
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                  </button>
+                </div>
+
+                <!-- Instrução Dinâmica & Noites -->
+                <div class="flex items-center justify-between mb-2.5 bg-[#F5F2EB] py-1 px-2.5 rounded-lg border border-[#E5DFD5] text-[10px] sm:text-[11px] font-montserrat">
+                  <span id="res-cal-instruction" class="text-natureGold-dark font-bold">
+                    1. Selecione a data de Check-in
+                  </span>
+                  <span id="res-cal-nights-badge" class="hidden bg-[#EAE2D5] text-charcoal font-bold px-2 py-0.5 rounded-full text-[10px]">
+                    -- noites
+                  </span>
+                </div>
+
+                <!-- Dias da Semana -->
+                <div class="grid grid-cols-7 gap-1 text-center text-[9px] sm:text-[10px] font-montserrat font-bold text-charcoal-muted mb-1.5 uppercase">
+                  <span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span>
+                </div>
+
+                <!-- Grelha de Dias (1 Mês Único) -->
+                <div id="res-days-grid" class="grid grid-cols-7 gap-1 text-center text-xs font-montserrat min-h-[190px]"></div>
+
+                <!-- Rodapé com Ações Rápidas -->
+                <div class="mt-2.5 pt-2.5 border-t border-sand-border flex items-center justify-between text-[11px] font-montserrat">
+                  <button 
+                    type="button" 
+                    id="res-cal-today-btn"
+                    class="text-charcoal-muted hover:text-natureGold-dark transition-colors text-[10px] cursor-pointer"
+                  >
+                    Hoje
+                  </button>
+                  <div class="flex items-center gap-2">
+                    <button 
+                      type="button" 
+                      id="res-cal-reset-btn"
+                      class="text-charcoal-muted hover:text-charcoal text-[10px] cursor-pointer"
+                    >
+                      Repor
+                    </button>
+                    <button 
+                      type="button" 
+                      id="res-cal-done-btn"
+                      class="text-charcoal font-bold bg-natureGold hover:bg-natureGold-light px-3 py-1 rounded-md text-[10px] transition-all shadow-sm cursor-pointer"
+                    >
+                      Concluir
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -910,6 +998,23 @@ const ACCOM_PRICING: Record<string, number> = {
       // 2. Elementos DOM
       const checkinInput = document.getElementById('step-checkin') as HTMLInputElement | null;
       const checkoutInput = document.getElementById('step-checkout') as HTMLInputElement | null;
+      const checkinBtn = document.getElementById('step-checkin-btn') as HTMLButtonElement | null;
+      const checkoutBtn = document.getElementById('step-checkout-btn') as HTMLButtonElement | null;
+      const checkinDisplay = document.getElementById('step-checkin-display') as HTMLSpanElement | null;
+      const checkoutDisplay = document.getElementById('step-checkout-display') as HTMLSpanElement | null;
+
+      const calPopover = document.getElementById('reservar-calendar-popover') as HTMLDivElement | null;
+      const calInstruction = document.getElementById('res-cal-instruction') as HTMLSpanElement | null;
+      const calNightsBadge = document.getElementById('res-cal-nights-badge') as HTMLSpanElement | null;
+      const monthTitle = document.getElementById('res-month-title') as HTMLSpanElement | null;
+      const daysGrid = document.getElementById('res-days-grid') as HTMLDivElement | null;
+
+      const prevBtn = document.getElementById('res-cal-prev') as HTMLButtonElement | null;
+      const nextBtn = document.getElementById('res-cal-next') as HTMLButtonElement | null;
+      const todayBtn = document.getElementById('res-cal-today-btn') as HTMLButtonElement | null;
+      const resetBtn = document.getElementById('res-cal-reset-btn') as HTMLButtonElement | null;
+      const doneBtn = document.getElementById('res-cal-done-btn') as HTMLButtonElement | null;
+
       const adultsSelect = document.getElementById('step-adults') as HTMLSelectElement | null;
       const childrenSelect = document.getElementById('step-children') as HTMLSelectElement | null;
       const extraCheckboxes = document.querySelectorAll<HTMLInputElement>('#extra-breakfast, #extra-spa, #extra-bike, #extra-wine');
@@ -932,14 +1037,48 @@ const ACCOM_PRICING: Record<string, number> = {
       const instantTestBtn = document.getElementById('btn-instant-test');
       const newReservationBtn = document.getElementById('btn-new-reservation');
 
-      // 3. Inicialização de Datas & Parâmetros URL
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(today.getDate() + 1);
-      const afterTomorrow = new Date(today);
-      afterTomorrow.setDate(today.getDate() + 3);
+      // 3. Inicialização de Datas & Calendário Personalizado (Idêntico ao BookingBar)
+      const monthNames = [
+        'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+        'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+      ];
 
-      const fmtDate = (d: Date) => d.toISOString().split('T')[0];
+      const toYMD = (d: Date) => {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+
+      const toDisplay = (d: Date) => {
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        return `${day}/${month}/${year}`;
+      };
+
+      const normalize = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
+
+      const parseDateSafe = (val: string | null | undefined, fallback: Date): Date => {
+        if (!val) return fallback;
+        const parts = val.split('-');
+        if (parts.length === 3) {
+          const y = parseInt(parts[0]);
+          const m = parseInt(parts[1]) - 1;
+          const d = parseInt(parts[2]);
+          if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+            return new Date(y, m, d);
+          }
+        }
+        const parsed = new Date(val);
+        return isNaN(parsed.getTime()) ? fallback : parsed;
+      };
+
+      const today = normalize(new Date());
+      const defaultCheckin = new Date(today);
+      defaultCheckin.setDate(today.getDate() + 1);
+      const defaultCheckout = new Date(today);
+      defaultCheckout.setDate(today.getDate() + 3);
 
       const urlParams = new URLSearchParams(window.location.search);
       const qCheckin = urlParams.get('checkin') || urlParams.get('check_in');
@@ -949,32 +1088,277 @@ const ACCOM_PRICING: Record<string, number> = {
       const qTipologia = urlParams.get('tipologia') || urlParams.get('alojamento');
       const qPerfil = urlParams.get('perfil');
 
-      if (checkinInput && checkoutInput) {
-        checkinInput.value = qCheckin || fmtDate(tomorrow);
-        checkoutInput.value = qCheckout || fmtDate(afterTomorrow);
-        checkinInput.min = fmtDate(today);
-        checkoutInput.min = fmtDate(tomorrow);
+      let checkinDate: Date = parseDateSafe(qCheckin, defaultCheckin);
+      let checkoutDate: Date = parseDateSafe(qCheckout, defaultCheckout);
 
-        state.checkin = checkinInput.value;
-        state.checkout = checkoutInput.value;
-
-        checkinInput.addEventListener('change', () => {
-          const nextDay = new Date(checkinInput.value);
-          nextDay.setDate(nextDay.getDate() + 1);
-          checkoutInput.min = fmtDate(nextDay);
-          if (new Date(checkoutInput.value) <= new Date(checkinInput.value)) {
-            checkoutInput.value = fmtDate(nextDay);
-          }
-          state.checkin = checkinInput.value;
-          state.checkout = checkoutInput.value;
-          recalculateNightsAndPricing();
-        });
-
-        checkoutInput.addEventListener('change', () => {
-          state.checkout = checkoutInput.value;
-          recalculateNightsAndPricing();
-        });
+      if (normalize(checkoutDate).getTime() <= normalize(checkinDate).getTime()) {
+        checkoutDate = new Date(checkinDate);
+        checkoutDate.setDate(checkinDate.getDate() + 2);
       }
+
+      let viewYear = checkinDate.getFullYear();
+      let viewMonth = checkinDate.getMonth();
+      let mode: 'checkin' | 'checkout' = 'checkin';
+
+      const updateInputsAndDisplays = () => {
+        const ymdCheckin = toYMD(checkinDate);
+        const ymdCheckout = toYMD(checkoutDate);
+
+        if (checkinInput) checkinInput.value = ymdCheckin;
+        if (checkoutInput) checkoutInput.value = ymdCheckout;
+
+        state.checkin = ymdCheckin;
+        state.checkout = ymdCheckout;
+
+        if (checkinDisplay) checkinDisplay.textContent = toDisplay(checkinDate);
+        if (checkoutDisplay) checkoutDisplay.textContent = toDisplay(checkoutDate);
+
+        const diffTime = checkoutDate.getTime() - checkinDate.getTime();
+        const nights = Math.max(1, Math.round(diffTime / (1000 * 60 * 60 * 24)));
+        if (calNightsBadge) {
+          calNightsBadge.textContent = nights === 1 ? '1 noite' : `${nights} noites`;
+          calNightsBadge.classList.remove('hidden');
+        }
+
+        recalculateNightsAndPricing();
+      };
+
+      const updateTriggerHighlights = () => {
+        if (!checkinBtn || !checkoutBtn) return;
+        if (mode === 'checkin') {
+          checkinBtn.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+          checkoutBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+        } else {
+          checkoutBtn.classList.add('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+          checkinBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+        }
+      };
+
+      const clearTriggerHighlights = () => {
+        if (!checkinBtn || !checkoutBtn) return;
+        checkinBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+        checkoutBtn.classList.remove('border-natureGold', 'ring-2', 'ring-natureGold/40', 'bg-white');
+      };
+
+      const refreshDayStyles = () => {
+        if (!calPopover) return;
+        const checkinTime = normalize(checkinDate).getTime();
+        const checkoutTime = normalize(checkoutDate).getTime();
+        const todayTime = today.getTime();
+
+        const allBtns = calPopover.querySelectorAll<HTMLButtonElement>('.res-day-btn');
+        allBtns.forEach(btn => {
+          const time = Number(btn.getAttribute('data-time'));
+
+          if (time < todayTime) {
+            btn.className = 'res-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center text-charcoal/25 cursor-not-allowed';
+            btn.disabled = true;
+            return;
+          }
+
+          btn.disabled = false;
+
+          if (time === checkinTime || time === checkoutTime) {
+            btn.className = 'res-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-natureGold text-charcoal font-bold rounded-lg shadow-sm scale-105 ring-2 ring-natureGold cursor-pointer';
+          } else if (time > checkinTime && time < checkoutTime) {
+            btn.className = 'res-day-btn w-full h-7 sm:h-8 text-xs flex items-center justify-center transition-all bg-[#F3EDE2] text-charcoal font-semibold rounded-none cursor-pointer';
+          } else {
+            btn.className = 'res-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center text-charcoal hover:bg-[#F5F2EB] hover:text-natureGold-dark rounded-lg cursor-pointer transition-colors';
+          }
+        });
+      };
+
+      const renderCalendar = () => {
+        if (!monthTitle || !daysGrid || !calPopover) return;
+        monthTitle.textContent = `${monthNames[viewMonth]} ${viewYear}`;
+        daysGrid.innerHTML = '';
+
+        const firstDay = new Date(viewYear, viewMonth, 1);
+        const startingDay = (firstDay.getDay() + 6) % 7; // Seg = 0
+        const daysCount = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+        for (let i = 0; i < startingDay; i++) {
+          const empty = document.createElement('div');
+          empty.className = 'w-full h-7 sm:h-8';
+          daysGrid.appendChild(empty);
+        }
+
+        for (let day = 1; day <= daysCount; day++) {
+          const d = new Date(viewYear, viewMonth, day);
+          const normTime = normalize(d).getTime();
+
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.textContent = String(day);
+          btn.setAttribute('data-time', String(normTime));
+          btn.setAttribute('data-date', toYMD(d));
+          btn.className = 'res-day-btn w-full h-7 sm:h-8 text-xs font-semibold flex items-center justify-center rounded-lg transition-colors';
+
+          btn.addEventListener('mouseenter', () => {
+            if (mode === 'checkout') {
+              const checkinTime = normalize(checkinDate).getTime();
+              const hoverTime = normTime;
+              const allBtns = calPopover.querySelectorAll<HTMLButtonElement>('.res-day-btn');
+              allBtns.forEach(b => {
+                const t = Number(b.getAttribute('data-time'));
+                if (t > checkinTime && t <= hoverTime) {
+                  b.classList.add('bg-[#F3EDE2]', 'text-charcoal');
+                } else if (!(t > checkinTime && t < normalize(checkoutDate).getTime())) {
+                  b.classList.remove('bg-[#F3EDE2]', 'text-charcoal');
+                }
+              });
+            }
+          });
+
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const clickedDate = new Date(viewYear, viewMonth, day);
+            const clickedTime = normTime;
+
+            if (mode === 'checkin') {
+              checkinDate = clickedDate;
+              if (normalize(checkoutDate).getTime() <= clickedTime) {
+                checkoutDate = new Date(clickedDate);
+                checkoutDate.setDate(checkoutDate.getDate() + 1);
+              }
+              mode = 'checkout';
+              if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+              updateInputsAndDisplays();
+              updateTriggerHighlights();
+              refreshDayStyles();
+            } else {
+              const curCheckinTime = normalize(checkinDate).getTime();
+              if (clickedTime <= curCheckinTime) {
+                checkinDate = clickedDate;
+                updateInputsAndDisplays();
+                updateTriggerHighlights();
+                refreshDayStyles();
+              } else {
+                checkoutDate = clickedDate;
+                updateInputsAndDisplays();
+                clearTriggerHighlights();
+                refreshDayStyles();
+                if (calInstruction) calInstruction.textContent = 'Estadia confirmada!';
+                setTimeout(() => {
+                  closeCalendar();
+                }, 250);
+              }
+            }
+          });
+
+          daysGrid.appendChild(btn);
+        }
+
+        refreshDayStyles();
+      };
+
+      const openCalendar = (forMode: 'checkin' | 'checkout') => {
+        if (!calPopover) return;
+        mode = forMode;
+        if (forMode === 'checkin') {
+          viewYear = checkinDate.getFullYear();
+          viewMonth = checkinDate.getMonth();
+          if (calInstruction) calInstruction.textContent = '1. Selecione a data de Check-in';
+          calPopover.style.left = '0';
+          calPopover.style.right = 'auto';
+        } else {
+          viewYear = checkoutDate.getFullYear();
+          viewMonth = checkoutDate.getMonth();
+          if (calInstruction) calInstruction.textContent = '2. Selecione a data de Check-out';
+          if (window.innerWidth >= 640) {
+            calPopover.style.left = 'auto';
+            calPopover.style.right = '0';
+          } else {
+            calPopover.style.left = '0';
+            calPopover.style.right = 'auto';
+          }
+        }
+        updateTriggerHighlights();
+        calPopover.classList.remove('hidden');
+        renderCalendar();
+      };
+
+      const closeCalendar = () => {
+        if (!calPopover) return;
+        calPopover.classList.add('hidden');
+        clearTriggerHighlights();
+      };
+
+      checkinBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (calPopover && !calPopover.classList.contains('hidden') && mode === 'checkin') {
+          closeCalendar();
+        } else {
+          openCalendar('checkin');
+        }
+      });
+
+      checkoutBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (calPopover && !calPopover.classList.contains('hidden') && mode === 'checkout') {
+          closeCalendar();
+        } else {
+          openCalendar('checkout');
+        }
+      });
+
+      prevBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewMonth--;
+        if (viewMonth < 0) {
+          viewMonth = 11;
+          viewYear--;
+        }
+        renderCalendar();
+      });
+
+      nextBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewMonth++;
+        if (viewMonth > 11) {
+          viewMonth = 0;
+          viewYear++;
+        }
+        renderCalendar();
+      });
+
+      todayBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        viewYear = today.getFullYear();
+        viewMonth = today.getMonth();
+        renderCalendar();
+      });
+
+      resetBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        checkinDate = new Date(defaultCheckin);
+        checkoutDate = new Date(defaultCheckout);
+        mode = 'checkin';
+        if (calInstruction) calInstruction.textContent = '1. Selecione a data de Check-in';
+        updateInputsAndDisplays();
+        updateTriggerHighlights();
+        renderCalendar();
+      });
+
+      doneBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeCalendar();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (calPopover && !calPopover.classList.contains('hidden')) {
+          const target = e.target as Node;
+          if (!calPopover.contains(target) && !checkinBtn?.contains(target) && !checkoutBtn?.contains(target)) {
+            closeCalendar();
+          }
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && calPopover && !calPopover.classList.contains('hidden')) {
+          closeCalendar();
+        }
+      });
 
       // Parâmetro de Adultos e Crianças
       if (adultsSelect && qAdults) {
@@ -1109,8 +1493,8 @@ const ACCOM_PRICING: Record<string, number> = {
         if (summaryAccomImg && state.accommodationImage) summaryAccomImg.src = state.accommodationImage;
         if (summaryAccomTitle) summaryAccomTitle.textContent = state.accommodationName;
         if (summaryAccomCap) summaryAccomCap.textContent = state.accommodationCapacity;
-        if (summaryCheckin) summaryCheckin.textContent = state.checkin;
-        if (summaryCheckout) summaryCheckout.textContent = state.checkout;
+        if (summaryCheckin) summaryCheckin.textContent = toDisplay(checkinDate);
+        if (summaryCheckout) summaryCheckout.textContent = toDisplay(checkoutDate);
         if (summaryGuests) summaryGuests.textContent = `${state.adults} Adultos${state.children > 0 ? `, ${state.children} Crianças` : ''}`;
         if (summaryCalcLine) summaryCalcLine.textContent = `${state.nights} ${state.nights === 1 ? 'Noite' : 'Noites'} × ${state.accommodationPrice}€`;
         if (summaryStayTotal) summaryStayTotal.textContent = `${stayTotal.toFixed(2)} €`;
@@ -1311,7 +1695,7 @@ const ACCOM_PRICING: Record<string, number> = {
 
         if (codeEl) codeEl.textContent = state.confirmationCode;
         if (confAccom) confAccom.textContent = state.accommodationName;
-        if (confDates) confDates.textContent = `${state.checkin} até ${state.checkout} (${state.nights} noites)`;
+        if (confDates) confDates.textContent = `${toDisplay(checkinDate)} até ${toDisplay(checkoutDate)} (${state.nights} noites)`;
         if (confGuest) confGuest.textContent = `${state.guest.name} · ${state.guest.email}`;
         if (confTotal) confTotal.textContent = `${state.grandTotal.toFixed(2)} €`;
       }
