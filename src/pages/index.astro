@@ -641,7 +641,7 @@ import '../styles/global.css';
       // Inicialização imediata de valores
       updateInputsAndDisplays();
 
-      // Ao fim de 3 segundos (ou instantâneo se ?nointro=true): transição suave para a imagem panorâmica
+      // Ao fim de 1 segundo (ou instantâneo se ?nointro=true): transição suave para a imagem panorâmica
       const isInstant = new URLSearchParams(window.location.search).get('nointro') === 'true';
 
       if (isInstant) {
@@ -659,7 +659,7 @@ import '../styles/global.css';
           if (mainContent) {
             mainContent.style.opacity = '1';
           }
-        }, 3000);
+        }, 1000);
       }
 
       // Interação de Hover Sincronizado com os 4 Públicos-Alvo
