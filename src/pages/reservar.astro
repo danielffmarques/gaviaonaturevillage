@@ -273,16 +273,70 @@ import { ACCOMMODATIONS } from '../utils/data';
               </div>
             </div>
 
-            <!-- Tipologia de Alojamento com Previsão Visual (Sem preços fixos no cartão) -->
+            <!-- 1. Hóspedes (Adultos + Crianças) -->
             <div class="space-y-2">
-              <label for="step-accommodation" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                Tipologia de Alojamento
+              <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                Hóspedes
               </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label for="step-adults" class="block text-[11px] uppercase tracking-wider text-charcoal-muted font-montserrat font-semibold">
+                    Adultos
+                  </label>
+                  <select 
+                    id="step-adults" 
+                    class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                  >
+                    <option value="1">1 Adulto</option>
+                    <option value="2" selected>2 Adultos</option>
+                    <option value="3">3 Adultos</option>
+                    <option value="4">4 Adultos</option>
+                    <option value="5">5 Adultos</option>
+                    <option value="6">6 Adultos</option>
+                    <option value="7">7 Adultos</option>
+                    <option value="8">8 Adultos</option>
+                  </select>
+                </div>
+
+                <div class="space-y-1.5">
+                  <label for="step-children" class="block text-[11px] uppercase tracking-wider text-charcoal-muted font-montserrat font-semibold">
+                    Crianças (0 aos 12 anos)
+                  </label>
+                  <select 
+                    id="step-children" 
+                    class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
+                  >
+                    <option value="0" selected>0 Crianças</option>
+                    <option value="1">1 Criança</option>
+                    <option value="2">2 Crianças</option>
+                    <option value="3">3 Crianças</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Alojamentos Disponíveis (Filtrados por Datas e Lotação de Hóspedes) -->
+            <div class="space-y-3 pt-4 border-t border-sand-border" id="section-accommodations">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Alojamentos Disponíveis
+                  </label>
+                  <p id="accom-filter-feedback" class="text-[11px] text-charcoal-muted font-montserrat mt-0.5">
+                    A apresentar opções disponíveis para as suas datas e número de hóspedes:
+                  </p>
+                </div>
+                <span id="accom-count-badge" class="text-[10px] font-montserrat font-bold text-natureGold-dark bg-natureGold/15 px-3 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">
+                  6 Disponíveis
+                </span>
+              </div>
+
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="accom-grid-selection">
                 {ACCOMMODATIONS.map(acc => {
                   return (
                     <label 
                       data-accom-radio={acc.id}
+                      data-capacity-max={acc.capacityMax}
                       class="accom-radio-card p-3.5 rounded-2xl border border-sand-border hover:border-natureGold bg-sand-warm/40 hover:bg-white cursor-pointer transition-all duration-200 flex items-center gap-3.5"
                     >
                       <input 
@@ -292,12 +346,13 @@ import { ACCOMMODATIONS } from '../utils/data';
                         data-name={acc.name}
                         data-image={acc.image}
                         data-capacity={acc.capacityLabel}
+                        data-capacity-max={acc.capacityMax}
                         class="accent-natureGold sr-only"
                       />
                       <img 
                         src={acc.image} 
                         alt={acc.name} 
-                        class="w-16 h-16 object-cover shrink-0 border border-sand-border"
+                        class="w-16 h-16 object-cover rounded-xl shrink-0 border border-sand-border"
                       />
                       <div class="min-w-0 flex-1">
                         <div class="font-catamaran font-bold text-sm text-charcoal truncate">
@@ -306,8 +361,9 @@ import { ACCOMMODATIONS } from '../utils/data';
                         <div class="text-[11px] text-charcoal-muted font-montserrat">
                           {acc.capacityLabel}
                         </div>
-                        <div class="text-[11px] font-montserrat text-natureGold-dark font-semibold mt-0.5 flex items-center gap-1">
-                          <span>Selecione para ver tarifas ↓</span>
+                        <div class="text-[11px] font-montserrat text-emerald-700 font-semibold mt-0.5 flex items-center gap-1.5">
+                          <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0 inline-block"></span>
+                          <span>Disponível para as suas datas</span>
                         </div>
                       </div>
                       <div class="radio-check w-5 h-5 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
@@ -317,240 +373,131 @@ import { ACCOMMODATIONS } from '../utils/data';
                   );
                 })}
               </div>
-            </div>
 
-            <!-- Hóspedes -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="space-y-1.5">
-                <label for="step-adults" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                  Adultos
-                </label>
-                <select 
-                  id="step-adults" 
-                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
-                >
-                  <option value="1">1 Adulto</option>
-                  <option value="2" selected>2 Adultos</option>
-                  <option value="3">3 Adultos</option>
-                  <option value="4">4 Adultos</option>
-                  <option value="6">6 Adultos</option>
-                  <option value="8">8 Adultos</option>
-                </select>
-              </div>
-
-              <div class="space-y-1.5">
-                <label for="step-children" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                  Crianças (0 aos 12 anos)
-                </label>
-                <select 
-                  id="step-children" 
-                  class="w-full bg-sand-warm/50 border border-sand-border rounded-xl px-4 py-3.5 text-charcoal text-sm focus:outline-none focus:border-natureGold transition-colors cursor-pointer"
-                >
-                  <option value="0" selected>0 Crianças</option>
-                  <option value="1">1 Criança</option>
-                  <option value="2">2 Crianças</option>
-                  <option value="3">3 Crianças</option>
-                </select>
+              <!-- Mensagem de alerta caso nenhum alojamento seja compatível com a lotação -->
+              <div id="no-accom-alert" class="hidden p-5 rounded-2xl bg-amber-50 border border-amber-200 text-center space-y-1.5">
+                <div class="font-catamaran font-bold text-sm text-amber-900">
+                  Não existem alojamentos disponíveis para este número de hóspedes.
+                </div>
+                <p class="text-xs text-amber-800 font-montserrat">
+                  A nossa lotação máxima por abrigo é de 8 hóspedes. Por favor reduza o número de hóspedes ou contacte-nos para reservar múltiplos abrigos.
+                </p>
               </div>
             </div>
 
-            <!-- Regimes de Estadia & Tarifas Disponíveis (APA, MP, PC) -->
-            <div class="space-y-4 pt-4 border-t border-sand-border" id="section-regimes-tarifas">
+            <!-- 3. Escolha da Pensão (Regime Compacto, sem emojis) -->
+            <div class="space-y-3 pt-4 border-t border-sand-border" id="section-regimes-estadia">
               <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
                 <div>
                   <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
-                    Regimes de Estadia & Tarifas Disponíveis
+                    Regime de Pensão
                   </label>
                   <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5">
-                    Selecione o plano de alimentação e a modalidade de tarifa pretendida:
+                    Escolha a opção de refeições pretendida:
                   </p>
                 </div>
-                <span class="text-[10px] font-montserrat font-bold text-natureGold-dark bg-natureGold/15 px-2.5 py-1 rounded-full uppercase tracking-wider whitespace-nowrap self-start sm:self-auto">
-                  Melhor Tarifa Oficial
+                <span class="text-[10px] font-montserrat font-bold text-natureGold-dark bg-natureGold/15 px-2.5 py-1 rounded-full uppercase tracking-wider self-start sm:self-auto">
+                  Restaurante Cadafaz
                 </span>
               </div>
 
-              <div class="space-y-3.5" id="meal-plans-list">
-                <!-- 1. Alojamento com Pequeno-Almoço (APA) -->
-                <div class="meal-plan-card bg-sand-warm/30 border border-sand-border rounded-2xl p-4 sm:p-5 transition-all" data-meal-plan-box="apa">
-                  <div class="flex items-start justify-between gap-3 mb-3">
-                    <div class="flex items-center gap-2.5">
-                      <span class="text-2xl">☕</span>
-                      <div>
-                        <h3 class="font-catamaran font-bold text-base text-charcoal flex items-center gap-2">
-                          <span>Alojamento com Pequeno-Almoço</span>
-                          <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">APA</span>
-                        </h3>
-                        <p class="text-xs text-charcoal-muted font-montserrat mt-0.5">
-                          Pequeno-almoço buffet continental com especialidades regionais no Restaurante Cadafaz.
-                        </p>
-                      </div>
+              <!-- 3 Opções Compactas de Pensão (sem emojis, tamanho discreto e elegante) -->
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" id="meal-plans-compact-selection">
+                <!-- 1. APA -->
+                <label class="meal-plan-card p-3.5 rounded-xl border border-natureGold bg-natureGold/10 cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="apa">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">APA</span>
+                    <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
+                      <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold"></div>
                     </div>
                   </div>
-
-                  <!-- Tarifas Reembolsável vs Não Reembolsável -->
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                    <!-- Opção 1: Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="apa" data-policy="refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <span class="font-catamaran font-bold text-xs uppercase text-charcoal block">Tarifa Reembolsável</span>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Cancelamento gratuito até 48h antes</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="apa_refundable" checked class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total da estadia:</span>
-                        <span class="font-catamaran font-extrabold text-base text-charcoal rate-price-display" data-rate-key="apa_refundable">-- €</span>
-                      </div>
-                    </label>
-
-                    <!-- Opção 2: Não Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="apa" data-policy="non_refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <span class="font-catamaran font-bold text-xs uppercase text-charcoal">Tarifa Não Reembolsável</span>
-                            <span class="text-[9px] font-bold font-montserrat uppercase bg-green-100 text-green-800 px-1.5 py-0.5 rounded">-10% DESC.</span>
-                          </div>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Pagamento imediato · Melhor preço</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="apa_non_refundable" class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total da estadia:</span>
-                        <span class="font-catamaran font-extrabold text-base text-natureGold-dark rate-price-display" data-rate-key="apa_non_refundable">-- €</span>
-                      </div>
-                    </label>
+                  <div>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Pequeno-Almoço</div>
+                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Buffet continental regional</p>
                   </div>
-                </div>
+                </label>
 
-                <!-- 2. Meia Pensão (MP) -->
-                <div class="meal-plan-card bg-sand-warm/30 border border-sand-border rounded-2xl p-4 sm:p-5 transition-all relative" data-meal-plan-box="mp">
-                  <div class="flex items-start justify-between gap-3 mb-3">
-                    <div class="flex items-center gap-2.5">
-                      <span class="text-2xl">🍽️</span>
-                      <div>
-                        <h3 class="font-catamaran font-bold text-base text-charcoal flex items-center gap-2">
-                          <span>Meia Pensão</span>
-                          <span class="text-[10px] bg-natureGold text-charcoal-dark font-montserrat font-extrabold px-2 py-0.5 rounded">MP</span>
-                          <span class="text-[9px] bg-amber-100 text-amber-800 font-montserrat font-bold px-2 py-0.5 rounded-full uppercase tracking-wider hidden sm:inline-block">Mais Escolhido</span>
-                        </h3>
-                        <p class="text-xs text-charcoal-muted font-montserrat mt-0.5">
-                          Pequeno-almoço buffet + Jantar de 3 pratos (couvert, prato principal e sobremesa regional) no Restaurante Cadafaz.
-                        </p>
-                      </div>
+                <!-- 2. MP -->
+                <label class="meal-plan-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="mp">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] bg-natureGold text-charcoal-dark font-montserrat font-extrabold px-2 py-0.5 rounded">MP</span>
+                    <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
+                      <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold hidden"></div>
                     </div>
                   </div>
-
-                  <!-- Tarifas MP -->
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                    <!-- Opção 1: Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="mp" data-policy="refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <span class="font-catamaran font-bold text-xs uppercase text-charcoal block">Tarifa Reembolsável</span>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Cancelamento gratuito até 48h antes</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="mp_refundable" class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total com M.P.:</span>
-                        <span class="font-catamaran font-extrabold text-base text-charcoal rate-price-display" data-rate-key="mp_refundable">-- €</span>
-                      </div>
-                    </label>
-
-                    <!-- Opção 2: Não Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="mp" data-policy="non_refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <span class="font-catamaran font-bold text-xs uppercase text-charcoal">Tarifa Não Reembolsável</span>
-                            <span class="text-[9px] font-bold font-montserrat uppercase bg-green-100 text-green-800 px-1.5 py-0.5 rounded">-10% DESC.</span>
-                          </div>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Pagamento imediato · Melhor preço</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="mp_non_refundable" class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total com M.P.:</span>
-                        <span class="font-catamaran font-extrabold text-base text-natureGold-dark rate-price-display" data-rate-key="mp_non_refundable">-- €</span>
-                      </div>
-                    </label>
+                  <div>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Meia Pensão</div>
+                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Pequeno-almoço + Jantar (3 pratos)</p>
                   </div>
-                </div>
+                </label>
 
-                <!-- 3. Pensão Completa (PC) -->
-                <div class="meal-plan-card bg-sand-warm/30 border border-sand-border rounded-2xl p-4 sm:p-5 transition-all" data-meal-plan-box="pc">
-                  <div class="flex items-start justify-between gap-3 mb-3">
-                    <div class="flex items-center gap-2.5">
-                      <span class="text-2xl">🍷</span>
-                      <div>
-                        <h3 class="font-catamaran font-bold text-base text-charcoal flex items-center gap-2">
-                          <span>Pensão Completa</span>
-                          <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">PC</span>
-                        </h3>
-                        <p class="text-xs text-charcoal-muted font-montserrat mt-0.5">
-                          Pequeno-almoço buffet + Almoço regional + Jantar completo de 3 pratos no Restaurante Cadafaz.
-                        </p>
-                      </div>
+                <!-- 3. PC -->
+                <label class="meal-plan-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2 shadow-xs" data-meal-key="pc">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[10px] bg-charcoal text-white font-montserrat font-bold px-2 py-0.5 rounded">PC</span>
+                    <div class="meal-radio-circle w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0">
+                      <div class="meal-radio-dot w-2 h-2 rounded-full bg-natureGold hidden"></div>
                     </div>
                   </div>
-
-                  <!-- Tarifas PC -->
-                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
-                    <!-- Opção 1: Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="pc" data-policy="refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <span class="font-catamaran font-bold text-xs uppercase text-charcoal block">Tarifa Reembolsável</span>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Cancelamento gratuito até 48h antes</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="pc_refundable" class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total com P.C.:</span>
-                        <span class="font-catamaran font-extrabold text-base text-charcoal rate-price-display" data-rate-key="pc_refundable">-- €</span>
-                      </div>
-                    </label>
-
-                    <!-- Opção 2: Não Reembolsável -->
-                    <label class="rate-option-card p-3.5 rounded-xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-2.5" data-meal="pc" data-policy="non_refundable">
-                      <div class="flex items-start justify-between gap-2">
-                        <div>
-                          <div class="flex items-center gap-1.5">
-                            <span class="font-catamaran font-bold text-xs uppercase text-charcoal">Tarifa Não Reembolsável</span>
-                            <span class="text-[9px] font-bold font-montserrat uppercase bg-green-100 text-green-800 px-1.5 py-0.5 rounded">-10% DESC.</span>
-                          </div>
-                          <span class="text-[11px] text-charcoal-muted font-montserrat">Pagamento imediato · Melhor preço</span>
-                        </div>
-                        <input type="radio" name="selected_rate_option" value="pc_non_refundable" class="accent-natureGold sr-only" />
-                        <div class="rate-radio-check w-4 h-4 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
-                          <div class="w-2 h-2 rounded-full bg-natureGold hidden rate-radio-dot"></div>
-                        </div>
-                      </div>
-                      <div class="flex items-baseline justify-between pt-2 border-t border-sand-border/60">
-                        <span class="text-[10px] text-charcoal-muted font-montserrat">Total com P.C.:</span>
-                        <span class="font-catamaran font-extrabold text-base text-natureGold-dark rate-price-display" data-rate-key="pc_non_refundable">-- €</span>
-                      </div>
-                    </label>
+                  <div>
+                    <div class="font-catamaran font-bold text-sm text-charcoal">Pensão Completa</div>
+                    <p class="text-[11px] text-charcoal-muted font-montserrat mt-0.5 leading-snug">Peq.-almoço + Almoço + Jantar</p>
                   </div>
-                </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- 4. Modalidade de Tarifa (Aparece por baixo da pensão com tarifas e descontos devidos) -->
+            <div class="space-y-3 pt-3" id="section-tarifa-modalidade">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                <label class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                  Tarifas para <span id="active-meal-title" class="text-natureGold-dark font-bold">Alojamento com Pequeno-Almoço (APA)</span>
+                </label>
+                <span class="text-[11px] text-charcoal-muted font-montserrat">
+                  Escolha as condições de cancelamento pretendidas:
+                </span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="rate-policy-cards-grid">
+                <!-- Tarifa Reembolsável -->
+                <label class="rate-policy-card p-4 rounded-2xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-3 shadow-xs" data-policy="refundable">
+                  <div class="flex items-start justify-between gap-2">
+                    <div>
+                      <span class="font-catamaran font-bold text-sm uppercase text-charcoal block">Tarifa Reembolsável</span>
+                      <span class="text-[11px] text-charcoal-muted font-montserrat">Cancelamento gratuito até 48h antes da chegada</span>
+                    </div>
+                    <div class="rate-policy-circle w-5 h-5 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
+                      <div class="rate-policy-dot w-2.5 h-2.5 rounded-full bg-natureGold hidden"></div>
+                    </div>
+                  </div>
+                  <div class="flex items-baseline justify-between pt-2.5 border-t border-sand-border/60">
+                    <span class="text-xs text-charcoal-muted font-montserrat">Total da estadia:</span>
+                    <span class="font-catamaran font-extrabold text-lg text-charcoal" id="rate-price-display-refundable">-- €</span>
+                  </div>
+                </label>
+
+                <!-- Tarifa Não Reembolsável -->
+                <label class="rate-policy-card p-4 rounded-2xl border border-sand-border hover:border-natureGold bg-white cursor-pointer transition-all flex flex-col justify-between gap-3 shadow-xs" data-policy="non_refundable">
+                  <div class="flex items-start justify-between gap-2">
+                    <div>
+                      <div class="flex items-center gap-1.5">
+                        <span class="font-catamaran font-bold text-sm uppercase text-charcoal">Tarifa Não Reembolsável</span>
+                        <span class="text-[9px] font-bold font-montserrat uppercase bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">-10% DESCONTO</span>
+                      </div>
+                      <span class="text-[11px] text-charcoal-muted font-montserrat">Pagamento imediato · Melhor preço garantido</span>
+                    </div>
+                    <div class="rate-policy-circle w-5 h-5 rounded-full border-2 border-sand-border flex items-center justify-center shrink-0 mt-0.5">
+                      <div class="rate-policy-dot w-2.5 h-2.5 rounded-full bg-natureGold hidden"></div>
+                    </div>
+                  </div>
+                  <div class="flex items-baseline justify-between pt-2.5 border-t border-sand-border/60">
+                    <div>
+                      <span class="text-xs text-charcoal-muted font-montserrat block">Total com desconto:</span>
+                      <span class="text-[11px] text-emerald-700 font-semibold font-montserrat" id="rate-discount-display-non-refundable">Poupe -- €</span>
+                    </div>
+                    <span class="font-catamaran font-extrabold text-lg text-natureGold-dark" id="rate-price-display-non-refundable">-- €</span>
+                  </div>
+                </label>
               </div>
             </div>
 
@@ -1286,7 +1233,8 @@ import { ACCOMMODATIONS } from '../utils/data';
       const adultsSelect = document.getElementById('step-adults') as HTMLSelectElement | null;
       const childrenSelect = document.getElementById('step-children') as HTMLSelectElement | null;
       const accomRadios = document.querySelectorAll<HTMLInputElement>('input[name="accommodation_radio"]');
-      const rateOptionCards = document.querySelectorAll<HTMLLabelElement>('.rate-option-card');
+      const mealPlanCards = document.querySelectorAll<HTMLLabelElement>('.meal-plan-card');
+      const ratePolicyCards = document.querySelectorAll<HTMLLabelElement>('.rate-policy-card');
       const promoCodeInput = document.getElementById('promo-code-input') as HTMLInputElement | null;
       const btnApplyPromo = document.getElementById('btn-apply-promo') as HTMLButtonElement | null;
       const promoFeedback = document.getElementById('promo-feedback') as HTMLDivElement | null;
@@ -1393,7 +1341,11 @@ import { ACCOMMODATIONS } from '../utils/data';
           calNightsBadge.classList.remove('hidden');
         }
 
-        recalculateNightsAndPricing();
+        if (typeof filterAccommodations === 'function') {
+          filterAccommodations();
+        } else {
+          recalculateNightsAndPricing();
+        }
       };
 
       const updateTriggerHighlights = () => {
@@ -1672,17 +1624,61 @@ import { ACCOMMODATIONS } from '../utils/data';
         state.accommodationId = qTipologia;
       }
 
-      // Seleção visual da Tipologia
-      let matchedRadio = false;
-      accomRadios.forEach(radio => {
-        if (radio.value === state.accommodationId) {
-          radio.checked = true;
-          matchedRadio = true;
+      // Filtragem dinâmica de Alojamentos por Capacidade e Datas
+      const filterAccommodations = () => {
+        const totalGuests = state.adults + state.children;
+        let visibleCount = 0;
+        let currentSelectedIsVisible = false;
+
+        accomRadios.forEach(radio => {
+          const card = radio.closest<HTMLLabelElement>('.accom-radio-card');
+          const capMax = parseInt(card?.getAttribute('data-capacity-max') || radio.getAttribute('data-capacity-max') || '2');
+
+          // Apenas alojamentos com capacidade suficiente para o grupo aparecem
+          const isCapable = capMax >= totalGuests;
+
+          if (isCapable) {
+            card?.classList.remove('hidden');
+            visibleCount++;
+            if (radio.value === state.accommodationId) currentSelectedIsVisible = true;
+          } else {
+            card?.classList.add('hidden');
+          }
+        });
+
+        // Atualizar contador e feedback
+        const countBadge = document.getElementById('accom-count-badge');
+        const feedback = document.getElementById('accom-filter-feedback');
+        const noAccomAlert = document.getElementById('no-accom-alert');
+        const nextBtn1 = document.getElementById('btn-goto-step-2') as HTMLButtonElement | null;
+
+        if (countBadge) {
+          countBadge.textContent = `${visibleCount} ${visibleCount === 1 ? 'Disponível' : 'Disponíveis'}`;
         }
-      });
-      if (!matchedRadio && accomRadios.length > 0) {
-        accomRadios[0].checked = true;
-      }
+
+        if (feedback) {
+          feedback.textContent = `A apresentar ${visibleCount} ${visibleCount === 1 ? 'alojamento compatível' : 'alojamentos compatíveis'} para ${totalGuests} hóspedes (${state.adults} adultos${state.children > 0 ? `, ${state.children} crianças` : ''}) nas suas datas selecionadas.`;
+        }
+
+        if (visibleCount === 0) {
+          noAccomAlert?.classList.remove('hidden');
+          if (nextBtn1) nextBtn1.disabled = true;
+        } else {
+          noAccomAlert?.classList.add('hidden');
+          if (nextBtn1) nextBtn1.disabled = false;
+
+          // Se o alojamento anteriormente selecionado deixou de ser visível, selecionar o primeiro compatível
+          if (!currentSelectedIsVisible) {
+            const firstRadio = document.querySelector<HTMLInputElement>('.accom-radio-card:not(.hidden) input[name="accommodation_radio"]');
+            if (firstRadio) {
+              firstRadio.checked = true;
+              state.accommodationId = firstRadio.value;
+            }
+          }
+        }
+
+        updateAccomCardsUI();
+      };
 
       const updateAccomCardsUI = () => {
         accomRadios.forEach(radio => {
@@ -1710,20 +1706,97 @@ import { ACCOMMODATIONS } from '../utils/data';
       accomRadios.forEach(radio => {
         radio.addEventListener('change', updateAccomCardsUI);
       });
-      updateAccomCardsUI();
+
+      // Seleção visual inicial
+      let matchedRadio = false;
+      accomRadios.forEach(radio => {
+        if (radio.value === state.accommodationId) {
+          radio.checked = true;
+          matchedRadio = true;
+        }
+      });
+      if (!matchedRadio && accomRadios.length > 0) {
+        accomRadios[0].checked = true;
+      }
+      filterAccommodations();
 
       // Listeners de Adultos e Crianças
       adultsSelect?.addEventListener('change', () => {
         state.adults = parseInt(adultsSelect.value) || 2;
+        filterAccommodations();
         recalculateNightsAndPricing();
       });
 
       childrenSelect?.addEventListener('change', () => {
         state.children = parseInt(childrenSelect.value) || 0;
+        filterAccommodations();
         recalculateNightsAndPricing();
       });
 
-      // 4. Cálculo Específico de Tarifa por Regime e Política
+      // 4. Interface da Escolha da Pensão e Tarifas
+      const updateMealPlanUI = () => {
+        mealPlanCards.forEach(card => {
+          const key = card.getAttribute('data-meal-key');
+          const dot = card.querySelector<HTMLElement>('.meal-radio-dot');
+          const isSelected = key === state.mealPlan;
+          if (isSelected) {
+            card.classList.add('border-natureGold', 'bg-natureGold/10', 'ring-2', 'ring-natureGold/30');
+            card.classList.remove('border-sand-border', 'bg-white');
+            dot?.classList.remove('hidden');
+          } else {
+            card.classList.remove('border-natureGold', 'bg-natureGold/10', 'ring-2', 'ring-natureGold/30');
+            card.classList.add('border-sand-border', 'bg-white');
+            dot?.classList.add('hidden');
+          }
+        });
+
+        const activeMealTitle = document.getElementById('active-meal-title');
+        if (activeMealTitle) {
+          const mInfo = BACKOFFICE_CONFIG.mealPlans[state.mealPlan] || BACKOFFICE_CONFIG.mealPlans['apa'];
+          activeMealTitle.textContent = mInfo.fullName;
+        }
+      };
+
+      mealPlanCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const key = card.getAttribute('data-meal-key');
+          if (key) {
+            state.mealPlan = key;
+            updateMealPlanUI();
+            recalculateNightsAndPricing();
+          }
+        });
+      });
+
+      const updateRatePolicyUI = () => {
+        ratePolicyCards.forEach(card => {
+          const policy = card.getAttribute('data-policy');
+          const dot = card.querySelector<HTMLElement>('.rate-policy-dot');
+          const isSelected = policy === state.cancellationPolicy;
+          if (isSelected) {
+            card.classList.add('border-natureGold', 'bg-natureGold/5', 'ring-2', 'ring-natureGold/40', 'shadow-soft');
+            card.classList.remove('border-sand-border', 'bg-white');
+            dot?.classList.remove('hidden');
+          } else {
+            card.classList.remove('border-natureGold', 'bg-natureGold/5', 'ring-2', 'ring-natureGold/40', 'shadow-soft');
+            card.classList.add('border-sand-border', 'bg-white');
+            dot?.classList.add('hidden');
+          }
+        });
+      };
+
+      ratePolicyCards.forEach(card => {
+        card.addEventListener('click', () => {
+          const policy = card.getAttribute('data-policy');
+          if (policy) {
+            state.cancellationPolicy = policy;
+            updateRatePolicyUI();
+            recalculateNightsAndPricing();
+          }
+        });
+      });
+
+      // Cálculo Específico de Tarifa por Regime e Política
       function calculateSpecificRate(mealKey: string, policyKey: string) {
         const baseDaily = BACKOFFICE_CONFIG.basePrices[state.accommodationId] || 120;
         const roomStay = baseDaily * state.nights;
@@ -1757,52 +1830,6 @@ import { ACCOMMODATIONS } from '../utils/data';
           total
         };
       }
-
-      // Atualização dos cartões visuais de tarifa
-      function updateRateCardsPricesAndUI() {
-        const rateDisplays = document.querySelectorAll<HTMLElement>('.rate-price-display');
-        rateDisplays.forEach(el => {
-          const key = el.getAttribute('data-rate-key');
-          if (!key) return;
-          const [mKey] = key.split('_');
-          const policyKey = key.includes('non_refundable') ? 'non_refundable' : 'refundable';
-          const calc = calculateSpecificRate(mKey, policyKey);
-          el.textContent = `${calc.total.toFixed(2)} €`;
-        });
-
-        rateOptionCards.forEach(card => {
-          const meal = card.getAttribute('data-meal');
-          const policy = card.getAttribute('data-policy');
-          const radio = card.querySelector<HTMLInputElement>('input[name="selected_rate_option"]');
-          const dot = card.querySelector<HTMLElement>('.rate-radio-dot');
-          const isSelected = meal === state.mealPlan && policy === state.cancellationPolicy;
-
-          if (radio) radio.checked = isSelected;
-
-          if (isSelected) {
-            card.classList.add('border-natureGold', 'bg-natureGold/5', 'ring-2', 'ring-natureGold/40', 'shadow-soft');
-            card.classList.remove('border-sand-border', 'bg-white');
-            dot?.classList.remove('hidden');
-          } else {
-            card.classList.remove('border-natureGold', 'bg-natureGold/5', 'ring-2', 'ring-natureGold/40', 'shadow-soft');
-            card.classList.add('border-sand-border', 'bg-white');
-            dot?.classList.add('hidden');
-          }
-        });
-      }
-
-      // Event Listeners dos Cartões de Tarifa (APA, MP, PC e Reembolsável / Não Reembolsável)
-      rateOptionCards.forEach(card => {
-        card.addEventListener('click', () => {
-          const meal = card.getAttribute('data-meal');
-          const policy = card.getAttribute('data-policy');
-          if (meal && policy) {
-            state.mealPlan = meal;
-            state.cancellationPolicy = policy;
-            recalculateNightsAndPricing();
-          }
-        });
-      });
 
       // Aplicação de Voucher / Desconto de Backoffice
       const applyPromoCode = (codeStr: string) => {
@@ -1881,8 +1908,20 @@ import { ACCOMMODATIONS } from '../utils/data';
         state.promoDiscountTotal = currentCalc.promoDiscount;
         state.grandTotal = currentCalc.total;
 
-        // Atualizar os 6 cartões de tarifas na página
-        updateRateCardsPricesAndUI();
+        // Atualizar as tarifas exibidas para o regime de pensão ativo
+        const refRateCalc = calculateSpecificRate(state.mealPlan, 'refundable');
+        const nonRefRateCalc = calculateSpecificRate(state.mealPlan, 'non_refundable');
+
+        const refPriceEl = document.getElementById('rate-price-display-refundable');
+        const nonRefPriceEl = document.getElementById('rate-price-display-non-refundable');
+        const nonRefDiscountEl = document.getElementById('rate-discount-display-non-refundable');
+
+        if (refPriceEl) refPriceEl.textContent = `${refRateCalc.total.toFixed(2)} €`;
+        if (nonRefPriceEl) nonRefPriceEl.textContent = `${nonRefRateCalc.total.toFixed(2)} €`;
+        if (nonRefDiscountEl) nonRefDiscountEl.textContent = `Poupe ${nonRefRateCalc.policyDiscount.toFixed(2)} € (-${BACKOFFICE_CONFIG.nonRefundableDiscountPercent}%)`;
+
+        updateMealPlanUI();
+        updateRatePolicyUI();
 
         // Atualizar painel lateral
         const summaryNightsBadge = document.getElementById('summary-nights-badge');
