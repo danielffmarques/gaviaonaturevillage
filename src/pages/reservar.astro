@@ -635,13 +635,14 @@ import { ACCOMMODATIONS } from '../utils/data';
 
               <!-- Observações -->
               <div class="space-y-1.5 sm:col-span-2">
-                <label for="guest-notes" id="guest-notes-label" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold transition-all">
-                  Pedidos Especiais ou Observações (Opcional)
-                </label>
-                <p id="children-notes-alert" class="text-xs font-montserrat font-bold text-natureGold-dark flex items-center gap-1.5 py-1 px-2.5 rounded-lg bg-natureGold/10 border border-natureGold/25 hidden transition-all">
-                  <svg class="w-4 h-4 shrink-0 text-natureGold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
-                  <span>Por Favor, indique aqui a idade das crianças.</span>
-                </p>
+                <div class="flex flex-wrap items-center gap-2">
+                  <label for="guest-notes" id="guest-notes-label" class="block text-xs uppercase tracking-widest text-charcoal font-montserrat font-bold">
+                    Pedidos Especiais ou Observações
+                  </label>
+                  <span id="children-notes-alert" class="text-xs font-montserrat font-bold text-red-600 hidden">
+                    — Por Favor, indique aqui a idade das crianças.
+                  </span>
+                </div>
                 <textarea 
                   id="guest-notes" 
                   rows="3" 
@@ -1985,26 +1986,29 @@ import { ACCOMMODATIONS } from '../utils/data';
 
         if (summaryGrandTotal) summaryGrandTotal.textContent = `${state.grandTotal.toFixed(2)} €`;
 
-        // Atualizar frase e título de observações quando há crianças
-        const notesLabel = document.getElementById('guest-notes-label');
+        // Atualizar frase de aviso em vermelho da idade das crianças
+        updateChildrenNotice();
+      }
+
+      // Função dedicada para atualizar o aviso da idade das crianças em vermelho
+      const updateChildrenNotice = () => {
         const childrenAlert = document.getElementById('children-notes-alert');
         const notesTextarea = document.getElementById('guest-notes') as HTMLTextAreaElement | null;
-        if (notesLabel && childrenAlert) {
-          if (state.children > 0) {
-            notesLabel.textContent = 'Pedidos Especiais ou Observações';
+        const numChildren = parseInt(childrenSelect?.value || '0') || state.children || 0;
+        if (childrenAlert) {
+          if (numChildren > 0) {
             childrenAlert.classList.remove('hidden');
             if (notesTextarea && (!notesTextarea.value || notesTextarea.placeholder.startsWith('ex: Hora prevista'))) {
               notesTextarea.placeholder = 'Por Favor, indique aqui a idade das crianças (ex: 4 e 8 anos), hora prevista de chegada ou outras observações...';
             }
           } else {
-            notesLabel.textContent = 'Pedidos Especiais ou Observações (Opcional)';
             childrenAlert.classList.add('hidden');
             if (notesTextarea && (!notesTextarea.value || notesTextarea.placeholder.includes('idade das crianças'))) {
               notesTextarea.placeholder = 'ex: Hora prevista de chegada, restrições alimentares ou berço para bebé...';
             }
           }
         }
-      }
+      };
 
       recalculateNightsAndPricing();
 
@@ -2028,6 +2032,9 @@ import { ACCOMMODATIONS } from '../utils/data';
         }
         if (stepNumber >= 3 && (!state.payment.cardNumber || !cardNumberInput?.value)) {
           applyDemoPaymentData(false);
+        }
+        if (stepNumber === 2) {
+          updateChildrenNotice();
         }
         if (stepNumber === 4) {
           populateConfirmationScreen();
