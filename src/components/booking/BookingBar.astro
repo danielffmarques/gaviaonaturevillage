@@ -10,15 +10,10 @@ const { isFloating = false } = Astro.props;
 <div class={`w-full max-w-5xl mx-auto ${isFloating ? 'relative z-30' : ''}`}>
   <div class="bg-white rounded-2xl shadow-luxury border border-sand-border p-3.5 sm:p-5 transition-all duration-300">
     <form 
-      action="https://synergy.booking-channel.com/ibe/index.html?hotel=3142&lang=pt" 
+      action="/reservar" 
       method="GET" 
-      target="_blank"
       class="booking-bar-form grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.05fr_1.05fr_1.2fr_1.5fr] gap-2.5 sm:gap-3.5 items-end relative"
     >
-      <input type="hidden" name="hotel" value="3142" />
-      <input type="hidden" name="lang" value="pt" />
-      <input type="hidden" name="check_in" class="bb-hidden-checkin" value="" />
-      <input type="hidden" name="check_out" class="bb-hidden-checkout" value="" />
       <input type="hidden" name="checkin" class="bb-hidden-checkin-alias" value="" />
       <input type="hidden" name="checkout" class="bb-hidden-checkout-alias" value="" />
 

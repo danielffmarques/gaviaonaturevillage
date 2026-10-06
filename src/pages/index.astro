@@ -150,15 +150,11 @@ import '../styles/global.css';
 
         <!-- Barra Formulário: Sem molde/caixa em volta, posicionada por baixo das 4 páginas -->
         <form 
-          action="https://synergy.booking-channel.com/ibe/index.html" 
+          action="/reservar" 
           method="GET" 
-          target="_blank"
           class="relative flex flex-wrap sm:flex-nowrap items-end gap-2.5 pt-2"
           id="hp-booking-form"
         >
-          <input type="hidden" name="hotel" value="3142" />
-          <input type="hidden" name="lang" value="pt" />
-          
           <!-- Hidden inputs enviados para o motor de reservas (formato YYYY-MM-DD) -->
           <input type="hidden" id="hp-checkin" name="checkin" value="" />
           <input type="hidden" id="hp-checkout" name="checkout" value="" />
@@ -206,13 +202,13 @@ import '../styles/global.css';
             </label>
             <select 
               id="hp-guests" 
-              name="guests" 
+              name="adults" 
               class="w-full bg-black/45 backdrop-blur-md border border-white/20 hover:border-natureGold focus:border-natureGold rounded-lg px-3 py-2 text-xs font-semibold text-white focus:outline-none shadow-soft cursor-pointer transition-colors" 
             >
               <option value="2" class="bg-[#181614] text-white">2 Adultos (Casal)</option>
               <option value="1" class="bg-[#181614] text-white">1 Adulto</option>
-              <option value="fam" class="bg-[#181614] text-white">Família (2 Ad + Crianças)</option>
-              <option value="group" class="bg-[#181614] text-white">Grupo (+4 Pessoas)</option>
+              <option value="4" class="bg-[#181614] text-white">Família (4 Pessoas)</option>
+              <option value="6" class="bg-[#181614] text-white">Grupo (+4 Pessoas)</option>
             </select>
           </div>
 

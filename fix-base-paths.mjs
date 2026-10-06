@@ -46,9 +46,9 @@ function fixHtml(html) {
     // ── JavaScript string literals with /images/ (e.g. in data objects) ─────
     .replace(/(["'`])\/images\//g, `$1${BASE}/images/`)
 
-    // ── internal navigation href="/..." links ────────────────────────────────
+    // ── internal navigation href="/..." and form action="/..." links ─────────
     // Skip: external (http/https), already prefixed, anchor-only (#)
-    .replace(/(\shref=")\/([^"]*?)"/g, (match, prefix, path) => {
+    .replace(/(\s(?:href|action)=")\/([^"]*?)"/g, (match, prefix, path) => {
       if (path.startsWith('gaviaonaturevillage')) return match; // already fixed
       if (path.startsWith('/')) return match;                   // protocol-relative
       return `${prefix}${BASE}/${path}"`;
