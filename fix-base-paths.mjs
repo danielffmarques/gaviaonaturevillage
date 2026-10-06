@@ -28,29 +28,31 @@ function fixHtml(html) {
   return html
     // ── CSS / JS assets injected by Astro/Vite (/_astro/...) ────────────────
     .replace(/(\s(?:href|src))="\/_astro\//g, `$1="${BASE}/_astro/`)
+
     // ── <img src="/images/..."> and <source srcset="/images/..."> ────────────
     .replace(/(\s(?:src|srcset))="\/images\//g, `$1="${BASE}/images/`)
-    // ── favicon / other public root assets  ─────────────────────────────────
+
+    // ── meta content="/images/..." (og:image, twitter:image, etc.) ───────────
+    .replace(/(\scontent)="\/images\//g, `$1="${BASE}/images/`)
+
+    // ── favicon / other public root assets ──────────────────────────────────
     .replace(/(\shref)="\/favicon\.ico"/g, `$1="${BASE}/favicon.ico"`)
     .replace(/(\shref)="\/favicon\.svg"/g, `$1="${BASE}/favicon.svg"`)
     .replace(/(\shref)="\/logo\.svg"/g, `$1="${BASE}/logo.svg"`)
+
     // ── inline background-image: url("/images/...") in <style> tags ─────────
     .replace(/url\(["']?\/images\//g, `url("${BASE}/images/`)
+
+    // ── JavaScript string literals with /images/ (e.g. in data objects) ─────
+    .replace(/(["'`])\/images\//g, `$1${BASE}/images/`)
+
     // ── internal navigation href="/..." links ────────────────────────────────
     // Skip: external (http/https), already prefixed, anchor-only (#)
     .replace(/(\shref=")\/([^"]*?)"/g, (match, prefix, path) => {
       if (path.startsWith('gaviaonaturevillage')) return match; // already fixed
       if (path.startsWith('/')) return match;                   // protocol-relative
       return `${prefix}${BASE}/${path}"`;
-    })
-    // ── canonical / og:url meta tags that Astro may output ──────────────────
-    .replace(
-      /(<link\s[^>]*rel="canonical"[^>]*href=")([^"]+)(")/g,
-      (m, pre, url, post) => {
-        if (url.includes('gaviaonaturevillage')) return m;
-        return `${pre}${url.replace(/\/$/, '')}${post}`;
-      }
-    );
+    });
 }
 
 const htmlFiles = collectHtml(DIST);
