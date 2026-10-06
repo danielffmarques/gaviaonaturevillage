@@ -3,22 +3,57 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingBar from '../components/booking/BookingBar.astro';
 
+// Alojamentos oficiais mais recomendados para Aventura & Ecoturismo (nomes originais mantidos)
 const accommodations = [
   {
-    title: 'Tenda Glamping Safari Adventure',
+    id: 'tenda-glamping-amigos',
+    title: 'Glamping Amigos',
     image: '/images/alojamentos/media_25_Gavi.jpg',
-    capacity: '2 a 4 Aventureiros',
-    size: '40 m² + Deck Panorâmico',
-    features: ['Espaço amplo para equipamento outdoor', 'Deck exterior suspenso em madeira', 'Banheiro privativo completo', 'Ar condicionado quente/frio', 'Vistas desafogadas sobre os montes'],
-    desc: 'O ponto de partida perfeito para quem ama a vida ao ar livre. Toda a emoção do campismo autêntico com colchões ortopédicos de alto conforto e chuveiro de alta pressão para retemperar forças após um dia nos trilhos.'
+    capacity: '4 Camas Individuais',
+    size: '30 m² + Deck Exterior',
+    features: ['4 Camas individuais de solteiro (sem beliches)', 'Espaço generoso para equipamento outdoor', 'Casa de banho completa privativa', 'Ar condicionado potente (quente/frio)', 'Wi-Fi rápido para rotas e mapas GPS'],
+    desc: 'O acampamento-base perfeito para caminhantes, ciclistas e pequenos grupos de aventura. Dispõe de quatro camas individuais e casa de banho privativa completa, combinando o espírito do campismo ao ar livre com o máximo conforto.'
   },
   {
-    title: 'Cork Shelter Explorer',
-    image: '/images/alojamentos/media_10_Gavi_o.jpg',
-    capacity: '2 a 3 Hóspedes',
-    size: '32 m² + Terraço',
-    features: ['Isolamento natural em cortiça', 'Deck privativo para preparação de rotas', 'Casa de banho privativa ampla', 'Wi-Fi rápido para planeamento de GPS', 'Estacionamento privativo próximo'],
-    desc: 'Construído em cortiça 100% natural, garante um descanso térmico e acústico sem falhas depois de uma longa descida de canoa no Tejo ou de uma travessia de BTT.'
+    id: 'cork-shelter-superior',
+    title: 'Cork Shelter Superior',
+    image: '/images/alojamentos/media_11_Gavi.jpg',
+    capacity: 'Até 4 Pessoas',
+    size: '32 m² + Deck Panorâmico',
+    features: ['1 Cama de Casal + 1 Beliche embutido', 'Isolamento bioclimático em cortiça natural', 'Deck exterior para planeamento de rotas', 'Climatização individual & Smart TV', 'Mini-frigorífico para abastecimento desportivo'],
+    desc: 'Estrutura sólida revestida a cortiça natural alentejana, garantindo um descanso térmico e acústico sem falhas após um dia desafiante nos trilhos pedestres ou em descidas de caiaque nas águas do Rio Tejo.'
+  }
+];
+
+// Os 2 melhores programas oficiais para Aventura & Ecoturismo
+const recommendedPrograms = [
+  {
+    id: 'balonismo',
+    title: 'Balonismo',
+    subtitle: 'Sentirá o céu mais perto do que nunca sobre o Alto Alentejo',
+    image: '/images/experiencias/balonismo.webp',
+    desc: 'Erga-se suavemente sobre a paisagem do Alto Alentejo ao nascer do dia. Uma experiência memorável e emocionante que revela as curvas serpenteantes do Rio Tejo, os montados de sobreiros e o Castelo de Belver.',
+    highlights: [
+      'Voo panorâmico em balão de ar quente sobre o Alto Alentejo e Vale do Tejo',
+      'Batismo de voo com brinde tradicional de espumante e iguarias',
+      'Certificado oficial de voo personalizado',
+      'Pequeno-almoço buffet reforçado e relaxamento no Wellness Center'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/gnv_balonismo.pdf'
+  },
+  {
+    id: 'cultura-e-gastronomia',
+    title: 'Cultura e Gastronomia',
+    subtitle: 'A essência do território: património de Belver, margens do Tejo e sabedoria secular',
+    image: '/images/programas/pdf_cultura-e-gastronomia.jpg',
+    desc: 'Um programa ativo que conjuga o contacto profundo com os trilhos e miradouros do Tejo com a descoberta etnográfica do património de Belver e a degustação da cozinha típica alentejana.',
+    highlights: [
+      'Visitas culturais guiadas pelo património histórico de Gavião e Belver',
+      'Caminhadas e descoberta ativa da fauna e flora ribeirinha',
+      'Refeições tradicionais e provas gastronómicas de produtos locais',
+      'Acesso revigorante ao circuito de spa para recuperação física'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Cultura-Gastronomia.pdf'
   }
 ];
 
@@ -27,18 +62,24 @@ const experiences = [
     title: 'E-Bikes & Trilhos da Herdade',
     time: 'Aluguer Disponível',
     image: '/images/village/media_35_Gavi.jpg',
+    link: '/natureza-e-lazer',
+    actionText: 'Ver Atividades Outdoor',
     desc: 'Bicicletas de montanha e elétricas para explorar os 8 hectares da herdade e as vias rurais centenárias de Cadafaz e Belver com facilidade.'
   },
   {
     title: 'Recuperação Muscular no Spa',
     time: 'Wellness Center',
     image: '/images/wellness/media_37_Gavi_o.jpg',
-    desc: 'Piscina aquecida a 35°C com jatos de massagem subaquática para descompressão lombar e sauna seca para desintoxicação muscular profunda.'
+    link: '/wellness-center',
+    actionText: 'Conhecer o Spa',
+    desc: 'Piscina aquecida a 35°C com jatos de massagem subaquática para descompressão muscular e sauna seca após os trilhos.'
   },
   {
     title: 'Pequeno-Almoço & Jantar Energético',
     time: 'Cadafaz Restaurante',
     image: '/images/restaurante/media_20_Gavi_o.jpg',
+    link: '/cadafaz-restaurante',
+    actionText: 'Ver Restaurante',
     desc: 'Buffet matinal reforçado com frutas da época, frutos secos, ovos do campo e pão alentejano tradicional para carregar energias antes de partir para a aventura.'
   }
 ];
@@ -48,18 +89,21 @@ const surroundingActivities = [
     title: 'Passadiços do Alamal & Caniçada do Tejo',
     distance: '6 km do Resort',
     image: '/images/arredores/passadicos_alamal.jpg',
+    link: '/percursos-pedestres',
     desc: 'Passadiço de madeira que acompanha as curvas sinuosas do Rio Tejo entre a Praia Fluvial da Quinta do Alamal e a histórica ponte de Belver.'
   },
   {
     title: 'Descidas de Canoa & Stand Up Paddle',
     distance: 'Na Albufeira de Belver',
     image: '/images/experiencias/media_105_Gavi_o.jpg',
+    link: '/natureza-e-lazer',
     desc: 'Passeios de caiaque e SUP pelas águas tranquilas e límpidas do Tejo, passando na base das escarpadas arribas sob o Castelo de Belver.'
   },
   {
     title: 'Rede Oficial de Percursos Pedestres (PR1 a PR8)',
     distance: 'Concelho de Gavião',
     image: '/images/arredores/pr1_encostas_tejo.jpg',
+    link: '/percursos-pedestres',
     desc: 'Mais de 80 km de trilhos pedestres marcados que cruzam pontes romanas, cascatas secretas (Ribeira da Venda), antas pré-históricas e miradouros rochosos.'
   }
 ];
@@ -75,17 +119,17 @@ const faqs = [
   },
   {
     q: 'Ajudam a reservar atividades de canoagem ou desportos náuticos?',
-    a: 'Com certeza! Temos parceria direta com operadores náuticos e de animação turística do Tejo, podendo articular transfers e aluguer de kayaks e SUP.'
+    a: 'Com certeza! Temos ligação direta com operadores de animação turística do Tejo, podendo articular aluguer de caiaques, SUP e transfers.'
   }
 ];
 ---
 
 <BaseLayout
   title="Aventura & Ecoturismo | Gavião Nature Village — Desporto & Natureza no Tejo"
-  description="Explore o Alto Alentejo no seu estado mais puro: passadiços do Alamal no Tejo, canoagem, trilhos pedestres PR1 a PR8, BTT e o refúgio sustentável do Gavião Nature Village."
+  description="Explore o Alto Alentejo no seu estado mais puro: passadiços do Alamal no Tejo, balonismo, canoagem, trilhos pedestres PR1 a PR8, Glamping Amigos e Cork Shelters."
 >
   <!-- =========================================================================
-       HERO AVENTURA & ECOTURISMO: DESIGN CONSISTENTE COM A VILA
+       HERO AVENTURA & ECOTURISMO
        ========================================================================= -->
   <section class="relative min-h-[42vh] sm:min-h-[46vh] flex flex-col justify-center items-center overflow-hidden bg-charcoal">
     <div class="absolute inset-0 z-0">
@@ -110,7 +154,7 @@ const faqs = [
        1º PASSO: APRESENTAR A VILA (CAMPO-BASE SUSTENTÁVEL)
        ========================================================================= -->
   <section id="vila-aventura" class="relative bg-sand-warm text-charcoal border-b border-sand-border pt-0 pb-16 md:pb-24">
-    <!-- BARRA FORMULÁRIO (METADE DENTRO DO HERO, METADE DE FORA - APENAS AS 2 CORES: HERO E SECÇÃO) -->
+    <!-- BARRA FORMULÁRIO -->
     <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-1/2">
       <BookingBar isFloating={true} />
     </div>
@@ -131,17 +175,49 @@ const faqs = [
           </p>
 
           <p class="text-charcoal-muted text-sm sm:text-base leading-relaxed font-normal">
-            Daqui tem acesso imediato aos percursos pedestres PR do concelho, aos passadiços suspensos sobre o Tejo, a arribas de escalada em Belver e a praias fluviais com condições excecionais para desportos náuticos não motorizados. E ao final do dia, espera-o o conforto de uma massagem revigorante e uma refeição reconfortante.
+            Daqui tem acesso imediato aos percursos pedestres PR do concelho, aos passadiços suspensos sobre o Tejo, a voos de balão de ar quente e a praias fluviais com condições excecionais para desportos náuticos não motorizados. E ao final do dia, espera-o o conforto de uma massagem revigorante e uma refeição reconfortante.
           </p>
 
-          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand-border font-montserrat">
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">+80 km</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Trilhos Pedestres Oficiais</div>
+          <!-- HIGHLIGHTS DA 1ª SECÇÃO ESPECÍFICOS PARA AVENTURA -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand-border font-montserrat">
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+                <span>Trilhos PR1 a PR8</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Mais de 80 km de percursos pedestres oficiais pelas serras e margens do Tejo.
+              </p>
             </div>
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">Rio Tejo & Alamal</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Canoagem, SUP & Passadiços</div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span>Passadiços do Alamal</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Passadiço em falésia cénica sobre o Tejo e praia fluvial a 5 minutos do resort.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Balonismo Panorâmico</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Voo de balão de ar quente com vistas inigualáveis sobre o montado e o Castelo.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                <span>Recuperação no Spa</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Piscina térmica aquecida a 35°C e sauna seca para regeneração muscular pós-treino.
+              </p>
             </div>
           </div>
         </div>
@@ -158,10 +234,10 @@ const faqs = [
           </div>
           <div class="space-y-4 pt-8">
             <div class="h-44 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/hero/hero_village.webp" alt="Castelo de Belver e Tejo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/experiencias/balonismo.webp" alt="Voo de Balonismo" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="h-64 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/alojamentos/media_25_Gavi.jpg" alt="Tenda Glamping Aventura" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/arredores/passadicos_alamal.jpg" alt="Passadiços do Alamal" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -170,19 +246,21 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       2º PASSO: OS ALOJAMENTOS EXPLORER
+       2º PASSO: OS ALOJAMENTOS (NOMES ORIGINAIS MANTIDOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal border-t border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Campo-Base de Aventura
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Conforto Robusto & Descanso Merecido
+          Alojamentos para Exploradores
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Estruturas preparadas para quem vive o dia intensamente lá fora e valoriza uma boa noite de sono reparador com todo o conforto.
+          Tendas Glamping e Cork Shelters pensados para acolher aventureiros, caminhantes e pequenos grupos com total comodidade.
         </p>
       </div>
 
@@ -194,7 +272,7 @@ const faqs = [
                 <img 
                   src={item.image} 
                   alt={item.title} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -228,12 +306,18 @@ const faqs = [
               </div>
             </div>
 
-            <div class="p-8 pt-0">
+            <div class="p-8 pt-0 flex flex-col sm:flex-row gap-3">
               <a 
-                href="/reservar?perfil=aventura" 
-                class="w-full block text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
+                href={`/reservar?tipologia=${item.id}&perfil=aventura`} 
+                class="flex-1 text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
               >
-                Verificar Disponibilidade Explorer
+                Reservar {item.title}
+              </a>
+              <a 
+                href={`/alojamento#${item.id}`} 
+                class="px-5 py-3.5 text-center font-montserrat font-semibold text-xs uppercase tracking-wider rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold bg-white transition-all"
+              >
+                Detalhes
               </a>
             </div>
           </div>
@@ -243,19 +327,118 @@ const faqs = [
     </div>
   </section>
 
+  <!-- =========================================================================
+       NOVA SECÇÃO: OS 2 MELHORES PROGRAMAS PARA AVENTURA
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-[#FAF7F2] text-charcoal border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+          Packs Ativos & Ecoturismo
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Programas Recomendados para Aventureiros
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Experiências que combinam a adrenalina das alturas e a exploração do território com a comodidade do resort.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {recommendedPrograms.map((prog) => (
+          <div class="bg-white rounded-2xl overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                <img 
+                  src={prog.image} 
+                  alt={prog.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span class="absolute top-4 left-4 bg-[#141210]/85 text-natureGold px-3 py-1 rounded text-xs font-montserrat font-bold uppercase tracking-wider backdrop-blur-md">
+                  Programa Especial
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <div>
+                  <h3 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                    {prog.title}
+                  </h3>
+                  <p class="font-catamaran text-natureGold-dark text-xs sm:text-sm font-semibold mt-1">
+                    {prog.subtitle}
+                  </p>
+                </div>
+
+                <p class="text-charcoal-muted text-sm leading-relaxed">
+                  {prog.desc}
+                </p>
+
+                <div class="bg-sand-warm rounded-xl p-4 border border-sand-border space-y-2">
+                  <span class="font-montserrat font-bold text-[11px] uppercase tracking-wider text-charcoal block">
+                    O Que Está Incluído:
+                  </span>
+                  <ul class="space-y-1.5 text-xs font-montserrat text-charcoal-muted">
+                    {prog.highlights.map(h => (
+                      <li class="flex items-start gap-2">
+                        <span class="text-natureGold font-bold">•</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8 pt-0 flex flex-wrap items-center gap-3">
+              <a 
+                href={`/experiencias#${prog.id}`} 
+                class="flex-1 btn-gold font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl text-center shadow-soft hover:shadow-gold transition-all"
+              >
+                Ver Programa Completo →
+              </a>
+              <a 
+                href={prog.pdfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-3 rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold font-montserrat font-semibold text-xs inline-flex items-center gap-1.5 transition-all"
+              >
+                <span>PDF</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href="/experiencias" 
+          class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
+        >
+          <span>Conhecer Todos os 7 Programas & Experiências</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- =========================================================================
-       3º PASSO: AS EXPERIÊNCIAS ATIVAS
+       3º PASSO: AS VIVÊNCIAS NO RESORT (COM LINKS PRÓPRIOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-sand-warm text-charcoal border-t border-b border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Recuperação & Energia
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Energia, Movimento & Recuperação
+          Comodidades para Atletas
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          E-bikes na ponta dos dedos, trilhos na propriedade e o circuito de hidroterapia para relaxar os músculos cansados.
+          Recarregue baterias com refeições energéticas, aluguer de bicicletas elétricas e descompressão muscular no circuito termal.
         </p>
       </div>
 
@@ -284,10 +467,10 @@ const faqs = [
             </div>
             <div class="p-6 pt-0">
               <a 
-                href="/experiencias" 
-                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5"
+                href={exp.link} 
+                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5 transition-colors"
               >
-                <span>Saber Mais</span>
+                <span>{exp.actionText}</span>
                 <span>→</span>
               </a>
             </div>
@@ -298,25 +481,27 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       4º PASSO: O QUE FAZER NOS ARREDORES (ROTAS & TEJO)
+       4º PASSO: O QUE FAZER (ARREDORES & ATIVIDADES DE AVENTURA COM LINKS CORRETOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Desporto Outdoor
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Trilhos, Desfiladeiros & Águas do Tejo
+          Trilhos & Tejo Selvagem
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Passadiços de madeira à beira-rio, cascatas de águas translúcidas e uma rede fantástica de percursos pedestres sinalizados.
+          Descubra o Rio Tejo em caiaque, percorra os passadiços do Alamal suspensos nas arribas e aventure-se pelos mais de 80 km de percursos pedestres.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {surroundingActivities.map((act) => (
-          <div class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group">
+          <a href={act.link} class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group block">
             <div class="h-60 overflow-hidden relative">
               <img 
                 src={act.image} 
@@ -335,8 +520,12 @@ const faqs = [
               <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
                 {act.desc}
               </p>
+              <div class="pt-2 text-xs uppercase tracking-wider text-natureGold-dark font-montserrat font-bold flex items-center gap-1">
+                <span>Ver Roteiro</span>
+                <span>→</span>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -345,7 +534,7 @@ const faqs = [
           href="/arredores" 
           class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
         >
-          <span>Ver Mapa de Percursos e Arredores</span>
+          <span>Explorar Todos os Roteiros dos Arredores</span>
           <span>→</span>
         </a>
       </div>
@@ -353,16 +542,15 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       FAQS DE AVENTURA & OUTDOOR
+       FAQS ESPECÍFICAS DE AVENTURA
        ========================================================================= -->
   <section class="py-16 md:py-20 bg-sand-warm text-charcoal border-t border-sand-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
       <div class="text-center mb-12">
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
-          Perguntas Frequentes de Ecoturismo & Desporto
+          Perguntas Frequentes de Aventureiros
         </h2>
       </div>
 
@@ -382,17 +570,16 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA (ESTILO A VILA)
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
        ========================================================================= -->
   <section id="reserva" class="py-12 md:py-16 bg-white border-t border-sand-border">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
       <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-3">
-        Reserve a Sua Estadia de Aventura
+        Prepare a Sua Próxima Aventura
       </h2>
       <p class="font-catamaran text-charcoal-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        Garantam a melhor tarifa disponível diretamente connosco, oferta de tracks GPX e acesso livre ao Wellness Center para recuperação muscular.
+        Garantam a melhor tarifa disponível diretamente connosco, oferta de tracks de percursos pedestres e acesso livre ao Wellness Center.
       </p>
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

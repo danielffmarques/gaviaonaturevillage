@@ -3,22 +3,57 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingBar from '../components/booking/BookingBar.astro';
 
+// Alojamentos oficiais mais recomendados para Bem-Estar & Retiro (nomes originais mantidos)
 const accommodations = [
   {
-    title: 'Cork Shelter Zen Retreat',
-    image: '/images/alojamentos/media_12_Gavi_o.jpg',
+    id: 'cork-shelter-standard',
+    title: 'Cork Shelter Standard',
+    image: '/images/alojamentos/media_7_Gavi_o.jpg',
     capacity: '1 a 2 Hóspedes',
-    size: '32 m² + Deck de Meditação',
-    features: ['Isolamento 100% em cortiça natural', 'Deck privado virado para o nascer do sol', 'Iluminação suave e relaxante', 'Chuveiro termostático amplo', 'Chás biológicos e infusões locais'],
-    desc: 'Um casulo de repouso absoluto. A cortiça natural absorve as ressonâncias sonoras e mantém uma temperatura estável, criando o ambiente perfeito para restabelecer o equilíbrio e os ciclos de sono.'
+    size: '26 m² + Deck Exterior',
+    features: ['Isolamento 100% em cortiça natural', 'Cama Queen ortopédica de alto conforto', 'Deck privado virado para o silêncio', 'Chuveiro amplo termostático', 'Chás biológicos e infusões locais'],
+    desc: 'Um casulo de repouso absoluto. A cortiça natural alentejana absorve ressonâncias sonoras e mantém a temperatura estável, criando o ambiente perfeito para restabelecer os ciclos de sono e meditar sem interferências.'
   },
   {
-    title: 'Tenda Glamping Natureza',
-    image: '/images/alojamentos/media_28_Gavi.jpg',
-    capacity: '2 Hóspedes',
-    size: '35 m² + Terraço Panorâmico',
-    features: ['Design eco-minimalista', 'Cama King-size ortopédica', 'Banho privativo completo', 'Ar condicionado silencioso', 'Vista aberta para o olival'],
-    desc: 'Adormecer com a brisa suave e acordar com o chilrear dos pássaros. Uma vivência de conexão sensorial direta com os elementos naturais sem abdicar de nenhum conforto.'
+    id: 'cork-shelter-superior',
+    title: 'Cork Shelter Superior',
+    image: '/images/alojamentos/media_11_Gavi.jpg',
+    capacity: 'Até 4 Hóspedes',
+    size: '32 m² + Sala com Luz Natural',
+    features: ['Espaço amplo com luz natural suave', 'Deck exterior para práticas contemplativas', 'Ar condicionado silencioso (quente/frio)', 'Chaleira elétrica e seleção de chás', 'Vistas abertas sobre o montado'],
+    desc: 'Espaço generoso e acolhedor para estadias de descompressão prolongada. A pequena sala de estar com luz natural e o deck virado para os sobreiros convidam à leitura, à respiração consciente e à contemplação da natureza.'
+  }
+];
+
+// Os 2 melhores programas oficiais para Bem-Estar & Retiro
+const recommendedPrograms = [
+  {
+    id: 'reconnect-thrive',
+    title: 'Reconnect & Thrive',
+    subtitle: 'Revitalização holística do corpo e da mente no silêncio de Cadafaz',
+    image: '/images/programas/pdf_reconnect-thrive.jpg',
+    desc: 'Um retiro anti-stress desenhado para restabelecer a energia vital. Combina o circuito diário de bem-estar (piscina interior aquecida, jacuzzi, sauna finlandesa e banho turco) com massagens terapêuticas e caminhadas na natureza.',
+    highlights: [
+      'Estadia de charme em Cork Shelter com isolamento bio-acústico',
+      'Acesso diário ilimitado ao circuito de hidroterapia e sauna',
+      'Massagens terapêuticas com óleos essenciais locais de alfazema',
+      'Caminhadas lentas e contemplativas nos trilhos da herdade'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Reconnect-Thrive.pdf'
+  },
+  {
+    id: 'experiencia-gastronomica',
+    title: 'Experiência Gastronómica',
+    subtitle: 'A riqueza dos sabores genuínos do Alentejo e a comunhão com a terra',
+    image: '/images/programas/pdf_experiencia-gastronomica.jpg',
+    desc: 'Uma viagem sensorial onde a alimentação equilibrada e os produtos frescos da horta biológica se unem à tradição culinária do Alto Alentejo, proporcionando momentos de puro prazer e conexão.',
+    highlights: [
+      'Jantar de degustação de pratos típicos no Restaurante Cadafaz',
+      'Harmonização exclusiva com vinhos selecionados da região',
+      'Pequeno-almoço buffet com produtos frescos, caseiros e da época',
+      'Acesso revigorante ao circuito do Wellness Center'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Experiencia-Gastronomica.pdf'
   }
 ];
 
@@ -27,18 +62,24 @@ const experiences = [
     title: 'Circuito Térmico Completo & Sauna',
     time: 'Wellness Center',
     image: '/images/wellness/media_37_Gavi_o.jpg',
+    link: '/wellness-center',
+    actionText: 'Conhecer o Circuito Térmico',
     desc: 'Piscina interior aquecida com jatos relaxantes, sauna finlandesa com luz natural e banho turco para desintoxicação celular profunda.'
   },
   {
     title: 'Massagens de Assinatura com Óleos Locais',
     time: 'Terapeutas Certificadas',
     image: '/images/wellness/media_38_Gavi_o.jpg',
+    link: '/wellness-center',
+    actionText: 'Ver Tratamentos',
     desc: 'Tratamentos holísticos personalizados com recurso a óleos essenciais de alecrim, alfazema e azeite biológico do Alto Alentejo.'
   },
   {
     title: 'Sessões de Yoga & Meditação na Cúpula',
     time: 'Tenda Geodésica',
     image: '/images/village/media_33_Gavi.jpg',
+    link: '/wellness-center',
+    actionText: 'Ver Espaço Holístico',
     desc: 'Práticas restaurativas ao nascer e pôr do sol num espaço circular envidraçado integrado nos sobreiros, com instrutores dedicados.'
   }
 ];
@@ -48,18 +89,21 @@ const surroundingActivities = [
     title: 'Passeio Silencioso nos Passadiços do Alamal',
     distance: '6 km do Resort',
     image: '/images/arredores/passadicos_alamal.jpg',
+    link: '/percursos-pedestres',
     desc: 'Um percurso plano de madeira junto às águas límpidas do Tejo. O som da correnteza e o ar puro da serra proporcionam uma terapia natural anti-stress.'
   },
   {
     title: 'Trilhos Pedestres Entre Vinhedos & Montado',
     distance: 'Na Herdade & Cadafaz',
     image: '/images/village/media_35_Gavi.jpg',
+    link: '/percursos-pedestres',
     desc: 'Percursos sinalizados dentro da herdade de 8 hectares para caminhadas lentas e contemplativas entre vinhas históricas e sobreiros.'
   },
   {
     title: 'Praia Fluvial da Ribeira da Venda',
     distance: '7 km do Resort',
     image: '/images/arredores/ribeira_venda.jpg',
+    link: '/natureza-e-lazer',
     desc: 'Recanto paradisíaco com cascatas de água pura e sombras abundantes, longe das multidões e perfeito para relaxar em contacto com a água.'
   }
 ];
@@ -82,10 +126,10 @@ const faqs = [
 
 <BaseLayout
   title="Bem-Estar & Retiro | Gavião Nature Village — Spa & Tranquilidade no Alentejo"
-  description="Desacelere e regenere corpo e mente no Gavião Nature Village: circuito de spa térmico, massagens com óleos locais, yoga na cúpula geodésica e silêncio absoluto em Cadafaz."
+  description="Desacelere e regenere corpo e mente no Gavião Nature Village: circuito de spa térmico, Cork Shelters bioclimáticos em cortiça, massagens com óleos locais e tranquilidade absoluta."
 >
   <!-- =========================================================================
-       HERO BEM-ESTAR & RETIRO: DESIGN CONSISTENTE COM A VILA
+       HERO BEM-ESTAR & RETIRO
        ========================================================================= -->
   <section class="relative min-h-[42vh] sm:min-h-[46vh] flex flex-col justify-center items-center overflow-hidden bg-charcoal">
     <div class="absolute inset-0 z-0">
@@ -110,7 +154,7 @@ const faqs = [
        1º PASSO: APRESENTAR A VILA (SOB O OLHAR DE BEM-ESTAR)
        ========================================================================= -->
   <section id="vila-wellness" class="relative bg-sand-warm text-charcoal border-b border-sand-border pt-0 pb-16 md:pb-24">
-    <!-- BARRA FORMULÁRIO (METADE DENTRO DO HERO, METADE DE FORA - APENAS AS 2 CORES: HERO E SECÇÃO) -->
+    <!-- BARRA FORMULÁRIO -->
     <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-1/2">
       <BookingBar isFloating={true} />
     </div>
@@ -134,14 +178,46 @@ const faqs = [
             O material de eleição das nossas estruturas é o aglomerado de cortiça expandida pura — um material 100% natural com propriedades acústicas comprovadas que neutraliza ruídos exteriores e transmite uma sensação ímpar de abrigo biológico.
           </p>
 
-          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand-border font-montserrat">
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">35°C Térmicos</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Piscina Interior Aquecida</div>
+          <!-- HIGHLIGHTS DA 1ª SECÇÃO ESPECÍFICOS PARA BEM-ESTAR -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand-border font-montserrat">
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                <span>Circuito Térmico a 35°C</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Piscina interior aquecida com jatos relaxantes, sauna finlandesa e banho turco.
+              </p>
             </div>
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">Slow Living</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Ritmo Natural & Tranquilidade</div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Tenda Geodésica & Yoga</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Espaço zen circular envidraçado integrado nos sobreiros para meditação e práticas lentas.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                <span>100% Cortiça Antirruído</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Arquitetura biológica que neutraliza frequências externas e regenera o sono.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" /></svg>
+                <span>Slow Food & Infusões</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Cozinha equilibrada no Cadafaz com ervas e legumes colhidos na horta biológica.
+              </p>
             </div>
           </div>
         </div>
@@ -158,10 +234,10 @@ const faqs = [
           </div>
           <div class="space-y-4 pt-8">
             <div class="h-44 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/wellness/media_38_Gavi_o.jpg" alt="Gabinete de Massagens" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/wellness/media_38_Gavi_o.jpg" alt="Massagens Terapêuticas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="h-64 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/village/media_3_Gavi.jpg" alt="Recanto de Leitura na Herdade" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/village/media_33_Gavi.jpg" alt="Cúpula de Yoga e Meditação" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -170,19 +246,21 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       2º PASSO: OS ALOJAMENTOS BIOCLIMÁTICOS
+       2º PASSO: OS ALOJAMENTOS (NOMES ORIGINAIS MANTIDOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal border-t border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Alojamentos para Retiro
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Casulos de Paz & Conforto Térmico
+          Silêncio, Equilíbrio & Luz Natural
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Acomodações integradas na paisagem que combinam sustentabilidade, materiais nobres e isolamento térmico e acústico para um sono verdadeiramente reparador.
+          Cork Shelters ecológicos revestidos a cortiça autóctone, concebidos para proporcionar um isolamento sereno e um descanso profundo.
         </p>
       </div>
 
@@ -194,7 +272,7 @@ const faqs = [
                 <img 
                   src={item.image} 
                   alt={item.title} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -228,12 +306,18 @@ const faqs = [
               </div>
             </div>
 
-            <div class="p-8 pt-0">
+            <div class="p-8 pt-0 flex flex-col sm:flex-row gap-3">
               <a 
-                href="/reservar?perfil=bem-estar" 
-                class="w-full block text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
+                href={`/reservar?tipologia=${item.id}&perfil=bem-estar`} 
+                class="flex-1 text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
               >
-                Verificar Disponibilidade de Retiro
+                Reservar {item.title}
+              </a>
+              <a 
+                href={`/alojamento#${item.id}`} 
+                class="px-5 py-3.5 text-center font-montserrat font-semibold text-xs uppercase tracking-wider rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold bg-white transition-all"
+              >
+                Detalhes
               </a>
             </div>
           </div>
@@ -243,19 +327,118 @@ const faqs = [
     </div>
   </section>
 
+  <!-- =========================================================================
+       NOVA SECÇÃO: OS 2 MELHORES PROGRAMAS PARA BEM-ESTAR
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-[#FAF7F2] text-charcoal border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+          Packs de Retiro & Relaxamento
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Programas Recomendados para Bem-Estar
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Experiências integradas que combinam circuito termal diário, rituais de massagem e alimentação equilibrada.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {recommendedPrograms.map((prog) => (
+          <div class="bg-white rounded-2xl overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                <img 
+                  src={prog.image} 
+                  alt={prog.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span class="absolute top-4 left-4 bg-[#141210]/85 text-natureGold px-3 py-1 rounded text-xs font-montserrat font-bold uppercase tracking-wider backdrop-blur-md">
+                  Programa Especial
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <div>
+                  <h3 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                    {prog.title}
+                  </h3>
+                  <p class="font-catamaran text-natureGold-dark text-xs sm:text-sm font-semibold mt-1">
+                    {prog.subtitle}
+                  </p>
+                </div>
+
+                <p class="text-charcoal-muted text-sm leading-relaxed">
+                  {prog.desc}
+                </p>
+
+                <div class="bg-sand-warm rounded-xl p-4 border border-sand-border space-y-2">
+                  <span class="font-montserrat font-bold text-[11px] uppercase tracking-wider text-charcoal block">
+                    O Que Está Incluído:
+                  </span>
+                  <ul class="space-y-1.5 text-xs font-montserrat text-charcoal-muted">
+                    {prog.highlights.map(h => (
+                      <li class="flex items-start gap-2">
+                        <span class="text-natureGold font-bold">•</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8 pt-0 flex flex-wrap items-center gap-3">
+              <a 
+                href={`/experiencias#${prog.id}`} 
+                class="flex-1 btn-gold font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl text-center shadow-soft hover:shadow-gold transition-all"
+              >
+                Ver Programa Completo →
+              </a>
+              <a 
+                href={prog.pdfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-3 rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold font-montserrat font-semibold text-xs inline-flex items-center gap-1.5 transition-all"
+              >
+                <span>PDF</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href="/experiencias" 
+          class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
+        >
+          <span>Conhecer Todos os 7 Programas & Experiências</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- =========================================================================
-       3º PASSO: AS EXPERIÊNCIAS DE SPA & WELLNESS
+       3º PASSO: AS VIVÊNCIAS NO RESORT (COM LINKS PRÓPRIOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-sand-warm text-charcoal border-t border-b border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Regeneração & Paz
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Rituais de Revitalização
+          Momentos de Equilíbrio
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Circuito hidrotermal, técnicas ancestrais de massagem e pratos nutritivos preparados com ingredientes puros da nossa horta.
+          Circuito hidroterápico, sauna e práticas de corpo e mente imersas na tranquilidade dos sobreiros centenários.
         </p>
       </div>
 
@@ -284,10 +467,10 @@ const faqs = [
             </div>
             <div class="p-6 pt-0">
               <a 
-                href="/experiencias" 
-                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5"
+                href={exp.link} 
+                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5 transition-colors"
               >
-                <span>Descobrir Menu de Massagens</span>
+                <span>{exp.actionText}</span>
                 <span>→</span>
               </a>
             </div>
@@ -298,25 +481,27 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       4º PASSO: O QUE FAZER (ARREDORES & BANHOS DE NATUREZA)
+       4º PASSO: O QUE FAZER (ARREDORES & ATIVIDADES DE BEM-ESTAR COM LINKS CORRETOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Natureza Restauradora
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Banhos de Natureza & Ar Puro
+          Caminhadas & Silêncio Natural
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Caminhadas lentas e silenciosas entre montados e junto às margens transparentes do Tejo para renovar as energias.
+          O contacto com os elementos naturais da região: o curso suave do Rio Tejo, a frescura das cascatas e a serenidade do montado.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {surroundingActivities.map((act) => (
-          <div class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group">
+          <a href={act.link} class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group block">
             <div class="h-60 overflow-hidden relative">
               <img 
                 src={act.image} 
@@ -335,8 +520,12 @@ const faqs = [
               <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
                 {act.desc}
               </p>
+              <div class="pt-2 text-xs uppercase tracking-wider text-natureGold-dark font-montserrat font-bold flex items-center gap-1">
+                <span>Ver Roteiro</span>
+                <span>→</span>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -345,7 +534,7 @@ const faqs = [
           href="/arredores" 
           class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
         >
-          <span>Conhecer Todos os Arredores do Tejo</span>
+          <span>Explorar Todos os Roteiros dos Arredores</span>
           <span>→</span>
         </a>
       </div>
@@ -353,16 +542,15 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       FAQS DE BEM-ESTAR
+       FAQS ESPECÍFICAS DE BEM-ESTAR
        ========================================================================= -->
   <section class="py-16 md:py-20 bg-sand-warm text-charcoal border-t border-sand-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
       <div class="text-center mb-12">
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
-          Perguntas Frequentes sobre Bem-Estar & Spa
+          Perguntas Frequentes sobre Bem-Estar
         </h2>
       </div>
 
@@ -382,9 +570,8 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA (ESTILO A VILA)
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
        ========================================================================= -->
   <section id="reserva" class="py-12 md:py-16 bg-white border-t border-sand-border">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
@@ -392,7 +579,7 @@ const faqs = [
         Reserve o Seu Retiro de Bem-Estar
       </h2>
       <p class="font-catamaran text-charcoal-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        Garantam a melhor tarifa disponível diretamente connosco, acesso livre ao circuito hidrotermal e massagens exclusivas.
+        Garantam a melhor tarifa disponível diretamente connosco, oferta de infusões de boas-vindas e acesso livre ao Wellness Center.
       </p>
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

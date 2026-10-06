@@ -3,22 +3,57 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingBar from '../components/booking/BookingBar.astro';
 
+// Alojamentos oficiais mais recomendados para Famílias (nomes originais mantidos)
 const accommodations = [
   {
+    id: 'cork-shelter-familiar',
     title: 'Cork Shelter Familiar',
     image: '/images/alojamentos/media_8_Gavi_o.jpg',
-    capacity: 'Até 4 Pessoas (2 Adultos + 2 Crianças)',
-    size: '42 m² + Terraço Privado',
-    features: ['Quarto principal casal + Beliche infantil', 'Kitchenette equipada com micro-ondas e frigorífico', 'Casa de banho privativa ampla', 'Isolamento em cortiça natural segura', 'Deck exterior com vedação suave'],
-    desc: 'O refúgio prático e seguro para férias em família. Com espaço generoso e kitchenette de apoio para preparar pequenas refeições e lanches para os mais novos com toda a conveniência.'
+    capacity: 'Até 8 Pessoas (Famílias & Grupos)',
+    size: '48 m² + Amplo Terraço',
+    features: ['2 Quartos privados independentes', '2 Casas de banho completas privativas', 'Sala de estar comum com mesa de refeições', 'Isolamento em cortiça natural segura', 'Deck exterior com vedação suave'],
+    desc: 'O refúgio prático e seguro para férias em família. Com dois quartos privados e duas casas de banho completas, oferece espaço amplo e total conforto para acolher até 8 pessoas com privacidade e autonomia.'
   },
   {
-    title: 'Tenda Glamping Familiar',
+    id: 'tenda-glamping-familiar',
+    title: 'Glamping Familiar',
     image: '/images/alojamentos/media_121_Gavi_o.jpg',
-    capacity: 'Até 4 Pessoas',
-    size: '45 m² + Deck Amplo',
-    features: ['1 Cama King + 2 Camas individuais', 'Casa de banho completa privativa', 'Terraço suspenso de madeira', 'Climatização eficiente (quente/frio)', 'Total integração na natureza'],
-    desc: 'Uma experiência inesquecível para as crianças: dormir numa tenda de safari de luxo sob as estrelas, com o conforto, segurança e casa de banho de um hotel moderno.'
+    capacity: 'Até 4 Pessoas (2 Adultos + 2 Crianças)',
+    size: '40 m² + Deck Amplo',
+    features: ['1 Cama de Casal + 1 Beliche em madeira', 'Casa de banho completa privativa', 'Terraço suspenso de madeira', 'Climatização eficiente (quente/frio)', 'Total integração na natureza'],
+    desc: 'Uma experiência inesquecível para as crianças: dormir numa tenda de safari na natureza com beliche embutido em madeira, mantendo o conforto, segurança, ar condicionado e casa de banho privativa de um hotel de charme.'
+  }
+];
+
+// Os 2 melhores programas oficiais para Famílias
+const recommendedPrograms = [
+  {
+    id: 'familia-no-campo',
+    title: 'Família no Campo',
+    subtitle: 'Liberdade, ar puro, descoberta da natureza e contacto genuíno com os animais',
+    image: '/images/programas/pdf_familia-no-campo.jpg',
+    desc: 'O cenário ideal para uma escapadela familiar diferente. Venha desfrutar com os seus entes queridos da luz dourada do Alentejo, das colinas ondulantes e dos caminhos rurais, proporcionando momentos mágicos na quinta pedagógica e na natureza.',
+    highlights: [
+      'Alojamento em Cork Shelter Familiar acolhedor e independente',
+      'Experiência na Quinta Pedagógica e contacto com os animais',
+      'Cesto de piquenique familiar para saborear nos campos da herdade',
+      'Utilização livre de bicicletas e mapas de percursos pedestres'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Familia-no-Campo.pdf'
+  },
+  {
+    id: 'cultura-e-tradicao',
+    title: 'Cultura e Tradição',
+    subtitle: 'A arte das Rodilhas de Belver, a herança etnográfica e a identidade comunitária',
+    image: '/images/programas/pdf_cultura-e-tradicao.jpg',
+    desc: 'Tecidos antigos, cores e estampados vibrantes dão vida às rodilhas de lã — antigas almofadas de cabeça das mulheres alentejanas. Um programa enriquecedor e divertido que convida miúdos e graúdos a mergulhar nas raízes autênticas de Gavião.',
+    highlights: [
+      'Visita guiada ao Museu do Sabão de Belver e Museu das Mantas',
+      'Workshop da arte tradicional das Rodilhas de Belver em família',
+      'Lembrança artesanal exclusiva confeccionada por artesãos locais',
+      'Acesso ao circuito de sauna e banho turco no Wellness Center'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/GNV_Cultura-Tradicao.pdf'
   }
 ];
 
@@ -27,18 +62,24 @@ const experiences = [
     title: 'Alimentar os Animais na Quinta',
     time: 'Quinta Pedagógica',
     image: '/images/village/media_1_Gavi.jpg',
+    link: '/village#quinta-pedagogica',
+    actionText: 'Conhecer a Quinta',
     desc: 'Todas as manhãs as crianças podem acompanhar o tratamento dos póneis, cabrinhas anãs e patos, colhendo também vegetais frescos na horta biológica.'
   },
   {
     title: 'Mergulhos Seguros na Piscina',
     time: 'Zona de Lazer Exterior',
     image: '/images/village/media_15_Gavi_o.jpg',
+    link: '/village#lazer',
+    actionText: 'Ver Espaços de Lazer',
     desc: 'Piscina de água salgada tratada biologicamente, com zona de baixa profundidade para crianças, espreguiçadeiras e relvados amplos para brincadeiras.'
   },
   {
     title: 'Refeições Descontraídas em Família',
     time: 'Cadafaz Restaurante',
     image: '/images/restaurante/media_20_Gavi_o.jpg',
+    link: '/cadafaz-restaurante',
+    actionText: 'Ver Restaurante',
     desc: 'Menu especial para os mais pequenos com ingredientes frescos da herdade, cadeirões de bebé e espaço amplo sem constrangimentos.'
   }
 ];
@@ -48,18 +89,21 @@ const surroundingActivities = [
     title: 'Praia Fluvial da Quinta do Alamal',
     distance: '6 km do Resort',
     image: '/images/arredores/praia_alamal.jpg',
+    link: '/natureza-e-lazer',
     desc: 'Praia de águas calmas e límpidas com Bandeira Azul no Tejo, vigilância balnear no verão, sombras de arvoredo e parque de merendas.'
   },
   {
     title: 'Museu do Sabão & Museu das Mantas',
     distance: '4 km (Belver)',
     image: '/images/arredores/museu_sabao.jpg',
+    link: '/patrimonio-e-cultura',
     desc: 'Dois espaços museológicos interativos e divertidos onde miúdos e graúdos aprendem as artes antigas de fazer sabão e tecer mantas de lã.'
   },
   {
     title: 'Canoagem Familiar na Albufeira de Belver',
     distance: 'Cais do Alamal',
     image: '/images/experiencias/media_105_Gavi_o.jpg',
+    link: '/natureza-e-lazer',
     desc: 'Aluguer de canoas e caiaques estáveis para toda a família navegar em segurança nas águas tranquilas e sem correntes do rio Tejo.'
   }
 ];
@@ -82,10 +126,10 @@ const faqs = [
 
 <BaseLayout
   title="Famílias & Natureza | Gavião Nature Village — Férias com Crianças no Alentejo"
-  description="Férias inesquecíveis em família no Gavião Nature Village: herdade 100% pedonal e segura, quinta pedagógica com animais, piscina e alojamentos ecológicos com kitchenette."
+  description="Férias inesquecíveis em família no Gavião Nature Village: herdade 100% pedonal e segura, Cork Shelter Familiar, Glamping Familiar, quinta pedagógica com animais e piscina."
 >
   <!-- =========================================================================
-       HERO FAMÍLIAS & NATUREZA: DESIGN CONSISTENTE COM A VILA
+       HERO FAMÍLIAS & NATUREZA
        ========================================================================= -->
   <section class="relative min-h-[42vh] sm:min-h-[46vh] flex flex-col justify-center items-center overflow-hidden bg-charcoal">
     <div class="absolute inset-0 z-0">
@@ -110,7 +154,7 @@ const faqs = [
        1º PASSO: APRESENTAR A VILA (SOB O OLHAR FAMILIAR)
        ========================================================================= -->
   <section id="vila-familias" class="relative bg-sand-warm text-charcoal border-b border-sand-border pt-0 pb-16 md:pb-24">
-    <!-- BARRA FORMULÁRIO (METADE DENTRO DO HERO, METADE DE FORA - APENAS AS 2 CORES: HERO E SECÇÃO) -->
+    <!-- BARRA FORMULÁRIO -->
     <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-1/2">
       <BookingBar isFloating={true} />
     </div>
@@ -131,17 +175,49 @@ const faqs = [
           </p>
 
           <p class="text-charcoal-muted text-sm sm:text-base leading-relaxed font-normal">
-            Troque os ecrãs e o bulício urbano pela quinta pedagógica, o aroma dos sobreiros e das ervas aromáticas, mergulhos na piscina e noites estreladas com conversas em família no terraço de madeira privativo do vosso Cork Shelter.
+            Troque os ecrãs e a rotina acelerada pela quinta pedagógica, o aroma dos sobreiros e das ervas aromáticas, mergulhos na piscina e noites estreladas com conversas em família no terraço de madeira privativo do vosso alojamento.
           </p>
 
-          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand-border font-montserrat">
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">100% Pedonal</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Sem Tráfego Automóvel</div>
+          <!-- HIGHLIGHTS DA 1ª SECÇÃO ESPECÍFICOS PARA FAMÍLIAS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand-border font-montserrat">
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                <span>100% Pedonal & Seguro</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Circulação sem tráfego automóvel no miolo da herdade para as crianças brincarem livres.
+              </p>
             </div>
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">Quinta & Horta</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Contacto Diário c/ Animais</div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>Quinta Pedagógica & Horta</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Contacto diário e alimentar animais da herdade: póneis, cabras anãs e colheita biológica.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" /></svg>
+                <span>Piscina & Zona de Lazer</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Piscina biológica de baixa profundidade com relvados amplos e sombras naturais de sobreiro.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                <span>Alojamentos Familiares</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Cork Shelters e Glamping com beliches de madeira e espaço espaçoso até 8 pessoas.
+              </p>
             </div>
           </div>
         </div>
@@ -158,10 +234,10 @@ const faqs = [
           </div>
           <div class="space-y-4 pt-8">
             <div class="h-44 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/alojamentos/media_11_Gavi.jpg" alt="Cork Shelter Familiar Exterior" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/village/media_2_Gavi.jpg" alt="Atividades Pedagógicas" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
             <div class="h-64 overflow-hidden border border-sand-border shadow-soft">
-              <img src="/images/village/media_6_Gavi_o.jpg" alt="Caminhos Pedonais Seguros" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+              <img src="/images/restaurante/media_20_Gavi_o.jpg" alt="Refeições Familiares no Cadafaz" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
             </div>
           </div>
         </div>
@@ -170,19 +246,21 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       2º PASSO: OS ALOJAMENTOS FAMILIARES
+       2º PASSO: OS ALOJAMENTOS (NOMES ORIGINAIS MANTIDOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal border-t border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Alojamentos Familiares
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Espaço, Privacidade & Praticidade
+          Espaço, Conforto & Segurança
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Casas ecológicas em cortiça e tendas de safari concebidas para acolher pais e filhos com privacidade, camas confortáveis e kitchenette de apoio.
+          Unidades desenhadas para acomodar famílias de todas as dimensões, combinando espaço amplo, beliches embutidos e contacto imediato com a natureza.
         </p>
       </div>
 
@@ -194,7 +272,7 @@ const faqs = [
                 <img 
                   src={item.image} 
                   alt={item.title} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -228,12 +306,18 @@ const faqs = [
               </div>
             </div>
 
-            <div class="p-8 pt-0">
+            <div class="p-8 pt-0 flex flex-col sm:flex-row gap-3">
               <a 
-                href="/reservar?perfil=familias" 
-                class="w-full block text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
+                href={`/reservar?tipologia=${item.id}&perfil=familias`} 
+                class="flex-1 text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
               >
-                Verificar Disponibilidade Familiar
+                Reservar {item.title}
+              </a>
+              <a 
+                href={`/alojamento#${item.id}`} 
+                class="px-5 py-3.5 text-center font-montserrat font-semibold text-xs uppercase tracking-wider rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold bg-white transition-all"
+              >
+                Detalhes
               </a>
             </div>
           </div>
@@ -243,14 +327,113 @@ const faqs = [
     </div>
   </section>
 
+  <!-- =========================================================================
+       NOVA SECÇÃO: OS 2 MELHORES PROGRAMAS PARA FAMÍLIAS
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-[#FAF7F2] text-charcoal border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+          Packs & Estadias Familiares
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Programas Recomendados para Famílias
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Experiências completas com atividades para crianças, ar livre e momentos memoráveis partilhados com quem mais ama.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {recommendedPrograms.map((prog) => (
+          <div class="bg-white rounded-2xl overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                <img 
+                  src={prog.image} 
+                  alt={prog.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span class="absolute top-4 left-4 bg-[#141210]/85 text-natureGold px-3 py-1 rounded text-xs font-montserrat font-bold uppercase tracking-wider backdrop-blur-md">
+                  Programa Especial
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <div>
+                  <h3 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                    {prog.title}
+                  </h3>
+                  <p class="font-catamaran text-natureGold-dark text-xs sm:text-sm font-semibold mt-1">
+                    {prog.subtitle}
+                  </p>
+                </div>
+
+                <p class="text-charcoal-muted text-sm leading-relaxed">
+                  {prog.desc}
+                </p>
+
+                <div class="bg-sand-warm rounded-xl p-4 border border-sand-border space-y-2">
+                  <span class="font-montserrat font-bold text-[11px] uppercase tracking-wider text-charcoal block">
+                    O Que Está Incluído:
+                  </span>
+                  <ul class="space-y-1.5 text-xs font-montserrat text-charcoal-muted">
+                    {prog.highlights.map(h => (
+                      <li class="flex items-start gap-2">
+                        <span class="text-natureGold font-bold">•</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8 pt-0 flex flex-wrap items-center gap-3">
+              <a 
+                href={`/experiencias#${prog.id}`} 
+                class="flex-1 btn-gold font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl text-center shadow-soft hover:shadow-gold transition-all"
+              >
+                Ver Programa Completo →
+              </a>
+              <a 
+                href={prog.pdfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-3 rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold font-montserrat font-semibold text-xs inline-flex items-center gap-1.5 transition-all"
+              >
+                <span>PDF</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href="/experiencias" 
+          class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
+        >
+          <span>Conhecer Todos os 7 Programas & Experiências</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- =========================================================================
-       3º PASSO: AS EXPERIÊNCIAS (DIVERSÃO & NATUREZA NA HERDADE)
+       3º PASSO: AS VIVÊNCIAS NO RESORT (COM LINKS PRÓPRIOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-sand-warm text-charcoal border-t border-b border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Diversão & Natureza
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
           Aventuras na Herdade
         </h2>
@@ -284,10 +467,10 @@ const faqs = [
             </div>
             <div class="p-6 pt-0">
               <a 
-                href="/village" 
-                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5"
+                href={exp.link} 
+                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5 transition-colors"
               >
-                <span>Descobrir a Herdade</span>
+                <span>{exp.actionText}</span>
                 <span>→</span>
               </a>
             </div>
@@ -298,25 +481,27 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       4º PASSO: O QUE FAZER NOS ARREDORES EM FAMÍLIA
+       4º PASSO: O QUE FAZER (ARREDORES & ATIVIDADES EM FAMÍLIA COM LINKS CORRETOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Atividades & Praias Fluviais
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
-          Praias Fluviais & Museus Interativos
+          Descobrir em Família
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          A poucos minutos da vila, águas calmas para mergulhos seguros, museus temáticos e percursos pedestres fáceis para toda a família.
+          Praias fluviais com bandeira azul, museus etnográficos interativos e passeios de canoa nas águas tranquilas do Tejo.
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {surroundingActivities.map((act) => (
-          <div class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group">
+          <a href={act.link} class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group block">
             <div class="h-60 overflow-hidden relative">
               <img 
                 src={act.image} 
@@ -335,8 +520,12 @@ const faqs = [
               <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
                 {act.desc}
               </p>
+              <div class="pt-2 text-xs uppercase tracking-wider text-natureGold-dark font-montserrat font-bold flex items-center gap-1">
+                <span>Ver Roteiro</span>
+                <span>→</span>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -345,7 +534,7 @@ const faqs = [
           href="/arredores" 
           class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
         >
-          <span>Ver Mais Atividades com Crianças</span>
+          <span>Explorar Todos os Roteiros dos Arredores</span>
           <span>→</span>
         </a>
       </div>
@@ -353,9 +542,8 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       FAQS DE FAMÍLIAS
+       FAQS ESPECÍFICAS DE FAMÍLIAS
        ========================================================================= -->
   <section class="py-16 md:py-20 bg-sand-warm text-charcoal border-t border-sand-border">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
@@ -382,17 +570,16 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA (ESTILO A VILA)
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
        ========================================================================= -->
   <section id="reserva" class="py-12 md:py-16 bg-white border-t border-sand-border">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
       <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-3">
-        Reservem as Vossas Férias em Família
+        Reserve as Férias da Sua Família
       </h2>
       <p class="font-catamaran text-charcoal-muted text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        Garantam a melhor tarifa disponível diretamente connosco, berço gratuito até aos 2 anos e acesso livre à quinta pedagógica e piscinas.
+        Garantam a melhor tarifa disponível diretamente connosco, oferta de garrafa de boas-vindas e acesso livre à quinta pedagógica e piscina exterior.
       </p>
     </div>
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

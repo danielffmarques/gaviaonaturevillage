@@ -3,22 +3,57 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookingBar from '../components/booking/BookingBar.astro';
 
+// Alojamentos oficiais mais recomendados para Casais (nomes originais mantidos)
 const accommodations = [
   {
-    title: 'Cork Shelter Suite Romântica',
-    image: '/images/alojamentos/media_10_Gavi_o.jpg',
-    capacity: '2 Adultos',
-    size: '32 m² + Terraço',
-    features: ['Cama King-size premium', 'Revestimento 100% cortiça natural', 'Terraço panorâmico privativo', 'Climatização independente', 'Chuveiro walk-in com efeito chuva'],
-    desc: 'O refúgio definitivo a dois. O isolamento acústico natural da cortiça alentejana garante um silêncio restaurador, complementado pelo deck de madeira virado para o pôr do sol.'
+    id: 'tenda-amor-perfeito',
+    title: 'Tenda Amor Perfeito',
+    image: '/images/alojamentos/media_27_Gavi_o.jpg',
+    capacity: '2 Pessoas (Romântico)',
+    size: '35 m² + Deck Privativo',
+    features: ['Cama King-Size premium', 'Deck exterior sobre o vinhedo', 'Casa de banho privativa completa', 'Ar condicionado quente/frio', 'Minibar & cafeteira'],
+    desc: 'Dedicada em exclusivo ao romantismo e à cumplicidade, a Tenda Amor Perfeito combina o charme do glamping de luxo com vistas panorâmicas sobre as vinhas e o montado alentejano.'
   },
   {
-    title: 'Tenda Glamping King',
-    image: '/images/alojamentos/media_27_Gavi_o.jpg',
+    id: 'cork-shelter-standard',
+    title: 'Cork Shelter Standard',
+    image: '/images/alojamentos/media_10_Gavi_o.jpg',
     capacity: '2 Adultos',
-    size: '35 m² + Deck Suspenso',
-    features: ['Decoração étnico-chic', 'Casa de banho privativa completa', 'Deck exterior privativo', 'Ar condicionado quente/frio', 'Vistas abertas sobre os montes'],
-    desc: 'A emoção de dormir na natureza com todo o luxo e conforto. Desfrute de um café ao nascer do sol no terraço de madeira privativo sob a brisa fresca dos sobreiros.'
+    size: '26 m² + Deck Exterior',
+    features: ['Revestimento 100% cortiça natural', 'Cama Queen de casal', 'Isolamento acústico absoluto', 'Casa de banho completa privativa', 'Climatização independente & Smart TV'],
+    desc: 'O refúgio perfeito para descanso a dois. O revestimento integral em cortiça autóctone assegura um silêncio sereno, complementado pelo deck de madeira virado para o pôr do sol alentejano.'
+  }
+];
+
+// Os 2 melhores programas oficiais para Casais
+const recommendedPrograms = [
+  {
+    id: 'lua-de-mel',
+    title: 'Lua de Mel',
+    subtitle: 'Uma celebração intimista sob o céu estrelado e a mística de Belver',
+    image: '/images/programas/pdf_lua-de-mel.jpg',
+    desc: 'Desenhado para recém-casados ou casais em celebração especial. Do alto de Belver nasceu o encanto deste "belo ver" — o refúgio perfeito para brindar ao amor entre o montado, o silêncio e as estrelas.',
+    highlights: [
+      'Estadia na exclusiva Tenda Glamping Amor Perfeito',
+      'Espumante de boas-vindas e frutas no quarto',
+      'Sessão privada de relaxamento a dois no Wellness Center',
+      'Jantar romântico no Restaurante Cadafaz com vista para o castelo'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/programas/gnv_lua-de-mel.pdf'
+  },
+  {
+    id: 'balonismo',
+    title: 'Balonismo',
+    subtitle: 'Sentirá o céu mais perto do que nunca sobre o Vale do Tejo',
+    image: '/images/experiencias/balonismo.webp',
+    desc: 'Erga-se suavemente sobre a paisagem serena do Alto Alentejo ao amanhecer e contemple o Rio Tejo, os montados de sobreiros e o Castelo de Belver a partir de uma perspetiva inesquecível a dois.',
+    highlights: [
+      'Voo panorâmico em balão de ar quente sobre o Alto Alentejo',
+      'Batismo de voo com tradicional brinde de espumante e iguarias',
+      'Certificado oficial de voo personalizado',
+      'Pequeno-almoço buffet no Cadafaz e acesso ao Wellness Center'
+    ],
+    pdfUrl: 'https://www.booking-channel.com/templates/cadenas/air/images/hotels/SYN3142/gnv_balonismo.pdf'
   }
 ];
 
@@ -27,18 +62,24 @@ const experiences = [
     title: 'Rituais de Spa a Dois & Jacuzzi',
     time: 'Wellness Center',
     image: '/images/wellness/media_40_Gavi.jpg',
+    link: '/wellness-center',
+    actionText: 'Conhecer o Spa',
     desc: 'Piscina de hidromassagem aquecida a 35°C, banho turco e massagens relaxantes em cabine dupla com aromaterapia de lavanda e óleos locais.'
   },
   {
     title: 'Cocktail ao Pôr do Sol no Sky Lounge',
     time: 'Ao Fim da Tarde',
     image: '/images/restaurante/media_19_Gavi.jpg',
+    link: '/cadafaz-restaurante',
+    actionText: 'Ver Sky Lounge',
     desc: 'Uma vista deslumbrante sobre os sobreiros e o Castelo de Belver banhado pela luz dourada, acompanhado por vinhos selecionados de Cadafaz.'
   },
   {
     title: 'Jantar Romântico no Restaurante Cadafaz',
     time: 'Sabores do Alentejo',
     image: '/images/restaurante/media_21_Gavi_o.jpg',
+    link: '/cadafaz-restaurante',
+    actionText: 'Ver Restaurante',
     desc: 'Gastronomia alentejana autêntica com ingredientes frescos da nossa horta biológica num ambiente íntimo à luz suave das velas.'
   }
 ];
@@ -48,18 +89,21 @@ const surroundingActivities = [
     title: 'Passadiços do Alamal & Rio Tejo',
     distance: '6 km do Resort',
     image: '/images/arredores/passadicos_alamal.jpg',
+    link: '/percursos-pedestres',
     desc: 'Um passeio de mãos dadas ao longo do passadiço de madeira que serpenteia a encosta do Tejo, com miradouros sobre as águas serenas.'
   },
   {
     title: 'Castelo Medieval de Belver',
     distance: '8 km do Resort',
     image: '/images/arredores/castelo_belver.jpg',
+    link: '/patrimonio-e-cultura',
     desc: 'Fortaleza histórica dos Templários com um dos panoramas mais românticos de Portugal sobre o vale do Tejo.'
   },
   {
     title: 'Passeio de Barco Solar no Tejo',
     distance: 'Cais do Alamal',
     image: '/images/arredores/praia_alamal.jpg',
+    link: '/natureza-e-lazer',
     desc: 'Navegação silenciosa e ecológica nas águas límpidas da albufeira de Belver, rodeada por arribas verdes e natureza intacta.'
   }
 ];
@@ -82,10 +126,10 @@ const faqs = [
 
 <BaseLayout
   title="Casais & Romance | Gavião Nature Village — Escapadinha a Dois no Alentejo"
-  description="Viva momentos inesquecíveis a dois no Gavião Nature Village: Cork Shelters com isolamento acústico em cortiça, jantares românticos ao pôr do sol, circuito termal a dois e silêncio absoluto no Alentejo."
+  description="Viva momentos inesquecíveis a dois no Gavião Nature Village: Tenda Amor Perfeito, Cork Shelters com isolamento em cortiça, jantares românticos ao pôr do sol e spa térmico."
 >
   <!-- =========================================================================
-       HERO CASAIS & ROMANCE: DESIGN CONSISTENTE COM A VILA
+       HERO CASAIS & ROMANCE
        ========================================================================= -->
   <section class="relative min-h-[42vh] sm:min-h-[46vh] flex flex-col justify-center items-center overflow-hidden bg-charcoal">
     <div class="absolute inset-0 z-0">
@@ -110,7 +154,7 @@ const faqs = [
        1º PASSO: APRESENTAR A VILA (SOB O OLHAR ROMÂNTICO)
        ========================================================================= -->
   <section id="vila-casais" class="relative bg-sand-warm text-charcoal border-b border-sand-border pt-0 pb-16 md:pb-24">
-    <!-- BARRA FORMULÁRIO (METADE DENTRO DO HERO, METADE DE FORA - APENAS AS 2 CORES: HERO E SECÇÃO) -->
+    <!-- BARRA FORMULÁRIO -->
     <div class="relative z-30 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -translate-y-1/2">
       <BookingBar isFloating={true} />
     </div>
@@ -131,17 +175,49 @@ const faqs = [
           </p>
 
           <p class="text-charcoal-muted text-sm sm:text-base leading-relaxed font-normal">
-            Aqui, cada unidade de alojamento está espaçada generosamente para assegurar que a vossa única companhia é a brisa do Tejo, os sobreiros centenários e o pôr do sol dourado sobre o Castelo de Belver. É o refúgio perfeito para celebrarem aniversários, pedidos especiais ou simplesmente para se reencontrarem longe do stress urbano.
+            Aqui, cada unidade de alojamento está espaçada generosamente para assegurar que a vossa única companhia é a brisa do Tejo, os sobreiros centenários e o pôr do sol dourado sobre o Castelo de Belver. É o refúgio perfeito para celebrarem aniversários, luas de mel ou simplesmente para se reencontrarem longe do ruído urbano.
           </p>
 
-          <div class="grid grid-cols-2 gap-6 pt-4 border-t border-sand-border font-montserrat">
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">8 Hectares</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Privacidade no Campo</div>
+          <!-- HIGHLIGHTS DA 1ª SECÇÃO ESPECÍFICOS PARA CASAIS -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-sand-border font-montserrat">
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                <span>8 Hectares de Privacidade</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Unidades amplamente espaçadas no montado para total intimidade e silêncio.
+              </p>
             </div>
-            <div>
-              <div class="text-2xl font-catamaran font-bold text-natureGold-dark">100% Cortiça</div>
-              <div class="text-xs text-charcoal-muted uppercase tracking-wider mt-1">Isolamento Acústico Natural</div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+                <span>100% Cortiça Natural</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Isolamento acústico que garante noites calmas e tranquilas de repouso absoluto.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                <span>Spa & Circuito a Dois</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Piscina interior aquecida a 35°C, sauna panorâmica e massagens relaxantes.
+              </p>
+            </div>
+
+            <div class="bg-white/80 rounded-xl p-4 border border-sand-border/80 shadow-xs">
+              <div class="flex items-center gap-2.5 text-natureGold-dark font-bold text-sm">
+                <svg class="w-4 h-4 text-natureGold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                <span>Pôr do Sol no Sky Lounge</span>
+              </div>
+              <p class="text-xs text-charcoal-muted mt-1 font-normal leading-relaxed">
+                Cocktails e vinhos regionais com vista mística para o Castelo de Belver.
+              </p>
             </div>
           </div>
         </div>
@@ -170,19 +246,21 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       2º PASSO: OS ALOJAMENTOS (SELEÇÃO PARA CASAIS)
+       2º PASSO: OS ALOJAMENTOS (NOMES ORIGINAIS MANTIDOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal border-t border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Alojamentos Recomendados
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
           Conforto Exclusivo & Silêncio
         </h2>
         <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
-          Acomodações pensadas para o descanso absoluto, onde o design bioclimático da cortiça se junta aos têxteis macios e decks virados para a imensidão alentejana.
+          Acomodações pensadas para o descanso absoluto a dois, mantendo a autenticidade e o conforto de excelência do resort.
         </p>
       </div>
 
@@ -194,7 +272,7 @@ const faqs = [
                 <img 
                   src={item.image} 
                   alt={item.title} 
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
@@ -228,12 +306,18 @@ const faqs = [
               </div>
             </div>
 
-            <div class="p-8 pt-0">
+            <div class="p-8 pt-0 flex flex-col sm:flex-row gap-3">
               <a 
-                href="/reservar?perfil=casais" 
-                class="w-full block text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
+                href={`/reservar?tipologia=${item.id}&perfil=casais`} 
+                class="flex-1 text-center font-montserrat font-bold text-xs uppercase tracking-widest py-3.5 rounded-xl bg-natureGold hover:bg-natureGold-light text-charcoal-dark transition-all duration-300 shadow-md"
               >
-                Verificar Disponibilidade deste Alojamento
+                Reservar {item.title}
+              </a>
+              <a 
+                href={`/alojamento#${item.id}`} 
+                class="px-5 py-3.5 text-center font-montserrat font-semibold text-xs uppercase tracking-wider rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold bg-white transition-all"
+              >
+                Detalhes
               </a>
             </div>
           </div>
@@ -243,14 +327,113 @@ const faqs = [
     </div>
   </section>
 
+  <!-- =========================================================================
+       NOVA SECÇÃO: OS 2 MELHORES PROGRAMAS PARA CASAIS
+       ========================================================================= -->
+  <section class="py-16 md:py-24 bg-[#FAF7F2] text-charcoal border-t border-sand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16 space-y-3">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block">
+          Experiências a Dois
+        </span>
+        <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal">
+          Programas Recomendados para Casais
+        </h2>
+        <p class="font-catamaran text-charcoal-muted text-sm sm:text-base leading-relaxed">
+          Packs com tudo incluído desenhados para elevar a sua estadia a um momento inesquecível de cumplicidade.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        {recommendedPrograms.map((prog) => (
+          <div class="bg-white rounded-2xl overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 flex flex-col justify-between group">
+            <div>
+              <div class="h-64 sm:h-72 w-full overflow-hidden relative">
+                <img 
+                  src={prog.image} 
+                  alt={prog.title} 
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <span class="absolute top-4 left-4 bg-[#141210]/85 text-natureGold px-3 py-1 rounded text-xs font-montserrat font-bold uppercase tracking-wider backdrop-blur-md">
+                  Programa Especial
+                </span>
+              </div>
+
+              <div class="p-6 sm:p-8 space-y-4">
+                <div>
+                  <h3 class="font-catamaran font-extrabold text-2xl text-charcoal uppercase group-hover:text-natureGold transition-colors">
+                    {prog.title}
+                  </h3>
+                  <p class="font-catamaran text-natureGold-dark text-xs sm:text-sm font-semibold mt-1">
+                    {prog.subtitle}
+                  </p>
+                </div>
+
+                <p class="text-charcoal-muted text-sm leading-relaxed">
+                  {prog.desc}
+                </p>
+
+                <div class="bg-sand-warm rounded-xl p-4 border border-sand-border space-y-2">
+                  <span class="font-montserrat font-bold text-[11px] uppercase tracking-wider text-charcoal block">
+                    O Que Está Incluído:
+                  </span>
+                  <ul class="space-y-1.5 text-xs font-montserrat text-charcoal-muted">
+                    {prog.highlights.map(h => (
+                      <li class="flex items-start gap-2">
+                        <span class="text-natureGold font-bold">•</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 sm:p-8 pt-0 flex flex-wrap items-center gap-3">
+              <a 
+                href={`/experiencias#${prog.id}`} 
+                class="flex-1 btn-gold font-montserrat font-bold text-xs uppercase tracking-wider py-3 rounded-xl text-center shadow-soft hover:shadow-gold transition-all"
+              >
+                Ver Programa Completo →
+              </a>
+              <a 
+                href={prog.pdfUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="px-4 py-3 rounded-xl border border-sand-border hover:border-natureGold text-charcoal hover:text-natureGold font-montserrat font-semibold text-xs inline-flex items-center gap-1.5 transition-all"
+              >
+                <span>PDF</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a 
+          href="/experiencias" 
+          class="inline-flex items-center gap-2 font-montserrat font-bold text-xs uppercase tracking-widest px-8 py-3.5 rounded-full border border-sand-border bg-white text-charcoal hover:border-natureGold hover:text-natureGold shadow-soft transition-all"
+        >
+          <span>Conhecer Todos os 7 Programas & Experiências</span>
+          <span>→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
 
   <!-- =========================================================================
-       3º PASSO: AS EXPERIÊNCIAS (MOMENTOS EXCLUSIVOS NO RESORT)
+       3º PASSO: AS VIVÊNCIAS NO RESORT (COM LINKS PRÓPRIOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-sand-warm text-charcoal border-t border-b border-sand-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          No Coração do Resort
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
           Vivências Criadas para Dois
         </h2>
@@ -284,10 +467,10 @@ const faqs = [
             </div>
             <div class="p-6 pt-0">
               <a 
-                href="/experiencias" 
-                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5"
+                href={exp.link} 
+                class="text-xs uppercase tracking-wider text-natureGold-dark hover:text-natureGold font-montserrat font-bold inline-flex items-center gap-1.5 transition-colors"
               >
-                <span>Saber Mais</span>
+                <span>{exp.actionText}</span>
                 <span>→</span>
               </a>
             </div>
@@ -298,14 +481,16 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       4º PASSO: O QUE FAZER (ARREDORES & ATIVIDADES A DOIS)
+       4º PASSO: O QUE FAZER (ARREDORES & ATIVIDADES A DOIS COM LINKS CORRETOS)
        ========================================================================= -->
   <section class="py-16 md:py-24 bg-white text-charcoal">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-natureGold-dark font-montserrat font-bold text-xs uppercase tracking-widest block mb-2">
+          Alto Alentejo & Vale do Tejo
+        </span>
         <h2 class="font-catamaran font-extrabold text-2xl sm:text-3xl md:text-4xl uppercase tracking-wide text-charcoal mb-4">
           Descobrir o Tejo & Belver
         </h2>
@@ -316,7 +501,7 @@ const faqs = [
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {surroundingActivities.map((act) => (
-          <div class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group">
+          <a href={act.link} class="bg-sand-warm/60 overflow-hidden border border-sand-border hover:border-natureGold/40 shadow-soft hover:shadow-luxury transition-all duration-300 group block">
             <div class="h-60 overflow-hidden relative">
               <img 
                 src={act.image} 
@@ -335,8 +520,12 @@ const faqs = [
               <p class="font-catamaran text-charcoal-muted text-sm leading-relaxed">
                 {act.desc}
               </p>
+              <div class="pt-2 text-xs uppercase tracking-wider text-natureGold-dark font-montserrat font-bold flex items-center gap-1">
+                <span>Ver Roteiro</span>
+                <span>→</span>
+              </div>
             </div>
-          </div>
+          </a>
         ))}
       </div>
 
@@ -352,7 +541,6 @@ const faqs = [
 
     </div>
   </section>
-
 
   <!-- =========================================================================
        FAQS ESPECÍFICAS DE CASAIS
@@ -382,9 +570,8 @@ const faqs = [
     </div>
   </section>
 
-
   <!-- =========================================================================
-       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA (ESTILO A VILA)
+       SECÇÃO DE RESERVA DEDICADA NO FINAL DA PÁGINA
        ========================================================================= -->
   <section id="reserva" class="py-12 md:py-16 bg-white border-t border-sand-border">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-6">
