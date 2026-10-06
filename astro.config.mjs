@@ -8,8 +8,8 @@ export default defineConfig({
   devToolbar: {
     enabled: false,
   },
-  site: 'https://gaviaonaturevillage.com',
-  base: '/',
+  site: 'https://danielffmarques.github.io',
+  base: '/gaviaonaturevillage',
   trailingSlash: 'never',
   redirects: {
     '/programas': '/experiencias',
